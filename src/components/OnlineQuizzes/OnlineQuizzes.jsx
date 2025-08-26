@@ -1,19 +1,30 @@
-import { Award, BookOpen, Clock, Target, Trophy, Users } from "lucide-react";
+import { Award, BookOpen, Clock, Trophy, Users } from "lucide-react";
 import icon from "../../assets/images/top-course.png";
+import technology from "../../assets/images/techno.png";
+import dev from "../../assets/images/dev.png";
+import marketing from "../../assets/images/marketing.png";
+import finance from "../../assets/images/finance.png";
+import gym from "../../assets/images/gym.png";
+import art from "../../assets/images/art.png";
 import Button from "../Shared/Button";
 const OnlineQuizzes = () => {
   const quizCategories = [
-    { icon: Target, title: "Math", color: "bg-blue-500" },
-    { icon: BookOpen, title: "Science", color: "bg-green-500" },
-    { icon: Users, title: "History", color: "bg-purple-500" },
-    { icon: Award, title: "English", color: "bg-red-500" },
-    { icon: Clock, title: "Physics", color: "bg-yellow-500" },
-    { icon: Trophy, title: "Art & Design", color: "bg-pink-500" },
+    { icon: technology, title: "Technology", color: "bg-white" },
+    { icon: dev, title: "Development", color: "bg-white" },
+    { icon: marketing, title: "Marketing", color: "bg-white" },
+    { icon: finance, title: "Financial", color: "bg-white" },
+    { icon: gym, title: "Fitness Train", color: "bg-white" },
+    { icon: art, title: "Art & Design", color: "bg-white" },
+    // { icon: BookOpen, title: "Development", color: "bg-green-500" },
+    // { icon: Users, title: "Marketing", color: "bg-purple-500" },
+    // { icon: Award, title: "Financial", color: "bg-red-500" },
+    // { icon: Clock, title: "Fitness Train", color: "bg-yellow-500" },
+    // { icon: Trophy, title: "Art & Design", color: "bg-pink-500" },
   ];
 
   return (
-    <section className="py-16 bg-white">
-      <div className="container mx-auto px-6">
+    <section className="py-16 w-10/12 mx-auto bg-white">
+      <div className=" mx-auto px-6">
         {/* Badge */}
         <div className="flex justify-center mb-6">
           <div className="inline-flex items-center space-x-2 bg-primary/10 border border-blue-100 backdrop-blur-sm rounded-full px-4 py-2 text-sm font-medium text-primary">
@@ -30,17 +41,26 @@ const OnlineQuizzes = () => {
           </h2>
         </div>
 
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6 max-w-4xl mx-auto">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6 mx-auto">
           {quizCategories.map((category, index) => {
             const IconComponent = category.icon;
             return (
-              <div key={index} className="text-center">
+              <div
+                key={index}
+                className="relative text-center mx-auto rounded-xl hover:bg-primary/50 p-10 hover:text-white overflow-hidden"
+              >
+                {/* Gradient Light Effect */}
+                <div className="absolute -top-10 -left-10 w-28 h-28 bg-gradient-to-tr from-white to-white rounded-full blur-xl z-0"></div>
+
+                {/* Icon Circle */}
                 <div
-                  className={`${category.color} w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-3 hover:scale-110 transition-transform cursor-pointer`}
+                  className={`${category.color} w-[90px] h-[90px] border mx-auto border-light flex items-center justify-center mb-3 transition-transform cursor-pointer rounded-full relative z-10`}
                 >
-                  <IconComponent className="w-8 h-8 text-white" />
+                  <img src={category.icon} alt={category.title} className="" />
                 </div>
-                <p className="text-sm font-medium text-gray-700">
+
+                {/* Title */}
+                <p className="font-bold text-center text-lg relative z-10">
                   {category.title}
                 </p>
               </div>
@@ -49,7 +69,7 @@ const OnlineQuizzes = () => {
         </div>
 
         <div className="text-center mt-8">
-          <Button rounded={"lg"}> Explore All Quizzes</Button>
+          <Button rounded={"lg"} padding= "px-6 py-3"> Explore All Quizzes</Button>
         </div>
       </div>
     </section>

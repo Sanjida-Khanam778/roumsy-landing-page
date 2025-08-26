@@ -44,7 +44,7 @@ const KeyFeature = () => {
 
           {/* Card 1 */}
           <div className="bg-white shadow-lg border border-blue-100 rounded-xl relative z-10">
-            <div className="flex items-center justify-center bg-blue-100 mb-6 mx-auto rounded-t-lg py-10">
+            <div className="flex items-center justify-center bg-[#B7DDFF] mb-6 mx-auto rounded-t-lg py-10">
               <img src={quiz} alt="" />
             </div>
             <div className="p-8">
@@ -56,14 +56,14 @@ const KeyFeature = () => {
                 clarify concepts, and receive personalized explanations.
               </p>
               <div className="text-center">
-                <Button rounded={"xl"}>Try Now</Button>
+                <Button padding= "px-6 py-3" rounded={"xl"}>Try Now</Button>
               </div>
             </div>
           </div>
 
           {/* Card 2 */}
           <div className="bg-white rounded-xl shadow-lg border border-blue-100 relative z-10">
-            <div className="flex items-center justify-center bg-blue-100 mb-6 mx-auto rounded-t-lg py-10">
+            <div className="flex items-center justify-center bg-[#D1E5F8] mb-6 mx-auto rounded-t-lg py-10">
               <img src={exam} alt="" />
             </div>
             <div className="p-8">
@@ -75,7 +75,7 @@ const KeyFeature = () => {
                 Track progress and identify areas for improvement.
               </p>
               <div className="text-center">
-                <Button rounded={"xl"}>Start Practice</Button>
+                <Button padding= "px-6 py-3" rounded={"xl"}>Start Practice</Button>
               </div>
             </div>
           </div>
