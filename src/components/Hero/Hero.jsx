@@ -1,15 +1,13 @@
-import React, { useState, useEffect } from "react";
-import {
-  ChevronLeft,
-  ChevronRight,
-  Play,
-  User,
-  MessageCircle,
-} from "lucide-react";
+import { useState, useEffect } from "react";
+import { Play, User, MessageCircle } from "lucide-react";
 import hero1 from "../../assets/images/herobg.png"; // First background image
 import hero2 from "../../assets/images/hero2.png"; // Second background image
 import hero3 from "../../assets/images/hero3.png"; // Third background image
 import badge from "../../assets/images/icon-badge.png";
+import one from "../../assets/images/one.png";
+import two from "../../assets/images/two.png";
+import three from "../../assets/images/three.png";
+import four from "../../assets/images/four.png";
 
 export default function Hero() {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -76,6 +74,13 @@ export default function Hero() {
     },
   ];
 
+  const avatar = [
+    { image: four },
+    { image: three },
+    { image: two },
+    { image: one },
+  ];
+
   // Auto-slide functionality
   useEffect(() => {
     const interval = setInterval(() => {
@@ -84,14 +89,6 @@ export default function Hero() {
 
     return () => clearInterval(interval);
   }, [slides.length]);
-
-  const nextSlide = () => {
-    setCurrentSlide((prev) => (prev + 1) % slides.length);
-  };
-
-  const prevSlide = () => {
-    setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length);
-  };
 
   const currentSlideData = slides[currentSlide];
 
@@ -155,21 +152,15 @@ export default function Hero() {
 
             {/* User Avatars and Stats */}
             <div className="flex items-center space-x-4 pt-8">
-              <div className="flex -space-x-3">
-                {[1, 2, 3, 4].map((i) => (
-                  <div
-                    key={i}
-                    className="w-10 h-10 bg-gradient-to-br from-blue-400 to-purple-500 rounded-full  border-white flex items-center justify-center"
-                  >
-                    <User size={16} className="text-white" />
-                  </div>
+              <div className="flex -space-x-4">
+                {avatar.map((icon) => (
+                  <img src={icon.image} alt="" />
                 ))}
               </div>
-              <div className="text-sm">
-                <div className="font-semibold text-gray-900">
-                  10k Enrollment
+              <div className="">
+                <div className="font-semibold text-gray">
+                 <span className="text-primary">10k</span>  Enrollment
                 </div>
-                <div className="text-gray-500">Active learners</div>
               </div>
             </div>
             {/* Navigation Dots */}
