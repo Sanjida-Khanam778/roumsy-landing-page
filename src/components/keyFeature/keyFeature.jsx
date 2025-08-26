@@ -56,7 +56,9 @@ const KeyFeature = () => {
                 clarify concepts, and receive personalized explanations.
               </p>
               <div className="text-center">
-                <Button padding= "px-6 py-3" rounded={"xl"}>Try Now</Button>
+                <Button padding="px-6 py-3" rounded={"xl"}>
+                  Try Now
+                </Button>
               </div>
             </div>
           </div>
@@ -75,7 +77,9 @@ const KeyFeature = () => {
                 Track progress and identify areas for improvement.
               </p>
               <div className="text-center">
-                <Button padding= "px-6 py-3" rounded={"xl"}>Start Practice</Button>
+                <Button padding="px-6 py-3" rounded={"xl"}>
+                  Start Practice
+                </Button>
               </div>
             </div>
           </div>

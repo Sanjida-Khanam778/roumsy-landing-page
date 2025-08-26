@@ -69,7 +69,10 @@ const OnlineQuizzes = () => {
         </div>
 
         <div className="text-center mt-8">
-          <Button rounded={"lg"} padding= "px-6 py-3"> Explore All Quizzes</Button>
+          <Button rounded={"lg"} padding="px-6 py-3">
+            {" "}
+            Explore All Quizzes
+          </Button>
         </div>
       </div>
     </section>

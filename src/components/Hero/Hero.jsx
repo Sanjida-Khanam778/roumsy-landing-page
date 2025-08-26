@@ -159,7 +159,7 @@ export default function Hero() {
               </div>
               <div className="">
                 <div className="font-semibold text-gray">
-                 <span className="text-primary">10k</span>  Enrollment
+                  <span className="text-primary">10k</span> Enrollment
                 </div>
               </div>
             </div>

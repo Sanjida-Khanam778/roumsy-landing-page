@@ -1,11 +1,15 @@
-export default function Button({ children, rounded = "full", padding= "px-6 py-1" }) {
+export default function Button({
+  children,
+  rounded = "full",
+  padding = "px-6 py-1",
+}) {
   const roundedMap = {
     sm: "rounded-sm",
     md: "rounded-md",
     lg: "rounded-lg",
     xl: "rounded-xl",
 
-    "2xl": "rounded-2xl"
+    "2xl": "rounded-2xl",
   };
   return (
     <button

@@ -3,6 +3,7 @@ import ContactBar from "../../components/ContactBar/ContactBar";
 import Hero from "../../components/Hero/Hero";
 import KeyFeature from "../../components/keyFeature/keyFeature";
 import OnlineQuizzes from "../../components/OnlineQuizzes/OnlineQuizzes";
+import StatsSection from "../../components/StatsSection/StatsSection";
 
 export default function Home() {
   return (
@@ -12,6 +13,7 @@ export default function Home() {
       <Hero />
       <KeyFeature />
       <OnlineQuizzes />
+      <StatsSection />
     </div>
   );
 }
