@@ -7,6 +7,7 @@ import finance from "../../assets/images/finance.png";
 import gym from "../../assets/images/gym.png";
 import art from "../../assets/images/art.png";
 import Button from "../Shared/Button";
+
 const OnlineQuizzes = () => {
   const quizCategories = [
     { icon: technology, title: "Technology", color: "bg-white" },
@@ -15,11 +16,6 @@ const OnlineQuizzes = () => {
     { icon: finance, title: "Financial", color: "bg-white" },
     { icon: gym, title: "Fitness Train", color: "bg-white" },
     { icon: art, title: "Art & Design", color: "bg-white" },
-    // { icon: BookOpen, title: "Development", color: "bg-green-500" },
-    // { icon: Users, title: "Marketing", color: "bg-purple-500" },
-    // { icon: Award, title: "Financial", color: "bg-red-500" },
-    // { icon: Clock, title: "Fitness Train", color: "bg-yellow-500" },
-    // { icon: Trophy, title: "Art & Design", color: "bg-pink-500" },
   ];
 
   return (
@@ -70,7 +66,6 @@ const OnlineQuizzes = () => {
 
         <div className="text-center mt-8">
           <Button rounded={"lg"} padding="px-6 py-3">
-            {" "}
             Explore All Quizzes
           </Button>
         </div>

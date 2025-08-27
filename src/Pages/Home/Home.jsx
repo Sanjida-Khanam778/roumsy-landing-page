@@ -4,6 +4,8 @@ import Hero from "../../components/Hero/Hero";
 import KeyFeature from "../../components/keyFeature/keyFeature";
 import OnlineQuizzes from "../../components/OnlineQuizzes/OnlineQuizzes";
 import StatsSection from "../../components/StatsSection/StatsSection";
+import LearningPrograms from "../../components/LearningPrograms/LearningPrograms";
+import AboutSection from "../../components/AboutSection/AboutSection";
 
 export default function Home() {
   return (
@@ -14,6 +16,8 @@ export default function Home() {
       <KeyFeature />
       <OnlineQuizzes />
       <StatsSection />
+      <AboutSection />
+      <LearningPrograms />
     </div>
   );
 }
