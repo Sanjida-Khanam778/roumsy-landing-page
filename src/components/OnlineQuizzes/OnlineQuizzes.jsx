@@ -66,7 +66,7 @@ const OnlineQuizzes = () => {
 
         <div className="text-center mt-8">
           <Button rounded={"lg"} padding="px-6 py-3">
-            Explore All Quizzes
+            Explore All Categories
           </Button>
         </div>
       </div>

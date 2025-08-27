@@ -6,6 +6,8 @@ import OnlineQuizzes from "../../components/OnlineQuizzes/OnlineQuizzes";
 import StatsSection from "../../components/StatsSection/StatsSection";
 import LearningPrograms from "../../components/LearningPrograms/LearningPrograms";
 import AboutSection from "../../components/AboutSection/AboutSection";
+import TopFeatures from "../../components/TopFeatures/TopFeatures";
+import PricingSection from "../../components/PricingSection/PricingSection";
 
 export default function Home() {
   return (
@@ -18,6 +20,8 @@ export default function Home() {
       <StatsSection />
       <AboutSection />
       <LearningPrograms />
+      <TopFeatures />
+      <PricingSection />
     </div>
   );
 }
