@@ -44,7 +44,7 @@ const PricingSection = () => {
   ];
 
   return (
-    <section className="py-16 bg-white">
+    <section className="py-16 bg-[#F9FAFB]">
       <div className="container mx-auto px-6">
         {/* Header */}
         <div className="text-center mb-4">

@@ -8,6 +8,8 @@ import LearningPrograms from "../../components/LearningPrograms/LearningPrograms
 import AboutSection from "../../components/AboutSection/AboutSection";
 import TopFeatures from "../../components/TopFeatures/TopFeatures";
 import PricingSection from "../../components/PricingSection/PricingSection";
+import WhyChooseUs from "../../components/WhyChooseUs/WhyChooseUs";
+import BecomeInstructor from "../../components/BecomeInstructor/BecomeInstructor";
 
 export default function Home() {
   return (
@@ -22,6 +24,8 @@ export default function Home() {
       <LearningPrograms />
       <TopFeatures />
       <PricingSection />
+      <WhyChooseUs />
+      <BecomeInstructor />
     </div>
   );
 }
