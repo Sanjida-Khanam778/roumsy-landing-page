@@ -10,6 +10,7 @@ import TopFeatures from "../../components/TopFeatures/TopFeatures";
 import PricingSection from "../../components/PricingSection/PricingSection";
 import WhyChooseUs from "../../components/WhyChooseUs/WhyChooseUs";
 import BecomeInstructor from "../../components/BecomeInstructor/BecomeInstructor";
+import Footer from "../../components/Footer/Footer";
 
 export default function Home() {
   return (
@@ -26,6 +27,7 @@ export default function Home() {
       <PricingSection />
       <WhyChooseUs />
       <BecomeInstructor />
+      <Footer />
     </div>
   );
 }
