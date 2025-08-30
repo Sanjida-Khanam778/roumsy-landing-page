@@ -3,6 +3,7 @@ import { Sidebar } from "../Sidebar/Sidebar";
 import { StartCards } from "./StartCards";
 import { MessageSquareDot } from "lucide-react";
 import profile from "../../../assets/admin-dashboard-images/profile.png";
+import { Quizz } from "../Quizz/Quizz";
 
 export default function DashboardMainPage() {
   const [currentComponent, setCurrentComponent] = useState("Dashboard"); // New state to track the active component
@@ -11,7 +12,7 @@ export default function DashboardMainPage() {
     setCurrentComponent(component);
   };
   return (
-    <div className="flex min-h-screen bg-[#EEF6FF]">
+    <div className="flex min-h-screen bg-[#EEF6FF] font-poppins">
       {/* Sidebar */}
       <Sidebar
         currentComponent={currentComponent}
@@ -41,7 +42,7 @@ export default function DashboardMainPage() {
               <StartCards />
             </div>
           )}
-          {currentComponent === "Users" && <div>Users</div>}
+          {currentComponent === "Quizz" && <Quizz />}
         </div>
       </div>
     </div>

@@ -1,5 +1,7 @@
-import Dashboard from "./MainDashboard";
-export const StartCards = () => {
+import { Search } from "lucide-react";
+import QuizManagement from "./AllQuizzes";
+
+export const Quizz = () => {
   const dollarIcon = () => (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -50,47 +52,80 @@ export const StartCards = () => {
     </svg>
   );
   return (
-    <div>
-      <div className="grid grid-cols-3 gap-8 mb-6 mx-20">
-        {/* Revenue */}
+    <div className="py-16">
+      <div className="px-7 flex justify-between items-center pb-12">
+        <div>
+          <h1 className="text-3xl font-medium text-[#1E90FF]">
+            Quiz Management
+          </h1>
+          <p className="text-sm text-[#929292]">
+            Create, manage, and analyze your quizzes
+          </p>
+        </div>
+        <button className="bg-gradient-to-r from-[#189EFE] to-[#0E5F98] text-white px-6 py-3 rounded-lg text-2xl font-medium">
+          + Create Quizz
+        </button>
+      </div>
+
+      <div className="grid grid-cols-3 gap-8 mb-6 mx-14">
+        {/* Quizzes */}
         <div className="flex items-center justify-between gap-5 p-6 bg-[#EDF6ED] border border-white rounded-xl shadow-2xl">
-          <div className="flex flex-col gap-3">
+          <div className="flex flex-col gap-1">
             <p className="bg-gradient-to-r from-[#1E90FF] to-[#0E5F98] bg-clip-text text-transparent font-medium text-2xl">
-              Total Revenue
+              Total Quizzes
             </p>
-            <p className="text-black font-medium text-xl">00</p>
+            <p className="text-black font-medium text-xl">04</p>
+            <p className="text-[#4CAF50] font-light text-base">3 active</p>
           </div>
           <div className="p-4 bg-[#D5FED7] rounded-xl shadow-md">
             {dollarIcon()}
           </div>
         </div>
-        {/* Users */}
+        {/* Attempts */}
         <div className="flex items-center justify-between gap-5 p-6 bg-[#D5E9F8] border border-white rounded-xl shadow-2xl">
-          <div className="flex flex-col gap-3">
+          <div className="flex flex-col gap-1">
             <p className="bg-gradient-to-r from-[#1E90FF] to-[#0E5F98] bg-clip-text text-transparent font-medium text-2xl">
-              Total User
+              Total Attempts
             </p>
-            <p className="text-black font-medium text-xl">00</p>
+            <p className="text-black font-medium text-xl">877</p>
+            <p className="text-[#4CAF50] font-light text-base">3 active</p>
           </div>
           <div className="p-4 bg-[#92CFFB] rounded-xl shadow-md">
             {userIcon()}
           </div>
         </div>
-        {/* Membership */}
+        {/* Average Score */}
         <div className="flex items-center justify-between gap-5 p-6 bg-[#F1EDDF] border border-white rounded-xl shadow-2xl">
-          <div className="flex flex-col gap-3">
+          <div className="flex flex-col gap-1">
             <p className="bg-gradient-to-r from-[#1E90FF] to-[#0E5F98] bg-clip-text text-transparent font-medium text-2xl">
-              Total Membership
+              Average Score
             </p>
-            <p className="text-black font-medium text-xl">00</p>
+            <p className="text-black font-medium text-xl">80%</p>
+            <p className="text-[#4CAF50] font-light text-base">
+              +3% improvement
+            </p>
           </div>
           <div className="p-4 bg-[#FFF0C4] rounded-xl shadow-md">
             {membershipIcon()}
           </div>
         </div>
       </div>
-      <div>
-        <Dashboard />
+
+      <div className="py-5 mx-14 bg-white">
+        <div className="mx-10 py-5 border border-[#C4C4C4] rounded-lg">
+          <div className="flex items-center gap-3 px-4">
+            <Search className="text-gray-500 w-5 h-5" />
+            <input
+              type="text"
+              placeholder="Search All Quizzes"
+              className="w-full outline-none text-gray-700 placeholder-gray-400"
+            />
+          </div>
+        </div>
+      </div>
+
+      <div className="py-5 mx-14">
+        <QuizManagement />
       </div>
     </div>
   );
