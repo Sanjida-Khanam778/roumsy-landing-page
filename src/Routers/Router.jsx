@@ -1,5 +1,6 @@
 import { createBrowserRouter } from "react-router-dom";
 import Home from "../Pages/Home/Home";
+import DashboardMainPage from "../components/Admin/Dashboard/AdminDashboard";
 
 export const router = createBrowserRouter([
   {
@@ -24,5 +25,9 @@ export const router = createBrowserRouter([
   {
     path: "/register",
     element: <h1>Register</h1>,
+  },
+  {
+    path: "/admin",
+    element: <DashboardMainPage />,
   },
 ]);
