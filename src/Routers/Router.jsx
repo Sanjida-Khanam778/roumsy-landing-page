@@ -3,6 +3,7 @@ import Home from "../Pages/Home/Home";
 import LoginForm from "../Pages/Auth/LoginForm";
 import SignUpPage from "../Pages/Auth/SignUpPage";
 import ForgotPasswordPage from "../Pages/Auth/ForgotPasswordPage";
+import OtpPage from "../Pages/Auth/OtpPage";
 
 export const router = createBrowserRouter([
   {
@@ -33,6 +34,7 @@ export const router = createBrowserRouter([
     element: <ForgotPasswordPage />,
   },
   {
-    
+    path: "/otp",
+    element: <OtpPage />
   }
 ]);
