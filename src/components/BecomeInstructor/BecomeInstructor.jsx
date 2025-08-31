@@ -1,4 +1,4 @@
-import icon from "../../assets/images/tic.png";
+import icon from "../../assets/images/thunder.png";
 import become from "../../assets/images/become.png";
 import Button from "../Shared/Button";
 const BecomeInstructor = () => {
