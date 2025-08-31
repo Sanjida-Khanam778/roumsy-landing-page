@@ -3,6 +3,7 @@ import { Eye, EyeOff, Mail } from "lucide-react";
 import logo from "../../assets/images/logo.png";
 import Button from "../../components/Shared/Button";
 import login from "../../assets/images/login.png";
+import { Link } from "react-router-dom";
 
 const LoginForm = () => {
   const [formData, setFormData] = useState({
@@ -144,12 +145,14 @@ const LoginForm = () => {
                 />
                 <span className="ml-2 text-sm text-gray-600">Remember Me</span>
               </label>
-              <button
-                type="button"
-                className="text-sm text-primary hover:text-primary transition-colors"
-              >
-                Forgot Password?
-              </button>
+              <Link to={"/forgot-password"}>
+                <button
+                  type="button"
+                  className="text-sm text-primary hover:text-primary transition-colors"
+                >
+                  Forgot Password?
+                </button>
+              </Link>
             </div>
 
             {/* Login Button */}
