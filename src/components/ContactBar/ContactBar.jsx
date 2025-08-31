@@ -1,11 +1,19 @@
 import React from "react";
 import { Phone, MapPin, User } from "lucide-react";
 import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { logout } from "../../Stores/authSlice";
 
 export default function ContactBar() {
+  const dispatch = useDispatch();
+  const { isAuthenticated, user } = useSelector((state) => state.auth);
+  console.log(isAuthenticated);
+  const handleLogout = () => {
+    dispatch(logout());
+  };
   return (
     <div className="bg-black border-b border-gray-800 font-Inter">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="w-10/12 mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center py-2 text-sm text-white">
           <div className="flex items-center space-x-6">
             <div className="flex items-center space-x-2 hover:text-primary transition-colors cursor-pointer">
@@ -22,9 +30,13 @@ export default function ContactBar() {
               size={14}
               className="group-hover:scale-110 transition-transform"
             />
-            <Link to={"/login"}>
-              <span>Login / Register</span>
-            </Link>
+            {isAuthenticated ? (
+              <span onClick={handleLogout}>Logout</span>
+            ) : (
+              <Link to={"/login"}>
+                <span>Login / Register</span>
+              </Link>
+            )}
           </div>
         </div>
       </div>

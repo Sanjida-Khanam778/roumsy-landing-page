@@ -1,15 +1,17 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import { persistStore, persistReducer } from "redux-persist";
-
 import storage from "redux-persist/lib/storage";
 import { api } from "../Api/api";
+import authReducer from "./authSlice"; // 👈 import authSlice
 
 const persistConfig = {
   key: "root",
   storage,
-  whitelist: ["auth"],
+  whitelist: ["auth"], // শুধু auth persist হবে
 };
+
 const rootReducer = combineReducers({
+  auth: authReducer, // 👈 এখানে auth যোগ করো
   [api.reducerPath]: api.reducer,
 });
 
@@ -26,4 +28,4 @@ export const store = configureStore({
     }).concat(api.middleware),
 });
 
-export const parsistor = persistStore(store);
+export const persistor = persistStore(store);

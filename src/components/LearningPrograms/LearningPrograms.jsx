@@ -116,11 +116,11 @@ const LearningPrograms = () => {
                 <hr className="text-gray/50" />
                 <div className="mt-4 flex justify-between items-center flex-col gap-3">
                   <div className="p-2 bg-primary/10 rounded-lg">
-                    <img src="" alt="" />
+                    {/* <img src="" alt="" /> */}
                     <span>Train with LearninGPT</span>
                   </div>
                   <div className="p-2 bg-primary/10 rounded-lg">
-                    <img src="" alt="" />
+                    {/* <img src="" alt="" /> */}
                     <span> Start Exam Simulator</span>
                   </div>
                 </div>

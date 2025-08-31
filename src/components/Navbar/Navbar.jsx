@@ -2,10 +2,13 @@ import React, { useState } from "react";
 import { Menu, X } from "lucide-react";
 import logo from "../../assets/images/logo.png"; // Adjust the path as necessary
 import Button from "../Shared/Button";
-
+import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
+import profile from '../../assets/images/loginProfile.png'
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-
+  const dispatch = useDispatch();
+  const { isAuthenticated, user } = useSelector((state) => state.auth);
   const navItems = [
     { name: "Home", href: "#", active: true },
     { name: "Explore Courses", href: "#", active: false },
@@ -16,11 +19,14 @@ export default function Navbar() {
 
   return (
     <div className=" text-white font-Poppins">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="w-10/12 mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center py-4">
           {/* Logo */}
           <div className="flex items-center space-x-3 cursor-pointer group">
             <img src={logo} alt="" className="w-10" />
+             <p className="text-[#011F47] font-bold text-2xl">
+                Learnin<span className="text-primary">GPT</span>
+              </p>
           </div>
 
           {/* Desktop Navigation */}
@@ -46,8 +52,11 @@ export default function Navbar() {
 
           {/* CTA Button and Mobile Menu Toggle */}
           <div className="flex items-center space-x-4">
-       
-            <Button rounded="2xl">Start Free</Button>
+            {!isAuthenticated ? (
+              <Button rounded="2xl">Start Free</Button>
+            ) : (
+              <img src={profile} alt="" />
+            )}
 
             {/* Mobile menu button */}
             <button

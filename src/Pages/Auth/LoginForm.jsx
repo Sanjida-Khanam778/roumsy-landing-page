@@ -5,6 +5,8 @@ import Button from "../../components/Shared/Button";
 import login from "../../assets/images/login.png";
 import { Link, useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
+import { useDispatch, useSelector } from "react-redux";
+import { loginSuccess } from "../../Stores/authSlice";
 
 const LoginForm = () => {
   const [formData, setFormData] = useState({
@@ -15,7 +17,9 @@ const LoginForm = () => {
   const [rememberMe, setRememberMe] = useState(false);
   const [errors, setErrors] = useState({});
   const navigate = useNavigate();
-
+  const dispatch = useDispatch();
+  const { isAuthenticated, user } = useSelector((state) => state.auth);
+  console.log(isAuthenticated)
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({
@@ -59,6 +63,7 @@ const LoginForm = () => {
 
       // ✅ Show toast success
       toast.success("Login successful!");
+      dispatch(loginSuccess())
 
       // 🚀 redirect example
       navigate("/");
