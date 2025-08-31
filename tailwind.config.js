@@ -12,6 +12,7 @@ export default {
         dark: "#6E6E6E",
         gray: "#929292",
         light: "#C5E7FF",
+        login: "#F0F8FF"
       },
     },
   },
