@@ -11,6 +11,7 @@ import PricingSection from "../../components/PricingSection/PricingSection";
 import WhyChooseUs from "../../components/WhyChooseUs/WhyChooseUs";
 import BecomeInstructor from "../../components/BecomeInstructor/BecomeInstructor";
 import Footer from "../../components/Footer/Footer";
+import TestimonialSlider from "../../components/TestimonialSlider/TestimonialSlider";
 
 export default function Home() {
   return (
@@ -27,6 +28,7 @@ export default function Home() {
       <PricingSection />
       <WhyChooseUs />
       <BecomeInstructor />
+      <TestimonialSlider />
       <Footer />
     </div>
   );
