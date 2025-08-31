@@ -153,7 +153,7 @@ export default function Hero() {
             {/* User Avatars and Stats */}
             <div className="flex items-center space-x-4 pt-8">
               <div className="flex -space-x-4">
-                {avatar.map((icon,idx) => (
+                {avatar.map((icon, idx) => (
                   <img key={idx} src={icon.image} alt="" />
                 ))}
               </div>
