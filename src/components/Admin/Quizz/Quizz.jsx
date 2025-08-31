@@ -1,7 +1,20 @@
 import { Search } from "lucide-react";
 import QuizManagement from "./AllQuizzes";
+import { useState } from "react";
+import QuizCreator from "./CreateNewQuizz";
 
 export const Quizz = () => {
+  const [showBasicInfo, setShowBasicInfo] = useState(false);
+
+  const handleCreateClick = () => {
+    setShowBasicInfo(true);
+  };
+
+  // === Conditional Rendering ===
+  if (showBasicInfo) {
+    return <QuizCreator />;
+  }
+
   const dollarIcon = () => (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -62,7 +75,10 @@ export const Quizz = () => {
             Create, manage, and analyze your quizzes
           </p>
         </div>
-        <button className="bg-gradient-to-r from-[#189EFE] to-[#0E5F98] text-white px-6 py-3 rounded-lg text-2xl font-medium">
+        <button
+          onClick={handleCreateClick}
+          className="bg-gradient-to-r from-[#189EFE] to-[#0E5F98] text-white px-6 py-3 rounded-lg text-2xl font-medium"
+        >
           + Create Quizz
         </button>
       </div>

@@ -1,6 +1,7 @@
 import { createBrowserRouter } from "react-router-dom";
 import Home from "../Pages/Home/Home";
 import DashboardMainPage from "../components/Admin/Dashboard/AdminDashboard";
+import QuizCreator from "../components/Admin/Quizz/CreateNewQuizz";
 
 export const router = createBrowserRouter([
   {
@@ -29,5 +30,9 @@ export const router = createBrowserRouter([
   {
     path: "/admin",
     element: <DashboardMainPage />,
+  },
+  {
+    path: "/admin/create-quizz",
+    element: <QuizCreator />,
   },
 ]);
