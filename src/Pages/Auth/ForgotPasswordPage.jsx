@@ -64,12 +64,14 @@ const LoginForm = () => {
       {/* Left Side - Login Form */}
       <div className="w-full lg:w-1/2 flex items-start justify-center mt-20">
         <div className="w-full max-w-md">
-          <div className="flex items-center justify-center space-x-2 mb-40">
-            <img src={logo} className="w-16" alt="" />
-            <p className="text-[#011F47] font-bold text-3xl">
-              Learnin<span className="text-primary">GPT</span>
-            </p>
-          </div>
+          <Link to={"/"}>
+            <div className="flex items-center justify-center space-x-2 mb-20">
+              <img src={logo} className="w-16" alt="logo" />
+              <p className="text-[#011F47] font-bold text-3xl">
+                Learnin<span className="text-primary">GPT</span>
+              </p>
+            </div>
+          </Link>
 
           {/* Form Container */}
           <form onSubmit={handleSubmit} className="space-y-8">

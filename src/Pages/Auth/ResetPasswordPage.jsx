@@ -4,7 +4,7 @@ import logo from "../../assets/images/logo.png";
 import Button from "../../components/Shared/Button";
 import login from "../../assets/images/login.png";
 import Swal from "sweetalert2";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const ResetPasswordPage = () => {
   const [formData, setFormData] = useState({
@@ -55,7 +55,7 @@ const ResetPasswordPage = () => {
       icon: "success",
       draggable: true,
     });
-    navigate('/login')
+    navigate("/login");
     const newErrors = validateForm();
 
     if (Object.keys(newErrors).length === 0) {
@@ -71,12 +71,14 @@ const ResetPasswordPage = () => {
       {/* Left Side - Login Form */}
       <div className="w-full lg:w-1/2 flex items-start justify-center mt-20">
         <div className="w-full max-w-md">
-          <div className="flex items-center justify-center space-x-2 mb-40">
-            <img src={logo} className="w-16" alt="" />
-            <p className="text-[#011F47] font-bold text-3xl">
-              Learnin<span className="text-primary">GPT</span>
-            </p>
-          </div>
+          <Link to={"/"}>
+            <div className="flex items-center justify-center space-x-2 mb-20">
+              <img src={logo} className="w-16" alt="logo" />
+              <p className="text-[#011F47] font-bold text-3xl">
+                Learnin<span className="text-primary">GPT</span>
+              </p>
+            </div>
+          </Link>
 
           {/* Form Container */}
           <form onSubmit={handleSubmit} className="space-y-6">

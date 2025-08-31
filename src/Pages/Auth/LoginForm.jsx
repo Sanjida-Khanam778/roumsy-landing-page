@@ -3,7 +3,8 @@ import { Eye, EyeOff, Mail } from "lucide-react";
 import logo from "../../assets/images/logo.png";
 import Button from "../../components/Shared/Button";
 import login from "../../assets/images/login.png";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
 
 const LoginForm = () => {
   const [formData, setFormData] = useState({
@@ -13,6 +14,7 @@ const LoginForm = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [rememberMe, setRememberMe] = useState(false);
   const [errors, setErrors] = useState({});
+  const navigate = useNavigate();
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -21,6 +23,7 @@ const LoginForm = () => {
       [name]: value,
     }));
 
+    // Clear specific error when user types
     if (errors[name]) {
       setErrors((prev) => ({
         ...prev,
@@ -53,15 +56,26 @@ const LoginForm = () => {
 
     if (Object.keys(newErrors).length === 0) {
       console.log("Login successful:", formData);
-      // 🔥 Here you can call API or redirect user
+
+      // ✅ Show toast success
+      toast.success("Login successful!");
+
+      // 🚀 redirect example
+      navigate("/");
+
+      // 🔥 ekhane API call korte paro jodi thake
     } else {
       setErrors(newErrors);
+
+      // ❌ Show first error toast (optional)
+      const firstError = Object.values(newErrors)[0];
+      toast.error(firstError);
     }
   };
 
   const handleGoogleLogin = () => {
     console.log("Google login clicked");
-    // Handle Google login here
+    toast("Google login coming soon!", { icon: "🔒" });
   };
 
   return (
@@ -69,13 +83,14 @@ const LoginForm = () => {
       {/* Left Side - Login Form */}
       <div className="w-full lg:w-1/2 flex items-center justify-center p-8">
         <div className="w-full max-w-md">
-          <div className="flex items-center justify-center space-x-2 mb-20">
-            <img src={logo} className="w-16" alt="" />
-            <p className="text-[#011F47] font-bold text-3xl">
-              Learnin<span className="text-primary">GPT</span>
-            </p>
-          </div>
-
+          <Link to={"/"}>
+            <div className="flex items-center justify-center space-x-2 mb-20">
+              <img src={logo} className="w-16" alt="logo" />
+              <p className="text-[#011F47] font-bold text-3xl">
+                Learnin<span className="text-primary">GPT</span>
+              </p>
+            </div>
+          </Link>
           {/* Form Container */}
           <form onSubmit={handleSubmit} className="space-y-6">
             {/* Email Input */}
@@ -203,12 +218,14 @@ const LoginForm = () => {
             <div className="text-center">
               <span className="text-sm text-gray-600">
                 Don't have an account?
-                <button
-                  type="button"
-                  className="text-primary hover:text-primary font-medium transition-colors ml-1"
-                >
-                  Create a free account
-                </button>
+                <Link to={"/register"}>
+                  <button
+                    type="button"
+                    className="text-primary hover:text-primary font-medium transition-colors ml-1"
+                  >
+                    Create a free account
+                  </button>
+                </Link>
               </span>
             </div>
           </form>
@@ -217,7 +234,7 @@ const LoginForm = () => {
 
       {/* Right Side - Image Placeholder */}
       <div className="hidden border lg:flex lg:w-1/2 bg-gradient-to-br from-[#1A9FFE] to-primary text-primary relative overflow-hidden">
-        <img src={login} className="object-cover mx-auto" alt="" />
+        <img src={login} className="object-cover mx-auto" alt="login" />
       </div>
     </div>
   );

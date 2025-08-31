@@ -1,19 +1,22 @@
 import React, { useState } from "react";
-import { Eye, EyeOff, Mail } from "lucide-react";
+import { Eye, EyeOff } from "lucide-react";
 import logo from "../../assets/images/logo.png";
 import Button from "../../components/Shared/Button";
 import login from "../../assets/images/login.png";
+import { Link, useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
 
 const SignUpPage = () => {
   const [formData, setFormData] = useState({
+    name: "",
     email: "",
     password: "",
+    confirmPassword: "",
   });
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
-  const [rememberMe, setRememberMe] = useState(false);
-
   const [errors, setErrors] = useState({});
+  const navigate = useNavigate();
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -33,6 +36,10 @@ const SignUpPage = () => {
   const validateForm = () => {
     const newErrors = {};
 
+    if (!formData.name.trim()) {
+      newErrors.name = "Name is required";
+    }
+
     if (!formData.email.trim()) {
       newErrors.email = "Email is required";
     } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
@@ -45,6 +52,12 @@ const SignUpPage = () => {
       newErrors.password = "Password must be at least 6 characters";
     }
 
+    if (!formData.confirmPassword.trim()) {
+      newErrors.confirmPassword = "Confirm password is required";
+    } else if (formData.password !== formData.confirmPassword) {
+      newErrors.confirmPassword = "Passwords do not match";
+    }
+
     return newErrors;
   };
 
@@ -53,34 +66,38 @@ const SignUpPage = () => {
     const newErrors = validateForm();
 
     if (Object.keys(newErrors).length === 0) {
-      console.log("Login successful:", formData);
-      // 🔥 Here you can call API or redirect user
+      console.log("Signup successful:", formData);
+      toast.success("Account created successfully!");
+      navigate("/login");
+      // 🔥 এখানে API call বা redirect করতে পারবে
     } else {
       setErrors(newErrors);
+      toast.error("Please fix the errors in the form");
     }
   };
 
   const handleGoogleLogin = () => {
     console.log("Google login clicked");
-    // Handle Google login here
+    toast("Google signup clicked!");
   };
 
   return (
-    <div className="min-h-screen flex bg-login">
-      {/* Left Side - Login Form */}
-
-      {/* Left Side - Login Form */}
+    <div className="min-h-screen flex bg-login font-Poppins">
+      {/* Left Side - Sign Up Form */}
       <div className="w-full lg:w-1/2 flex items-center justify-center p-8">
         <div className="w-full max-w-md">
-          <div className="flex items-center justify-center space-x-2 mb-20">
-            <img src={logo} className="w-16" alt="" />
-            <p className="text-[#011F47] font-bold text-3xl">
-              Learnin<span className="text-primary">GPT</span>
-            </p>
-          </div>
+          <Link to={"/"}>
+            <div className="flex items-center justify-center space-x-2 mb-20">
+              <img src={logo} className="w-16" alt="logo" />
+              <p className="text-[#011F47] font-bold text-3xl">
+                Learnin<span className="text-primary">GPT</span>
+              </p>
+            </div>
+          </Link>
 
           {/* Form Container */}
           <form onSubmit={handleSubmit} className="space-y-6">
+            {/* Name */}
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-2">
                 Your Name
@@ -90,11 +107,17 @@ const SignUpPage = () => {
                 name="name"
                 value={formData.name}
                 onChange={handleInputChange}
-                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary ${
+                  errors.name ? "border-red-500" : "border-gray-300"
+                }`}
                 placeholder="Enter your full name"
               />
+              {errors.name && (
+                <p className="text-red-500 text-xs mt-1">{errors.name}</p>
+              )}
             </div>
 
+            {/* Email */}
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-2">
                 Your Email
@@ -104,11 +127,17 @@ const SignUpPage = () => {
                 name="email"
                 value={formData.email}
                 onChange={handleInputChange}
-                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary ${
+                  errors.email ? "border-red-500" : "border-gray-300"
+                }`}
                 placeholder="example@gmail.com"
               />
+              {errors.email && (
+                <p className="text-red-500 text-xs mt-1">{errors.email}</p>
+              )}
             </div>
 
+            {/* Password */}
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-2">
                 Password
@@ -119,7 +148,9 @@ const SignUpPage = () => {
                   name="password"
                   value={formData.password}
                   onChange={handleInputChange}
-                  className="w-full px-4 py-3 pr-10 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  className={`w-full px-4 py-3 pr-10 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary ${
+                    errors.password ? "border-red-500" : "border-gray-300"
+                  }`}
                   placeholder="Enter your password"
                 />
                 <button
@@ -134,8 +165,12 @@ const SignUpPage = () => {
                   )}
                 </button>
               </div>
+              {errors.password && (
+                <p className="text-red-500 text-xs mt-1">{errors.password}</p>
+              )}
             </div>
 
+            {/* Confirm Password */}
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-2">
                 Confirm Password
@@ -146,7 +181,11 @@ const SignUpPage = () => {
                   name="confirmPassword"
                   value={formData.confirmPassword}
                   onChange={handleInputChange}
-                  className="w-full px-4 py-3 pr-10 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  className={`w-full px-4 py-3 pr-10 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary ${
+                    errors.confirmPassword
+                      ? "border-red-500"
+                      : "border-gray-300"
+                  }`}
                   placeholder="Confirm your password"
                 />
                 <button
@@ -161,8 +200,14 @@ const SignUpPage = () => {
                   )}
                 </button>
               </div>
+              {errors.confirmPassword && (
+                <p className="text-red-500 text-xs mt-1">
+                  {errors.confirmPassword}
+                </p>
+              )}
             </div>
-            {/* Login Button */}
+
+            {/* Create Account Button */}
             <div>
               <Button type="submit" rounded="lg" padding="px-4 py-3 w-full">
                 CREATE ACCOUNT
@@ -179,7 +224,7 @@ const SignUpPage = () => {
               </div>
             </div>
 
-            {/* Google Login */}
+            {/* Google Signup */}
             <button
               type="button"
               onClick={handleGoogleLogin}
@@ -206,25 +251,27 @@ const SignUpPage = () => {
               <span>Sign Up with Google</span>
             </button>
 
-            {/* Sign Up Link */}
+            {/* Already have account */}
             <div className="text-center">
               <span className="text-sm text-gray-600">
-                already have an account? 
-                <button
-                  type="button"
-                  className="text-primary hover:text-primary font-medium transition-colors ml-1"
-                >
-                  Log In
-                </button>
+                Already have an account?{" "}
+                <Link to={"/login"}>
+                  <button
+                    type="button"
+                    className="text-primary hover:text-primary font-medium transition-colors ml-1"
+                  >
+                    Log In
+                  </button>
+                </Link>
               </span>
             </div>
           </form>
         </div>
       </div>
 
-      {/* Right Side - Image Placeholder */}
+      {/* Right Side - Image */}
       <div className="hidden border lg:flex lg:w-1/2 bg-gradient-to-br from-[#1A9FFE] to-primary text-primary relative overflow-hidden">
-        <img src={login} className="object-cover mx-auto" alt="" />
+        <img src={login} className="object-cover mx-auto" alt="Signup" />
       </div>
     </div>
   );
