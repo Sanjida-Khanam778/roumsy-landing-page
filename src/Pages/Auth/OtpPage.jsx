@@ -3,6 +3,7 @@ import { ArrowLeft, Eye, EyeOff, Mail } from "lucide-react";
 import logo from "../../assets/images/logo.png";
 import Button from "../../components/Shared/Button";
 import login from "../../assets/images/login.png";
+import { Link } from "react-router-dom";
 
 const OtpPage = () => {
   const [formData, setFormData] = useState({
@@ -74,18 +75,20 @@ const OtpPage = () => {
       {/* Left Side - Login Form */}
       <div className="w-full lg:w-1/2 flex items-start justify-center mt-20">
         <div className="w-full max-w-md">
-          <div className="flex items-center justify-center space-x-2 mb-40">
-            <img src={logo} className="w-16" alt="" />
-            <p className="text-[#011F47] font-bold text-3xl">
-              Learnin<span className="text-primary">GPT</span>
-            </p>
-          </div>
+          <Link to={"/"}>
+            <div className="flex items-center justify-center space-x-2 mb-40">
+              <img src={logo} className="w-16" alt="" />
+              <p className="text-[#011F47] font-bold text-3xl">
+                Learnin<span className="text-primary">GPT</span>
+              </p>
+            </div>
+          </Link>
 
           {/* Form Container */}
           <form onSubmit={handleSubmit} className="space-y-10">
             {/* Email Input */}
             <div className="text-center mb-8">
-              <h2 className="text-xl font-semibold text-primary mb-4">OTP</h2>
+              <h2 className="text-xl font-semibold text-[#3B76B7] mb-4">OTP</h2>
             </div>
 
             <div className="flex justify-center space-x-6">
@@ -102,13 +105,17 @@ const OtpPage = () => {
               ))}
             </div>
 
-            <Button
-              padding="w-full py-3 px-2"
-              rounded="lg"
-              onClick={() => setCurrentPage("otp")}
-            >
-              Continue
-            </Button>
+            <div>
+              <Link to={"/reset-password"}>
+                <Button
+                  padding="w-full py-3 px-2"
+                  rounded="lg"
+                  onClick={() => setCurrentPage("otp")}
+                >
+                  Continue
+                </Button>
+              </Link>
+            </div>
 
             {/* <div className="text-center mx-auto border">
                  <button

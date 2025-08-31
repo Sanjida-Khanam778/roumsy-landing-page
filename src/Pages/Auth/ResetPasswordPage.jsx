@@ -3,16 +3,16 @@ import { ArrowLeft, Eye, EyeOff, Mail } from "lucide-react";
 import logo from "../../assets/images/logo.png";
 import Button from "../../components/Shared/Button";
 import login from "../../assets/images/login.png";
-import { Link } from "react-router-dom";
+import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
 
-const LoginForm = () => {
+const ResetPasswordPage = () => {
   const [formData, setFormData] = useState({
     email: "",
     password: "",
   });
-  const [showPassword, setShowPassword] = useState(false);
-  const [rememberMe, setRememberMe] = useState(false);
   const [errors, setErrors] = useState({});
+  const navigate = useNavigate();
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -49,6 +49,13 @@ const LoginForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    Swal.fire({
+      title: "Password Changed!",
+      text: "Your password has been changed successfully.",
+      icon: "success",
+      draggable: true,
+    });
+    navigate('/login')
     const newErrors = validateForm();
 
     if (Object.keys(newErrors).length === 0) {
@@ -72,45 +79,49 @@ const LoginForm = () => {
           </div>
 
           {/* Form Container */}
-          <form onSubmit={handleSubmit} className="space-y-8">
+          <form onSubmit={handleSubmit} className="space-y-6">
             {/* Email Input */}
-            <div className="text-center">
+            <div className="text-center mb-8">
               <h2 className="text-xl font-semibold text-[#3B76B7] mb-4">
-                Forget Password
+                Reset Password
               </h2>
             </div>
 
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-2">
-                Enter Email
+                Create New Password
               </label>
-              <div className="relative">
-                <input
-                  type="email"
-                  name="email"
-                  value={formData.email}
-                  onChange={handleInputChange}
-                  className="w-full px-4 py-3 pr-10 border border-gray rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                  placeholder="example@gmail.com"
-                />
-                <button
-                  type="button"
-                  className="absolute right-3 top-1/2 transform -translate-y-1/2"
-                ></button>
-              </div>
+              <input
+                type="password"
+                name="password"
+                value={formData.password}
+                onChange={handleInputChange}
+                className="w-full px-4 py-3 border border-gray rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                placeholder="Enter new password"
+              />
             </div>
 
             <div>
-              <Link to={"/otp"}>
-                <Button
-                  padding="w-full py-3 px-2"
-                  rounded="lg"
-                  onClick={() => setCurrentPage("otp")}
-                >
-                  Get OTP
-                </Button>
-              </Link>
+              <label className="block text-sm font-medium text-gray-500 mb-2">
+                Confirm Password
+              </label>
+              <input
+                type="password"
+                name="confirmPassword"
+                value={formData.confirmPassword}
+                onChange={handleInputChange}
+                className="w-full px-4 py-3 border border-gray rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                placeholder="Confirm new password"
+              />
             </div>
+
+            <Button
+              padding="w-full py-3 px-2"
+              rounded="lg"
+              onClick={() => setCurrentPage("otp")}
+            >
+              Reset
+            </Button>
 
             {/* <div className="text-center mx-auto border">
               <button
@@ -133,4 +144,4 @@ const LoginForm = () => {
   );
 };
 
-export default LoginForm;
+export default ResetPasswordPage;
