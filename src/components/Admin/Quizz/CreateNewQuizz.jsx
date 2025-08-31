@@ -9,6 +9,8 @@ import {
 } from "lucide-react";
 import { BasicInfo } from "./BasicInfo";
 import { QuestionsContent } from "./QuestionsContent";
+import QuizSettings from "./QuizSettings";
+import QuizPreview from "./Preview";
 
 export default function QuizCreator() {
 
@@ -90,10 +92,10 @@ export default function QuizCreator() {
           <p className="text-lg">👉 Document Content</p>
         )}
         {activeTab === "settings" && (
-          <p className="text-lg">👉 Settings Content</p>
+          <QuizSettings />
         )}
         {activeTab === "preview" && (
-          <p className="text-lg">👉 Preview Content</p>
+          <QuizPreview />
         )}
       </div>
     </div>
