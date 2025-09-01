@@ -1,14 +1,16 @@
 import React, { useState } from "react";
+import tic from "../../assets/images/tic.png";
+import pricing1 from "../../assets/images/pricing1.png";
+import pricing2 from "../../assets/images/pricing2.png";
+import pricing3 from "../../assets/images/pricing3.png";
+import logo from "../../assets/images/logo.png";
 import {
   Plus,
   Search,
-  MessageSquare,
   Send,
-  Paperclip,
   Sparkles,
 } from "lucide-react";
-import logo from "../../assets/images/logo.png";
-import tic from "../../assets/images/tic.png";
+import Button from "../../components/Shared/Button";
 
 const Dashboard = () => {
   const [inputValue, setInputValue] = useState("");
@@ -18,17 +20,189 @@ const Dashboard = () => {
   ]);
   const [showSearch, setShowSearch] = useState(false);
   const [searchValue, setSearchValue] = useState("");
-
+  const [showPricingModal, setShowPricingModal] = useState(true);
+  const [chatCount, setChatCount] = useState(0); // Track the number of chats
+  const [isSubscribed, setIsSubscribed] = useState(false);
   const suggestionCards = [
     "Ask your LearnGPT about PMP certification",
     "Ask your LearnGPT about immigration to Canada",
     "What projects should I be concerned about right now?",
   ];
+  const plans = [
+    {
+      title: "Exam Simulator Only",
+      price: "19.99 CAD",
+      period: "Per Month",
+      color: "bg-[#A1D1FF]",
+      features: ["Mock Exams & Practice"],
+      buttonText: "Choose Plan",
+      buttonColor: "bg-blue-600 hover:bg-blue-700",
+      image: pricing3,
+      scale: false,
+    },
+    {
+      title: "Full Access",
+      price: "29.99 CAD",
+      period: "Per Month",
+      color: "bg-[#42A5FF]",
+      popular: true,
+      features: ["Quiz", "Chatbot", "Docs"],
+      originalPrice: "39.99 CAD",
+      buttonText: "Choose Plan",
+      buttonColor: "bg-blue-600 hover:bg-blue-700",
+      image: pricing2,
+      scale: true,
+    },
+    {
+      title: "AI Coach Only",
+      price: "19.99 CAD",
+      period: "Per Month",
+      color: "bg-[#7ED6D1]",
+      features: ["Chat + Smart Guidance"],
+      buttonText: "Choose Plan",
+      buttonColor: "bg-blue-600 hover:bg-blue-700",
+      image: pricing1,
+      scale: false,
+    },
+  ];
+
+  const handleSendMessage = () => {
+    if (inputValue.trim()) {
+      if (chatCount >= 3) {
+        // Block chat if the user has hit the chat limit
+        setShowPricingModal(true);
+        return;
+      }
+
+      setConversations((prev) => [
+        ...prev,
+        { sender: "user", text: inputValue },
+        {
+          sender: "ai",
+          text: "This is a static AI response. I'm here to help with your learning!",
+        },
+      ]);
+      setInputValue("");
+      setChatCount((prev) => prev + 1); // Increment chat count
+    }
+  };
+
+  const handleChoosePlan = (planTitle) => {
+    setIsSubscribed(true); // Mark the user as subscribed
+    setShowPricingModal(false);
+    setChatCount(0); // Reset chat count on subscription
+    setConversations((prev) => [
+      ...prev,
+      {
+        sender: "ai",
+        text: `Great choice! You've selected the ${planTitle} plan. Let's get started with your learning journey!`,
+      },
+    ]);
+  };
+
+  const handleMaybeLater = () => {
+    // Allow chat but track the chats
+    setShowPricingModal(false);
+  };
 
   return (
     <div className="flex h-screen bg-[#575555]/10">
+      {showPricingModal && !isSubscribed && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+          <div className="bg-white rounded-2xl shadow-2xl max-w-5xl w-full max-h-[90vh] overflow-y-auto">
+            {/* Modal Header */}
+            <div className="text-left px-20 py-6">
+              <h2 className="text-3xl font-bold mb-2 text-primary">
+                Unlock AI Coach Access
+              </h2>
+              <p className="text-gray">
+                Get unlimited access to our AI Coach for 30 days!
+              </p>
+            </div>
+
+            {/* Pricing Cards */}
+            <div className="px-20 py-6">
+              <div className="grid md:grid-cols-3 gap-6 mx-auto">
+                {plans.map((plan, index) => (
+                  <div
+                    key={index}
+                    className={`bg-white rounded-lg overflow-hidden shadow-lg flex flex-col h-full ${
+                      plan.scale ? "transform scale-100" : ""
+                    }`}
+                  >
+                    {/* Popular Badge */}
+                    {plan.popular && (
+                      <div className="absolute top-4 right-4 bg-[#FFB563] text-white px-3 py-1 rounded-full text-xs font-medium z-10">
+                        Best Deal
+                      </div>
+                    )}
+
+                    {/* Header with Icon */}
+                    <div
+                      className={`${plan.color} p-8 text-white text-center relative flex flex-col items-center`}
+                    >
+                      <img src={plan.image} alt="" />
+                      <h3 className="text-xl font-semibold my-2">
+                        {plan.title}
+                      </h3>
+                    </div>
+
+                    {/* Content */}
+                    <div className="p-6 flex flex-col flex-grow ">
+                      {/* Features */}
+                      <div className="flex-1">
+                        {plan.features.map((feature, featureIndex) => (
+                          <div
+                            key={featureIndex}
+                            className="flex items-center mb-2"
+                          >
+                            <img src={tic} alt="" />
+                            <span className="ml-2 text-gray-700 text-sm">
+                              {feature}
+                            </span>
+                          </div>
+                        ))}
+                      </div>
+
+                      {/* Pricing */}
+                      <div className="mb-4 flex-1">
+                        {plan.originalPrice && (
+                          <div className="text-gray line-through text-sm mb-1">
+                            {plan.originalPrice}
+                          </div>
+                        )}
+                        <div className="text-2xl font-bold text-primary mb-1">
+                          {plan.price}
+                        </div>
+                        <div className="text-gray-600 text-sm">
+                          {plan.period}
+                        </div>
+                      </div>
+
+                      {/* Button - Pushed to bottom */}
+                      <div className="mt-auto">
+                        <Button rounded="lg">Choose Plan</Button>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              {/* Maybe Later Button */}
+              <div className="text-center my-6 border border-gray/50 rounded-md py-3 w-9/12 mx-auto">
+                <button
+                  onClick={handleMaybeLater}
+                  className="text-gray-500 hover:text-gray-700 font-medium transition-colors"
+                >
+                  Maybe Later
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
       {/* Left Sidebar */}
-      <div className="w-72 bg-blue-600 text-white flex flex-col">
+      <div className="w-72 bg-[#0062A7] text-white flex flex-col">
         {/* Logo and Header */}
         <div className="p-6 border-b border-blue-500">
           {/* Logo */}
@@ -94,7 +268,7 @@ const Dashboard = () => {
         {/* Header */}
         <div className=" border-b border-gray/50 px-6 py-4 flex justify-between items-center">
           <div className="text-sm text-gray font-semibold text-end w-full">
-            Remaining 3/3
+            Remaining {3-chatCount}/3
           </div>
         </div>
 
@@ -180,24 +354,26 @@ const Dashboard = () => {
                     type="text"
                     placeholder="Ask me anything about your projects"
                     value={inputValue}
+                    onKeyPress={(e) => e.key === "Enter" && handleSendMessage()}
                     onChange={(e) => setInputValue(e.target.value)}
                     className="flex-1 outline-none text-gray-700 placeholder-gray-400"
                   />
                   <div className="flex items-center gap-3 ml-4">
                     <button
-                      onClick={() => {
-                        if (inputValue.trim()) {
-                          setConversations((prev) => [
-                            ...prev,
-                            { sender: "user", text: inputValue },
-                            {
-                              sender: "ai",
-                              text: "This is a static AI response.",
-                            },
-                          ]);
-                          setInputValue("");
-                        }
-                      }}
+                      // onClick={() => {
+                      //   if (inputValue.trim()) {
+                      //     setConversations((prev) => [
+                      //       ...prev,
+                      //       { sender: "user", text: inputValue },
+                      //       {
+                      //         sender: "ai",
+                      //         text: "This is a static AI response.",
+                      //       },
+                      //     ]);
+                      //     setInputValue("");
+                      //   }
+                      // }}
+                      onClick={handleSendMessage}
                       className="bg-blue-500 hover:bg-blue-600 text-white rounded-lg p-2 transition-colors"
                     >
                       <Send className="w-4 h-4" />

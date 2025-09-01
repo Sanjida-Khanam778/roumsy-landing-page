@@ -6,6 +6,7 @@ import ForgotPasswordPage from "../Pages/Auth/ForgotPasswordPage";
 import OtpPage from "../Pages/Auth/OtpPage";
 import ResetPasswordPage from "../Pages/Auth/ResetPasswordPage";
 import Dashboard from "../Pages/Dashboard/Dashboard";
+import QuizInterface from "../Pages/QuizInterface/QuizInterface";
 
 export const router = createBrowserRouter([
   {
@@ -37,14 +38,18 @@ export const router = createBrowserRouter([
   },
   {
     path: "/otp",
-    element: <OtpPage />
+    element: <OtpPage />,
   },
   {
     path: "/reset-password",
-    element: <ResetPasswordPage />
+    element: <ResetPasswordPage />,
   },
   {
-    path: '/dashboard',
-    element: <Dashboard />
-  }
+    path: "/dashboard",
+    element: <Dashboard />,
+  },
+  {
+    path: "/quiz",
+    element: <QuizInterface />,
+  },
 ]);
