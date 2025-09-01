@@ -57,6 +57,7 @@ export const Sidebar = ({ currentComponent, onMenuClick }) => {
     { icon: monetiazaionIcon, label: "Monetization" },
   ];
 
+  const settingsItems = ["Account", "Terms & Conditions", "Privacy Policies"];
   const navigate = useNavigate();
 
   const handleLogout = () => {
@@ -109,16 +110,17 @@ export const Sidebar = ({ currentComponent, onMenuClick }) => {
         {open && (
           <div className="absolute left-6 top-10 mt-2 w-48 shadow-lg z-50">
             <div className="flex flex-col overflow-hidden gap-0.5">
-              {["Account", "Terms & Conditions", "Privacy Policies"].map(
-                (item, idx) => (
+              {settingsItems.map((item, idx) => {
+                return (
                   <button
                     key={idx}
+                    onClick={() => onMenuClick(item)}
                     className="px-4 py-2 text-white text-sm text-left bg-[#0096FF] rounded-md"
                   >
                     {item}
                   </button>
-                )
-              )}
+                );
+              })}
             </div>
           </div>
         )}
