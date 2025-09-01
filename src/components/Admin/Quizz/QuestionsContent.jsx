@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Edit3, Plus, Trash2 } from "lucide-react";
 
-export const QuestionsContent = () => {
+export const QuestionsContent = ({ editMode }) => {
   const [showSelectModal, setShowSelectModal] = useState(false);
   const [selectedQuestions, setSelectedQuestions] = useState([]);
   const [selectAll, setSelectAll] = useState(false);
@@ -309,15 +309,24 @@ export const QuestionsContent = () => {
                 onClick={addNewQuestion}
                 className="w-80 bg-gradient-to-r from-[#189EFE] to-[#0E5F98] text-white text-base py-2 px-4 rounded-lg font-normal transition-colors flex items-center justify-center"
               >
-                <Plus className="w-4 h-4 mr-2" />
-                Add Question
+                {editMode ? (
+                  <>
+                    Update Question
+                  </>
+                ) : (
+                  <>
+                    <Plus className="w-4 h-4 mr-2" />
+                    Add New Question
+                  </>
+                )}
               </button>
             </div>
           </div>
         </div>
 
-        {/* Right Panel - Questions List */}
+        {/* Right Panel */}
         <div className="w-1/2">
+          {/* Questions List */}
           <div className="bg-white rounded-lg p-6">
             <div className="flex items-center justify-between mb-6">
               <h3 className="text-lg font-semibold text-gray-900 flex items-center">
@@ -357,58 +366,61 @@ export const QuestionsContent = () => {
               ))}
             </div>
           </div>
-
-          {/* Upload Questions Section */}
-          <div className="mt-8 bg-gray-50 rounded-lg py-6">
-            <h4 className="text-base font-medium text-black mb-4">
-              Upload Questions
-            </h4>
-            <div className="flex items-center relative">
-              <button className="bg-blue-500 hover:bg-blue-600 rounded-md text-white w-32 h-10 py-2 font-medium absolute top-2">
-                Choose File
-              </button>
-              <div className="text-sm text-[#CAC8C8] rounded-md w-full h-10 bg-white pl-36 mt-2 pt-2.5">
-                No file chosen
-              </div>
-            </div>
-            <button className="w-full bg-gradient-to-r from-[#189EFE] to-[#0E5F98] text-white py-2 px-4 rounded-lg text-base font-medium mt-4">
-              Upload
-            </button>
-          </div>
-
-          {/* Uploaded Questions */}
-          <div className="bg-white rounded-lg p-6">
-            <div className="flex items-center mb-4">
-              <h3 className="text-lg font-semibold text-gray-900 flex items-center">
-                <span className="mr-1">{questionIcon()}</span>
-                Uploaded Questions
-              </h3>
-            </div>
-            <div className="space-y-2">
-              {uploadedFiles.map((file, index) => (
-                <div
-                  key={index}
-                  className="flex items-center justify-between border border-[#DBDBDB] bg-white p-4 rounded-md"
-                >
-                  <span className="text-base text-black">{file.name}</span>
-                  <div className="flex items-center space-x-2">
-                    <button
-                      onClick={() => setShowSelectModal(true)}
-                      className="bg-[#1E90FF] text-white px-3 py-1 rounded-md text-sm font-medium"
-                    >
-                      Use
-                    </button>
-                    <button
-                      onClick={() => deleteFile(index)}
-                      className="bg-red-500 text-white px-3 py-1 rounded-md text-sm font-medium"
-                    >
-                      Delete
-                    </button>
+          {!editMode && (
+            <>
+              {/* Upload Questions Section */}
+              <div className="mt-8 bg-gray-50 rounded-lg py-6">
+                <h4 className="text-base font-medium text-black mb-4">
+                  Upload Questions
+                </h4>
+                <div className="flex items-center relative">
+                  <button className="bg-blue-500 hover:bg-blue-600 rounded-md text-white w-32 h-10 py-2 font-medium absolute top-2">
+                    Choose File
+                  </button>
+                  <div className="text-sm text-[#CAC8C8] rounded-md w-full h-10 bg-white pl-36 mt-2 pt-2.5">
+                    No file chosen
                   </div>
                 </div>
-              ))}
-            </div>
-          </div>
+                <button className="w-full bg-gradient-to-r from-[#189EFE] to-[#0E5F98] text-white py-2 px-4 rounded-lg text-base font-medium mt-4">
+                  Upload
+                </button>
+              </div>
+
+              {/* Uploaded Questions */}
+              <div className="bg-white rounded-lg p-6">
+                <div className="flex items-center mb-4">
+                  <h3 className="text-lg font-semibold text-gray-900 flex items-center">
+                    <span className="mr-1">{questionIcon()}</span>
+                    Uploaded Questions
+                  </h3>
+                </div>
+                <div className="space-y-2">
+                  {uploadedFiles.map((file, index) => (
+                    <div
+                      key={index}
+                      className="flex items-center justify-between border border-[#DBDBDB] bg-white p-4 rounded-md"
+                    >
+                      <span className="text-base text-black">{file.name}</span>
+                      <div className="flex items-center space-x-2">
+                        <button
+                          onClick={() => setShowSelectModal(true)}
+                          className="bg-[#1E90FF] text-white px-3 py-1 rounded-md text-sm font-medium"
+                        >
+                          Use
+                        </button>
+                        <button
+                          onClick={() => deleteFile(index)}
+                          className="bg-red-500 text-white px-3 py-1 rounded-md text-sm font-medium"
+                        >
+                          Delete
+                        </button>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </>
+          )}
         </div>
       </div>
 

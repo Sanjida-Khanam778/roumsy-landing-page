@@ -11,10 +11,17 @@ import { BasicInfo } from "./BasicInfo";
 import { QuestionsContent } from "./QuestionsContent";
 import QuizSettings from "./QuizSettings";
 import QuizPreview from "./Preview";
+import { Document } from "./Document";
 
 export default function QuizCreator() {
-
   const [activeTab, setActiveTab] = useState("basic");
+  const [editMode, setEditMode] = useState(false);
+
+  // Preview এর Edit button এ handle
+  const handleEditClick = () => {
+    setActiveTab("questions");
+    setEditMode(true);
+  };
 
   const tabs = [
     { id: "basic", label: "Basic Info", icon: <Info size={18} /> },
@@ -82,21 +89,11 @@ export default function QuizCreator() {
 
       {/* Content */}
       <div className="mt-12 drop-shadow-md">
-        {activeTab === "basic" && (
-          <BasicInfo />
-        )}
-        {activeTab === "questions" && (
-          <QuestionsContent />
-        )}
-        {activeTab === "document" && (
-          <p className="text-lg">👉 Document Content</p>
-        )}
-        {activeTab === "settings" && (
-          <QuizSettings />
-        )}
-        {activeTab === "preview" && (
-          <QuizPreview />
-        )}
+        {activeTab === "basic" && <BasicInfo />}
+        {activeTab === "questions" && <QuestionsContent editMode={editMode}/>}
+        {activeTab === "document" && <Document />}
+        {activeTab === "settings" && <QuizSettings />}
+        {activeTab === "preview" && <QuizPreview onEdit={handleEditClick}/>}
       </div>
     </div>
   );

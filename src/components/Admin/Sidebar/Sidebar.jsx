@@ -63,7 +63,7 @@ export const Sidebar = ({ currentComponent, onMenuClick }) => {
     navigate("/admin/login");
   };
   return (
-    <div className="w-72 flex flex-col items-center bg-[#97D0FA] shadow-sm relative">
+    <div className="h-full bg-[#97D0FA] shadow-sm flex flex-col items-center">
       {/* Logo */}
       <div className="p-6 mb-16">
         <img src={logo} className="w-[168px] h-[70px] mx-auto" alt="" />
@@ -114,7 +114,6 @@ export const Sidebar = ({ currentComponent, onMenuClick }) => {
                   <button
                     key={idx}
                     className="px-4 py-2 text-white text-sm text-left bg-[#0096FF] rounded-md"
-                    
                   >
                     {item}
                   </button>

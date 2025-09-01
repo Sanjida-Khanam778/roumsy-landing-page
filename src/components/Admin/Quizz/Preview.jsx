@@ -1,16 +1,6 @@
 import { Pencil, Settings, Trash2 } from "lucide-react";
-import { useState } from "react";
 
-const QuizPreview = () => {
-    const [isEditing, setIsEditing] = useState(false)
-
-  const handleEditClick = () => {
-    setIsEditing(true)
-  }
-
-  if (isEditing) {
-    return <div>Update</div>
-  }
+const QuizPreview = ({ onEdit }) => {
   const questions = [
     {
       id: 1,
@@ -141,7 +131,7 @@ const QuizPreview = () => {
           ))}
         </div>
         <div className="flex gap-2">
-          <button onClick={handleEditClick} className="flex items-center gap-1 border px-3 py-1 text-sm bg-gray-100 text-gray-700 rounded-md hover:bg-gray-200">
+          <button onClick={onEdit} className="flex items-center gap-1 border px-3 py-1 text-sm bg-gray-100 text-gray-700 rounded-md hover:bg-gray-200">
             <Pencil size={14} color="#1E90FF" />
             Edit
           </button>

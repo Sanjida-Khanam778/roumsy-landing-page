@@ -12,14 +12,17 @@ export default function DashboardMainPage() {
     setCurrentComponent(component);
   };
   return (
-    <div className="flex min-h-screen bg-[#EEF6FF] font-poppins">
+    <div className="flex bg-[#EEF6FF] font-poppins">
       {/* Sidebar */}
-      <Sidebar
-        currentComponent={currentComponent}
-        onMenuClick={handleComponentChange}
-      />
+      <div className="w-72 fixed top-0 left-0 h-screen">
+        <Sidebar
+          currentComponent={currentComponent}
+          onMenuClick={handleComponentChange}
+        />
+      </div>
+
       {/* Main Content */}
-      <div className="flex-1">
+      <div className="flex-1 ml-72 min-h-screen overflow-y-auto">
         {/* Header */}
         <div className="bg-[#EEF6FF] px-6 py-4">
           <div className="flex items-center justify-end gap-9">
