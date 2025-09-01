@@ -5,6 +5,7 @@ import SignUpPage from "../Pages/Auth/SignUpPage";
 import ForgotPasswordPage from "../Pages/Auth/ForgotPasswordPage";
 import OtpPage from "../Pages/Auth/OtpPage";
 import ResetPasswordPage from "../Pages/Auth/ResetPasswordPage";
+import Dashboard from "../Pages/Dashboard/Dashboard";
 
 export const router = createBrowserRouter([
   {
@@ -41,5 +42,9 @@ export const router = createBrowserRouter([
   {
     path: "/reset-password",
     element: <ResetPasswordPage />
+  },
+  {
+    path: '/dashboard',
+    element: <Dashboard />
   }
 ]);
