@@ -6,7 +6,7 @@ const QuizInterface = () => {
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [selectedAnswers, setSelectedAnswers] = useState({});
   const [timeRemaining, setTimeRemaining] = useState(15 * 60); // 15 minutes in seconds
-    const navigate = useNavigate()
+  const navigate = useNavigate();
   // Sample questions data
   const questions = [
     {
@@ -88,7 +88,7 @@ const QuizInterface = () => {
   };
 
   const handleSubmit = () => {
-navigate('/quiz-result')
+    navigate("/quiz-result");
   };
 
   return (
@@ -97,7 +97,7 @@ navigate('/quiz-result')
         {/* Progress Bar */}
         <div className="mb-8">
           <div className="flex items-center justify-between mb-2">
-            <div className="w-full bg-gray-200 rounded-full h-3 relative">
+            <div className="w-full bg-[#D4EDFF] rounded-full h-3 relative">
               <div
                 className="bg-gradient-to-r from-teal-500 to-blue-500 h-3 rounded-full transition-all duration-500 ease-out"
                 style={{ width: `${progressPercentage}%` }}

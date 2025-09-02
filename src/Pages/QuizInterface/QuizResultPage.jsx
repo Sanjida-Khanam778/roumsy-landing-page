@@ -1,13 +1,25 @@
+import { useState } from "react";
 import { CheckCircle, XCircle } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import cross from "../../assets/images/cross.png";
 import Button from "../../components/Shared/Button";
 import aiHelp from "../../assets/images/aiHelp.png";
 import retake from "../../assets/images/retake.png";
+import Swal from "sweetalert2";
+import ReactStars from "react-stars";
+import { X } from "lucide-react"; // <-- import cross icon
 const QuizResultPage = () => {
-  //   const [showResult, setShowResult] = useState(true);
+  // Fix: clicking a tag should open the review modal
+  const handleTagClick = (tag) => {
+    setShowReviewModal(true);
+    setReviewText(tag); // Optionally prefill with tag text
+  };
+  const [showReviewModal, setShowReviewModal] = useState(false); // To manage the review popup
+  const [reviewText, setReviewText] = useState(""); // To hold the review text
+  const [rating, setRating] = useState(5); // Default rating is 5
+
   const navigate = useNavigate();
-  // Sample quiz results data
+
   const quizResults = {
     score: 33,
     totalQuestions: 3,
@@ -45,14 +57,17 @@ const QuizResultPage = () => {
       },
     ],
   };
-
+  const tags = [
+    "Loved the question format",
+    "Challenging but helpful",
+    "AI help was useful",
+  ];
   const handleRetakeQuiz = () => {
-    // setShowResult(false);
     navigate("/quiz");
   };
 
   const handleGetAIHelp = () => {
-    console.log("Getting AI help...");
+    navigate("/dashboard");
   };
 
   const getScoreColor = (score) => {
@@ -67,15 +82,25 @@ const QuizResultPage = () => {
     return "Let's work on improvement!";
   };
 
+  const handleReviewSubmit = () => {
+    // Handle review submission and show success message
+    Swal.fire({
+      title: "THANKYOU FOR THE REVIEW!",
+      text: "Your opinion matters to us...",
+      icon: "success",
+      draggable: true,
+    });
+    setShowReviewModal(false); // Close the modal after submission
+  };
+
   return (
     <div className="min-h-screen bg-[#575555]/5 py-8 px-4">
       <div className="max-w-4xl mx-auto">
         {/* Result Card */}
-        <div className="  overflow-hidden">
+        <div className="overflow-hidden">
           {/* Header */}
           <div className="flex items-center flex-col justify-center text-center relative">
             <img src={cross} alt="" />
-
             <h1 className="text-3xl lg:text-4xl font-bold mb-2">
               Quiz Complete!
             </h1>
@@ -101,7 +126,6 @@ const QuizResultPage = () => {
             <h3 className="text-lg font-semibold text-gray-800 mb-6">
               Question Review
             </h3>
-
             <div className="space-y-4">
               {quizResults.questions.map((q, index) => (
                 <div
@@ -141,7 +165,6 @@ const QuizResultPage = () => {
                       </span>
                       <span className="text-gray-700">{q.correctAnswer}</span>
                     </div>
-
                     {!q.isCorrect && (
                       <div className="text-sm">
                         <span className="font-medium text-primary">
@@ -173,19 +196,20 @@ const QuizResultPage = () => {
               </p>
             </div>
 
-            <div className="flex flex-col sm:flex-row gap-4 justify-center  pt-8">
-              <div className="relative">
+            <div className="flex flex-col sm:flex-row gap-4 justify-center pt-8">
+              <div onClick={handleGetAIHelp} className="relative">
                 <img src={aiHelp} className="absolute bottom-0 left-2" alt="" />
-                <Button rounded="lg" padding="pl-24 pr-4 py-3">
+                <Button
+                  rounded="lg"
+                  padding="pl-24 pr-4 py-3"
+                  onClick={() => setShowReviewModal(true)}
+                >
                   Get AI Help
                 </Button>
               </div>
-              <div className="relative">
+              <div onClick={handleRetakeQuiz} className="relative">
                 <img src={retake} className="absolute bottom-0 left-2" alt="" />
-                <button
-                  onClick={handleRetakeQuiz}
-                  className="flex items-center justify-center gap-3 pl-20 border border-gray/50 text-black px-6 py-3 rounded-lg font-medium transition-colors"
-                >
+                <button className="flex items-center justify-center gap-3 pl-20 border border-gray/50 text-black px-6 py-3 rounded-lg font-medium transition-colors">
                   Retake Quiz
                 </button>
               </div>
@@ -195,20 +219,62 @@ const QuizResultPage = () => {
           {/* Bottom Tags */}
           <div className="p-6 ">
             <div className="flex flex-wrap justify-center gap-3">
-              <span className="bg-primary text-white px-4 py-2 rounded-full text-sm font-medium">
-                Loved the question format
-              </span>
-              <span className="bg-primary text-white px-4 py-2 rounded-full text-sm font-medium">
-                Challenging but helpful
-              </span>
-              <span className="bg-primary text-white px-4 py-2 rounded-full text-sm font-medium">
-                AI help was useful
-              </span>
+              {tags.map((tag, index) => (
+                <span
+                  key={index}
+                  onClick={() => handleTagClick(tag)} // Handle tag click
+                  className="bg-primary text-white px-4 py-2 rounded-full text-sm font-medium cursor-pointer"
+                >
+                  {tag}
+                </span>
+              ))}
             </div>
           </div>
         </div>
 
-        {/* Performance Summary */}
+        {/* Review Modal */}
+
+        {showReviewModal && (
+          <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+            <div className="bg-white rounded-2xl shadow-2xl max-w-xl w-full p-6 relative">
+              {/* Close (X) button */}
+              <button
+                onClick={() => setShowReviewModal(false)}
+                className="absolute top-3 right-3 text-gray-500 hover:text-gray-800 transition"
+              >
+                <X size={24} />
+              </button>
+
+              <h2 className="text-2xl font-semibold text-center mb-4 text-gray-800">
+                Submit Review
+              </h2>
+
+              <div className="flex gap-2 mb-4">
+                <ReactStars
+                  count={5}
+                  value={rating}
+                  onChange={setRating}
+                  size={30}
+                  color2={"#ffd700"}
+                />
+              </div>
+
+              <textarea
+                value={reviewText}
+                onChange={(e) => setReviewText(e.target.value)}
+                rows={5}
+                placeholder="Write your feedback here..."
+                className="w-full p-3 border border-gray/50 rounded-lg mb-4"
+              />
+
+              <div className="text-center" onClick={handleReviewSubmit}>
+                <Button rounded="lg" padding="w-1/3 py-2">
+                  Submit
+                </Button>
+              </div>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );
