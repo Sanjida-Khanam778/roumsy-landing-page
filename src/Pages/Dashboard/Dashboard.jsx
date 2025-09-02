@@ -4,14 +4,10 @@ import pricing1 from "../../assets/images/pricing1.png";
 import pricing2 from "../../assets/images/pricing2.png";
 import pricing3 from "../../assets/images/pricing3.png";
 import logo from "../../assets/images/logo.png";
-import {
-  Plus,
-  Search,
-  Send,
-  Sparkles,
-} from "lucide-react";
+import { Plus, Search, Send, Sparkles } from "lucide-react";
 import Button from "../../components/Shared/Button";
-
+import botProfile from "../../assets/images/botProfile.jpg";
+import userProfile from "../../assets/images/userProfile.jpg";
 const Dashboard = () => {
   const [inputValue, setInputValue] = useState("");
   // Each conversation is { sender: 'user' | 'ai', text: string }
@@ -106,7 +102,7 @@ const Dashboard = () => {
   };
 
   return (
-    <div className="flex h-screen bg-[#575555]/10">
+    <div className="flex h-screen bg-[#575555]/10 font-Poppins">
       {showPricingModal && !isSubscribed && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
           <div className="bg-white rounded-2xl shadow-2xl max-w-5xl w-full max-h-[90vh] overflow-y-auto">
@@ -221,7 +217,7 @@ const Dashboard = () => {
         </div>
 
         {/* Search Chat */}
-        <div className="p-6 border-b border-blue-500">
+        {/* <div className="p-6 border-b border-blue-500">
           <button
             className="w-full flex items-center gap-3 text-blue-200 hover:text-white transition-colors"
             onClick={() => setShowSearch((prev) => !prev)}
@@ -239,7 +235,7 @@ const Dashboard = () => {
               autoFocus
             />
           )}
-        </div>
+        </div> */}
 
         {/* My Conversations */}
         <div className="flex-1 p-6">
@@ -268,7 +264,7 @@ const Dashboard = () => {
         {/* Header */}
         <div className=" border-b border-gray/50 px-6 py-4 flex justify-between items-center">
           <div className="text-sm text-gray font-semibold text-end w-full">
-            Remaining {3-chatCount}/3
+            Remaining {3 - chatCount}/3
           </div>
         </div>
 
@@ -294,13 +290,13 @@ const Dashboard = () => {
                       msg.sender === "user" ? "justify-end" : "justify-start"
                     }`}
                   >
-                    <div
-                      className={`px-5 py-3 rounded-full shadow-sm mr-2 h-12 w-12  flex items-center justify-center ${
-                        msg.sender !== "user" && "bg-white"
-                      }`}
-                    >
-                      {/* <img src="" alt="" /> */}
-                    </div>
+                    {msg.sender !== "user" && (
+                      <div
+                        className={` rounded-full mr-2 h-12 w-12  flex items-center justify-center `}
+                      >
+                        <img className="rounded-full" src={botProfile} alt="" />
+                      </div>
+                    )}
                     <div
                       className={`max-w-[70%] px-5 py-3 rounded-xl shadow-sm break-words ${
                         msg.sender === "user"
@@ -310,13 +306,17 @@ const Dashboard = () => {
                     >
                       {msg.text}
                     </div>
-                    <div
-                      className={`px-5 py-3 rounded-full shadow-sm ml-2 h-12 w-12  flex items-center justify-center ${
-                        msg.sender === "user" && "bg-blue-500"
-                      }`}
-                    >
-                      {/* <img src="" alt="" /> */}
-                    </div>
+                    {msg.sender === "user" && (
+                      <div
+                        className={` rounded-full shadow-sm ml-2 h-12 w-12  flex items-center justify-center `}
+                      >
+                        <img
+                          className="rounded-full"
+                          src={userProfile}
+                          alt=""
+                        />
+                      </div>
+                    )}
                   </div>
                 ))}
               </div>

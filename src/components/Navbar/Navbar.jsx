@@ -19,7 +19,7 @@ export default function Navbar() {
 
   return (
     <div className=" text-white font-Poppins">
-      <div className="w-10/12 mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="w-10/12 mx-auto">
         <div className="flex justify-between items-center py-4">
           {/* Logo */}
          <Link to={'/'}>

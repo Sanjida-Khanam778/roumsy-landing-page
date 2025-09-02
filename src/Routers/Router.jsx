@@ -11,6 +11,7 @@ import ResetPasswordPage from "../Pages/Auth/ResetPasswordPage";
 import Dashboard from "../Pages/Dashboard/Dashboard";
 import QuizInterface from "../Pages/QuizInterface/QuizInterface";
 import QuizResultPage from "../Pages/QuizInterface/QuizResultPage";
+import Topics from "../Pages/Topics/Topics";
 
 export const router = createBrowserRouter([
   {
@@ -54,6 +55,10 @@ export const router = createBrowserRouter([
       {
         path: "/quiz-result",
         element: <QuizResultPage />,
+      },
+      {
+        path: "/topics",
+        element: <Topics />,
       },
     ],
   },
