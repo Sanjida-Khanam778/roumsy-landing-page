@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 import { Clock, ChevronLeft, ChevronRight } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 const QuizInterface = () => {
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [selectedAnswers, setSelectedAnswers] = useState({});
   const [timeRemaining, setTimeRemaining] = useState(15 * 60); // 15 minutes in seconds
-
+    const navigate = useNavigate()
   // Sample questions data
   const questions = [
     {
@@ -84,6 +85,10 @@ const QuizInterface = () => {
 
   const handleQuestionNavigate = (questionIndex) => {
     setCurrentQuestion(questionIndex);
+  };
+
+  const handleSubmit = () => {
+navigate('/quiz-result')
   };
 
   return (
@@ -178,32 +183,40 @@ const QuizInterface = () => {
                 disabled={currentQuestion === 0}
                 className={`flex items-center gap-2 px-6 py-3 rounded-lg font-medium transition-colors ${
                   currentQuestion === 0
-                    ? "bg-gray-300 text-gray-500 cursor-not-allowed"
-                    : "bg-gray-600 text-white hover:bg-gray-700"
+                    ? "bg-black text-white cursor-not-allowed"
+                    : "bg-black text-white hover:bg-gray-700"
                 }`}
               >
                 <ChevronLeft className="w-4 h-4" />
                 Previous
               </button>
-
-              <button
-                onClick={handleNext}
-                disabled={currentQuestion === totalQuestions - 1}
-                className={`flex items-center gap-2 px-6 py-3 rounded-lg font-medium transition-colors ${
-                  currentQuestion === totalQuestions - 1
-                    ? "bg-gray-300 text-gray-500 cursor-not-allowed"
-                    : "bg-blue-500 text-white hover:bg-blue-600"
-                }`}
-              >
-                Next
-                <ChevronRight className="w-4 h-4" />
-              </button>
+              {currentQuestion === totalQuestions - 1 ? (
+                <button
+                  type="submit"
+                  onClick={handleSubmit}
+                  className={`flex items-center gap-2 px-6 py-3 rounded-lg font-medium transition-colors bg-blue-500 text-white hover:bg-blue-600
+                  `}
+                >
+                  Submit
+                  <ChevronRight className="w-4 h-4" />
+                </button>
+              ) : (
+                <button
+                  onClick={handleNext}
+                  className={`flex items-center gap-2 px-6 py-3 rounded-lg font-medium transition-colors 
+                      bg-blue-500 text-white hover:bg-blue-600
+                  `}
+                >
+                  Next
+                  <ChevronRight className="w-4 h-4" />
+                </button>
+              )}
             </div>
           </div>
         </div>
 
         {/* Question Navigator */}
-        <div className="mt-8 flex justify-center">
+        {/* <div className="mt-8 flex justify-center">
           <div className="bg-white rounded-2xl shadow-lg p-6">
             <h4 className="text-center text-gray-700 font-medium mb-4">
               Question Navigator
@@ -226,7 +239,7 @@ const QuizInterface = () => {
               ))}
             </div>
           </div>
-        </div>
+        </div> */}
 
         {/* Quiz Stats */}
         <div className="mt-8 grid grid-cols-1 md:grid-cols-3 gap-6">
