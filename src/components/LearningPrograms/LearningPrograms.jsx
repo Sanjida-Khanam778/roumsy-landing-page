@@ -183,7 +183,7 @@ const LearningPrograms = () => {
         <div className="relative max-w-6xl mx-auto">
           <div className="overflow-hidden">
             <div
-              className="flex transition-transform duration-500 ease-in-out"
+              className="flex transition-transform duration-1000 ease-out"
               style={{ transform: `translateX(-${currentSlide * 100}%)` }}
             >
               {Array.from({ length: totalSlides * 3 }).map((_, slideIndex) => (

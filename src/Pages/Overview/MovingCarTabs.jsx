@@ -183,47 +183,50 @@ const MovingCarTabs = () => {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      <div className="max-w-6xl mx-auto p-6">
+      <div className="max-w-7xl mx-auto p-6">
         {/* Tab Navigation */}
         <div className="relative bg-white rounded-lg shadow-sm p-6 mb-6">
           {/* Tab Icons and Labels */}
-          <div className="flex justify-between items-center mb-8 border">
-            {tabs.map((tab, index) => (
-              <button
-                key={tab.id}
-                onClick={() => setActiveTab(index)}
-                className={`flex flex-col items-center space-y-2 transition-all duration-300 border ${
-                  activeTab === index
-                    ? "text-blue-600 transform scale-105"
-                    : "text-gray-500 hover:text-gray-700"
-                }`}
-              >
-                {/* Icon Circle */}
-                <div
-                  className={`w-16 h-16 rounded-full flex items-center justify-center text-2xl transition-all duration-300 ${
+          <div className="flex justify-around mb-8 w-full ">
+            <div className="flex gap-8 w-full justify-evenly">
+              {tabs.map((tab, index) => (
+                <button
+                  key={tab.id}
+                  onClick={() => setActiveTab(index)}
+                  className={`flex flex-col items-center space-y-2 transition-all duration-300 ${
                     activeTab === index
-                      ? "bg-blue-100 border-2 border-blue-300"
-                      : "bg-gray-100 border-2 border-gray-200"
+                      ? "text-blue-600 transform scale-105"
+                      : "text-gray-500 hover:text-gray-700"
                   }`}
                 >
-                  {tab.icon}
-                </div>
+                  {/* Icon Circle */}
+                  <div
+                    className={`w-16 h-16 rounded-full flex items-center justify-center text-2xl transition-all duration-300 ${
+                      activeTab === index
+                        ? "bg-blue-100 border-2 border-blue-300"
+                        : "bg-gray-100 border-2 border-gray-200"
+                    }`}
+                  >
+                    {tab.icon}
+                  </div>
 
-                {/* Tab Title and Subtitle */}
-                <div className="text-center">
-                  <h3 className="font-semibold text-sm">{tab.title}</h3>
-                  <p className="text-xs text-gray-500">{tab.subtitle}</p>
-                </div>
-              </button>
-            ))}
+                  {/* Tab Title and Subtitle */}
+                  <div className="text-center">
+                    <h3 className="font-semibold text-sm">{tab.title}</h3>
+                    <p className="text-xs text-gray-500">{tab.subtitle}</p>
+                  </div>
+                </button>
+              ))}
+            </div>
           </div>
 
           {/* Moving Car */}
-          <div className="relative h-10 mb-4 border">
+          <div className="relative h-10 mb-4">
+            {/* Car should be centered on the active (blue) part of the road line */}
             <div
-              className="absolute transition-all duration-700 ease-in-out transform z-50 mx-auto border"
+              className="absolute transition-all duration-700 ease-in-out transform z-50 mx-auto flex items-center justify-center"
               style={{
-                left: `${(activeTab * 100) / (tabs.length - 1)}%`,
+                left: `calc(${((activeTab + 0.5) * 100) / tabs.length}% )`,
                 transform: "translateX(-50%)",
               }}
             >
