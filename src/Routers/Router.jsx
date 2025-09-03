@@ -12,6 +12,7 @@ import Dashboard from "../Pages/Dashboard/Dashboard";
 import QuizInterface from "../Pages/QuizInterface/QuizInterface";
 import QuizResultPage from "../Pages/QuizInterface/QuizResultPage";
 import Topics from "../Pages/Topics/Topics";
+import MovingCarTabs from "../Pages/Overview/MovingCarTabs";
 
 export const router = createBrowserRouter([
   {
@@ -59,6 +60,10 @@ export const router = createBrowserRouter([
       {
         path: "/topics",
         element: <Topics />,
+      },
+      {
+        path: "/overview",
+        element: <MovingCarTabs />,
       },
     ],
   },
