@@ -8,7 +8,7 @@ import { Plus, Search, Send, Sparkles } from "lucide-react";
 import Button from "../../components/Shared/Button";
 import botProfile from "../../assets/images/botProfile.jpg";
 import userProfile from "../../assets/images/userProfile.jpg";
-const Dashboard = () => {
+const Dashboard = ({ tab }) => {
   const [inputValue, setInputValue] = useState("");
   // Each conversation is { sender: 'user' | 'ai', text: string }
   const [conversations, setConversations] = useState([
@@ -103,6 +103,7 @@ const Dashboard = () => {
 
   return (
     <div className="flex h-screen bg-[#575555]/10 font-Poppins">
+      {/* pricing modal */}
       {showPricingModal && !isSubscribed && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
           <div className="bg-white rounded-2xl shadow-2xl max-w-5xl w-full max-h-[90vh] overflow-y-auto">
@@ -345,8 +346,13 @@ const Dashboard = () => {
             </div>
 
             {/* Input Area */}
-            <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[400px] h-[400px] -z-20 bg-gradient-to-tr from-[#78E0E6]/60 to-transparent rounded-full blur-3xl"></div>
-            <div className="absolute bottom-0 left-1/3 border-2 -translate-x-1/2 -z-20 w-[400px] h-[400px] bg-gradient-to-tr from-[#CDA9FF]/50 to-transparent rounded-full blur-3xl"></div>
+            {!tab && (
+              <>
+                <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[400px] h-[400px] -z-20 bg-gradient-to-tr from-[#78E0E6]/60 to-transparent rounded-full blur-3xl"></div>
+                <div className="absolute bottom-0 left-1/3 border-2 -translate-x-1/2 -z-20 w-[400px] h-[400px] bg-gradient-to-tr from-[#CDA9FF]/50 to-transparent rounded-full blur-3xl"></div>
+              </>
+            )}
+
             <div className="w-full">
               <div className="bg-white border border-gray/50 rounded-2xl shadow-sm">
                 <div className="flex items-center p-4">

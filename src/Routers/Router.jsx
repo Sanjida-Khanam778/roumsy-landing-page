@@ -62,7 +62,7 @@ export const router = createBrowserRouter([
         element: <Topics />,
       },
       {
-        path: "/overview",
+        path: "/overview/:id",
         element: <MovingCarTabs />,
       },
     ],

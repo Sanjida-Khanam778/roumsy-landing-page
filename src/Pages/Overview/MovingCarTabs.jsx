@@ -1,33 +1,247 @@
 import { useState } from "react";
 import car from "../../assets/images/car.png";
-const MovingCarTabs = () => {
-  const [activeTab, setActiveTab] = useState(0);
+import tab1 from "../../assets/images/icon/tab1.png";
+import tab2 from "../../assets/images/icon/tab2.png";
+import tab3 from "../../assets/images/icon/tab3.png";
+import tab4 from "../../assets/images/icon/tab4.png";
+import tab5 from "../../assets/images/icon/tab5.png";
+import { CheckCircle, Star } from "lucide-react";
+import learning1 from "../../assets/images/learning1.png";
+import Dashboard from "../Dashboard/Dashboard";
+import guided from "../../assets/images/guided.png";
+import free from "../../assets/images/free.png";
+import Documentation from "./Documentation";
 
+const MovingCarTabs = () => {
+  const [selectedSkillLevel, setSelectedSkillLevel] = useState("");
+  const [selectedMode, setSelectedMode] = useState("");
+
+  const handleSkillLevelSelect = (level) => {
+    setSelectedSkillLevel(level);
+    setSelectedMode("");
+  };
+
+  const handleModeSelect = (mode) => {
+    setSelectedMode(mode);
+    setSelectedSkillLevel("");
+  };
+
+  const [activeTab, setActiveTab] = useState(0);
   const tabs = [
     {
       id: "course-overview",
       title: "Course Overview",
       subtitle: "See your learning path",
-      icon: "📚",
+      icon: tab1,
       content: (
-        <div className="p-8 text-center">
-          <h2 className="text-2xl font-bold mb-4">Course Overview</h2>
-          <p className="text-gray-600">
-            Welcome to your learning journey! Here you can see your complete
-            course structure, progress tracking, and upcoming milestones.
-          </p>
-          <div className="mt-6 grid grid-cols-1 md:grid-cols-3 gap-4">
-            <div className="bg-blue-50 p-4 rounded-lg">
-              <h3 className="font-semibold">Modules Completed</h3>
-              <p className="text-2xl font-bold text-blue-600">3/12</p>
+        <div className="">
+          <div className=" p-6">
+            {/* Header */}
+            <div className="flex items-center mb-6">
+              <h1 className="text-2xl font-bold text-secondary">
+                🌍 Immigration & Language Preparation
+              </h1>
             </div>
-            <div className="bg-green-50 p-4 rounded-lg">
-              <h3 className="font-semibold">Progress</h3>
-              <p className="text-2xl font-bold text-green-600">25%</p>
+
+            {/* Course Description */}
+            <div className="mb-8">
+              <h2 className="font-semibold text-light">Course Description</h2>
+              <div className="space-y-4 text-light">
+                <p>
+                  This comprehensive course is specially designed for
+                  individuals planning to immigrate to a new country and seeking
+                  to strengthen their language proficiency along the way.
+                  Whether you're preparing for visa interviews, citizenship
+                  tests, or academic/professional language exams like IELTS,
+                  TOEFL, or CELPIP, this course offers the essential tools,
+                  strategies, and practice to help you succeed.
+                </p>
+                <p>
+                  The course combines immigration-specific knowledge with
+                  language development, helping you build strong communication
+                  skills while understanding the legal, cultural, and procedural
+                  aspects of relocating abroad. You will gain practical
+                  experience in speaking, listening, reading, and writing
+                  through real-life scenarios such as job interviews, embassy
+                  appointments, and settlement guidance.
+                </p>
+              </div>
             </div>
-            <div className="bg-purple-50 p-4 rounded-lg">
-              <h3 className="font-semibold">Time Spent</h3>
-              <p className="text-2xl font-bold text-purple-600">24h</p>
+
+            {/* Topics Covered */}
+            <div className="mb-8 text-light">
+              <h2 className=" font-semibold mb-4">Topics include:</h2>
+              <ul className="space-y-2">
+                <li>
+                  • Understanding immigration requirements and documentation
+                </li>
+                <li>• Preparing for English proficiency exams</li>
+                <li>
+                  • Developing fluency and vocabulary for everyday situations
+                </li>
+                <li>• Learning about cultural adaptation and integration</li>
+                <li>
+                  • Practicing interview techniques and verbal communication
+                </li>
+              </ul>
+              <p className="text-gray-700 mt-4">
+                With flexible lessons, expert support, and practical exercises,
+                this course empowers you to confidently navigate the immigration
+                process and thrive in a new environment—linguistically,
+                socially, and professionally.
+              </p>
+            </div>
+
+            {/* Course Sections */}
+            <div className="mb-8">
+              <h2 className="text-2xl font-bold text-secondary mb-6 flex items-center">
+                📚 Course Sections
+              </h2>
+
+              <div className="space-y-6">
+                {/* Section 1 */}
+                <div>
+                  <h3 className="text-lg font-bold text-gray-900 mb-3 flex items-center">
+                    1. Introduction to Immigration Systems
+                  </h3>
+                  <ul className="text-light space-y-1 ml-8">
+                    <li>
+                      • Overview of immigration categories (student, skilled
+                      worker, family, etc.)
+                    </li>
+                    <li>
+                      • Country-specific guidelines (Canada, UK, Australia,
+                      etc.)
+                    </li>
+                    <li>• Documentation and application preparation</li>
+                  </ul>
+                </div>
+
+                {/* Section 2 */}
+                <div>
+                  <h3 className="text-lg font-semibold text-gray-900 mb-3 flex items-center">
+                    2. English Language Fundamentals
+                  </h3>
+                  <ul className="text-light space-y-1 ml-8">
+                    <li>• Grammar and sentence structure refresher</li>
+                    <li>• Pronunciation and accent improvement</li>
+                    <li>
+                      • Essential vocabulary for daily life and formal
+                      situations
+                    </li>
+                  </ul>
+                </div>
+
+                {/* Section 3 */}
+                <div>
+                  <h3 className="text-lg font-semibold text-gray-900 mb-3 flex items-center">
+                    3. IELTS/TOEFL/CELPIP Exam Preparation{" "}
+                  </h3>
+                  <ul className="text-light space-y-1 ml-8">
+                    <li>• Test formats and scoring systems</li>
+                    <li>
+                      • Practice tasks for Reading, Writing, Listening &
+                      Speaking
+                    </li>
+                    <li>• Tips and strategies for exam day success</li>
+                  </ul>
+                </div>
+
+                {/* Section 4 */}
+                <div>
+                  <h3 className="text-lg font-semibold text-gray-900 mb-3 flex items-center">
+                    4. Communication for Real-life Situations{" "}
+                  </h3>
+                  <ul className="text-light space-y-1 ml-8">
+                    <li>• Job interview roleplay and resume writing</li>
+                    <li>
+                      • Conversations at banks, clinics, schools, and government
+                      offices
+                    </li>
+                    <li>• Writing emails, forms, and formal letters</li>
+                  </ul>
+                </div>
+
+                {/* Section 5 */}
+                <div>
+                  <h3 className="text-lg font-semibold text-gray-900 mb-3 flex items-center">
+                    5. Cultural Awareness & Integration{" "}
+                  </h3>
+                  <ul className="text-light space-y-1 ml-8">
+                    <li>• Local laws, norms, and etiquette</li>
+                    <li>• Building confidence in social interactions</li>
+                    <li>• Local laws, norms, and etiquette</li>
+                  </ul>
+                </div>
+
+                {/* Section 6 */}
+                <div>
+                  <h3 className="text-lg font-semibold text-gray-900 mb-3 flex items-center">
+                    6. Mock Interviews & Practice Tests{" "}
+                  </h3>
+                  <ul className="text-light space-y-1 ml-8">
+                    <li>
+                      • Personalized feedback from instructors (if applicable)
+                    </li>
+                    <li>• Full-length exam simulations</li>
+                    <li>
+                      • Personalized feedback from instructors (if applicable)
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            {/* Exam Format Overview */}
+            <div className="mb-8">
+              <h2 className="text-2xl font-bold text-secondary mb-6 flex items-center">
+                📝 Exam Format Overview
+              </h2>
+
+              <div className="grid md:grid-cols-2">
+                {/* Left Column */}
+                <div className="border border-gray-200 p-6">
+                  <h3 className="font-bold text-gray-900 mb-4">
+                    IELTS (International English Language Testing System)
+                  </h3>
+
+                  <div className="space-y-3 text-sm text-gray-700">
+                    <p>
+                      Test Types: IELTS Academic & IELTS General Training <br />
+                      Duration: ~2 hours 45 minutes
+                    </p>
+                    <p>
+                      Sections: <br />
+                      • Listening: IELTS Listening has 40 questions testing
+                      listening skills
+                      <br />
+                      • Reading: IELTS Reading has 40 questions testing reading
+                      skills
+                      <br />
+                      • Writing: IELTS Writing has 2 sections: 1) describing
+                      graphs/charts in 150 words 2) essay writing in 250 words
+                      <br />• Speaking: IELTS Speaking has 3 parts: 1)
+                      introduction & interview 2) long turn 3) discussion
+                    </p>
+                  </div>
+                </div>
+
+                {/* Right Column */}
+                <div className="border-r border-gray-200 border-y p-6">
+                  <h3 className="font-bold text-gray-900 mb-4">
+                    What is included in this Course?
+                  </h3>
+                  <div className="space-y-3 text-sm text-gray-700">
+                    <p>• Section-by-section breakdown and tutorials</p>
+                    <p>• Practice tests that mimic real exam conditions</p>
+                    <p>• Answer explanations and scoring strategies</p>
+                    <p>• Time management techniques</p>
+                    <p>
+                      • Speaking and writing practice with feedback (optional)
+                    </p>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -37,26 +251,117 @@ const MovingCarTabs = () => {
       id: "ai-coach",
       title: "AI Coach",
       subtitle: "Get personalized guidance",
-      icon: "🤖",
+      icon: tab2,
       content: (
-        <div className="p-8 text-center">
-          <h2 className="text-2xl font-bold mb-4">AI Coach</h2>
-          <p className="text-gray-600">
-            Your personal AI assistant is here to help you learn more
-            effectively with customized recommendations and instant support.
-          </p>
-          <div className="mt-6 bg-gradient-to-r from-blue-500 to-purple-600 text-white p-6 rounded-lg">
-            <h3 className="text-xl font-semibold mb-2">
-              💡 Today&apos;s Recommendation
-            </h3>
-            <p>
-              &quot;Focus on JavaScript fundamentals before moving to React.
-              You&apos;re doing great!&quot;
-            </p>
-          </div>
-          <button className="mt-4 bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition-colors">
-            Ask AI Coach
-          </button>
+        <div className=" bg-gray-50 flex items-center justify-center p-6">
+          {selectedSkillLevel && !selectedMode ? (
+            <div className="bg-gray-50 flex items-center justify-center p-6">
+              <div className="max-w-4xl w-full">
+                <div className=" border border-gray-300 p-12">
+                  <div className="text-center mb-12">
+                    <h2 className="text-2xl font-bold text-gray-900">
+                      Choose Your Mode
+                    </h2>
+                  </div>
+
+                  <div className="grid md:grid-cols-2 gap-8 max-w-3xl mx-auto">
+                    {/* Guided Learning Path */}
+                    <div className=" rounded-lg shadow-lg overflow-hidden">
+                      <div className="bg-[#B7DDFF] py-6 relative flex items-center justify-center">
+                        <img src={free} alt="" />
+                      </div>
+                      <div className="p-6 text-center">
+                        <h3 className="text-lg font-semibold text-gray-900 mb-3">
+                          Guided Learning Path
+                        </h3>
+                        <p className="text-gray-600 text-sm mb-6">
+                          Start here for a structured and faster learning
+                          experience.
+                        </p>
+                        <button
+                          onClick={() =>
+                            handleModeSelect("Guided Learning Path")
+                          }
+                          className="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition-colors w-full"
+                        >
+                          Start Guide Path
+                        </button>
+                      </div>
+                    </div>
+
+                    {/* Free Questions */}
+                    <div className=" rounded-lg shadow-lg overflow-hidden">
+                      <div className="bg-[#D1E5F8] py-6 relative flex items-center justify-center">
+                        <img src={guided} alt="" />
+                      </div>
+                      <div className="p-6 text-center">
+                        <h3 className="text-lg font-semibold text-gray-900 mb-3">
+                          Free Questions
+                        </h3>
+                        <p className="text-gray-600 text-sm mb-6">
+                          Ask anything. One credit per question. Personalized
+                          answers powered by AI.
+                        </p>
+                        <button
+                          onClick={() => handleModeSelect("Free Questions")}
+                          className="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition-colors w-full"
+                        >
+                          Start Free Questions
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          ) : selectedMode ? (
+            <div className="">
+              <h2 className="text-2xl font-bold mb-4">LearninGPT Assistant</h2>
+              <p className="text-gray mb-8">
+                Ask questions about the course material. 3 free messages
+                remaining.
+              </p>
+              <Dashboard tab={true} />
+            </div>
+          ) : (
+            <div className="max-w-4xl w-full">
+              <div className=" border-2 border-blue-400 rounded-lg p-12">
+                <div className="text-center mb-12">
+                  <p className="text-gray-800 text-lg">
+                    Before we begin, choose your expertise level so the AI Coach
+                    can better guide you.
+                  </p>
+                </div>
+
+                <div className="text-center mb-12">
+                  <h2 className="text-2xl font-semibold text-gray-900">
+                    Skill level
+                  </h2>
+                </div>
+
+                <div className="flex justify-center space-x-6">
+                  <button
+                    onClick={() => handleSkillLevelSelect("Beginner")}
+                    className="bg-blue-100 text-blue-800 px-8 py-3 rounded-lg border border-blue-200 hover:bg-blue-200 transition-colors font-medium min-w-[120px]"
+                  >
+                    Beginner
+                  </button>
+                  <button
+                    onClick={() => handleSkillLevelSelect("Intermediate")}
+                    className="bg-blue-100 text-blue-800 px-8 py-3 rounded-lg border border-blue-200 hover:bg-blue-200 transition-colors font-medium min-w-[120px]"
+                  >
+                    Intermediate
+                  </button>
+                  <button
+                    onClick={() => handleSkillLevelSelect("Advance")}
+                    className="bg-blue-100 text-blue-800 px-8 py-3 rounded-lg border border-blue-200 hover:bg-blue-200 transition-colors font-medium min-w-[120px]"
+                  >
+                    Advance
+                  </button>
+                </div>
+              </div>
+            </div>
+          )}
         </div>
       ),
     },
@@ -64,40 +369,12 @@ const MovingCarTabs = () => {
       id: "documentation",
       title: "Documentation",
       subtitle: "Study comprehensive materials",
-      icon: "📄",
+      icon: tab3,
       content: (
-        <div className="p-8 text-center">
+        <div className="p-8">
           <h2 className="text-2xl font-bold mb-4">Documentation</h2>
-          <p className="text-gray-600">
-            Access all course materials, references, and detailed explanations
-            in one organized place.
-          </p>
-          <div className="mt-6 grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div className="border border-gray-200 p-4 rounded-lg hover:shadow-md transition-shadow">
-              <h3 className="font-semibold text-left">📖 Course Materials</h3>
-              <p className="text-sm text-gray-600 text-left mt-2">
-                PDFs, slides, and reading materials
-              </p>
-            </div>
-            <div className="border border-gray-200 p-4 rounded-lg hover:shadow-md transition-shadow">
-              <h3 className="font-semibold text-left">🔗 External Resources</h3>
-              <p className="text-sm text-gray-600 text-left mt-2">
-                Helpful links and references
-              </p>
-            </div>
-            <div className="border border-gray-200 p-4 rounded-lg hover:shadow-md transition-shadow">
-              <h3 className="font-semibold text-left">📝 Notes & Summaries</h3>
-              <p className="text-sm text-gray-600 text-left mt-2">
-                Key points and takeaways
-              </p>
-            </div>
-            <div className="border border-gray-200 p-4 rounded-lg hover:shadow-md transition-shadow">
-              <h3 className="font-semibold text-left">❓ FAQ</h3>
-              <p className="text-sm text-gray-600 text-left mt-2">
-                Frequently asked questions
-              </p>
-            </div>
-          </div>
+          <p className="text-gray">Comprehensive study materials and guides</p>
+        <Documentation />
         </div>
       ),
     },
@@ -105,7 +382,7 @@ const MovingCarTabs = () => {
       id: "exam-simulator",
       title: "Exam Simulator",
       subtitle: "Practice with mock exams",
-      icon: "📝",
+      icon: tab4,
       content: (
         <div className="p-8 text-center">
           <h2 className="text-2xl font-bold mb-4">Exam Simulator</h2>
@@ -148,7 +425,7 @@ const MovingCarTabs = () => {
       id: "certification",
       title: "Certification",
       subtitle: "Earn your certificate",
-      icon: "🏆",
+      icon: tab5,
       content: (
         <div className="p-8 text-center">
           <h2 className="text-2xl font-bold mb-4">Certification</h2>
@@ -160,9 +437,9 @@ const MovingCarTabs = () => {
             <h3 className="text-xl font-semibold mb-2">
               🏆 Certificate Progress
             </h3>
-            <div className="bg-white bg-opacity-20 rounded-full h-4 mb-2">
+            <div className=" bg-opacity-20 rounded-full h-4 mb-2">
               <div
-                className="bg-white h-4 rounded-full"
+                className=" h-4 rounded-full"
                 style={{ width: "25%" }}
               ></div>
             </div>
@@ -182,10 +459,56 @@ const MovingCarTabs = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="bg-[#F4F8FD]">
+      <div className="text-center py-8  max-w-7xl mx-auto">
+        <button className="bg-[#E8F5FF] border border-gray/20 px-6 py-2 rounded-full shadow-sm text-sm font-medium text-gray-700 hover:bg-gray-100 transition">
+          Start Your Journey
+        </button>{" "}
+        <h1 className="text-3xl font-bold text-gray-900 mt-2">
+          Topic Overview
+        </h1>
+      </div>
+
+      {/* Main Card */}
+      <div className=" rounded-lg overflow-hidden  max-w-7xl mx-auto">
+        <div className="flex gap-8 mt-10">
+          {/* Left Side - Blue Section with Illustration */}
+          <img className="h-40" src={learning1} alt="" />
+
+          {/* Right Side - Content */}
+          <div className="items-start justify-start">
+            <h2 className="text-2xl font-bold text-gray-900 mb-4">
+              Immigration & Language Preparation
+            </h2>
+
+            <p className="text-gray-600 mb-6 leading-relaxed">
+              Master language skills, ace your exams, and get expert guidance
+              for a smooth immigration journey.
+            </p>
+
+            {/* Rating */}
+            <div className="flex items-center">
+              <div className="flex items-center mr-2">
+                {[...Array(5)].map((_, i) => (
+                  <Star
+                    key={i}
+                    className={`w-5 h-5 ${
+                      i < 4
+                        ? "text-yellow-400 fill-current"
+                        : "text-gray/30 fill-current"
+                    }`}
+                  />
+                ))}
+              </div>
+              <span className="text-gray-900 font-medium mr-1">4</span>
+              <span className="text-gray-500">(Ratings)</span>
+            </div>
+          </div>
+        </div>
+      </div>
       <div className="max-w-7xl mx-auto p-6">
         {/* Tab Navigation */}
-        <div className="relative bg-white rounded-lg shadow-sm p-6 mb-6">
+        <div className="relative  rounded-lg p-6 mb-6">
           {/* Tab Icons and Labels */}
           <div className="flex justify-around mb-8 w-full ">
             <div className="flex gap-8 w-full justify-evenly">
@@ -193,25 +516,23 @@ const MovingCarTabs = () => {
                 <button
                   key={tab.id}
                   onClick={() => setActiveTab(index)}
-                  className={`flex flex-col items-center space-y-2 transition-all duration-300 ${
-                    activeTab === index
-                      ? "text-blue-600 transform scale-105"
-                      : "text-gray-500 hover:text-gray-700"
-                  }`}
+                  className={`flex flex-col items-center space-y-2 transition-all duration-300`}
                 >
                   {/* Icon Circle */}
                   <div
                     className={`w-16 h-16 rounded-full flex items-center justify-center text-2xl transition-all duration-300 ${
-                      activeTab === index
-                        ? "bg-blue-100 border-2 border-blue-300"
-                        : "bg-gray-100 border-2 border-gray-200"
+                      index <= activeTab ? "bg-[#1E90FF]" : "bg-[#929292]"
                     }`}
                   >
-                    {tab.icon}
+                    <img src={tab.icon} alt="" />
                   </div>
 
                   {/* Tab Title and Subtitle */}
-                  <div className="text-center">
+                  <div
+                    className={`text-center ${
+                      index <= activeTab ? "text-[#1E90FF]" : "text-[#929292]"
+                    }`}
+                  >
                     <h3 className="font-semibold text-sm">{tab.title}</h3>
                     <p className="text-xs text-gray-500">{tab.subtitle}</p>
                   </div>
@@ -246,24 +567,11 @@ const MovingCarTabs = () => {
         </div>
 
         {/* Tab Content */}
-        <div className="bg-white rounded-lg shadow-sm min-h-96">
+        <div className=" rounded-lg min-h-96">
           <div className="transition-all duration-500 ease-in-out">
             {tabs[activeTab].content}
           </div>
         </div>
-
-        {/* Navigation Buttons */}
-        {/*      <div className="flex space-x-2">
-            {tabs.map((_, index) => (
-              <button
-                key={index}
-                onClick={() => setActiveTab(index)}
-                className={`w-3 h-3 rounded-full transition-all duration-300 ${
-                  activeTab === index ? "bg-blue-600" : "bg-gray-300"
-                }`}
-              />
-            ))}
-          </div> */}
       </div>
     </div>
   );

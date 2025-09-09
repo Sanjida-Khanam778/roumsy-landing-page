@@ -3,9 +3,11 @@ import { BookOpen, Users } from "lucide-react";
 import learning1 from "../../assets/images/learning1.png";
 import learning2 from "../../assets/images/learning2.png";
 import learning3 from "../../assets/images/learning3.png";
+import { Link } from "react-router-dom";
 export default function AllPrograms({ limit }) {
   const programs = [
     {
+      id: 1,
       bg: learning1,
       title: "Immigration & Language Preparation",
       subtitle:
@@ -20,6 +22,7 @@ export default function AllPrograms({ limit }) {
       learners: "2.5k learners",
     },
     {
+      id: 1,
       bg: learning2,
       title: "Project Management",
       subtitle:
@@ -34,6 +37,7 @@ export default function AllPrograms({ limit }) {
       learners: "2.5k learners",
     },
     {
+      id: 1,
       bg: learning3,
       title: "Tech & Development",
       subtitle:
@@ -62,6 +66,7 @@ export default function AllPrograms({ limit }) {
       learners: "2.5k learners",
     },
     {
+      id: 1,
       bg: learning2,
       title: "Project Management",
       subtitle:
@@ -76,6 +81,7 @@ export default function AllPrograms({ limit }) {
       learners: "2.5k learners",
     },
     {
+      id: 1,
       bg: learning3,
       title: "Tech & Development",
       subtitle:
@@ -137,10 +143,12 @@ export default function AllPrograms({ limit }) {
           <div className="flex-grow mt-auto mb-4">
             <hr className="text-gray/50" />
             <div className="mt-4 flex justify-between items-center flex-col gap-3">
-              <div className="p-2 bg-primary/10 rounded-lg">
-                {/* <img src="" alt="" /> */}
-                <span>Train with LearninGPT</span>
-              </div>
+              <Link to={`/overview/${program.id}`}>
+                <div className="p-2 bg-primary/10 rounded-lg">
+                  {/* <img src="" alt="" /> */}
+                  <span>Train with LearninGPT</span>
+                </div>
+              </Link>
               <div className="p-2 bg-primary/10 rounded-lg">
                 {/* <img src="" alt="" /> */}
                 <span> Start Exam Simulator</span>
