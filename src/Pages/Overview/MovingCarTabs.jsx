@@ -373,7 +373,7 @@ const MovingCarTabs = () => {
       content: (
         <div className="p-8">
           <h2 className="text-2xl font-bold mb-4">Documentation</h2>
-          <p className="text-gray">Comprehensive study materials and guides</p>
+          <p className="text-gray mb-4">Comprehensive study materials and guides</p>
         <Documentation />
         </div>
       ),
