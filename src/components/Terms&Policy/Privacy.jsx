@@ -10,11 +10,11 @@ const Privacy = () => {
         </div>
 
         {/* Last Updated */}
-        <div className="mb-8">
+        {/* <div className="mb-8">
           <p className="text-gray-600 text-sm">
             Last Updated: January 19, 2025
           </p>
-        </div>
+        </div> */}
 
         {/* Privacy Policy Sections */}
         <div className="space-y-8">

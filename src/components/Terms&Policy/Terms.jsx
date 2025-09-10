@@ -6,14 +6,9 @@ const Terms = () => {
       <div className="max-w-7xl mx-auto p-8">
         {/* Header */}
         <div className="text-center mb-8">
-          <h1 className="text-3xl font-bold text-gray-900">Privacy Policy</h1>
-        </div>
-
-        {/* Last Updated */}
-        <div className="mb-8">
-          <p className="text-gray-600 text-sm">
-            Last Updated: January 19, 2025
-          </p>
+          <h1 className="text-3xl font-bold text-gray-900">
+            Terms & Conditions
+          </h1>
         </div>
 
         {/* Privacy Policy Sections */}
@@ -21,82 +16,97 @@ const Terms = () => {
           {/* Section 1 */}
           <div>
             <h2 className="text-lg font-bold text-gray-900 mb-4">
-              1. Information We Collect
+              1. Acceptance of Terms
             </h2>
             <p className="text-gray-700">
-              We Collect Information You Provide Directly To Us, Such As When
-              You Create An Account, Use Our Services, Or Contact Us For
-              Support.
+              By accessing and using LearninGPT ("the Service"), you accept and
+              agree to be bound by the terms and provision of this agreement.
             </p>
           </div>
 
           {/* Section 2 */}
           <div>
             <h2 className="text-lg font-bold text-gray-900 mb-4">
-              2. How We Use Your Information
+              2. Description of Service
             </h2>
             <p className="text-gray-700">
-              We Use The Information We Collect To Provide, Maintain, And
-              Improve Our Services, Process Transactions, And Communicate With
-              You.
+              LearninGPT is an AI-powered learning platform that provides
+              educational content, quizzes, and personalized learning assistance
+              through artificial intelligence.
             </p>
           </div>
 
           {/* Section 3 */}
           <div>
             <h2 className="text-lg font-bold text-gray-900 mb-4">
-              3. Information Sharing
+              3. User Accounts
             </h2>
             <p className="text-gray-700">
-              We Do Not Sell, Trade, Or Otherwise Transfer Your Personal
-              Information To Third Parties Without Your Consent, Except As
-              Described In This Policy.
+              To access certain features of the Service, you must register for
+              an account. You are responsible for maintaining the
+              confidentiality of your account credentials and for all activities
+              that occur under your account.
             </p>
           </div>
 
           {/* Section 4 */}
           <div>
             <h2 className="text-lg font-bold text-gray-900 mb-4">
-              4. Data Security
+              4. Acceptable Use
             </h2>
             <p className="text-gray-700">
-              We Implement Appropriate Security Measures To Protect Your
-              Personal Information Against Unauthorized Access, Alteration,
-              Disclosure, Or Destruction.
+              You agree not to use the Service for any unlawful purpose or in
+              any way that could damage, disable, overburden, or impair the
+              Service.
             </p>
           </div>
 
           {/* Section 5 */}
           <div>
             <h2 className="text-lg font-bold text-gray-900 mb-4">
-              5. Cookies And Tracking
+              5. Intellectual Property
             </h2>
             <p className="text-gray-700">
-              We Use Cookies And Similar Tracking Technologies To Enhance Your
-              Experience On Our Platform And Analyze Usage Patterns.
+              The Service and its original content, features, and functionality
+              are owned by LearninGPT and are protected by international
+              copyright, trademark, patent, trade secret, and other intellectual
+              property laws.
             </p>
           </div>
 
           {/* Section 6 */}
           <div>
             <h2 className="text-lg font-bold text-gray-900 mb-4">
-              6. Your Rights
+              6. Payment Terms
             </h2>
             <p className="text-gray-700">
-              You Have The Right To Access, Update, Or Delete Your Personal
-              Information. You May Also Opt Out Of Certain Communications From
-              Us.
+              Certain features of the Service may require payment. You agree to
+              pay all charges incurred by you or any users of your account and
+              credit card at the prices in effect when such charges are
+              incurred.
             </p>
           </div>
 
           {/* Section 7 */}
           <div>
             <h2 className="text-lg font-bold text-gray-900 mb-4">
-              7. Contact Us
+              7. Termination
             </h2>
             <p className="text-gray-700">
-              If You Have Any Questions About This Privacy Policy, Please
-              Contact Us At Privacy@learningpt.Com.
+              We may terminate or suspend your account and bar access to the
+              Service immediately, without prior notice or liability, under our
+              sole discretion, for any reason whatsoever.
+            </p>
+          </div>
+
+          {/* Section 8 */}
+          <div>
+            <h2 className="text-lg font-bold text-gray-900 mb-4">
+              8. Contact Information{" "}
+            </h2>
+            <p className="text-gray-700">
+              If you have any questions about these Terms of Service, please
+              contact us at legal@learningpt.com.
             </p>
           </div>
         </div>
