@@ -13,6 +13,7 @@ import QuizInterface from "../Pages/QuizInterface/QuizInterface";
 import QuizResultPage from "../Pages/QuizInterface/QuizResultPage";
 import Topics from "../Pages/Topics/Topics";
 import MovingCarTabs from "../Pages/Overview/MovingCarTabs";
+import Features from "../components/Features/Features";
 
 export const router = createBrowserRouter([
   {
@@ -65,6 +66,10 @@ export const router = createBrowserRouter([
         path: "/overview/:id",
         element: <MovingCarTabs />,
       },
+      {
+        path: "/features",
+        element: <Features />
+      }
     ],
   },
   {
