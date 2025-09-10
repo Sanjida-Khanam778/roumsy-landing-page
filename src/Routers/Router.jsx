@@ -19,6 +19,7 @@ import Privacy from "../components/Terms&Policy/Privacy";
 import ContactPage from "../components/ContactPage/ContactPage";
 import About from "../components/About/About";
 import PricingSection from "../components/PricingSection/PricingSection";
+import Profile from "../Pages/Home/Profile";
 
 export const router = createBrowserRouter([
   {
@@ -73,28 +74,32 @@ export const router = createBrowserRouter([
       },
       {
         path: "/features",
-        element: <Features />
+        element: <Features />,
       },
       {
         path: "/terms",
-        element: <Terms />
+        element: <Terms />,
       },
       {
         path: "/privacy",
-        element: <Privacy />
+        element: <Privacy />,
       },
       {
         path: "/contact",
-        element: <ContactPage />
+        element: <ContactPage />,
       },
       {
         path: "/about",
-        element: <About />
+        element: <About />,
       },
       {
         path: "/pricing",
-        element: <PricingSection />
-      }
+        element: <PricingSection />,
+      },
+      {
+        path: "/profile",
+        element: <Profile />,
+      },
     ],
   },
   {
