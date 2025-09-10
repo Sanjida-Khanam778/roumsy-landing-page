@@ -57,7 +57,7 @@ const KeyFeature = () => {
               </p>
               <div className="text-center">
                 <Button padding="px-6 py-3" rounded={"xl"}>
-                  Try Now
+                  Try Assistant
                 </Button>
               </div>
             </div>
@@ -78,7 +78,7 @@ const KeyFeature = () => {
               </p>
               <div className="text-center">
                 <Button padding="px-6 py-3" rounded={"xl"}>
-                  Start Practice
+                  Start Exam Simulator
                 </Button>
               </div>
             </div>
