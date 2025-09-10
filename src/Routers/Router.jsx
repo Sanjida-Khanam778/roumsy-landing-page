@@ -1,5 +1,9 @@
 import { createBrowserRouter, Outlet } from "react-router-dom";
 import Home from "../Pages/Home/Home";
+
+import DashboardMainPage from "../components/Admin/Dashboard/AdminDashboard";
+import QuizCreator from "../components/Admin/Quizz/CreateNewQuizz";
+
 import Navbar from "../components/Navbar/Navbar";
 import Footer from "../components/Footer/Footer";
 import React from "react";
@@ -20,6 +24,7 @@ import ContactPage from "../components/ContactPage/ContactPage";
 import About from "../components/About/About";
 import PricingSection from "../components/PricingSection/PricingSection";
 import Profile from "../Pages/Home/Profile";
+
 
 export const router = createBrowserRouter([
   {
@@ -105,5 +110,13 @@ export const router = createBrowserRouter([
   {
     path: "/dashboard",
     element: <Dashboard />,
+  },
+  {
+    path: "/admin",
+    element: <DashboardMainPage />,
+  },
+  {
+    path: "/admin/create-quizz",
+    element: <QuizCreator />,
   },
 ]);
