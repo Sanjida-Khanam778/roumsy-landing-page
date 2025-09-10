@@ -1,172 +1,214 @@
-import React from "react";
-
+import team1 from "../../assets/images/team1.png";
+import team2 from "../../assets/images/team2.png";
+import team3 from "../../assets/images/team3.png";
+import inno from "../../assets/images/logo/inno.png";
+import access from "../../assets/images/logo/access.png";
+import personal from "../../assets/images/logo/personal.png";
+import excellence from "../../assets/images/logo/excellence.png";
+import about from "../../assets/images/aboutPage.png";
+import Button from "../Shared/Button";
 export default function About() {
-  const values = [
+  const teamMembers = [
     {
-      icon: "💡",
-      title: "Innovation",
+      name: "Name",
+      role: "CEO & Co-founder",
       description:
-        "Leveraging cutting-edge technology to transform learning experiences",
+        "Former educator with 15 years of experience in curriculum design",
+      img: team1,
     },
     {
-      icon: "♿",
-      title: "Accessibility",
+      name: "Name",
+      role: "CTO & Co-founder",
       description:
-        "Making education inclusive and accessible to learners of all abilities",
+        "A researcher specializing in natural language processing and machine learning",
+      img: team2,
     },
     {
-      icon: "👤",
-      title: "Personalization",
+      name: "Name",
+      role: "Head of Product",
       description:
-        "Tailored learning paths that adapt to individual needs and preferences",
-    },
-    {
-      icon: "⭐",
-      title: "Excellence",
-      description:
-        "Committed to delivering the highest quality educational experiences",
+        "UX designer passionate about creating intuitive learning experiences",
+      img: team3,
     },
   ];
-
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-cyan-50">
-      {/* Hero Section */}
-      <div className="relative overflow-hidden">
-        {/* Decorative circles */}
-        <div className="absolute top-20 left-10 w-32 h-32 bg-blue-200 rounded-full opacity-20 animate-pulse"></div>
-        <div className="absolute top-40 right-20 w-24 h-24 bg-cyan-200 rounded-full opacity-30 animate-bounce"></div>
-        <div className="absolute bottom-20 left-1/4 w-16 h-16 bg-blue-300 rounded-full opacity-25"></div>
-
-        <div className="container mx-auto px-6 py-16">
-          <div className="text-center mb-16">
-            <h1 className="text-5xl font-bold text-gray-800 mb-6 tracking-tight">
-              About <span className="text-blue-600">LearnGPT</span>
-            </h1>
-            <p className="text-xl text-gray-600 max-w-2xl mx-auto leading-relaxed">
-              We're revolutionizing education by combining artificial
-              intelligence with personalized learning, helping students reach
-              their full potential.
-            </p>
-          </div>
-
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
-            {/* Left Content */}
-            <div className="space-y-8">
-              <div className="bg-white/70 backdrop-blur-sm rounded-3xl p-8 shadow-xl border border-white/20 hover:shadow-2xl transition-all duration-300 hover:scale-105">
-                <h2 className="text-3xl font-bold text-gray-800 mb-4">
-                  Our Mission
-                </h2>
-                <p className="text-gray-600 leading-relaxed mb-6">
-                  To democratize quality education through intelligent
-                  technology. We believe every learner deserves personalized,
-                  engaging experiences that adapt to their unique learning style
-                  and pace.
-                </p>
-                <p className="text-gray-600 leading-relaxed mb-6">
-                  By combining AI with proven pedagogical methods, we're
-                  creating a future where learning is more effective,
-                  accessible, and enjoyable for everyone.
-                </p>
-                <button className="bg-gradient-to-r from-blue-600 to-cyan-600 text-white px-8 py-3 rounded-full font-medium hover:from-blue-700 hover:to-cyan-700 transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-xl">
-                  Learn More
-                </button>
-              </div>
-            </div>
-
-            {/* Right Images */}
-            <div className="relative">
-              <div className="grid grid-cols-2 gap-4">
-                <div className="space-y-4">
-                  <div className="bg-gradient-to-br from-blue-400 to-blue-600 rounded-2xl h-48 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 flex items-center justify-center">
-                    <div className="text-center text-white">
-                      <div className="text-4xl mb-2">📚</div>
-                      <div className="text-sm font-medium">
-                        Interactive Learning
-                      </div>
-                    </div>
-                  </div>
-                  <div className="bg-gradient-to-br from-cyan-400 to-cyan-600 rounded-2xl h-32 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 flex items-center justify-center">
-                    <div className="text-center text-white">
-                      <div className="text-3xl mb-1">🎯</div>
-                      <div className="text-xs font-medium">Goal Tracking</div>
-                    </div>
-                  </div>
-                </div>
-                <div className="space-y-4 mt-8">
-                  <div className="bg-gradient-to-br from-purple-400 to-purple-600 rounded-2xl h-32 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 flex items-center justify-center">
-                    <div className="text-center text-white">
-                      <div className="text-3xl mb-1">👥</div>
-                      <div className="text-xs font-medium">Collaboration</div>
-                    </div>
-                  </div>
-                  <div className="bg-gradient-to-br from-orange-400 to-orange-600 rounded-2xl h-48 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 flex items-center justify-center">
-                    <div className="text-center text-white">
-                      <div className="text-4xl mb-2">🚀</div>
-                      <div className="text-sm font-medium">
-                        Progress Analytics
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              {/* Floating circle with icon */}
-              <div className="absolute -left-8 top-1/2 transform -translate-y-1/2 w-24 h-24 bg-blue-500 rounded-full shadow-2xl flex items-center justify-center animate-float">
-                <div className="text-white text-2xl">🤖</div>
-              </div>
-            </div>
-          </div>
+    <div className="min-h-screen bg-[#F2F4F7] py-12 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto">
+        {/* Header Section */}
+        <div className="text-center mb-20">
+          <h1 className="text-4xl font-bold text-gray-900 mb-4">
+            About LearninGPT
+          </h1>
+          <p className="text-lg text-gray-600 max-w-3xl mx-auto">
+            We're revolutionizing education by combining artificial intelligence
+            with personalized learning to help students achieve their full
+            potential.
+          </p>
         </div>
-      </div>
 
-      {/* Values Section */}
-      <div className="bg-white/50 backdrop-blur-sm py-20">
-        <div className="container mx-auto px-6">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-gray-800 mb-4">
-              Our Values
+        {/* Mission Section */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-20">
+          {/* Left side - Empty image placeholder */}
+          <div className="bg-gray-200 rounded-lg flex items-center justify-center">
+            <img src={about} alt="" />
+          </div>
+
+          {/* Right side - Mission content */}
+          <div className="flex flex-col justify-center">
+            <h2 className="text-3xl font-bold text-gray-900 mb-6">
+              Our Mission
             </h2>
-            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-              The principles that guide everything we do
+            <p className="text-gray-600 mb-4">
+              Our mission is to make quality higher education personalized,
+              scalable, and accessible to everyone. We believe that learning
+              should be tailored to each individual's pace and learning style,
+              empowering students to achieve excellence.
             </p>
+            <p className="text-gray-600 mb-6">
+              We're committed to creating personalized learning experiences that
+              are accessible to all learners worldwide, regardless of their
+              background or starting point.
+            </p>
+            <div>
+              <Button rounded="md" padding="py-2 px-4">
+                Join Our Mission
+              </Button>
+            </div>
           </div>
+        </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {values.map((value, index) => (
-              <div
-                key={index}
-                className="bg-white/80 backdrop-blur-sm rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all duration-300 hover:scale-105 border border-white/30 group"
-              >
-                <div className="w-16 h-16 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300 shadow-lg">
-                  <span className="text-2xl">{value.icon}</span>
-                </div>
-                <h3 className="text-xl font-bold text-gray-800 mb-3 group-hover:text-blue-600 transition-colors duration-300">
-                  {value.title}
-                </h3>
-                <p className="text-gray-600 leading-relaxed text-sm">
-                  {value.description}
-                </p>
+        {/* Values Section */}
+        <div className="mb-20">
+          <h2 className="text-3xl font-bold text-gray-900 text-center mb-4">
+            Our Values
+          </h2>
+          <p className="text-gray-600 text-center mb-12">
+            The principles that guide everything we do
+          </p>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {/* Innovation */}
+            <div className="bg-[#F3F3F3] border border-gray/50 p-6 rounded-lg shadow-sm text-center">
+              <div className="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                <img src={inno} alt="" />
               </div>
-            ))}
+              <h3 className="text-xl font-semibold text-gray-900 mb-2">
+                Innovation
+              </h3>
+              <p className="text-gray-600 text-sm">
+                We embrace cutting-edge AI technology to create groundbreaking
+                educational experiences.
+              </p>
+            </div>
+
+            {/* Accessibility */}
+            <div className="bg-[#F3F3F3] border border-gray/50 p-6 rounded-lg shadow-sm text-center">
+              <div className="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                <img src={access} alt="" />
+              </div>
+              <h3 className="text-xl font-semibold text-gray-900 mb-2">
+                Accessibility
+              </h3>
+              <p className="text-gray-600 text-sm">
+                Quality education should be available to everyone, regardless of
+                background or circumstances.
+              </p>
+            </div>
+
+            {/* Personalization */}
+            <div className="bg-[#F3F3F3] border border-gray/50 p-6 rounded-lg shadow-sm text-center">
+              <div className="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                <img src={personal} alt="" />
+              </div>
+              <h3 className="text-xl font-semibold text-gray-900 mb-2">
+                Personalization
+              </h3>
+              <p className="text-gray-600 text-sm">
+                Every learner is unique, and their educational experience should
+                be too.
+              </p>
+            </div>
+
+            {/* Excellence */}
+            <div className="bg-[#F3F3F3] border border-gray/50 p-6 rounded-lg shadow-sm text-center">
+              <div className="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                <img src={excellence} alt="" />
+              </div>
+              <h3 className="text-xl font-semibold text-gray-900 mb-2">
+                Excellence
+              </h3>
+              <p className="text-gray-600 text-sm">
+                We strive for the highest standards in everything we do, from
+                content to user experience.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        {/* Story Section */}
+        <div className="mb-10 rounded-lg py-8">
+          <h2 className="text-3xl font-bold text-gray-900 text-center mb-8">
+            Our Story
+          </h2>
+          <div className="max-w-7xl mx-auto space-y-6 text-gray-600">
+            <p>
+              LearninGPT was born from a simple observation: traditional
+              education methods weren't keeping pace with how people actually
+              learn in the digital age. Our founders, who had backgrounds in
+              both education and technology, recognized that artificial
+              intelligence could bridge this gap.
+            </p>
+            <p>
+              In 2023, we set out to create a platform that would combine the
+              best of human expertise with the power of AI to deliver fully
+              personalized learning experiences. We started with a simple
+              question: "What if every student had access to a personal tutor
+              that understood their unique way of learning style?"
+            </p>
+            <p>
+              Today, LearninGPT serves thousands of students worldwide, helping
+              them master new skills through interactive, personalized lessons.
+              Our AI adapts to each learner's pace and style, creating truly
+              customized learning paths. But we're just getting started.
+            </p>
           </div>
         </div>
       </div>
+      <div className="max-w-7xl mx-auto">
+        {/* Header Section */}
+        <div className="text-center mb-16">
+          <h1 className="text-4xl font-bold text-gray-900 mb-4">
+            Meet Our Team
+          </h1>
+          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+            The passionate individuals behind LearninGPT
+          </p>
+        </div>
 
-      <style jsx>{`
-        @keyframes float {
-          0%,
-          100% {
-            transform: translateY(0px) translateX(-50%);
-          }
-          50% {
-            transform: translateY(-20px) translateX(-50%);
-          }
-        }
+        {/* Team Members Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+          {teamMembers.map((member, index) => (
+            <div
+              key={index}
+              className="bg-white rounded-lg shadow-sm border border-gray/50 p-8 text-center hover:shadow-md transition-shadow duration-300"
+            >
+              {/* Profile Image Placeholder */}
+              <div className="w-24 h-24 bg-gray-300 rounded-full mx-auto mb-6 flex items-center justify-center">
+                <img src={member.img} alt="" />
+              </div>
 
-        .animate-float {
-          animation: float 3s ease-in-out infinite;
-        }
-      `}</style>
+              {/* Member Info */}
+              <h3 className="text-xl font-semibold text-gray-900 mb-2">
+                {member.name}
+              </h3>
+              <p className="text-primary font-medium mb-4">{member.role}</p>
+              <p className="text-gray-600 text-sm leading-relaxed">
+                {member.description}
+              </p>
+            </div>
+          ))}
+        </div>
+      </div>
     </div>
   );
 }

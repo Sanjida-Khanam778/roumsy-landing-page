@@ -120,12 +120,12 @@ const Footer = () => {
                     </Link>
                   </li>
                   <li>
-                    <a
-                      href="#"
+                    <Link
+                      to={'/contact'}
                       className="text-gray-700 text-sm hover:text-primary transition-colors"
                     >
                       Contact
-                    </a>
+                    </Link>
                   </li>
                   <li>
                     <Link

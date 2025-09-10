@@ -18,6 +18,7 @@ import Terms from "../components/Terms&Policy/Terms";
 import Privacy from "../components/Terms&Policy/Privacy";
 import ContactPage from "../components/ContactPage/ContactPage";
 import About from "../components/About/About";
+import PricingSection from "../components/PricingSection/PricingSection";
 
 export const router = createBrowserRouter([
   {
@@ -89,6 +90,10 @@ export const router = createBrowserRouter([
       {
         path: "/about",
         element: <About />
+      },
+      {
+        path: "/pricing",
+        element: <PricingSection />
       }
     ],
   },
