@@ -7,6 +7,7 @@ import call from "../../assets/images/icon/call.png";
 import linkedin from "../../assets/images/icon/linkedin.png";
 import gmail from "../../assets/images/icon/gmail.png";
 import Button from "../Shared/Button";
+import { Link } from "react-router-dom";
 
 // import { Phone, Mail, Linkedin, Instagram, Twitter, LinkedinIcon } from 'lucide-react';
 
@@ -61,7 +62,9 @@ const Footer = () => {
           </div>
           <div className="col-span-3">
             <div className="flex flex-col items-center justify-center pb-6 space-y-4">
-              <h2 className="text-[#011F47] font-semibold text-xl">Start learning smarter today.</h2>
+              <h2 className="text-[#011F47] font-semibold text-xl">
+                Start learning smarter today.
+              </h2>
               <Button rounded="lg">Join Now</Button>
             </div>
             <div className="flex justify-evenly">
@@ -109,12 +112,12 @@ const Footer = () => {
                 <h3 className="font-semibold text-gray-800 mb-4">Company</h3>
                 <ul className="space-y-2">
                   <li>
-                    <a
-                      href="#"
+                    <Link
+                      to={'/about'}
                       className="text-gray-700 text-sm hover:text-primary transition-colors"
                     >
                       About
-                    </a>
+                    </Link>
                   </li>
                   <li>
                     <a
@@ -125,12 +128,12 @@ const Footer = () => {
                     </a>
                   </li>
                   <li>
-                    <a
-                      href="#"
+                    <Link
+                      to={"/features"}
                       className="text-gray-700 text-sm hover:text-primary transition-colors"
                     >
                       Features
-                    </a>
+                    </Link>
                   </li>
                 </ul>
               </div>
@@ -140,20 +143,20 @@ const Footer = () => {
                 <h3 className="font-semibold text-gray-800 mb-4">Legal</h3>
                 <ul className="space-y-2">
                   <li>
-                    <a
-                      href="#"
+                    <Link
+                      to={"/privacy"}
                       className="text-gray-700 text-sm hover:text-primary transition-colors"
                     >
                       Privacy Policy
-                    </a>
+                    </Link>
                   </li>
                   <li>
-                    <a
-                      href="#"
+                    <Link
+                      to={"/terms"}
                       className="text-gray-700 text-sm hover:text-primary transition-colors"
                     >
                       Terms Of Service
-                    </a>
+                    </Link>
                   </li>
                   <li>
                     <a

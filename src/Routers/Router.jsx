@@ -16,6 +16,8 @@ import MovingCarTabs from "../Pages/Overview/MovingCarTabs";
 import Features from "../components/Features/Features";
 import Terms from "../components/Terms&Policy/Terms";
 import Privacy from "../components/Terms&Policy/Privacy";
+import ContactPage from "../components/ContactPage/ContactPage";
+import About from "../components/About/About";
 
 export const router = createBrowserRouter([
   {
@@ -79,6 +81,14 @@ export const router = createBrowserRouter([
       {
         path: "/privacy",
         element: <Privacy />
+      },
+      {
+        path: "/contact",
+        element: <ContactPage />
+      },
+      {
+        path: "/about",
+        element: <About />
       }
     ],
   },

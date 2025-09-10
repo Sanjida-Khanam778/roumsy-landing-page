@@ -1,8 +1,10 @@
 import React from "react";
+import { ScrollRestoration } from "react-router-dom";
 
 const Terms = () => {
   return (
     <div className="bg-[#F2F4F7] py-6">
+      <ScrollRestoration />
       <div className="max-w-7xl mx-auto p-8">
         {/* Header */}
         <div className="text-center mb-8">
