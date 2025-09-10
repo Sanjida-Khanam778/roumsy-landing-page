@@ -82,10 +82,9 @@ const Documentation = () => {
     setShowAlert(true);
   };
 
-
-   const handleMaybeLater = () => {
+  const handleMaybeLater = () => {
     // Allow chat but track the chats
-  setShowAlert(false);
+    setShowAlert(false);
   };
 
   return (
@@ -129,8 +128,6 @@ const Documentation = () => {
 
           <div className="flex flex-col justify-between">
             <div className="flex-grow">
-          
-
               <ul className="space-y-4 text-gray-700 list-disc list-inside">
                 <li>
                   Overview of popular immigration destinations (e.g., Canada,
@@ -162,98 +159,98 @@ const Documentation = () => {
 
       {/* Subscription Alert Modal */}
       {showAlert && (
-         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-                 <div className="bg-white rounded-2xl shadow-2xl max-w-5xl w-full max-h-[90vh] overflow-y-auto">
-                   {/* Modal Header */}
-                   <div className="text-left px-20 py-6">
-                     <h2 className="text-3xl font-bold mb-2 text-primary">
-                       Unlock AI Coach Access
-                     </h2>
-                     <p className="text-gray">
-                       Get unlimited access to our AI Coach for 30 days!
-                     </p>
-                   </div>
-       
-                   {/* Pricing Cards */}
-                   <div className="px-20 py-6">
-                     <div className="grid md:grid-cols-3 gap-6 mx-auto">
-                       {plans.map((plan, index) => (
-                         <div
-                           key={index}
-                           className={`bg-white rounded-lg overflow-hidden shadow-lg flex flex-col h-full ${
-                             plan.scale ? "transform scale-100" : ""
-                           }`}
-                         >
-                           {/* Popular Badge */}
-                           {plan.popular && (
-                             <div className="absolute top-4 right-4 bg-[#FFB563] text-white px-3 py-1 rounded-full text-xs font-medium z-10">
-                               Best Deal
-                             </div>
-                           )}
-       
-                           {/* Header with Icon */}
-                           <div
-                             className={`${plan.color} p-8 text-white text-center relative flex flex-col items-center`}
-                           >
-                             <img src={plan.image} alt="" />
-                             <h3 className="text-xl font-semibold my-2">
-                               {plan.title}
-                             </h3>
-                           </div>
-       
-                           {/* Content */}
-                           <div className="p-6 flex flex-col flex-grow ">
-                             {/* Features */}
-                             <div className="flex-1">
-                               {plan.features.map((feature, featureIndex) => (
-                                 <div
-                                   key={featureIndex}
-                                   className="flex items-center mb-2"
-                                 >
-                                   <img src={tic} alt="" />
-                                   <span className="ml-2 text-gray-700 text-sm">
-                                     {feature}
-                                   </span>
-                                 </div>
-                               ))}
-                             </div>
-       
-                             {/* Pricing */}
-                             <div className="mb-4 flex-1">
-                               {plan.originalPrice && (
-                                 <div className="text-gray line-through text-sm mb-1">
-                                   {plan.originalPrice}
-                                 </div>
-                               )}
-                               <div className="text-2xl font-bold text-primary mb-1">
-                                 {plan.price}
-                               </div>
-                               <div className="text-gray-600 text-sm">
-                                 {plan.period}
-                               </div>
-                             </div>
-       
-                             {/* Button - Pushed to bottom */}
-                             <div className="mt-auto">
-                               <Button rounded="lg">Choose Plan</Button>
-                             </div>
-                           </div>
-                         </div>
-                       ))}
-                     </div>
-       
-                     {/* Maybe Later Button */}
-                     <div className="text-center my-6 border border-gray/50 rounded-md py-3 w-9/12 mx-auto">
-                       <button
-                         onClick={handleMaybeLater}
-                         className="text-gray-500 hover:text-gray-700 font-medium transition-colors"
-                       >
-                         Maybe Later
-                       </button>
-                     </div>
-                   </div>
-                 </div>
-               </div>
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+          <div className="bg-white rounded-2xl shadow-2xl max-w-5xl w-full max-h-[90vh] overflow-y-auto">
+            {/* Modal Header */}
+            <div className="text-left px-20 py-6">
+              <h2 className="text-3xl font-bold mb-2 text-primary">
+                Unlock AI Coach Access
+              </h2>
+              <p className="text-gray">
+                Get unlimited access to our AI Coach for 30 days!
+              </p>
+            </div>
+
+            {/* Pricing Cards */}
+            <div className="px-20 py-6">
+              <div className="grid md:grid-cols-3 gap-6 mx-auto">
+                {plans.map((plan, index) => (
+                  <div
+                    key={index}
+                    className={`bg-white rounded-lg overflow-hidden shadow-lg flex flex-col h-full ${
+                      plan.scale ? "transform scale-100" : ""
+                    }`}
+                  >
+                    {/* Popular Badge */}
+                    {plan.popular && (
+                      <div className="absolute top-4 right-4 bg-[#FFB563] text-white px-3 py-1 rounded-full text-xs font-medium z-10">
+                        Best Deal
+                      </div>
+                    )}
+
+                    {/* Header with Icon */}
+                    <div
+                      className={`${plan.color} p-8 text-white text-center relative flex flex-col items-center`}
+                    >
+                      <img src={plan.image} alt="" />
+                      <h3 className="text-xl font-semibold my-2">
+                        {plan.title}
+                      </h3>
+                    </div>
+
+                    {/* Content */}
+                    <div className="p-6 flex flex-col flex-grow ">
+                      {/* Features */}
+                      <div className="flex-1">
+                        {plan.features.map((feature, featureIndex) => (
+                          <div
+                            key={featureIndex}
+                            className="flex items-center mb-2"
+                          >
+                            <img src={tic} alt="" />
+                            <span className="ml-2 text-gray-700 text-sm">
+                              {feature}
+                            </span>
+                          </div>
+                        ))}
+                      </div>
+
+                      {/* Pricing */}
+                      <div className="mb-4 flex-1">
+                        {plan.originalPrice && (
+                          <div className="text-gray line-through text-sm mb-1">
+                            {plan.originalPrice}
+                          </div>
+                        )}
+                        <div className="text-2xl font-bold text-primary mb-1">
+                          {plan.price}
+                        </div>
+                        <div className="text-gray-600 text-sm">
+                          {plan.period}
+                        </div>
+                      </div>
+
+                      {/* Button - Pushed to bottom */}
+                      <div className="mt-auto">
+                        <Button rounded="lg">Choose Plan</Button>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              {/* Maybe Later Button */}
+              <div className="text-center my-6 border border-gray/50 rounded-md py-3 w-9/12 mx-auto">
+                <button
+                  onClick={handleMaybeLater}
+                  className="text-gray-500 hover:text-gray-700 font-medium transition-colors"
+                >
+                  Maybe Later
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
       )}
     </div>
   );

@@ -11,7 +11,10 @@ import Dashboard from "../Dashboard/Dashboard";
 import guided from "../../assets/images/guided.png";
 import free from "../../assets/images/free.png";
 import Documentation from "./Documentation";
-
+import Button from "../../components/Shared/Button";
+import material from "../../assets/images/icon/material.png";
+import QuizInterface from "../QuizInterface/QuizInterface";
+import CourseCompletionCertificate from "./CourseCompletionCertificate";
 const MovingCarTabs = () => {
   const [selectedSkillLevel, setSelectedSkillLevel] = useState("");
   const [selectedMode, setSelectedMode] = useState("");
@@ -27,6 +30,11 @@ const MovingCarTabs = () => {
   };
 
   const [activeTab, setActiveTab] = useState(0);
+  const [startQuiz, setStartQuiz] = useState(false);
+
+  const handleStartQuiz = () => {
+    setStartQuiz(true);
+  };
   const tabs = [
     {
       id: "course-overview",
@@ -373,8 +381,10 @@ const MovingCarTabs = () => {
       content: (
         <div className="p-8">
           <h2 className="text-2xl font-bold mb-4">Documentation</h2>
-          <p className="text-gray mb-4">Comprehensive study materials and guides</p>
-        <Documentation />
+          <p className="text-gray mb-4">
+            Comprehensive study materials and guides
+          </p>
+          <Documentation />
         </div>
       ),
     },
@@ -384,40 +394,24 @@ const MovingCarTabs = () => {
       subtitle: "Practice with mock exams",
       icon: tab4,
       content: (
-        <div className="p-8 text-center">
-          <h2 className="text-2xl font-bold mb-4">Exam Simulator</h2>
-          <p className="text-gray-600">
-            Test your knowledge with realistic practice exams and get detailed
-            feedback on your performance.
-          </p>
-          <div className="mt-6 bg-yellow-50 border border-yellow-200 p-6 rounded-lg">
-            <h3 className="text-lg font-semibold mb-4">
-              🎯 Practice Tests Available
-            </h3>
-            <div className="space-y-3">
-              <div className="flex justify-between items-center">
-                <span>Module 1 Quiz</span>
-                <span className="bg-green-100 text-green-800 px-2 py-1 rounded text-sm">
-                  Completed
-                </span>
-              </div>
-              <div className="flex justify-between items-center">
-                <span>Module 2 Quiz</span>
-                <span className="bg-blue-100 text-blue-800 px-2 py-1 rounded text-sm">
-                  Available
-                </span>
-              </div>
-              <div className="flex justify-between items-center">
-                <span>Module 3 Quiz</span>
-                <span className="bg-gray-100 text-gray-800 px-2 py-1 rounded text-sm">
-                  Locked
-                </span>
+        <div>
+          {startQuiz ? (
+            <QuizInterface />
+          ) : (
+            <div className="bg-gray-50 flex flex-col gap-20 items-center justify-center p-6">
+              <p className="text-[#011E46] font-bold text-xl">
+                Start your exam now and test your knowledge in real time.
+              </p>
+              <div onClick={handleStartQuiz}>
+                <Button padding="py-2 px-4" rounded="md">
+                  <span className="flex items-center text-xl gap-2">
+                    <img className="h-8" src={material} />
+                    Start Exam
+                  </span>
+                </Button>
               </div>
             </div>
-          </div>
-          <button className="mt-4 bg-yellow-600 text-white px-6 py-2 rounded-lg hover:bg-yellow-700 transition-colors">
-            Start Practice Test
-          </button>
+          )}
         </div>
       ),
     },
@@ -427,33 +421,7 @@ const MovingCarTabs = () => {
       subtitle: "Earn your certificate",
       icon: tab5,
       content: (
-        <div className="p-8 text-center">
-          <h2 className="text-2xl font-bold mb-4">Certification</h2>
-          <p className="text-gray-600">
-            Complete your course and earn a professional certificate to showcase
-            your new skills.
-          </p>
-          <div className="mt-6 bg-gradient-to-r from-yellow-400 to-orange-500 text-white p-6 rounded-lg">
-            <h3 className="text-xl font-semibold mb-2">
-              🏆 Certificate Progress
-            </h3>
-            <div className=" bg-opacity-20 rounded-full h-4 mb-2">
-              <div
-                className=" h-4 rounded-full"
-                style={{ width: "25%" }}
-              ></div>
-            </div>
-            <p>25% Complete - Keep going!</p>
-          </div>
-          <div className="mt-4 text-sm text-gray-600">
-            <p>Requirements:</p>
-            <ul className="mt-2 space-y-1">
-              <li>✅ Complete all modules</li>
-              <li>⏳ Pass final exam (80% minimum)</li>
-              <li>⏳ Submit final project</li>
-            </ul>
-          </div>
-        </div>
+      <CourseCompletionCertificate />
       ),
     },
   ];
@@ -567,7 +535,7 @@ const MovingCarTabs = () => {
         </div>
 
         {/* Tab Content */}
-        <div className=" rounded-lg min-h-96">
+        <div className=" rounded-lg min-h-80">
           <div className="transition-all duration-500 ease-in-out">
             {tabs[activeTab].content}
           </div>

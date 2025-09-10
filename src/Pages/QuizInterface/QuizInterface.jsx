@@ -1,8 +1,12 @@
 import React, { useState } from "react";
 import { Clock, ChevronLeft, ChevronRight } from "lucide-react";
-import { useNavigate } from "react-router-dom";
+import { Navigate, useLocation, useNavigate } from "react-router-dom";
+import QuizResultPage from "./QuizResultPage";
 
 const QuizInterface = () => {
+  const location = useLocation();
+  console.log(location.pathname.includes("overview"));
+  const [component, setComponent] = useState(false);
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [selectedAnswers, setSelectedAnswers] = useState({});
   const [timeRemaining, setTimeRemaining] = useState(15 * 60); // 15 minutes in seconds
@@ -88,9 +92,12 @@ const QuizInterface = () => {
   };
 
   const handleSubmit = () => {
-    navigate("/quiz-result");
+    setComponent(true);
   };
 
+  if (component) {
+    return <QuizResultPage />;
+  }
   return (
     <div className="min-h-screen bg-gray-50 py-8 px-4">
       <div className="max-w-4xl mx-auto">
