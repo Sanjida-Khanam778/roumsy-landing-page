@@ -14,6 +14,7 @@ import Footer from "../../components/Footer/Footer";
 import TestimonialSlider from "../../components/TestimonialSlider/TestimonialSlider";
 import Logo from "../../components/Logo/Logo";
 import ContactUs from "../../components/ContactUs/ContactUs";
+import Blogs from "../../components/Blogs/Blogs";
 export default function Home() {
   return (
     <div className="font-Poppins">
@@ -31,6 +32,7 @@ export default function Home() {
       <BecomeInstructor />
       <TestimonialSlider />
       <Logo />
+      <Blogs />
       <ContactUs />
       <Footer />
     </div>
