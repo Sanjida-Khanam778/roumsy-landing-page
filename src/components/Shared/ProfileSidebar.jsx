@@ -1,28 +1,45 @@
-import { NavLink, useNavigate } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { FaCog, FaChevronDown, FaSignOutAlt, FaReact } from "react-icons/fa";
 import { MdOutlineDashboard } from "react-icons/md";
 import { IoSettingsOutline, IoTrophyOutline } from "react-icons/io5";
 import logo from "../../assets/images/logo.png";
+import { useDispatch } from "react-redux";
+import { logout } from "../../Stores/authSlice";
 export const ProfileSidebar = ({ currentComponent, onMenuClick }) => {
   const [open, setOpen] = useState(false);
   const navigate = useNavigate();
   const settingsItems = [
-    {name:"Account Setting", go:"/profile-dashboard/user-acc"},
-    {name:"Upgrade Plan", go:"/profile-dashboard/plan"},
-    {name:"Terms & Conditions", go:"/profile-dashboard/terms"},
-    {name:"Privacy Policies", go:"/profile-dashboard/privacy"}
+    { name: "Account Setting", go: "/profile-dashboard/user-acc" },
+    { name: "Upgrade Plan", go: "/profile-dashboard/plan" },
+    { name: "Terms & Conditions", go: "/profile-dashboard/terms" },
+    { name: "Privacy Policies", go: "/profile-dashboard/privacy" },
   ];
-
-  const menuLinks = [
-    { icon: <MdOutlineDashboard size={22} />, label: "Dashboard", go: "/profile-dashboard/profile" },
-    { icon: <FaReact size={22} />, label: "AI Assistant", go: "/profile-dashboard/certificates"},
-    { icon: <IoTrophyOutline size={22} />, label: "Certificate", go: "/profile-dashboard/certificates" },
-  ];
-
+  const dispatch = useDispatch();
+  const { isAuthenticated, user } = useSelector((state) => state.auth);
+  console.log(isAuthenticated);
   const handleLogout = () => {
-    navigate("/admin/login");
+    dispatch(logout());
   };
+  const menuLinks = [
+    {
+      icon: <MdOutlineDashboard size={22} />,
+      label: "Dashboard",
+      go: "/profile-dashboard/profile",
+    },
+    {
+      icon: <FaReact size={22} />,
+      label: "AI Assistant",
+      go: "/profile-dashboard/certificates",
+    },
+    {
+      icon: <IoTrophyOutline size={22} />,
+      label: "Certificate",
+      go: "/profile-dashboard/certificates",
+    },
+  ];
+
+
 
   return (
     <div
@@ -30,12 +47,14 @@ export const ProfileSidebar = ({ currentComponent, onMenuClick }) => {
       style={{ minWidth: 220 }}
     >
       {/* Logo */}
-      <div className="flex items-center space-x-2 mb-12">
-        <img src={logo} className="w-12" alt="" />
-        <p className="text-[#011F47] font-bold text-2xl">
-          Learnin<span className="text-primary">GPT</span>
-        </p>
-      </div>
+      <Link to={"/"}>
+        <div className="flex items-center space-x-2 mb-12">
+          <img src={logo} className="w-12" alt="" />
+          <p className="text-[#011F47] font-bold text-2xl">
+            Learnin<span className="text-primary">GPT</span>
+          </p>
+        </div>
+      </Link>
       {/* Navigation Links */}
       <nav className="w-full flex flex-col items-center">
         <ul className="flex flex-col gap-2 items-center">
