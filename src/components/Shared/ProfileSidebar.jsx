@@ -31,7 +31,7 @@ export const ProfileSidebar = ({ currentComponent, onMenuClick }) => {
     {
       icon: <FaReact size={22} />,
       label: "AI Assistant",
-      go: "/profile-dashboard/certificates",
+      go: "/dashboard",
     },
     {
       icon: <IoTrophyOutline size={22} />,

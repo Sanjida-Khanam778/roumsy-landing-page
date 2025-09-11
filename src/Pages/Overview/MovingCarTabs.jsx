@@ -15,6 +15,9 @@ import Button from "../../components/Shared/Button";
 import material from "../../assets/images/icon/material.png";
 import QuizInterface from "../QuizInterface/QuizInterface";
 import CourseCompletionCertificate from "./CourseCompletionCertificate";
+
+import { CiSearch } from "react-icons/ci";
+import { RiMenuSearchLine } from "react-icons/ri";
 const MovingCarTabs = () => {
   const [selectedSkillLevel, setSelectedSkillLevel] = useState("");
   const [selectedMode, setSelectedMode] = useState("");
@@ -31,7 +34,6 @@ const MovingCarTabs = () => {
 
   const [activeTab, setActiveTab] = useState(0);
   const [startQuiz, setStartQuiz] = useState(false);
-
   const handleStartQuiz = () => {
     setStartQuiz(true);
   };
@@ -40,7 +42,7 @@ const MovingCarTabs = () => {
       id: "course-overview",
       title: "Course Overview",
       subtitle: "See your learning path",
-      icon: tab1,
+      active: true,
       content: (
         <div className="">
           <div className=" p-6">
@@ -260,6 +262,7 @@ const MovingCarTabs = () => {
       title: "AI Coach",
       subtitle: "Get personalized guidance",
       icon: tab2,
+      active: false,
       content: (
         <div className=" bg-gray-50 flex items-center justify-center p-6">
           {selectedSkillLevel && !selectedMode ? (
@@ -378,6 +381,7 @@ const MovingCarTabs = () => {
       title: "Documentation",
       subtitle: "Study comprehensive materials",
       icon: tab3,
+      active: false,
       content: (
         <div className="p-8">
           <h2 className="text-2xl font-bold mb-4">Documentation</h2>
@@ -393,6 +397,7 @@ const MovingCarTabs = () => {
       title: "Exam Simulator",
       subtitle: "Practice with mock exams",
       icon: tab4,
+      active: false,
       content: (
         <div>
           {startQuiz ? (
@@ -420,9 +425,8 @@ const MovingCarTabs = () => {
       title: "Certification",
       subtitle: "Earn your certificate",
       icon: tab5,
-      content: (
-      <CourseCompletionCertificate />
-      ),
+      active: false,
+      content: <CourseCompletionCertificate />,
     },
   ];
 
@@ -492,7 +496,11 @@ const MovingCarTabs = () => {
                       index <= activeTab ? "bg-[#1E90FF]" : "bg-[#929292]"
                     }`}
                   >
-                    <img src={tab.icon} alt="" />
+                    {tab.active ? (
+                      <RiMenuSearchLine className="text-3xl text-white" />
+                    ) : (
+                      <img src={tab.icon} alt="" />
+                    )}
                   </div>
 
                   {/* Tab Title and Subtitle */}
