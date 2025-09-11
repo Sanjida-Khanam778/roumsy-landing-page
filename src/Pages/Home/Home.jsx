@@ -11,7 +11,9 @@ import PricingSection from "../../components/PricingSection/PricingSection";
 import WhyChooseUs from "../../components/WhyChooseUs/WhyChooseUs";
 import BecomeInstructor from "../../components/BecomeInstructor/BecomeInstructor";
 import Footer from "../../components/Footer/Footer";
-
+import TestimonialSlider from "../../components/TestimonialSlider/TestimonialSlider";
+import Logo from "../../components/Logo/Logo";
+import ContactUs from "../../components/ContactUs/ContactUs";
 export default function Home() {
   return (
     <div className="font-Poppins">
@@ -27,6 +29,9 @@ export default function Home() {
       <PricingSection />
       <WhyChooseUs />
       <BecomeInstructor />
+      <TestimonialSlider />
+      <Logo />
+      <ContactUs />
       <Footer />
     </div>
   );

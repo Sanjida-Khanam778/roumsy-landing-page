@@ -1,5 +1,6 @@
-import icon from "../../assets/images/tic.png";
+import icon from "../../assets/images/thunder.png";
 import become from "../../assets/images/become.png";
+import Button from "../Shared/Button";
 const BecomeInstructor = () => {
   return (
     <section className="py-16 bg-white">
@@ -32,10 +33,7 @@ const BecomeInstructor = () => {
               community through discussion forums and group projects, and
               providing continuous support to address challenges and improve.
             </p>
-
-            <button className="bg-blue-500 hover:bg-blue-600 text-white px-8 py-3 rounded-lg font-medium transition-colors">
-              Start Teaching Today
-            </button>
+            <Button rounded="lg" padding="px-4 py-2"> Start Teaching Today</Button>
           </div>
         </div>
       </div>

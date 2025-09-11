@@ -85,7 +85,7 @@ export default function Hero() {
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % slides.length);
-    }, 5000);
+    }, 3000);
 
     return () => clearInterval(interval);
   }, [slides.length]);
@@ -109,7 +109,7 @@ export default function Hero() {
       {/* Overlay for better readability */}
       <div className="absolute inset-0 bg-primary/10"></div>
 
-      <div className="relative w-10/12 flex mx-auto px-4 sm:px-6 lg:px-8 h-full">
+      <div className="relative w-10/12 flex mx-auto h-full">
         <div className="grid grid-cols-1 w-1/2 gap-12 items-center min-h-[600px] h-full ">
           {/* Left Content */}
           <div className="space-y-8 z-10 relative w-5/6">
@@ -153,7 +153,7 @@ export default function Hero() {
             {/* User Avatars and Stats */}
             <div className="flex items-center space-x-4 pt-8">
               <div className="flex -space-x-4">
-                {avatar.map((icon,idx) => (
+                {avatar.map((icon, idx) => (
                   <img key={idx} src={icon.image} alt="" />
                 ))}
               </div>
