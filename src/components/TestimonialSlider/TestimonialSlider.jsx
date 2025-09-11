@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { ChevronLeft, ChevronRight, Star } from "lucide-react";
 import icon from "../../assets/images/thunder.png";
 import profile from "../../assets/images/customerProfile.png";
 
 const TestimonialSlider = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
+  const [isTransitioning, setIsTransitioning] = useState(true);
 
   const testimonials = [
     {
@@ -33,20 +34,30 @@ const TestimonialSlider = () => {
     },
   ];
 
+  // Next slide
   const nextSlide = () => {
-    setCurrentSlide((prev) => (prev + 1) % testimonials.length);
+    if (currentSlide >= testimonials.length) {
+      setIsTransitioning(false);
+      setCurrentSlide(1);
+      setTimeout(() => {
+        setIsTransitioning(true);
+      }, 50);
+    } else {
+      setCurrentSlide((prev) => prev + 1);
+    }
   };
 
+  // Prev slide
   const prevSlide = () => {
-    setCurrentSlide(
-      (prev) => (prev - 1 + testimonials.length) % testimonials.length
-    );
+    setCurrentSlide((prev) => (prev - 1 + testimonials.length) % testimonials.length);
   };
 
+  // Go to specific slide
   const goToSlide = (index) => {
     setCurrentSlide(index);
   };
 
+  // Render stars
   const renderStars = (rating) => {
     return Array.from({ length: 5 }, (_, index) => (
       <Star
@@ -56,6 +67,26 @@ const TestimonialSlider = () => {
         }`}
       />
     ));
+  };
+
+  // Auto slide every 3s
+  useEffect(() => {
+    const interval = setInterval(() => {
+      nextSlide();
+    }, 3000);
+
+    return () => clearInterval(interval);
+  }, [currentSlide]);
+
+  // Handle transition end for infinite loop
+  const handleTransitionEnd = () => {
+    if (currentSlide >= testimonials.length) {
+      setIsTransitioning(false);
+      setCurrentSlide(1);
+      setTimeout(() => {
+        setIsTransitioning(true);
+      }, 50);
+    }
   };
 
   return (
@@ -68,19 +99,20 @@ const TestimonialSlider = () => {
           <span>Let’s Join With Us</span>
         </div>
       </div>
-      <h1 className="text-3xl font-semibold text-center mb-4">Feedback’s From Our Student</h1>
+      <h1 className="text-3xl font-semibold text-center mb-4">
+        Feedback’s From Our Student
+      </h1>
       <div className="max-w-6xl mx-auto p-6 bg-gray-50 flex items-center justify-center">
-        {/* Badge */}
-
         <div className="relative w-full">
-          {/* Main slider container */}
+          {/* Slider */}
           <div className="relative overflow-hidden">
             <div
-              className="flex transition-transform duration-300 ease-in-out"
+              className={`flex ${isTransitioning ? "transition-transform duration-300 ease-in-out" : ""}`}
               style={{ transform: `translateX(-${currentSlide * 100}%)` }}
+              onTransitionEnd={handleTransitionEnd}
             >
-              {testimonials.map((testimonial, index) => (
-                <div key={testimonial.id} className="w-full flex-shrink-0 px-4">
+              {[...testimonials, testimonials[0]].map((testimonial, index) => (
+                <div key={`${testimonial.id}-${index}`} className="w-full flex-shrink-0 px-4">
                   <div className="grid md:grid-cols-2 gap-6">
                     {/* Left card */}
                     <div className="bg-white rounded-lg p-6 shadow-sm border border-gray/50">
@@ -88,7 +120,7 @@ const TestimonialSlider = () => {
                         <img
                           src={testimonial.image}
                           alt={testimonial.name}
-                          className=" rounded-lg object-cover flex-shrink-0"
+                          className="rounded-lg object-cover flex-shrink-0"
                         />
                         <div className="flex-1">
                           <p className="text-gray-600 text-sm leading-relaxed mb-4">
@@ -96,7 +128,7 @@ const TestimonialSlider = () => {
                           </p>
                         </div>
                       </div>
-                      <div className="border-t pt-4">
+                      <div className="border-t border-gray/50 pt-4">
                         <div className="flex items-center justify-between">
                           <div>
                             <h3 className="font-semibold text-gray-900">
@@ -116,8 +148,8 @@ const TestimonialSlider = () => {
                       </div>
                     </div>
 
-                    {/* Right card (duplicate for layout) */}
-                    <div className="bg-white rounded-lg p-6 shadow-sm border border-gray">
+                    {/* Right card (duplicate) */}
+                    <div className="bg-white rounded-lg p-6 shadow-sm border border-gray/50">
                       <div className="flex items-start space-x-4 mb-4">
                         <img
                           src={testimonial.image}
@@ -130,7 +162,7 @@ const TestimonialSlider = () => {
                           </p>
                         </div>
                       </div>
-                      <div className="border-t pt-4">
+                      <div className="border-t border-gray/50 pt-4">
                         <div className="flex items-center justify-between">
                           <div>
                             <h3 className="font-semibold text-gray-900">
@@ -155,22 +187,22 @@ const TestimonialSlider = () => {
             </div>
           </div>
 
-          {/* Navigation arrows */}
+          {/* Arrows */}
           <button
             onClick={prevSlide}
-            className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 bg-white rounded-full p-2 shadow-lg hover:shadow-xl transition-shadow duration-200 border border-gray-200"
+            className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 bg-white rounded-full p-2 shadow-lg hover:shadow-xl transition-shadow duration-200 border border-gray/50"
           >
             <ChevronLeft className="w-5 h-5 text-gray-600" />
           </button>
 
           <button
             onClick={nextSlide}
-            className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 bg-white rounded-full p-2 shadow-lg hover:shadow-xl transition-shadow duration-200 border border-gray-200"
+            className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 bg-white rounded-full p-2 shadow-lg hover:shadow-xl transition-shadow duration-200 border border-gray/50"
           >
             <ChevronRight className="w-5 h-5 text-gray-600" />
           </button>
 
-          {/* Pagination dots */}
+          {/* Dots */}
           <div className="flex justify-center mt-8 space-x-2">
             {testimonials.map((_, index) => (
               <button
