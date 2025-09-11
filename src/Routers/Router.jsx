@@ -35,4 +35,12 @@ export const router = createBrowserRouter([
     path: "/admin/create-quizz",
     element: <QuizCreator />,
   },
+  {
+    path: "/admin/terms&conditions",
+    element: <div>Terms</div>,
+  },
+  {
+    path: "/admin/privacy-policies",
+    element: <div>Privacy</div>,
+  },
 ]);

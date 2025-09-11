@@ -6,6 +6,8 @@ import profile from "../../../assets/admin-dashboard-images/profile.png";
 import { Quizz } from "../Quizz/Quizz";
 import Monetization from "../Monitization/Monitization";
 import { Account } from "../Settings/Account";
+import Privacy from "../Settings/Privacy";
+import Terms from "../Settings/Terms";
 
 export default function DashboardMainPage() {
   const [currentComponent, setCurrentComponent] = useState("Dashboard"); // New state to track the active component
@@ -50,6 +52,8 @@ export default function DashboardMainPage() {
           {currentComponent === "Quizz" && <Quizz />}
           {currentComponent === "Monetization" && <Monetization />}
           {currentComponent === "Account" && <Account />}
+          {currentComponent === "Terms & Conditions" && <Terms />}
+          {currentComponent === "Privacy Policies" && <Privacy />}
         </div>
       </div>
     </div>
