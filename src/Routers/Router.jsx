@@ -24,6 +24,7 @@ import About from "../components/About/About";
 import PricingSection from "../components/PricingSection/PricingSection";
 import Profile from "../Pages/Home/Profile";
 import ProfileDashboard from "../Pages/Dashboard/ProfileDashboard";
+import Certificates from "../Pages/Home/Certificates";
 
 export const router = createBrowserRouter([
   {
@@ -101,11 +102,6 @@ export const router = createBrowserRouter([
         path: "/pricing",
         element: <PricingSection />,
       },
-      {
-        path: "/profile",
-        element: <Profile />,
-      },
-
     ],
   },
   {
@@ -119,6 +115,16 @@ export const router = createBrowserRouter([
   {
     path: "/profile-dashboard",
     element: <ProfileDashboard />,
+    children: [
+      {
+        path: "profile",
+        element: <Profile />,
+      },
+      {
+        path: "certificates",
+        element: <Certificates />,
+      },
+    ],
   },
   {
     path: "/admin/create-quizz",

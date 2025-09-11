@@ -3,7 +3,7 @@ import { Menu, X } from "lucide-react";
 import logo from "../../assets/images/logo.png"; // Adjust the path as necessary
 import Button from "../Shared/Button";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import profile from '../../assets/images/loginProfile.png'
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -16,14 +16,16 @@ export default function Navbar() {
     { name: "Contact", href: "#", active: false },
     { name: "Language", href: "#", active: false },
   ];
-
+const location = useLocation()
+console.log(location.pathname.includes('profile-dashboard'))
   return (
     <div className=" text-white font-Poppins">
       <div className="w-10/12 mx-auto">
         <div className="flex justify-between items-center py-4">
           {/* Logo */}
+         
          <Link to={'/'}>
-          <div className="flex items-center space-x-3 cursor-pointer group">
+          <div className={`flex items-center space-x-3 cursor-pointer group ${location.pathname.includes('profile-dashboard')&& "hidden"}`}>
             <img src={logo} alt="" className="w-10" />
              <p className="text-[#011F47] font-bold text-2xl">
                 Learnin<span className="text-primary">GPT</span>

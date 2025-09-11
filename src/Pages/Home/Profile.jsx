@@ -14,7 +14,7 @@ import global from "../../assets/images/icon/global.png"
 import star from "../../assets/images/icon/star.png"
 export default function Profile() {
   return (
-    <div className="min-h-screen bg-[#F4F8FD] p-6">
+    <div className="h-[91vh] overflow-auto bg-[#F4F8FD] p-6">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <div className="flex justify-between items-center mb-8">
