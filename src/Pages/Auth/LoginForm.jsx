@@ -19,7 +19,7 @@ const LoginForm = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { isAuthenticated, user } = useSelector((state) => state.auth);
-  console.log(isAuthenticated)
+  console.log(isAuthenticated);
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({
@@ -63,10 +63,17 @@ const LoginForm = () => {
 
       // ✅ Show toast success
       toast.success("Login successful!");
-      dispatch(loginSuccess())
+      dispatch(loginSuccess());
 
-      // 🚀 redirect example
-      navigate("/");
+      // 🚀 Conditional redirect
+      if (
+        formData.email === "admin@gmail.com" &&
+        formData.password === "123456"
+      ) {
+        navigate("/admin");
+      } else {
+        navigate("/");
+      }
 
       // 🔥 ekhane API call korte paro jodi thake
     } else {
