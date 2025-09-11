@@ -23,7 +23,6 @@ import Privacy from "../components/Terms&Policy/Privacy";
 import ContactPage from "../components/ContactPage/ContactPage";
 import About from "../components/About/About";
 
-
 export const router = createBrowserRouter([
   {
     path: "/",
@@ -77,24 +76,24 @@ export const router = createBrowserRouter([
       },
       {
         path: "/features",
-        element: <Features />
+        element: <Features />,
       },
       {
         path: "/terms",
-        element: <Terms />
+        element: <Terms />,
       },
       {
         path: "/privacy",
-        element: <Privacy />
+        element: <Privacy />,
       },
       {
         path: "/contact",
-        element: <ContactPage />
+        element: <ContactPage />,
       },
       {
         path: "/about",
-        element: <About />
-      }
+        element: <About />,
+      },
     ],
   },
   {
@@ -108,13 +107,5 @@ export const router = createBrowserRouter([
   {
     path: "/admin/create-quizz",
     element: <QuizCreator />,
-  },
-  {
-    path: "/admin/terms&conditions",
-    element: <div>Terms</div>,
-  },
-  {
-    path: "/admin/privacy-policies",
-    element: <div>Privacy</div>,
   },
 ]);
