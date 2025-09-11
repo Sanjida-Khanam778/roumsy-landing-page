@@ -8,6 +8,7 @@ import { Plus, Search, Send, Sparkles } from "lucide-react";
 import Button from "../../components/Shared/Button";
 import botProfile from "../../assets/images/botProfile.jpg";
 import userProfile from "../../assets/images/userProfile.jpg";
+import { Link } from "react-router-dom";
 const Dashboard = ({ tab }) => {
   const [inputValue, setInputValue] = useState("");
   // Each conversation is { sender: 'user' | 'ai', text: string }
@@ -203,12 +204,14 @@ const Dashboard = ({ tab }) => {
         {/* Logo and Header */}
         <div className="p-6 border-b border-blue-500">
           {/* Logo */}
-          <div className="flex items-center space-x-2 mb-6">
-            <img src={logo} className="w-12" alt="" />
-            <p className="text-[#011F47] font-bold text-2xl">
-              Learnin<span className="text-primary">GPT</span>
-            </p>
-          </div>
+          <Link to={'/'}>
+            <div className="flex items-center space-x-2 mb-6">
+              <img src={logo} className="w-12" alt="" />
+              <p className="text-[#011F47] font-bold text-2xl">
+                Learnin<span className="text-primary">GPT</span>
+              </p>
+            </div>
+          </Link>
 
           {/* New Chat Button */}
           <button className="w-full flex items-center gap-3 bg-blue-500 hover:bg-blue-400 rounded-lg px-4 py-3 transition-colors">

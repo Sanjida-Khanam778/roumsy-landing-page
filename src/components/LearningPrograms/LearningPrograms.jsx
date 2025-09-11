@@ -5,6 +5,7 @@ import learning1 from "../../assets/images/learning1.png";
 import learning2 from "../../assets/images/learning2.png";
 import learning3 from "../../assets/images/learning3.png";
 import { useEffect, useState } from "react";
+
 const LearningPrograms = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
 
@@ -162,7 +163,7 @@ const LearningPrograms = () => {
   };
 
   return (
-    <section className="py-16 bg-gray-50">
+    <section className="py-16 bg-white">
       <div className="container mx-auto px-6">
         <div className="flex justify-center mb-6">
           <div className="inline-flex items-center space-x-2 bg-primary/10 border border-blue-100 backdrop-blur-sm rounded-full px-4 py-2 text-sm font-medium text-primary">

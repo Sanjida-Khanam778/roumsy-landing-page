@@ -1,4 +1,6 @@
-import { useState, useEffect } from "react";
+"use client";
+
+import { useState, useEffect, useRef } from "react";
 import { Play, User, MessageCircle } from "lucide-react";
 import hero1 from "../../assets/images/herobg.png"; // First background image
 import hero2 from "../../assets/images/hero2.png"; // Second background image
@@ -8,9 +10,13 @@ import one from "../../assets/images/one.png";
 import two from "../../assets/images/two.png";
 import three from "../../assets/images/three.png";
 import four from "../../assets/images/four.png";
+import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 export default function Hero() {
   const [currentSlide, setCurrentSlide] = useState(0);
+  const [isAnimating, setIsAnimating] = useState(false); // To manage animation state
+  const intervalRef = useRef(null); // Store interval ID
 
   const slides = [
     {
@@ -23,11 +29,13 @@ export default function Hero() {
         text: "Train with LearnInGPT",
         icon: Play,
         color: "bg-green-500 hover:bg-green-600",
+        go: "/topics",
       },
       secondaryButton: {
         text: "Start Exam Simulator",
         icon: Play,
         color: "bg-blue-500 hover:bg-blue-600",
+        go: "/quiz",
       },
 
       features: [
@@ -46,6 +54,7 @@ export default function Hero() {
         text: "Try AI-Powered Learning",
         icon: Play,
         color: "bg-blue-500 hover:bg-blue-600",
+        go: "/dashboard",
       },
       secondaryButton: null,
 
@@ -64,6 +73,7 @@ export default function Hero() {
         text: "Create Free Account",
         icon: User,
         color: "bg-blue-500 hover:bg-blue-600",
+        go: "/register",
       },
       secondaryButton: null,
 
@@ -81,20 +91,63 @@ export default function Hero() {
     { image: one },
   ];
 
-  // Auto-slide functionality
+  // Auto-slide functionality with pause on interaction
   useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentSlide((prev) => (prev + 1) % slides.length);
+    intervalRef.current = setInterval(() => {
+      if (!isAnimating) {
+        setCurrentSlide((prev) => (prev + 1) % slides.length);
+      }
     }, 3000);
+    return () => clearInterval(intervalRef.current); // Cleanup interval when component unmounts
+  }, [slides.length, isAnimating]);
 
-    return () => clearInterval(interval);
-  }, [slides.length]);
+  // Stop auto-slide on manual slide change
+  const handleManualSlideChange = (index) => {
+    clearInterval(intervalRef.current);
+    setCurrentSlide(index);
+    setIsAnimating(true); // Trigger animation when manually changing the slide
+    setTimeout(() => {
+      setIsAnimating(false);
+      intervalRef.current = setInterval(() => {
+        setCurrentSlide((prev) => (prev + 1) % slides.length);
+      }, 3000);
+    }, 500); // Reset the animation state after the transition
+  };
 
   const currentSlideData = slides[currentSlide];
 
   // Determine the background image based on the current slide
   const backgroundImages = [hero1, hero2, hero3]; // Array of background images
   const currentBackgroundImage = backgroundImages[currentSlide];
+
+  // Helper to restart interval
+  const restartInterval = () => {
+    clearInterval(intervalRef.current);
+    intervalRef.current = setInterval(() => {
+      setCurrentSlide((prev) => (prev + 1) % slides.length);
+    }, 3000);
+  };
+
+  // Handle next and previous slide navigation
+  const handleNextSlide = () => {
+    clearInterval(intervalRef.current);
+    setIsAnimating(true);
+    setCurrentSlide((prev) => (prev + 1) % slides.length);
+    setTimeout(() => {
+      setIsAnimating(false);
+      restartInterval();
+    }, 500);
+  };
+
+  const handlePrevSlide = () => {
+    clearInterval(intervalRef.current);
+    setIsAnimating(true);
+    setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length); // To handle circular navigation
+    setTimeout(() => {
+      setIsAnimating(false);
+      restartInterval();
+    }, 500);
+  };
 
   return (
     <div
@@ -116,7 +169,7 @@ export default function Hero() {
             {/* Badge */}
             <div className="inline-flex items-center space-x-2 bg-white/80 backdrop-blur-sm rounded-full px-4 py-2 text-sm font-medium text-primary border-blue-100">
               <div className="">
-                <img src={badge} alt="" />
+                <img src={badge || "/placeholder.svg"} alt="" />
               </div>
               <span>{currentSlideData.badge}</span>
             </div>
@@ -133,20 +186,22 @@ export default function Hero() {
 
             {/* Buttons */}
             <div className="flex flex-col sm:flex-row gap-4">
-              <button
+              <Link
+                to={currentSlideData.primaryButton.go}
                 className={`${currentSlideData.primaryButton.color} text-white px-8 py-4 rounded-lg font-semibold flex items-center justify-center space-x-2 transition-all duration-300 transform hover:scale-105 shadow-lg`}
               >
                 <currentSlideData.primaryButton.icon size={20} />
                 <span>{currentSlideData.primaryButton.text}</span>
-              </button>
+              </Link>
 
               {currentSlideData.secondaryButton && (
-                <button
+                <Link
+                  to={currentSlideData.secondaryButton.go}
                   className={`${currentSlideData.secondaryButton.color} text-white px-8 py-4 rounded-lg font-semibold flex items-center justify-center space-x-2 transition-all duration-300 transform hover:scale-105 shadow-lg`}
                 >
                   <currentSlideData.secondaryButton.icon size={20} />
                   <span>{currentSlideData.secondaryButton.text}</span>
-                </button>
+                </Link>
               )}
             </div>
 
@@ -154,7 +209,11 @@ export default function Hero() {
             <div className="flex items-center space-x-4 pt-8">
               <div className="flex -space-x-4">
                 {avatar.map((icon, idx) => (
-                  <img key={idx} src={icon.image} alt="" />
+                  <img
+                    key={idx}
+                    src={icon.image || "/placeholder.svg"}
+                    alt=""
+                  />
                 ))}
               </div>
               <div className="">
@@ -168,7 +227,7 @@ export default function Hero() {
               {slides.map((_, index) => (
                 <button
                   key={index}
-                  onClick={() => setCurrentSlide(index)}
+                  onClick={() => handleManualSlideChange(index)} // Change slide manually
                   className={`w-2 h-2 rounded-full transition-all duration-300 ${
                     index === currentSlide
                       ? "bg-blue-500 scale-125"
@@ -180,7 +239,23 @@ export default function Hero() {
           </div>
 
           {/* Slide Controls */}
-          <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex items-center space-x-6"></div>
+          <div className="absolute bottom-12 left-1/2 transform -translate-x-1/2 flex items-center space-x-6 z-30">
+            <button
+              onClick={handlePrevSlide}
+              className="text-white p-2 rounded-full bg-primary/50 hover:bg-primary/70 transition-all duration-200 cursor-pointer"
+              type="button"
+            >
+              <FaArrowLeft />
+              {/* Left Arrow */}
+            </button>
+            <button
+              onClick={handleNextSlide}
+              className="text-white p-2 rounded-full bg-primary/50 hover:bg-primary/70 transition-all duration-200 cursor-pointer"
+              type="button"
+            >
+              <FaArrowRight /> {/* Right Arrow */}
+            </button>
+          </div>
         </div>
         <div className=" w-1/2 relative">
           {/* Static Badge 1 - Top Right */}

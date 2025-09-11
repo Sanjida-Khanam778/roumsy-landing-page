@@ -7,6 +7,7 @@ import finance from "../../assets/images/finance.png";
 import gym from "../../assets/images/gym.png";
 import art from "../../assets/images/art.png";
 import Button from "../Shared/Button";
+import { Link } from "react-router-dom";
 
 const OnlineQuizzes = () => {
   const quizCategories = [
@@ -64,11 +65,14 @@ const OnlineQuizzes = () => {
           })}
         </div>
 
-        <div className="text-center mt-8">
-          <Button rounded={"lg"} padding="px-6 py-3">
-            Explore All Categories
-          </Button>
-        </div>
+        <Link to={'/topics'}>
+         
+          <div className="text-center mt-8">
+            <Button rounded={"lg"} padding="px-6 py-3">
+              Explore All Categories
+            </Button>
+          </div>
+        </Link>
       </div>
     </section>
   );

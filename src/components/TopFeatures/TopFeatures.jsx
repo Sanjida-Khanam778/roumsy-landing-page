@@ -6,7 +6,10 @@ import { useSelector } from "react-redux";
 import { Award, BookOpen, Clock, Play } from "lucide-react";
 import watch from "../../assets/images/watch.png";
 import score from "../../assets/images/score.png";
-// Top Features Section Component
+import create from "../../assets/images/icon/create.png";
+import explore from "../../assets/images/icon/explore.png";
+import join from "../../assets/images/icon/join.png";
+
 const TopFeatures = () => {
   const { isAuthenticated } = useSelector((state) => state.auth);
   const [currentProgress, setCurrentProgress] = useState(65);
@@ -23,18 +26,21 @@ const TopFeatures = () => {
       description: "See your growth over time with personalized stats",
       buttonText: "Create Free Account",
       image: arrow,
+      icon: create,
     },
     {
       title: "Practice Smarter",
       description: "Get instant feedback and AI coaching",
       buttonText: "Explore Features",
       image: tech,
+      icon: explore,
     },
     {
       title: "Start Learning Today",
       description: "Begin your journey in seconds",
       buttonText: "Join Now",
       image: book,
+      icon: join,
     },
   ];
 
@@ -130,8 +136,9 @@ const TopFeatures = () => {
 
                 <div className="flex-grow">
                   <button
-                    className={`bg-primary/10  text-black px-6 py-2 rounded-lg text-sm font-medium transition-colors`}
+                    className={`bg-primary/10  text-black px-6 py-2 flex rounded-lg gap-2 text-sm font-medium transition-colors`}
                   >
+                    <img src={feature.icon} alt="" />
                     {feature.buttonText}
                   </button>
                 </div>

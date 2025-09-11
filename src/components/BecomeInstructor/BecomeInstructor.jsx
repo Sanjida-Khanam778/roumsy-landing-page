@@ -1,6 +1,7 @@
 import icon from "../../assets/images/thunder.png";
 import become from "../../assets/images/become.png";
 import Button from "../Shared/Button";
+import { Link } from "react-router-dom";
 const BecomeInstructor = () => {
   return (
     <section className="py-16 bg-white">
@@ -24,7 +25,7 @@ const BecomeInstructor = () => {
               </div>
             </div>
 
-            <h2 className="text-3xl font-bold text-gray-800 leading-tight">
+            <h2 className="text-4xl font-semibold text-gray-800 leading-tight">
               Become an Instructor and Join With Us
             </h2>
 
@@ -33,7 +34,13 @@ const BecomeInstructor = () => {
               community through discussion forums and group projects, and
               providing continuous support to address challenges and improve.
             </p>
-            <Button rounded="lg" padding="px-4 py-2"> Start Teaching Today</Button>
+            <Link to={"/form"}>
+              <div className="mt-8">
+                <Button rounded="lg" padding="px-4 py-2">
+                Start Teaching Today
+              </Button>
+              </div>
+            </Link>
           </div>
         </div>
       </div>

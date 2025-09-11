@@ -1,9 +1,9 @@
-import React, { useState, useRef } from "react";
+import { useState, useRef } from "react";
 import { Menu, X } from "lucide-react";
 import logo from "../../assets/images/logo.png"; // Adjust the path as necessary
 import Button from "../Shared/Button";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import profile from "../../assets/images/loginProfile.png";
 import { logout } from "../../Stores/authSlice";
 
@@ -13,12 +13,14 @@ const Navbar = () => {
   const profileRef = useRef(null);
   const dispatch = useDispatch();
   const { isAuthenticated, user } = useSelector((state) => state.auth);
-
+  const navigate = useNavigate();
   const location = useLocation();
 
   const handleLogout = () => {
+    navigate("/");
     dispatch(logout());
   };
+
   const navItems = [
     { name: "Home", href: "/", active: location.pathname === "/" },
     {
@@ -125,7 +127,10 @@ const Navbar = () => {
                     >
                       Privacy Policies
                     </Link>
-                    <button onClick={handleLogout} className="py-2 text-red-600 font-semibold">
+                    <button
+                      onClick={handleLogout}
+                      className="py-2 text-red-600 font-semibold"
+                    >
                       Log out
                     </button>
                   </div>

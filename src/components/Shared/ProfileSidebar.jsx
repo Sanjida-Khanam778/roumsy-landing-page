@@ -4,7 +4,7 @@ import { FaCog, FaChevronDown, FaSignOutAlt, FaReact } from "react-icons/fa";
 import { MdOutlineDashboard } from "react-icons/md";
 import { IoSettingsOutline, IoTrophyOutline } from "react-icons/io5";
 import logo from "../../assets/images/logo.png";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../../Stores/authSlice";
 export const ProfileSidebar = ({ currentComponent, onMenuClick }) => {
   const [open, setOpen] = useState(false);
@@ -19,6 +19,7 @@ export const ProfileSidebar = ({ currentComponent, onMenuClick }) => {
   const { isAuthenticated, user } = useSelector((state) => state.auth);
   console.log(isAuthenticated);
   const handleLogout = () => {
+    navigate('/')
     dispatch(logout());
   };
   const menuLinks = [

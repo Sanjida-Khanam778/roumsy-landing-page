@@ -1,7 +1,9 @@
+import info from "../../assets/images/icon/info.png";
 import tic from "../../assets/images/tic.png";
 import choose1 from "../../assets/images/choose1.png";
 import choose2 from "../../assets/images/choose2.png";
 import choose3 from "../../assets/images/choose3.png";
+
 const WhyChooseUs = () => {
   const features = [
     {
@@ -31,8 +33,8 @@ const WhyChooseUs = () => {
       <div className="w-10/12 mx-auto px-6">
         {/* Header */}
         <div className="text-center mb-12">
-          <div className="inline-flex items-center bg-primary text-white px-4 py-2 rounded-full text-sm mb-4">
-            <span className="mr-2">💡</span>
+          <div className="inline-flex items-center bg-primary text-white px-4 py-2 rounded-full text-sm mb-4 gap-3">
+            <img src={info} alt="" />
             Reason to Choose
           </div>
           <h2 className="text-3xl font-bold text-gray-800">Why Choose Us!</h2>

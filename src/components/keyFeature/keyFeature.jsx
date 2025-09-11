@@ -2,6 +2,7 @@ import exam from "../../assets/images/exam.png";
 import quiz from "../../assets/images/quiz.png";
 import Button from "../Shared/Button";
 import badge from "../../assets/images/chat-icon.png";
+import { Link } from "react-router-dom";
 
 const KeyFeature = () => {
   return (
@@ -14,7 +15,7 @@ const KeyFeature = () => {
       -right-28 sm:-right-40 lg:-right-28
       w-[320px] h-[320px] sm:w-[420px] sm:h-[420px] lg:w-[320px] lg:h-[320px]
       rounded-full border-[10px] sm:border-[12px] lg:border-[36px]
-      border-light/50
+      border-circle
       z-0
     "
       />
@@ -40,7 +41,7 @@ const KeyFeature = () => {
         </p>
 
         <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-          <div className="absolute top-0 right-0 w-96 h-96 bg-gradient-to-tr from-[#C5E7FF] via-blue-50 to-transparent rounded-full blur-3xl"></div>
+          <div className="absolute -top-20 -right-40 w-[600px] h-[600px] bg-gradient-to-tr from-[#C5E7FF] via-blue-50 to-transparent rounded-full blur-3xl"></div>
 
           {/* Card 1 */}
           <div className="bg-white shadow-lg border border-blue-100 rounded-xl relative z-10">
@@ -55,11 +56,13 @@ const KeyFeature = () => {
                 Get instant help from our intelligent chatbot. Ask questions,
                 clarify concepts, and receive personalized explanations.
               </p>
-              <div className="text-center">
-                <Button padding="px-6 py-3" rounded={"xl"}>
-                  Try Assistant
-                </Button>
-              </div>
+              <Link to={"/dashboard"}>
+                <div className="text-center">
+                  <Button padding="px-6 py-3" rounded={"xl"}>
+                    Try Assistant
+                  </Button>
+                </div>
+              </Link>
             </div>
           </div>
 
@@ -76,11 +79,13 @@ const KeyFeature = () => {
                 Practice with adaptive quizzes that adjust to your skill level.
                 Track progress and identify areas for improvement.
               </p>
-              <div className="text-center">
-                <Button padding="px-6 py-3" rounded={"xl"}>
-                  Start Exam Simulator
-                </Button>
-              </div>
+              <Link to={"/quiz"}>
+                <div className="text-center">
+                  <Button padding="px-6 py-3" rounded={"xl"}>
+                    Start Exam Simulator
+                  </Button>
+                </div>
+              </Link>
             </div>
           </div>
         </div>

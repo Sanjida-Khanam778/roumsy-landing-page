@@ -27,6 +27,7 @@ import ProfileDashboard from "../Pages/Dashboard/ProfileDashboard";
 import Certificates from "../Pages/Home/Certificates";
 import { UserAcc } from "../Pages/Home/UserAcc";
 import Plan from "../Pages/Home/Plan";
+import Form from "../components/BecomeInstructor/Form";
 
 export const router = createBrowserRouter([
   {
@@ -43,26 +44,6 @@ export const router = createBrowserRouter([
       </>
     ),
     children: [
-      {
-        path: "/login",
-        element: <LoginForm />,
-      },
-      {
-        path: "/register",
-        element: <SignUpPage />,
-      },
-      {
-        path: "/forgot-password",
-        element: <ForgotPasswordPage />,
-      },
-      {
-        path: "/otp",
-        element: <OtpPage />,
-      },
-      {
-        path: "/reset-password",
-        element: <ResetPasswordPage />,
-      },
       {
         path: "/quiz",
         element: <QuizInterface />,
@@ -104,7 +85,31 @@ export const router = createBrowserRouter([
         path: "/pricing",
         element: <PricingSection />,
       },
+      {
+        path: "/form",
+        element: <Form />,
+      },
     ],
+  },
+  {
+    path: "/login",
+    element: <LoginForm />,
+  },
+  {
+    path: "/register",
+    element: <SignUpPage />,
+  },
+  {
+    path: "/forgot-password",
+    element: <ForgotPasswordPage />,
+  },
+  {
+    path: "/otp",
+    element: <OtpPage />,
+  },
+  {
+    path: "/reset-password",
+    element: <ResetPasswordPage />,
   },
   {
     path: "/dashboard",

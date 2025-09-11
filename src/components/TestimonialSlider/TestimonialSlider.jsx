@@ -68,6 +68,7 @@ const TestimonialSlider = () => {
           <span>Let’s Join With Us</span>
         </div>
       </div>
+      <h1 className="text-3xl font-semibold text-center mb-4">Feedback’s From Our Student</h1>
       <div className="max-w-6xl mx-auto p-6 bg-gray-50 flex items-center justify-center">
         {/* Badge */}
 
@@ -82,7 +83,7 @@ const TestimonialSlider = () => {
                 <div key={testimonial.id} className="w-full flex-shrink-0 px-4">
                   <div className="grid md:grid-cols-2 gap-6">
                     {/* Left card */}
-                    <div className="bg-white rounded-lg p-6 shadow-sm border border-gray">
+                    <div className="bg-white rounded-lg p-6 shadow-sm border border-gray/50">
                       <div className="flex items-start space-x-4 mb-4">
                         <img
                           src={testimonial.image}
