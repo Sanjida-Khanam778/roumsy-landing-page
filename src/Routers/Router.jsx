@@ -6,7 +6,6 @@ import QuizCreator from "../components/Admin/Quizz/CreateNewQuizz";
 
 import Navbar from "../components/Navbar/Navbar";
 import Footer from "../components/Footer/Footer";
-import React from "react";
 import LoginForm from "../Pages/Auth/LoginForm";
 import SignUpPage from "../Pages/Auth/SignUpPage";
 import ForgotPasswordPage from "../Pages/Auth/ForgotPasswordPage";
@@ -25,7 +24,6 @@ import About from "../components/About/About";
 import PricingSection from "../components/PricingSection/PricingSection";
 import Profile from "../Pages/Home/Profile";
 import ProfileDashboard from "../Pages/Dashboard/ProfileDashboard";
-
 
 export const router = createBrowserRouter([
   {
@@ -98,6 +96,7 @@ export const router = createBrowserRouter([
         path: "/about",
         element: <About />,
       },
+
       {
         path: "/pricing",
         element: <PricingSection />,
@@ -106,6 +105,7 @@ export const router = createBrowserRouter([
         path: "/profile",
         element: <Profile />,
       },
+
     ],
   },
   {
