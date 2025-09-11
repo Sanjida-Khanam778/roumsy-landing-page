@@ -25,6 +25,8 @@ import PricingSection from "../components/PricingSection/PricingSection";
 import Profile from "../Pages/Home/Profile";
 import ProfileDashboard from "../Pages/Dashboard/ProfileDashboard";
 import Certificates from "../Pages/Home/Certificates";
+import { UserAcc } from "../Pages/Home/UserAcc";
+import Plan from "../Pages/Home/Plan";
 
 export const router = createBrowserRouter([
   {
@@ -123,6 +125,22 @@ export const router = createBrowserRouter([
       {
         path: "certificates",
         element: <Certificates />,
+      },
+      {
+        path: "user-acc",
+        element: <UserAcc />,
+      },
+      {
+        path: "plan",
+        element: <Plan />,
+      },
+      {
+        path: "terms",
+        element: <Terms />,
+      },
+      {
+        path: "privacy",
+        element: <Privacy />,
       },
     ],
   },

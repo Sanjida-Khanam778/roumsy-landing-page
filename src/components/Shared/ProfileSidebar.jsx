@@ -8,10 +8,10 @@ export const ProfileSidebar = ({ currentComponent, onMenuClick }) => {
   const [open, setOpen] = useState(false);
   const navigate = useNavigate();
   const settingsItems = [
-    "Account Setting",
-    "Upgrade Plan",
-    "Terms & Conditions",
-    "Privacy Policies",
+    {name:"Account Setting", go:"/profile-dashboard/user-acc"},
+    {name:"Upgrade Plan", go:"/profile-dashboard/plan"},
+    {name:"Terms & Conditions", go:"/profile-dashboard/terms"},
+    {name:"Privacy Policies", go:"/profile-dashboard/privacy"}
   ];
 
   const menuLinks = [
@@ -74,14 +74,14 @@ export const ProfileSidebar = ({ currentComponent, onMenuClick }) => {
             <div className="absolute left-10 top-12 mt-1 w-48 bg-[#2885CA] text-black rounded-lg z-50">
               <div className="flex flex-col overflow-hidden gap-0.5">
                 {settingsItems.map((item, idx) => (
-                  <button
+                  <NavLink
                     key={idx}
-                    onClick={() => onMenuClick(item)}
+                    to={item.go}
                     className={`px-4 py-2 text-sm text-left hover:text-white ${(idx =
                       3 && "border-b border-white")}`}
                   >
-                    {item}
-                  </button>
+                    {item.name}
+                  </NavLink>
                 ))}
               </div>
             </div>
