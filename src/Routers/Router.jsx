@@ -24,6 +24,7 @@ import ContactPage from "../components/ContactPage/ContactPage";
 import About from "../components/About/About";
 import PricingSection from "../components/PricingSection/PricingSection";
 import Profile from "../Pages/Home/Profile";
+import ProfileDashboard from "../Pages/Dashboard/ProfileDashboard";
 
 
 export const router = createBrowserRouter([
@@ -114,6 +115,10 @@ export const router = createBrowserRouter([
   {
     path: "/admin",
     element: <DashboardMainPage />,
+  },
+  {
+    path: "/profile-dashboard",
+    element: <ProfileDashboard />,
   },
   {
     path: "/admin/create-quizz",
