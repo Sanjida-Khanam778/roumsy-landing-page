@@ -149,10 +149,12 @@ export default function AllPrograms({ limit }) {
                   <span>Train with LearninGPT</span>
                 </div>
               </Link>
-              <div className="p-2 bg-primary/10 rounded-lg">
-                {/* <img src="" alt="" /> */}
-                <span> Start Exam Simulator</span>
-              </div>
+              <Link to={"/quiz"}>
+                <div className="p-2 bg-primary/10 rounded-lg">
+                  {/* <img src="" alt="" /> */}
+                  <span> Start Exam Simulator</span>
+                </div>
+              </Link>
             </div>
           </div>
         </div>
