@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { Sidebar } from "../Sidebar/Sidebar";
 import { StartCards } from "./StartCards";
-import { MessageSquareDot } from "lucide-react";
 import profile from "../../../assets/admin-dashboard-images/profile.png";
 import { Quizz } from "../Quizz/Quizz";
 import Monetization from "../Monitization/Monitization";
@@ -30,7 +29,7 @@ export default function DashboardMainPage() {
         {/* Header */}
         <div className="bg-[#EEF6FF] px-6 py-4">
           <div className="flex items-center justify-end gap-9">
-            <MessageSquareDot color="#1E90FF" />
+            {/* <MessageSquareDot color="#1E90FF" /> */}
             <img
               onClick={() => handleComponentChange("Profile")}
               src={profile}
