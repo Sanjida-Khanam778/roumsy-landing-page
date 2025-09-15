@@ -73,7 +73,7 @@ const PricingSection = () => {
             left-0 sm:left-0 lg:-left-36
             w-[320px] h-[320px] sm:w-[420px] sm:h-[420px] lg:w-[320px] lg:h-[320px]
             rounded-full border-[10px] sm:border-[12px] lg:border-[36px]
-            border-circle z-0
+            border-circle/50 z-0
           
           "
         />

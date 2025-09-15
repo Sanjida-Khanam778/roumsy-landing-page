@@ -49,7 +49,9 @@ const TestimonialSlider = () => {
 
   // Prev slide
   const prevSlide = () => {
-    setCurrentSlide((prev) => (prev - 1 + testimonials.length) % testimonials.length);
+    setCurrentSlide(
+      (prev) => (prev - 1 + testimonials.length) % testimonials.length
+    );
   };
 
   // Go to specific slide
@@ -90,8 +92,18 @@ const TestimonialSlider = () => {
   };
 
   return (
-    <div className="bg-[#F9FAFB] py-16">
-      <div className="flex justify-center mb-6">
+    <div className="relative z-10 bg-[#F9FAFB] py-16">
+      {/* Circular background - z-0 so it's behind testimonial content */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute top-0 sm:top-10 lg:-top-40 right-0 sm:right-0 lg:-right-16 w-[320px] h-[320px] sm:w-[420px] sm:h-[420px] lg:w-[320px] lg:h-[320px] rounded-full border-[10px] sm:border-[12px] lg:border-[36px] border-circle/50 z-0"
+        style={{ clipPath: "inset(50% 0 0 0)" }}
+      />
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute bottom-0 sm:bottom-10 lg:top-32 right-0 sm:right-0 lg:right-44 w-[320px] h-[320px] sm:w-[420px] sm:h-[420px] lg:w-[320px] lg:h-[320px] rounded-full border-[10px] sm:border-[12px] lg:border-[36px] border-circle/50"
+      />
+      <div className="flex justify-center mb-6 z-10 relative">
         <div className="inline-flex items-center space-x-2 bg-primary/10 border border-blue-100 backdrop-blur-sm rounded-full px-4 py-2 text-sm font-medium text-primary">
           <div>
             <img src={icon} alt="badge" />
@@ -102,17 +114,24 @@ const TestimonialSlider = () => {
       <h1 className="text-3xl font-semibold text-center mb-4">
         Feedback’s From Our Student
       </h1>
-      <div className="max-w-6xl mx-auto p-6 bg-gray-50 flex items-center justify-center">
+      <div className="max-w-6xl mx-auto p-6 bg-gray-50 flex items-center justify-center z-10 relative">
         <div className="relative w-full">
           {/* Slider */}
           <div className="relative overflow-hidden">
             <div
-              className={`flex ${isTransitioning ? "transition-transform duration-300 ease-in-out" : ""}`}
+              className={`flex ${
+                isTransitioning
+                  ? "transition-transform duration-300 ease-in-out"
+                  : ""
+              }`}
               style={{ transform: `translateX(-${currentSlide * 100}%)` }}
               onTransitionEnd={handleTransitionEnd}
             >
               {[...testimonials, testimonials[0]].map((testimonial, index) => (
-                <div key={`${testimonial.id}-${index}`} className="w-full flex-shrink-0 px-4">
+                <div
+                  key={`${testimonial.id}-${index}`}
+                  className="w-full flex-shrink-0 px-4"
+                >
                   <div className="grid md:grid-cols-2 gap-6">
                     {/* Left card */}
                     <div className="bg-white rounded-lg p-6 shadow-sm border border-gray/50">

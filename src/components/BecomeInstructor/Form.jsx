@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { MdOutlineFileUpload } from "react-icons/md";
+import { ScrollRestoration } from "react-router-dom";
 import Swal from "sweetalert2";
 
 export default function Form() {
@@ -63,6 +64,7 @@ export default function Form() {
 
   return (
     <div className=" mx-auto p-8 bg-[#EFF4FF] rounded-lg shadow-sm">
+      <ScrollRestoration />
       <form
         onSubmit={handleSubmit}
         className="space-y-6 max-w-md mx-auto my-10"
