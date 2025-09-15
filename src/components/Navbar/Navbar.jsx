@@ -3,13 +3,15 @@ import { Menu, X } from "lucide-react";
 import logo from "../../assets/images/logo.png"; // Adjust the path as necessary
 import Button from "../Shared/Button";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link, NavLink, useLocation, useNavigate } from "react-router-dom";
 import profile from "../../assets/images/loginProfile.png";
 import { logout } from "../../Stores/authSlice";
+
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [profileDropdown, setProfileDropdown] = useState(false);
+  const [showLanguagePopup, setShowLanguagePopup] = useState(false);
   const profileRef = useRef(null);
   const dispatch = useDispatch();
   const { isAuthenticated, user } = useSelector((state) => state.auth);
@@ -23,26 +25,19 @@ const Navbar = () => {
 
   const navItems = [
     { name: "Home", href: "/", active: location.pathname === "/" },
+    { name: "Explore Courses", href: "/topics", active: location.pathname === "/topics" },
+    { name: "Pricing", href: "/pricing", active: location.pathname === "/pricing" },
+    { name: "Contact", href: "/contact", active: location.pathname === "/contact" },
     {
-      name: "Explore Courses",
-      href: "/topics",
-      active: location.pathname === "/topics",
-    },
-    {
-      name: "Pricing",
-      href: "/pricing",
-      active: location.pathname === "/pricing",
-    },
-    { name: "About", href: "/about", active: location.pathname === "/about" },
-    {
-      name: "Contact",
-      href: "/contact",
-      active: location.pathname === "/contact",
+      name: "Language",
+      href: "/lang",
+      active: showLanguagePopup, // Active state based on the popup visibility
+      isLanguage: true,
     },
   ];
 
   return (
-    <div className=" text-white font-Poppins">
+    <div className="text-white font-Poppins">
       <div className="w-10/12 mx-auto">
         <div className="flex justify-between items-center py-4">
           {/* Logo */}
@@ -61,25 +56,68 @@ const Navbar = () => {
 
           {/* Desktop Navigation */}
           <nav className="hidden lg:flex items-center space-x-8">
-            {navItems.map((item) => (
-              <Link key={item.name} to={item.href}>
-                <a
-                  className={`relative font-medium transition-all duration-300 ${
-                    item.active
-                      ? "text-primary font-bold"
-                      : "text-dark font-bold"
-                  } group`}
-                >
-                  {item.name}
-                  {item.active && (
-                    <div className="absolute -bottom-2 left-0 right-0 h-0.5 bg-gradient-to-r from-[#189EFE] to-[#0E5F98] rounded-full"></div>
+            {navItems.map((item) =>
+              item.isLanguage ? (
+                <div key={item.name} className="relative">
+                  <button
+                    type="button"
+                    className={`relative font-bold transition-all duration-300 group ${
+                      item.active ? "text-primary" : "text-dark"
+                    }`}
+                    onClick={() => setShowLanguagePopup((prev) => !prev)} // Toggle the popup
+                  >
+                    {item.name}
+                    {item.active && (
+                      <div className="absolute -bottom-2 left-0 right-0 h-0.5 bg-gradient-to-r from-[#189EFE] to-[#0E5F98] rounded-full"></div>
+                    )}
+                    {!item.active && (
+                      <div className="absolute -bottom-2 left-0 right-0 h-0.5 bg-gradient-to-r from-[#189EFE] to-[#0E5F98] rounded-full scale-x-0 group-hover:scale-x-100 transition-transform duration-300"></div>
+                    )}
+                  </button>
+                  {showLanguagePopup && (
+                    <div
+                      className="absolute left-1/2 -translate-x-1/2 top-10 w-40 bg-white rounded-lg shadow-lg z-50 flex flex-col text-left py-3 border border-gray-200"
+                      style={{ minWidth: "140px" }}
+                    >
+                      <button className="flex items-center px-4 py-2 text-black hover:bg-gray-100 text-base gap-2">
+                        <span role="img" aria-label="English" className="text-xl">
+                          🇬🇧
+                        </span>{" "}
+                        English
+                      </button>
+                      <button className="flex items-center px-4 py-2 text-black hover:bg-gray-100 text-base gap-2">
+                        <span role="img" aria-label="French" className="text-xl">
+                          🇫🇷
+                        </span>{" "}
+                        French
+                      </button>
+                      <button className="flex items-center px-4 py-2 text-black hover:bg-gray-100 text-base gap-2">
+                        <span role="img" aria-label="Spanish" className="text-xl">
+                          🇪🇸
+                        </span>{" "}
+                        Spanish
+                      </button>
+                    </div>
                   )}
-                  {!item.active && (
-                    <div className="absolute -bottom-2 left-0 right-0 h-0.5 bg-gradient-to-r from-[#189EFE] to-[#0E5F98] rounded-full scale-x-0 group-hover:scale-x-100 transition-transform duration-300"></div>
-                  )}
-                </a>
-              </Link>
-            ))}
+                </div>
+              ) : (
+                <NavLink key={item.name} to={item.href}>
+                  <a
+                    className={`relative font-bold transition-all duration-300 ${
+                      item.active && !showLanguagePopup ? "text-primary" : "text-dark"
+                    } group`}
+                  >
+                    {item.name}
+                    {item.active && !showLanguagePopup && (
+                      <div className="absolute -bottom-2 left-0 right-0 h-0.5 bg-gradient-to-r from-[#189EFE] to-[#0E5F98] rounded-full"></div>
+                    )}
+                    {!item.active && !showLanguagePopup && (
+                      <div className="absolute -bottom-2 left-0 right-0 h-0.5 bg-gradient-to-r from-[#189EFE] to-[#0E5F98] rounded-full scale-x-0 group-hover:scale-x-100 transition-transform duration-300"></div>
+                    )}
+                  </a>
+                </NavLink>
+              )
+            )}
           </nav>
 
           {/* CTA Button and Mobile Menu Toggle */}
@@ -159,7 +197,7 @@ const Navbar = () => {
                 <Link key={item.name} to={item.href}>
                   <a
                     className={`px-4 py-3 rounded-lg transition-all duration-200 ${
-                      item.active
+                      item.active && !showLanguagePopup
                         ? "text-primary bg-blue-900/20 border-l-4 border-blue-400"
                         : "text-dark hover:text-white hover:bg-gray-800"
                     }`}

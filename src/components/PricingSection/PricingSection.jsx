@@ -44,7 +44,7 @@ const PricingSection = () => {
   ];
 
   return (
-    <section className="py-16 bg-[#F9FAFB]">
+    <section className="py-16 bg-[#F9FAFB] ">
       <div className="container mx-auto px-6">
         {/* Header */}
         <div className="text-center mb-4">
@@ -64,11 +64,23 @@ const PricingSection = () => {
         </div>
 
         {/* Pricing Cards */}
-        <div className="grid md:grid-cols-3 gap-12 mx-auto max-w-6xl">
+        <div className="grid md:grid-cols-3 gap-12 mx-auto max-w-6xl relative">
+        <div
+          aria-hidden="true"
+          className="
+            pointer-events-none absolute
+            bottom-0 sm:bottom-10 lg:-bottom-36
+            left-0 sm:left-0 lg:-left-36
+            w-[320px] h-[320px] sm:w-[420px] sm:h-[420px] lg:w-[320px] lg:h-[320px]
+            rounded-full border-[10px] sm:border-[12px] lg:border-[36px]
+            border-circle z-0
+          
+          "
+        />
           {plans.map((plan, index) => (
             <div
               key={index}
-              className={`bg-white rounded-lg overflow-hidden shadow-lg flex flex-col h-full ${
+              className={`bg-white z-10 rounded-lg overflow-hidden shadow-lg flex flex-col h-full ${
                 plan.scale ? "transform scale-110" : ""
               }`}
             >

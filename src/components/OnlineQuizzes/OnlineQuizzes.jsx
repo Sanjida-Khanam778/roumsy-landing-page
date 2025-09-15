@@ -20,8 +20,9 @@ const OnlineQuizzes = () => {
   ];
 
   return (
-    <section className="py-16 w-10/12 mx-auto bg-white">
+    <section className="pt-16 w-10/12 mx-auto bg-white">
       <div className=" mx-auto px-6">
+    
         {/* Badge */}
         <div className="flex justify-center mb-6">
           <div className="inline-flex items-center space-x-2 bg-primary/10 border border-blue-100 backdrop-blur-sm rounded-full px-4 py-2 text-sm font-medium text-primary">
@@ -65,8 +66,7 @@ const OnlineQuizzes = () => {
           })}
         </div>
 
-        <Link to={'/topics'}>
-         
+        <Link to={"/topics"}>
           <div className="text-center mt-8">
             <Button rounded={"lg"} padding="px-6 py-3">
               Explore All Categories

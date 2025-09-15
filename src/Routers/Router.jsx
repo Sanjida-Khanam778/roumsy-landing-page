@@ -89,6 +89,10 @@ export const router = createBrowserRouter([
         path: "/form",
         element: <Form />,
       },
+      {
+        path: "/lang",
+        element: < ></>,
+      },
     ],
   },
   {
