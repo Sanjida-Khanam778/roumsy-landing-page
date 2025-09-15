@@ -99,7 +99,7 @@ const QuizInterface = () => {
     return <QuizResultPage />;
   }
   return (
-    <div className="min-h-screen bg-gray-50 py-8 px-4">
+    <div className=" bg-gray-50 py-8 px-4">
       <div className="max-w-4xl mx-auto">
         {/* Progress Bar */}
         <div className="mb-8">
@@ -223,22 +223,22 @@ const QuizInterface = () => {
         </div>
 
         {/* Question Navigator */}
-        {/* <div className="mt-8 flex justify-center">
-          <div className="bg-white rounded-2xl shadow-lg p-6">
-            <h4 className="text-center text-gray-700 font-medium mb-4">
+        <div className="mt-8 flex justify-center  w-full">
+          <div className="bg-white rounded-tl-2xl w-2/5 rounded-br-2xl border-b-2 shadow-lg border border-gray/50 p-4">
+            <h4 className="text-left text-gray-800 font-bold mb-3 text-base">
               Question Navigator
             </h4>
-            <div className="flex gap-3">
+            <div className="flex gap-2">
               {questions.map((_, index) => (
                 <button
                   key={index}
                   onClick={() => handleQuestionNavigate(index)}
-                  className={`w-10 h-10 rounded-lg font-medium transition-all duration-200 ${
+                  className={`w-12 h-6 rounded-tl-lg rounded-br-lg rounded-tr-sm rounded-bl-sm font-semibold text-sm transition-all duration-200 ${
                     index === currentQuestion
-                      ? "bg-gray-800 text-white"
+                      ? "  bg-gradient-to-r from-[#189EFE] to-[#0E5F98] text-white shadow-md"
                       : selectedAnswers[index] !== undefined
                       ? "bg-green-500 text-white"
-                      : "bg-gray-200 text-gray-600 hover:bg-gray-300"
+                      : "bg-gray-100 text-gray-700 hover:bg-gray-200 border border-gray/50"
                   }`}
                 >
                   {index + 1}
@@ -246,10 +246,10 @@ const QuizInterface = () => {
               ))}
             </div>
           </div>
-        </div> */}
+        </div>
 
         {/* Quiz Stats */}
-        <div className="mt-8 grid grid-cols-1 md:grid-cols-3 gap-6">
+        {/* <div className="mt-8 grid grid-cols-1 md:grid-cols-3 gap-6">
           <div className="bg-white rounded-xl shadow-md p-6 text-center">
             <div className="text-3xl font-bold text-blue-600 mb-2">
               {completedQuestions}
@@ -270,7 +270,7 @@ const QuizInterface = () => {
             </div>
             <div className="text-sm text-gray-600">Time Remaining</div>
           </div>
-        </div>
+        </div> */}
       </div>
     </div>
   );

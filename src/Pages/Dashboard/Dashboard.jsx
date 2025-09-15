@@ -221,7 +221,7 @@ const Dashboard = ({ tab }) => {
         </div>
 
         {/* Search Chat */}
-        {/* <div className="p-6 border-b border-blue-500">
+        <div className="p-6 border-b border-blue-500">
           <button
             className="w-full flex items-center gap-3 text-blue-200 hover:text-white transition-colors"
             onClick={() => setShowSearch((prev) => !prev)}
@@ -239,7 +239,7 @@ const Dashboard = ({ tab }) => {
               autoFocus
             />
           )}
-        </div> */}
+        </div>
 
         {/* My Conversations */}
         <div className="flex-1 p-6">
