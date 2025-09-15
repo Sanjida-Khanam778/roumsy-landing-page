@@ -2,10 +2,12 @@ import React from "react";
 import FilterBar from "./FilterBar";
 import AllPrograms from "../../components/Shared/AllPrograms";
 import { Search } from "lucide-react";
+import { ScrollRestoration } from "react-router-dom";
 
 export default function Topics() {
   return (
     <div>
+      <ScrollRestoration />
       <FilterBar />
       {/* heading... */}
       <div className="flex flex-col items-center justify-center px-4 bg-[#F4F8FD] py-10">

@@ -3,12 +3,15 @@ import tech from "../../assets/images/techno.png";
 import book from "../../assets/images/book.png";
 import arrow from "../../assets/images/arrow.png";
 import { useSelector } from "react-redux";
-import { Award, BookOpen, Clock, Play } from "lucide-react";
 import watch from "../../assets/images/watch.png";
 import score from "../../assets/images/score.png";
 import create from "../../assets/images/icon/create.png";
-import explore from "../../assets/images/icon/explore.png";
 import join from "../../assets/images/icon/join.png";
+import createw from "../../assets/images/icon/createw.png";
+import joinw from "../../assets/images/icon/joinw.png";
+import { Link } from "react-router-dom";
+import { MdOutlineExplore } from "react-icons/md";
+import { FaRegUser } from "react-icons/fa";
 
 const TopFeatures = () => {
   const { isAuthenticated } = useSelector((state) => state.auth);
@@ -26,21 +29,24 @@ const TopFeatures = () => {
       description: "See your growth over time with personalized stats",
       buttonText: "Create Free Account",
       image: arrow,
-      icon: create,
+      icon: <FaRegUser className="" />,
+      go: "/register",
     },
     {
       title: "Practice Smarter",
       description: "Get instant feedback and AI coaching",
       buttonText: "Explore Features",
       image: tech,
-      icon: explore,
+      icon: <MdOutlineExplore className="text-xl" />,
+      go: "/topics",
     },
     {
       title: "Start Learning Today",
       description: "Begin your journey in seconds",
       buttonText: "Join Now",
       image: book,
-      icon: join,
+      icons: join,
+      go: "/topics",
     },
   ];
 
@@ -122,7 +128,7 @@ const TopFeatures = () => {
             {features.map((feature, index) => (
               <div
                 key={index}
-                className="bg-white rounded-xl p-6 shadow-sm  text-center flex flex-col items-center"
+                className="bg-white rounded-xl p-2 border border-gray/20 shadow-lg px-4 text-center flex flex-col items-center"
               >
                 {/* Icon Placeholder */}
                 <img src={feature.image} alt="" />
@@ -130,18 +136,52 @@ const TopFeatures = () => {
                 <h3 className="font-semibold text-lg my-3 text-gray-800">
                   {feature.title}
                 </h3>
-                <p className="text-gray-600 text-sm mb-6 leading-relaxed">
+                <p className="text-gray-600 text-sm mb-3 w-3/5 leading-relaxed">
                   {feature.description}
                 </p>
 
-                <div className="flex-grow">
-                  <button
-                    className={`bg-primary/10  text-black px-6 py-2 flex rounded-lg gap-2 text-sm font-medium transition-colors`}
-                  >
-                    <img src={feature.icon} alt="" />
-                    {feature.buttonText}
-                  </button>
-                </div>
+                <Link to={feature.go}>
+                  <div className="flex-grow">
+                    <button
+                      className={`bg-primary/10 items-center hover:bg-gradient-to-r hover:from-[#189EFE] hover:to-[#0E5F98] hover:text-white text-black px-6 py-2 flex rounded-lg gap-2 text-sm font-medium transition-colors group`}
+                    >
+                      {feature.icon ? (
+                        feature.icon
+                      ) : (
+                        <>
+                          {feature.buttonText === "Create Free Account" ? (
+                            <>
+                              <img
+                                src={create}
+                                alt="Create"
+                                className="w-6 h-6 group-hover:hidden"
+                              />
+                              <img
+                                src={createw}
+                                alt="Create Hover"
+                                className="w-6 h-6 hidden group-hover:block"
+                              />
+                            </>
+                          ) : feature.buttonText === "Join Now" ? (
+                            <>
+                              <img
+                                src={join}
+                                alt="Join"
+                                className="w-6 h-6 group-hover:hidden"
+                              />
+                              <img
+                                src={joinw}
+                                alt="Join Hover"
+                                className="w-6 h-6 hidden group-hover:block"
+                              />
+                            </>
+                          ) : null}
+                        </>
+                      )}
+                      {feature.buttonText}
+                    </button>
+                  </div>
+                </Link>
               </div>
             ))}
           </div>

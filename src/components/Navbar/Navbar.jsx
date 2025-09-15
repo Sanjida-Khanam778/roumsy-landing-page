@@ -6,7 +6,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link, NavLink, useLocation, useNavigate } from "react-router-dom";
 import profile from "../../assets/images/loginProfile.png";
 import { logout } from "../../Stores/authSlice";
-
+import en from "../../assets/images/logo/en.png";
+import spanish from "../../assets/images/logo/spanish.png";
+import france from "../../assets/images/logo/france.png";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -25,9 +27,21 @@ const Navbar = () => {
 
   const navItems = [
     { name: "Home", href: "/", active: location.pathname === "/" },
-    { name: "Explore Courses", href: "/topics", active: location.pathname === "/topics" },
-    { name: "Pricing", href: "/pricing", active: location.pathname === "/pricing" },
-    { name: "Contact", href: "/contact", active: location.pathname === "/contact" },
+    {
+      name: "Explore Courses",
+      href: "/topics",
+      active: location.pathname === "/topics",
+    },
+    {
+      name: "Pricing",
+      href: "/pricing",
+      active: location.pathname === "/pricing",
+    },
+    {
+      name: "Contact",
+      href: "/contact",
+      active: location.pathname === "/contact",
+    },
     {
       name: "Language",
       href: "/lang",
@@ -80,21 +94,15 @@ const Navbar = () => {
                       style={{ minWidth: "140px" }}
                     >
                       <button className="flex items-center px-4 py-2 text-black hover:bg-gray-100 text-base gap-2">
-                        <span role="img" aria-label="English" className="text-xl">
-                          🇬🇧
-                        </span>{" "}
+                        <img src={en} alt="" />
                         English
                       </button>
                       <button className="flex items-center px-4 py-2 text-black hover:bg-gray-100 text-base gap-2">
-                        <span role="img" aria-label="French" className="text-xl">
-                          🇫🇷
-                        </span>{" "}
+                        <img src={france} alt="" />
                         French
                       </button>
                       <button className="flex items-center px-4 py-2 text-black hover:bg-gray-100 text-base gap-2">
-                        <span role="img" aria-label="Spanish" className="text-xl">
-                          🇪🇸
-                        </span>{" "}
+                        <img src={spanish} alt="" />
                         Spanish
                       </button>
                     </div>
@@ -104,7 +112,9 @@ const Navbar = () => {
                 <NavLink key={item.name} to={item.href}>
                   <a
                     className={`relative font-bold transition-all duration-300 ${
-                      item.active && !showLanguagePopup ? "text-primary" : "text-dark"
+                      item.active && !showLanguagePopup
+                        ? "text-primary"
+                        : "text-dark"
                     } group`}
                   >
                     {item.name}
@@ -123,7 +133,11 @@ const Navbar = () => {
           {/* CTA Button and Mobile Menu Toggle */}
           <div className="flex items-center space-x-4 relative">
             {!isAuthenticated ? (
-              <Button rounded="2xl">Start Free</Button>
+              <Link to={'/topics'}>
+                <div>
+                  <Button rounded="2xl">Start Free</Button>
+                </div>
+              </Link>
             ) : (
               <div className="relative">
                 <img

@@ -1,17 +1,26 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
-import { Play, User, MessageCircle } from "lucide-react";
 import hero1 from "../../assets/images/herobg.png"; // First background image
 import hero2 from "../../assets/images/hero2.png"; // Second background image
 import hero3 from "../../assets/images/hero3.png"; // Third background image
 import badge from "../../assets/images/icon-badge.png";
+import badge2 from "../../assets/images/icon/badge2.png";
+import badge3 from "../../assets/images/icon/badge3.png";
 import one from "../../assets/images/one.png";
 import two from "../../assets/images/two.png";
 import three from "../../assets/images/three.png";
 import four from "../../assets/images/four.png";
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import banner from "../../assets/images/icon/banner.png";
+import banner2 from "../../assets/images/icon/banner2.png";
+import banner3 from "../../assets/images/icon/banner3.png";
+import banner4 from "../../assets/images/icon/banner4.png";
+import youtube from "../../assets/images/icon/youtube.png";
+import head from "../../assets/images/icon/head.png";
+import track from "../../assets/images/icon/track.png";
+import unlimited from "../../assets/images/icon/unlimited.png";
 
 export default function Hero() {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -21,65 +30,65 @@ export default function Hero() {
   const slides = [
     {
       id: 1,
-      badge: "AI-Powered Learning Platform",
+      badge: { text: "AI-Powered Learning Platform", icon: badge },
       title: "Master Your Exams with LearnInGPT",
       description:
         "Experience personalized learning with our AI assistant. Take your skills from textbook to real-world, and accelerate your learning journey.",
       primaryButton: {
         text: "Train with LearnInGPT",
-        icon: Play,
-        color: "bg-green-500 hover:bg-green-600",
+        icon: banner,
+        color: "bg-[#04AA0B]",
         go: "/topics",
       },
       secondaryButton: {
         text: "Start Exam Simulator",
-        icon: Play,
-        color: "bg-blue-500 hover:bg-blue-600",
-        go: "/quiz",
+        icon: banner2,
+        color: "bg-gradient-to-r from-[#189EFE] to-[#0E5F98]",
+        go: "/topics",
       },
 
       features: [
-        { icon: Play, text: "Quality Video Courses" },
-        { icon: User, text: "Learn with AI" },
-        { icon: MessageCircle, text: "Live Support" },
+        { icon: youtube, text: "Quality Video Courses" },
+        { icon: head, text: "Learn with AI" },
+        // { icon: MessageCircle, text: "Live Support" },
       ],
     },
     {
       id: 2,
-      badge: "Train Your Brain with Smart Tech",
+      badge: { text: "Train Your Brain with Smart Tech", icon: badge2 },
       title: "Practice Smart, Not Hard",
       description:
         "Access hundreds of quizzes with instant feedback, tailored to your skill level.",
       primaryButton: {
         text: "Try AI-Powered Learning",
-        icon: Play,
-        color: "bg-blue-500 hover:bg-blue-600",
-        go: "/dashboard",
+        icon: banner3,
+        color: "bg-gradient-to-r from-[#189EFE] to-[#0E5F98]",
+        go: "/topics",
       },
       secondaryButton: null,
 
       features: [
-        { icon: Play, text: "Quality Video Courses" },
-        { icon: User, text: "Track Your Progress" },
+        { icon: youtube, text: "Quality Video Courses" },
+        { icon: track, text: "Track Your Progress" },
       ],
     },
     {
       id: 3,
-      badge: "Smarter Practice, Higher Scores",
+      badge: { text: "Smarter Practice, Higher Scores", icon: badge3 },
       title: "Track Your Progress",
       description:
         "Monitor your learning and see your growth track from Day One.",
       primaryButton: {
         text: "Create Free Account",
-        icon: User,
-        color: "bg-blue-500 hover:bg-blue-600",
+        icon: banner4,
+        color: "bg-gradient-to-r from-[#189EFE] to-[#0E5F98]",
         go: "/register",
       },
       secondaryButton: null,
 
       features: [
-        { icon: Play, text: "Quality Video Courses" },
-        { icon: MessageCircle, text: "Unlimited Support" },
+        { icon: youtube, text: "Quality Video Courses" },
+        { icon: unlimited, text: "Unlimited Support" },
       ],
     },
   ];
@@ -148,6 +157,9 @@ export default function Hero() {
       restartInterval();
     }, 500);
   };
+  const renderImage = (src) => {
+    return <img src={src} alt="Banner Icon" />;
+  };
 
   return (
     <div
@@ -169,9 +181,9 @@ export default function Hero() {
             {/* Badge */}
             <div className="inline-flex items-center space-x-2 bg-white/80 backdrop-blur-sm rounded-full px-4 py-2 text-sm font-medium text-primary border-blue-100">
               <div className="">
-                <img src={badge || "/placeholder.svg"} alt="" />
+                <img src={currentSlideData.badge.icon || "/placeholder.svg"} alt="" />
               </div>
-              <span>{currentSlideData.badge}</span>
+              <span>{currentSlideData.badge.text}</span>
             </div>
 
             {/* Title */}
@@ -188,18 +200,20 @@ export default function Hero() {
             <div className="flex flex-col sm:flex-row gap-4">
               <Link
                 to={currentSlideData.primaryButton.go}
-                className={`${currentSlideData.primaryButton.color} text-white px-8 py-4 rounded-lg font-semibold flex items-center justify-center space-x-2 transition-all duration-300 transform hover:scale-105 shadow-lg`}
+                className={`${currentSlideData.primaryButton.color} text-white px-8 py-3 rounded-lg font-semibold flex items-center justify-center space-x-2 transition-all duration-300 transform hover:scale-105 shadow-lg`}
               >
-                <currentSlideData.primaryButton.icon size={20} />
+                {renderImage(currentSlideData.primaryButton.icon)}
+                {/* Always render the banner */}
                 <span>{currentSlideData.primaryButton.text}</span>
               </Link>
 
               {currentSlideData.secondaryButton && (
                 <Link
                   to={currentSlideData.secondaryButton.go}
-                  className={`${currentSlideData.secondaryButton.color} text-white px-8 py-4 rounded-lg font-semibold flex items-center justify-center space-x-2 transition-all duration-300 transform hover:scale-105 shadow-lg`}
+                  className={`${currentSlideData.secondaryButton.color} text-white px-8 py-3 rounded-lg font-semibold flex items-center justify-center space-x-2 transition-all duration-300 transform hover:scale-105 shadow-lg`}
                 >
-                  <currentSlideData.secondaryButton.icon size={20} />
+                  {renderImage(currentSlideData.secondaryButton.icon)}
+                  {/* Always render the banner */}
                   <span>{currentSlideData.secondaryButton.text}</span>
                 </Link>
               )}
@@ -259,9 +273,9 @@ export default function Hero() {
         </div>
         <div className=" w-1/2 relative">
           {/* Static Badge 1 - Top Right */}
-          <div className="absolute top-[45%]  transform -translate-y-1/2 -left-24 bg-white/95 backdrop-blur-sm rounded-lg px-4 py-3 shadow-lg z-20">
+          <div className="absolute top-[45%]  transform -translate-y-1/2 -left-24 bg-white/95 backdrop-blur-sm rounded-3xl px-4 py-2 shadow-lg z-20">
             <div className="flex items-center space-x-2">
-              <Play size={16} className="text-red-500 flex-shrink-0" />
+              <img src={youtube} alt="" />
               <span className="text-sm font-medium text-gray-700 whitespace-nowrap overflow-hidden text-ellipsis max-w-[120px] lg:max-w-[150px]">
                 {currentSlideData.features[0]?.text}
               </span>
@@ -269,21 +283,15 @@ export default function Hero() {
           </div>
 
           {/* Static Badge 2 - Vertically Centered */}
-          <div className="absolute top-[55%] transform -translate-y-1/2 -left-16 bg-white/95 backdrop-blur-sm rounded-lg px-4 py-3 shadow-lg z-20">
-            <div className="flex items-center space-x-2">
-              {(() => {
-                const IconComponent =
-                  currentSlideData.features[1]?.icon || User;
-                return (
-                  <IconComponent
-                    size={16}
-                    className="text-blue-500 flex-shrink-0"
-                  />
-                );
-              })()}
-              <span className="text-sm font-medium text-gray-700 whitespace-nowrap overflow-hidden text-ellipsis max-w-[120px] lg:max-w-[150px]">
-                {currentSlideData.features[1]?.text || "Learn with AI"}
-              </span>
+          <div className="absolute top-[55%] transform -translate-y-1/2 -left-16  bg-white/95 backdrop-blur-sm rounded-3xl px-4 py-2 shadow-lg z-20">
+            <div className="space-y-4">
+              <div className="flex items-center space-x-2">
+                {renderImage(currentSlideData.features[1]?.icon)}
+                {/* Always render the image for icons */}
+                <span className="text-sm font-medium text-gray-700">
+                  {currentSlideData.features[1]?.text}
+                </span>
+              </div>
             </div>
           </div>
         </div>

@@ -56,9 +56,9 @@ const KeyFeature = () => {
                 Get instant help from our intelligent chatbot. Ask questions,
                 clarify concepts, and receive personalized explanations.
               </p>
-              <Link to={"/dashboard"}>
+              <Link to={"/topics"}>
                 <div className="text-center">
-                  <Button padding="px-6 py-3" rounded={"xl"}>
+                  <Button padding="px-6 py-2" rounded={"lg"}>
                     Try Assistant
                   </Button>
                 </div>
@@ -79,9 +79,9 @@ const KeyFeature = () => {
                 Practice with adaptive quizzes that adjust to your skill level.
                 Track progress and identify areas for improvement.
               </p>
-              <Link to={"/quiz"}>
+              <Link to={"/topics"}>
                 <div className="text-center">
-                  <Button padding="px-6 py-3" rounded={"xl"}>
+                  <Button padding="px-6 py-2" rounded={"lg"}>
                     Start Exam Simulator
                   </Button>
                 </div>
