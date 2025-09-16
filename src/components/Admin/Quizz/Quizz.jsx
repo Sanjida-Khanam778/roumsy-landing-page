@@ -2,17 +2,29 @@ import { Search } from "lucide-react";
 import QuizManagement from "./AllQuizzes";
 import { useState } from "react";
 import QuizCreator from "./CreateNewQuizz";
+import { EditQuizz } from "./EditQuizz";
 
 export const Quizz = () => {
   const [showBasicInfo, setShowBasicInfo] = useState(false);
+  const [editQuizz, setEditQuizz] = useState(false);
+  const [selectedQuiz, setSelectedQuiz] = useState(null);
 
   const handleCreateClick = () => {
     setShowBasicInfo(true);
+  };
+  const handleEditQuizz = (quiz) => {
+    setSelectedQuiz(quiz);
+    setEditQuizz(true);
   };
 
   // === Conditional Rendering ===
   if (showBasicInfo) {
     return <QuizCreator />;
+  }
+  if (editQuizz && selectedQuiz) {
+    return (
+      <EditQuizz quiz={selectedQuiz} onClose={() => setEditQuizz(false)} />
+    );
   }
 
   const dollarIcon = () => (
@@ -141,7 +153,7 @@ export const Quizz = () => {
       </div>
 
       <div className="py-5 mx-14">
-        <QuizManagement />
+        <QuizManagement handleEditQuizz={handleEditQuizz} />
       </div>
     </div>
   );
