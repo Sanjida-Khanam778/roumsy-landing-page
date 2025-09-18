@@ -52,7 +52,7 @@ const Navbar = () => {
 
   return (
     <div className="text-white font-Poppins">
-      <div className="w-10/12 mx-auto">
+      <div className="mx-auto w-full px-4 sm:px-6 lg:px-0 lg:w-10/12 xl:w-10/12">
         <div className="flex justify-between items-center py-4">
           {/* Logo */}
           <Link to={"/"}>
@@ -61,15 +61,15 @@ const Navbar = () => {
                 location.pathname.includes("profile-dashboard") && "hidden"
               }`}
             >
-              <img src={logo} alt="" className="w-10" />
-              <p className="text-[#011F47] font-bold text-2xl">
+              <img src={logo} alt="" className="w-6 md:w-8 lg:w-10" />
+              <p className="text-[#011F47] font-bold text-lg md:text-xl lg:text-2xl">
                 Learnin<span className="text-primary">GPT</span>
               </p>
             </div>
           </Link>
 
           {/* Desktop Navigation */}
-          <nav className="hidden lg:flex items-center space-x-8">
+          <nav className="hidden lg:flex items-center space-x-4 xl:space-x-8 relative">
             {navItems.map((item) =>
               item.isLanguage ? (
                 <div key={item.name} className="relative">
@@ -131,9 +131,9 @@ const Navbar = () => {
           </nav>
 
           {/* CTA Button and Mobile Menu Toggle */}
-          <div className="flex items-center space-x-4 relative">
+          <div className="flex items-center md:space-x-4 relative">
             {!isAuthenticated ? (
-              <Link to={'/topics'}>
+              <Link to={"/topics"}>
                 <div>
                   <Button rounded="2xl">Start Free</Button>
                 </div>
@@ -194,7 +194,11 @@ const Navbar = () => {
               className="lg:hidden text-white p-2 hover:bg-gray-800 rounded-lg transition-colors"
               onClick={() => setIsMenuOpen(!isMenuOpen)}
             >
-              {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
+              {isMenuOpen ? (
+                <X className="text-black" size={24} />
+              ) : (
+                <Menu className="text-black" size={24} />
+              )}
             </button>
           </div>
         </div>
@@ -206,21 +210,55 @@ const Navbar = () => {
           }`}
         >
           <div className="border-t border-gray-800 py-4">
-            <nav className="flex flex-col space-y-2">
-              {navItems.map((item) => (
-                <Link key={item.name} to={item.href}>
-                  <a
-                    className={`px-4 py-3 rounded-lg transition-all duration-200 ${
-                      item.active && !showLanguagePopup
-                        ? "text-primary bg-blue-900/20 border-l-4 border-blue-400"
-                        : "text-dark hover:text-white hover:bg-gray-800"
-                    }`}
-                    onClick={() => setIsMenuOpen(false)}
-                  >
-                    {item.name}
-                  </a>
-                </Link>
-              ))}
+            <nav className="flex flex-col space-y-2 border justify-center items-start">
+              {navItems.map((item) =>
+                item.isLanguage ? (
+                  <div key={item.name} className="relative">
+                    <button
+                      type="button"
+                      className={`relative transition-all duration-300 group ml-4 ${
+                        item.active ? "text-primary" : "text-dark"
+                      }`}
+                      onClick={() => setShowLanguagePopup((prev) => !prev)} // Toggle the popup
+                    >
+                      {item.name}
+                    </button>
+
+                    {showLanguagePopup && (
+                      <div
+                        className="absolute left-40 -top-32 mt-2 w-40 bg-white rounded-lg shadow-lg z-50 flex flex-col text-left py-3 border border-gray-200"
+                        style={{ minWidth: "140px" }}
+                      >
+                        <button className="flex items-center px-4 py-2 text-black hover:bg-gray-100 text-base gap-2">
+                          <img src={en} alt="" />
+                          English
+                        </button>
+                        <button className="flex items-center px-4 py-2 text-black hover:bg-gray-100 text-base gap-2">
+                          <img src={france} alt="" />
+                          French
+                        </button>
+                        <button className="flex items-center px-4 py-2 text-black hover:bg-gray-100 text-base gap-2">
+                          <img src={spanish} alt="" />
+                          Spanish
+                        </button>
+                      </div>
+                    )}
+                  </div>
+                ) : (
+                  <Link key={item.name} to={item.href}>
+                    <a
+                      className={`px-4 py-3 rounded-lg transition-all duration-200 ${
+                        item.active && !showLanguagePopup
+                          ? "text-primary"
+                          : "text-dark hover:text-white hover:bg-gray-800"
+                      }`}
+                      onClick={() => setIsMenuOpen(false)}
+                    >
+                      {item.name}
+                    </a>
+                  </Link>
+                )
+              )}
             </nav>
           </div>
         </div>

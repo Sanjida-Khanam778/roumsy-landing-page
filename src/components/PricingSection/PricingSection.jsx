@@ -44,7 +44,7 @@ const PricingSection = () => {
   ];
 
   return (
-    <section className="py-16 pb-28 bg-[#F9FAFB] ">
+    <section className="py-10 lg:py-16 pb-10 md:pb-12 lg:pb-28 bg-[#F9FAFB] ">
       <div className="container mx-auto px-6">
         {/* Header */}
         <div className="text-center mb-4">
@@ -56,15 +56,15 @@ const PricingSection = () => {
           </div>
         </div>
 
-        <div className="text-center mb-12">
-          <h2 className="text-3xl font-bold mb-4 text-gray-800">Pricing</h2>
-          <p className="text-gray">
+        <div className="text-center mb-6 md:mb-12">
+          <h2 className="text-xl md:text-3xl font-bold mb-4 text-gray-800">Pricing</h2>
+          <p className="text-gray text-sm md:text-base">
             Flexible AI learning plans for individuals and enterprises.
           </p>
         </div>
 
         {/* Pricing Cards */}
-        <div className="grid md:grid-cols-3 gap-12 mx-auto max-w-6xl relative">
+        <div className="grid md:grid-cols-3 gap-6 md:gap-12 mx-auto max-w-6xl relative">
         <div
           aria-hidden="true"
           className="
@@ -81,7 +81,7 @@ const PricingSection = () => {
             <div
               key={index}
               className={`bg-white z-10 rounded-lg overflow-hidden shadow-lg flex flex-col h-full ${
-                plan.scale ? "transform scale-110" : ""
+                plan.scale ? "md:transform md:scale-110" : ""
               }`}
             >
               {/* Popular Badge */}

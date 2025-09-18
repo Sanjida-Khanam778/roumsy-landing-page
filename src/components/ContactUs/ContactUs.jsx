@@ -56,7 +56,7 @@ const ContactUs = () => {
       setTimeout(() => {
         setIsSubmitted(false);
         setFormData({ name: "", email: "", message: "" });
-      }, );
+      });
     } else {
       setErrors(newErrors);
     }
@@ -72,8 +72,8 @@ const ContactUs = () => {
   }
 
   return (
-    <div className=" bg-[#F9FAFB] rounded-xl py-16">
-      <div className=" max-w-xl mx-auto">
+    <div className="px-6 md:px-0 bg-[#F9FAFB] rounded-xl py-10 md:py-16 ">
+      <div className="max-w-xl mx-auto">
         {/* Header */}
         <div className="text-center mb-6">
           <h2 className="text-2xl font-bold text-gray-800 mb-2">Contact Us</h2>

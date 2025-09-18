@@ -40,7 +40,7 @@ const Footer = () => {
 
               <div className="flex items-center text-gray-700 text-sm">
                 <img src={gmail} alt="" />
-                <span>Georgia.Young@example.Com</span>
+                <span>Georgia.Young@example.com</span>
               </div>
             </div>
 
@@ -162,14 +162,7 @@ const Footer = () => {
                       Terms Of Service
                     </Link>
                   </li>
-                  <li>
-                    <a
-                      href="#"
-                      className="text-gray-700 text-sm hover:text-primary transition-colors"
-                    >
-                      Cookie Policy
-                    </a>
-                  </li>
+                 
                 </ul>
               </div>
             </div>

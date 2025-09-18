@@ -29,26 +29,28 @@ const WhyChooseUs = () => {
   ];
 
   return (
-    <section className="py-28 bg-gray-50 bg-[#F9FAFB]">
-      <div className="w-10/12 mx-auto px-6">
+    <section className="pb-10 md:pb-16 lg:py-28 bg-gray-50 bg-[#F9FAFB]">
+      <div className="md:w-10/12 mx-auto px-6">
         {/* Header */}
-        <div className="text-center mb-12">
+        <div className="text-center mb-6 md:mb-12">
           <div className="inline-flex items-center bg-primary text-white px-4 py-2 rounded-full text-sm mb-4 gap-3">
             <img src={info} alt="" />
             Reason to Choose
           </div>
-          <h2 className="text-3xl font-bold text-gray-800">Why Choose Us!</h2>
+          <h2 className="text-xl md:text-3xl font-bold text-gray-800">
+            Why Choose Us!
+          </h2>
         </div>
-        <img className="mx-auto" src={lines} alt="" />
+        <img className="mx-auto hidden md:block" src={lines} alt="" />
         {/* Timeline Container */}
         <div className="relative mx-auto">
           {/* Timeline Points and Content */}
-          <div className="grid md:grid-cols-3 gap-8 relative w-9/12 mx-auto">
+          <div className="grid md:grid-cols-3 gap-8 relative w-full 2xl:w-9/12 mx-auto">
             {features.map((feature, index) => (
               <div key={index} className="relative">
                 {/* Content Card */}
                 <div
-                  className={`mt-28 ${
+                  className={`${
                     feature.long ? "md:mt-[4px]" : "md:-mt-[70px]"
                   } flex-grow`}
                 >
@@ -66,7 +68,11 @@ const WhyChooseUs = () => {
                       </div>
                     </div>
                     <div>
-                      <img src={feature.image} className="w-24" alt="" />
+                      <img
+                        src={feature.image}
+                        className="w-24 md:hidden lg:w-24"
+                        alt=""
+                      />
                     </div>
                   </div>
                 </div>

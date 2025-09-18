@@ -51,11 +51,11 @@ const Blogs = () => {
       </div>
 
       {/* News Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         {newsArticles.map((article) => (
           <div
             key={article.id}
-            className="bg-white rounded-md shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 border border-gray"
+            className="bg-white rounded-md shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 border border-gray w-full md:w-2/3 lg:w-full mx-auto"
           >
             {/* Image */}
             <div className="relative overflow-hidden mt-10">
