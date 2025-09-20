@@ -44,10 +44,10 @@ const PricingSection = () => {
   ];
 
   return (
-    <section className="py-10 lg:py-16 pb-10 md:pb-12 lg:pb-28 bg-[#F9FAFB] ">
+    <section className="py-5 md:pt-10 lg:pt-10 pb-8 md:pb-12 lg:pb-28 bg-[#F9FAFB] ">
       <div className="container mx-auto px-6">
         {/* Header */}
-        <div className="text-center mb-4">
+        <div className="text-center mb-2 md:mb-4">
           <div className="inline-flex items-center bg-orange-100 text-orange-700 px-3 py-1 rounded-full text-sm">
             <img src={sales} alt="" />
             <span className="ml-2">
@@ -56,15 +56,15 @@ const PricingSection = () => {
           </div>
         </div>
 
-        <div className="text-center mb-6 md:mb-12">
-          <h2 className="text-xl md:text-3xl font-bold mb-4 text-gray-800">Pricing</h2>
+        <div className="text-center mb-3 md:mb-12">
+          <h2 className="text-xl md:text-3xl font-bold mb-2 md:mb-4 text-gray-800">Pricing</h2>
           <p className="text-gray text-sm md:text-base">
             Flexible AI learning plans for individuals and enterprises.
           </p>
         </div>
 
         {/* Pricing Cards */}
-        <div className="grid md:grid-cols-3 gap-6 md:gap-12 mx-auto max-w-6xl relative">
+        <div className="grid md:grid-cols-3 gap-4 md:gap-6 lg:gap-12 mx-auto max-w-6xl relative">
         <div
           aria-hidden="true"
           className="

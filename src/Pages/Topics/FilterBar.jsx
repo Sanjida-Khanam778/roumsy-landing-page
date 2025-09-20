@@ -71,7 +71,7 @@ const FilterBar = () => {
   };
 
   return (
-    <div className="bg-white border-y border-gray/50 py-4 ">
+    <div className="bg-white border-y border-gray/50 py-4">
       <div className="flex flex-col w-10/12 mx-auto">
         <div className="flex items-center justify-between w-full">
           {/* Filters Label */}
@@ -87,7 +87,7 @@ const FilterBar = () => {
           <div className="ml-auto text-sm text-gray-500">3 Courses found</div>
         </div>
         {/* Filter Dropdowns */}
-        <div className="flex items-center gap-10 my-4">
+        <div className="flex flex-wrap justify-center md:justify-start items-center gap-2 md:gap-10 my-4">
           {Object.entries(filters).map(([filterKey, filter]) => (
             <div key={filterKey} className="relative">
               <button

@@ -98,14 +98,14 @@ export default function AllPrograms({ limit }) {
   ];
 
   return (
-    <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+    <div className="grid md:grid-cols-3 gap-4 lg:gap-8 max-w-6xl px-6 lg:px-0 mx-auto">
       {programs.map((program, index) => (
         <div
           key={index}
           className="bg-white rounded-xl border border-gray/20 hover:shadow-xl transition-shadow flex flex-col h-full"
         >
           <div className="p-4 pb-0">
-            <img src={program.bg} alt="" />
+            <img src={program.bg} className="mx-auto" alt="" />
           </div>
 
           <div className="flex flex-col flex-grow p-4 pb-0">
