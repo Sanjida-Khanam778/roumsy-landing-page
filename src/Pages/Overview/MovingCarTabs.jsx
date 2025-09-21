@@ -5,7 +5,7 @@ import tab2 from "../../assets/images/icon/tab2.png";
 import tab3 from "../../assets/images/icon/tab3.png";
 import tab4 from "../../assets/images/icon/tab4.png";
 import tab5 from "../../assets/images/icon/tab5.png";
-import { CheckCircle, Star } from "lucide-react";
+import { Star } from "lucide-react";
 import learning1 from "../../assets/images/learning1.png";
 import Dashboard from "../Dashboard/Dashboard";
 import guided from "../../assets/images/guided.png";
@@ -16,7 +16,6 @@ import material from "../../assets/images/icon/material.png";
 import QuizInterface from "../QuizInterface/QuizInterface";
 import CourseCompletionCertificate from "./CourseCompletionCertificate";
 
-import { CiSearch } from "react-icons/ci";
 import { RiMenuSearchLine } from "react-icons/ri";
 const MovingCarTabs = () => {
   const [selectedSkillLevel, setSelectedSkillLevel] = useState("");
@@ -432,7 +431,7 @@ const MovingCarTabs = () => {
 
   return (
     <div className="bg-[#F4F8FD]">
-      <div className="text-center py-8  max-w-7xl mx-auto">
+      <div className="text-center pt-8 max-w-7xl mx-auto">
         <button className="bg-[#E8F5FF] border border-gray/20 px-6 py-2 rounded-full shadow-sm text-sm font-medium text-gray-700 hover:bg-gray-100 transition">
           Start Your Journey
         </button>{" "}
@@ -442,8 +441,8 @@ const MovingCarTabs = () => {
       </div>
 
       {/* Main Card */}
-      <div className=" rounded-lg overflow-hidden  max-w-7xl mx-auto">
-        <div className="flex gap-8 mt-10">
+      <div className=" rounded-lg overflow-hidden  max-w-7xl mx-auto p-6">
+        <div className="flex gap-8 mt-5 xl:mt-10">
           {/* Left Side - Blue Section with Illustration */}
           <img className="h-40" src={learning1} alt="" />
 
@@ -480,7 +479,7 @@ const MovingCarTabs = () => {
       </div>
       <div className="max-w-7xl mx-auto p-6">
         {/* Tab Navigation */}
-        <div className="relative  rounded-lg p-6 mb-6">
+        <div className="relative  rounded-lg p-0 mb-6">
           {/* Tab Icons and Labels */}
           <div className="flex justify-around mb-8 w-full ">
             <div className="flex gap-8 w-full justify-evenly">

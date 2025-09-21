@@ -55,7 +55,7 @@ const Documentation = () => {
     {
       id: 2,
       title: "Introduction to Immigration Systems",
-      isUnlocked: false,
+      isUnlocked: true,
       isActive: false,
     },
     {
