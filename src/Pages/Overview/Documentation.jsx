@@ -8,6 +8,8 @@ import Button from "../../components/Shared/Button";
 
 const Documentation = () => {
   const [showAlert, setShowAlert] = useState(false);
+  const [activeLesson, setActiveLesson] = useState(1);
+
   const plans = [
     {
       title: "Exam Simulator Only",
@@ -45,34 +47,43 @@ const Documentation = () => {
       scale: false,
     },
   ];
+
   const lessons = [
     {
       id: 1,
-      title: "Introduction to Immigration Systems",
+      title: "Immigration Overview PDF",
       isUnlocked: true,
       isActive: true,
+      type: "pdf",
+      content: "https://example.com/uploads/lesson1.pdf",
     },
     {
       id: 2,
-      title: "Introduction to Immigration Systems",
+      title: "Immigration Intro Video",
       isUnlocked: true,
       isActive: false,
+      type: "video",
+      content: "https://youtu.be/pLnN3ooJcqw?si=Rm0WRFYJnWkhpZ4T",
     },
     {
       id: 3,
-      title: "Introduction to Immigration Systems",
-      isUnlocked: false,
+      title: "Immigration PPT Slides",
+      isUnlocked: true,
       isActive: false,
+      type: "ppt",
+      url: "/sample2.pptx",
     },
-    {
-      id: 4,
-      title: "Introduction to Immigration Systems",
-      isUnlocked: false,
-      isActive: false,
-    },
+    // {
+    //   id: 4,
+    //   title: "Immigration Word Doc",
+    //   isUnlocked: true,
+    //   isActive: false,
+    //   type: "doc",
+    //   url: "/sample/doc.docx",
+    // },
     {
       id: 5,
-      title: "Introduction to Immigration Systems",
+      title: "Locked Lesson",
       isUnlocked: false,
       isActive: false,
     },
@@ -83,9 +94,18 @@ const Documentation = () => {
   };
 
   const handleMaybeLater = () => {
-    // Allow chat but track the chats
     setShowAlert(false);
   };
+
+  const handleLessonClick = (lesson) => {
+    if (!lesson.isUnlocked) {
+      setShowAlert(true);
+      return;
+    }
+    setActiveLesson(lesson.id);
+  };
+
+  const currentLesson = lessons.find((l) => l.id === activeLesson);
 
   return (
     <div className="flex bg-white">
@@ -95,16 +115,22 @@ const Documentation = () => {
           {lessons.map((lesson) => (
             <div
               key={lesson.id}
-              className={`p-4 rounded cursor-pointer transition-colors ${
-                lesson.isActive ? "" : "hover:bg-gray-100"
+              className={`p-4 cursor-pointer transition-colors ${
+                lesson.id === activeLesson ? "bg-white" : "hover:bg-gray-100"
               }`}
-              onClick={lesson.isUnlocked ? undefined : handleLockedLessonClick}
+              onClick={() =>
+                lesson.isUnlocked
+                  ? handleLessonClick(lesson)
+                  : handleLockedLessonClick()
+              }
             >
               <div className="flex items-center justify-between">
                 <div className="flex-1">
                   <h3
                     className={`font-medium ${
-                      lesson.isActive ? "text-[#1E90FF]" : "text-gray"
+                      lesson.id === activeLesson
+                        ? "text-[#1E90FF]"
+                        : "text-gray"
                     }`}
                   >
                     {lesson.title}
@@ -123,37 +149,65 @@ const Documentation = () => {
       <div className="flex-1 p-8">
         <div className="max-w-4xl h-full">
           <h1 className="text-3xl font-bold text-gray-900 mb-8">
-            Introduction to Immigration Systems
+            {currentLesson?.title}
           </h1>
 
-          <div className="flex flex-col justify-between">
-            <div className="flex-grow">
-              <ul className="space-y-4 text-gray-700 list-disc list-inside">
-                <li>
-                  Overview of popular immigration destinations (e.g., Canada,
-                  Australia, UK)
-                </li>
-                <li>
-                  Understanding visa categories, eligibility, and documentation
-                  basics
-                </li>
-              </ul>
+          {/* PDF */}
+          {currentLesson?.type === "pdf" && (
+            <div className="w-full h-full rounded-lg overflow-hidden">
+              <iframe
+                src="https://docs.google.com/gview?url=https://www.adobe.com/support/products/enterprise/knowledgecenter/media/c4611_sample_explain.pdf&embedded=true"
+                width="100%"
+                height="500px"
+              ></iframe>
             </div>
+          )}
 
-            {/* <div className="pt-8 ">
-              <div className="flex justify-between items-center">
-                <button className="bg-gray-200 text-gray-600 px-6 py-2 rounded-lg cursor-not-allowed">
-                  Previous
-                </button>
-                <button
-                  onClick={handleLockedLessonClick}
-                  className="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition-colors"
-                >
-                  Next Lesson
-                </button>
-              </div>
-            </div> */}
-          </div>
+          {/* PPT */}
+
+          {currentLesson?.type === "ppt" && (
+            <div className="w-full h-full rounded-lg overflow-hidden">
+              <iframe
+                src={`https://docs.google.com/presentation/d/1bNVVeNyMtZnOey1m25w1uY7AzZi1jZOn/preview`}
+                width="100%"
+                height="500px"
+                frameBorder="0"
+                title="PPT Preview"
+                allow="fullscreen"
+              ></iframe>
+            </div>
+          )}
+
+          {/* DOC */}
+          {/* {currentLesson?.type === "doc" && (
+            <iframe
+              src={`https://docs.google.com/document/d/1sVHPHYNJFEesnrHFYUyYBIQFxfqZwmSmDQctEjza2vk/edit?usp=sharing`}
+              width="100%"
+              height="500px"
+            ></iframe>
+          )} */}
+
+          {/* Video */}
+          {currentLesson?.type === "video" && (
+            <div className="aspect-w-16 aspect-h-9">
+              <iframe
+                width="100%"
+                height="500px"
+                src="https://www.youtube.com/embed/pLnN3ooJcqw?si=Rm0WRFYJnWkhpZ4T"
+                frameborder="0"
+                title="YouTube video player"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                referrerpolicy="strict-origin-when-cross-origin"
+                allowFullScreen
+              ></iframe>
+            </div>
+          )}
+
+          {!currentLesson?.type && (
+            <p className="text-gray-600">
+              This lesson is locked or not available.
+            </p>
+          )}
         </div>
       </div>
 
@@ -181,14 +235,11 @@ const Documentation = () => {
                       plan.scale ? "transform scale-100" : ""
                     }`}
                   >
-                    {/* Popular Badge */}
                     {plan.popular && (
                       <div className="absolute top-4 right-4 bg-[#FFB563] text-white px-3 py-1 rounded-full text-xs font-medium z-10">
                         Best Deal
                       </div>
                     )}
-
-                    {/* Header with Icon */}
                     <div
                       className={`${plan.color} p-8 text-white text-center relative flex flex-col items-center`}
                     >
@@ -197,10 +248,7 @@ const Documentation = () => {
                         {plan.title}
                       </h3>
                     </div>
-
-                    {/* Content */}
                     <div className="p-6 flex flex-col flex-grow ">
-                      {/* Features */}
                       <div className="flex-1">
                         {plan.features.map((feature, featureIndex) => (
                           <div
@@ -214,8 +262,6 @@ const Documentation = () => {
                           </div>
                         ))}
                       </div>
-
-                      {/* Pricing */}
                       <div className="mb-4 flex-1">
                         {plan.originalPrice && (
                           <div className="text-gray line-through text-sm mb-1">
@@ -229,8 +275,6 @@ const Documentation = () => {
                           {plan.period}
                         </div>
                       </div>
-
-                      {/* Button - Pushed to bottom */}
                       <div className="mt-auto">
                         <Button rounded="lg">Choose Plan</Button>
                       </div>
@@ -238,8 +282,6 @@ const Documentation = () => {
                   </div>
                 ))}
               </div>
-
-              {/* Maybe Later Button */}
               <div className="text-center my-6 border border-gray/50 rounded-md py-3 w-9/12 mx-auto">
                 <button
                   onClick={handleMaybeLater}

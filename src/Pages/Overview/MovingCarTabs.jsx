@@ -10,14 +10,13 @@ import learning1 from "../../assets/images/learning1.png";
 import Dashboard from "../Dashboard/Dashboard";
 import guided from "../../assets/images/guided.png";
 import free from "../../assets/images/free.png";
-import Documentation from "./Documentation";
 import Button from "../../components/Shared/Button";
 import material from "../../assets/images/icon/material.png";
 import QuizInterface from "../QuizInterface/QuizInterface";
 import CourseCompletionCertificate from "./CourseCompletionCertificate";
-
 import { RiMenuSearchLine } from "react-icons/ri";
-const MovingCarTabs = () => {
+import Documentation from "./Documentation";
+export default function MovingCarTabs () {
   const [selectedSkillLevel, setSelectedSkillLevel] = useState("");
   const [selectedMode, setSelectedMode] = useState("");
 
@@ -552,4 +551,4 @@ const MovingCarTabs = () => {
   );
 };
 
-export default MovingCarTabs;
+
