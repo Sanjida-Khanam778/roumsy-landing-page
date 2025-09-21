@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { CheckCircle, XCircle } from "lucide-react";
-import { useNavigate } from "react-router-dom";
+import { Link, NavLink, useNavigate, useParams } from "react-router-dom";
 import cross from "../../assets/images/cross.png";
 import Button from "../../components/Shared/Button";
 import aiHelp from "../../assets/images/aiHelp.png";
@@ -9,11 +9,13 @@ import Swal from "sweetalert2";
 import ReactStars from "react-stars";
 import { X } from "lucide-react"; // <-- import cross icon
 const QuizResultPage = () => {
+  console.log("result page");
   // Fix: clicking a tag should open the review modal
   const handleTagClick = (tag) => {
     setShowReviewModal(true);
     setReviewText(tag); // Optionally prefill with tag text
   };
+  
   const [showReviewModal, setShowReviewModal] = useState(false); // To manage the review popup
   const [reviewText, setReviewText] = useState(""); // To hold the review text
   const [rating, setRating] = useState(5); // Default rating is 5
@@ -94,7 +96,7 @@ const QuizResultPage = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[#575555]/5 py-8 px-4">
+    <div className="min-h-screen w-full bg-[#575555]/5 py-8 px-4">
       <div className="max-w-4xl mx-auto">
         {/* Result Card */}
         <div className="overflow-hidden">
@@ -207,12 +209,18 @@ const QuizResultPage = () => {
                   Get AI Help
                 </Button>
               </div>
-              <div onClick={handleRetakeQuiz} className="relative">
-                <img src={retake} className="absolute bottom-0 left-2" alt="" />
-                <button className="flex items-center justify-center gap-3 pl-20 border border-gray/50 text-black px-6 py-3 rounded-lg font-medium transition-colors">
-                  Retake Quiz
-                </button>
-              </div>
+              <NavLink to={"/quiz"}>
+                <div className="relative">
+                  <img
+                    src={retake}
+                    className="absolute bottom-0 left-2"
+                    alt=""
+                  />
+                  <button className="flex items-center justify-center gap-3 pl-20 border border-gray/50 text-black px-6 py-3 rounded-lg font-medium transition-colors">
+                    Retake Quiz
+                  </button>
+                </div>
+              </NavLink>
             </div>
           </div>
 

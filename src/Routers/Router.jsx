@@ -28,6 +28,7 @@ import Certificates from "../Pages/Home/Certificates";
 import { UserAcc } from "../Pages/Home/UserAcc";
 import Plan from "../Pages/Home/Plan";
 import Form from "../components/BecomeInstructor/Form";
+import QuizStart from "../Pages/QuizInterface/QuizStart";
 
 export const router = createBrowserRouter([
   {
@@ -46,7 +47,7 @@ export const router = createBrowserRouter([
     children: [
       {
         path: "/quiz",
-        element: <QuizInterface />,
+        element: <QuizStart  />,
       },
       {
         path: "/quiz-result",

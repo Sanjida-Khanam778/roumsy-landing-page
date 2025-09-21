@@ -15,9 +15,11 @@ import TestimonialSlider from "../../components/TestimonialSlider/TestimonialSli
 import Logo from "../../components/Logo/Logo";
 import ContactUs from "../../components/ContactUs/ContactUs";
 import Blogs from "../../components/Blogs/Blogs";
+import { ScrollRestoration } from "react-router-dom";
 export default function Home() {
   return (
     <div className="font-Poppins">
+      <ScrollRestoration />
       <ContactBar />
       <Navbar />
       <Hero />

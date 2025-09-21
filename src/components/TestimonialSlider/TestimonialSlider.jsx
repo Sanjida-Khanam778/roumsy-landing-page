@@ -101,7 +101,7 @@ const TestimonialSlider = () => {
       />
       <div
         aria-hidden="true"
-        className="pointer-events-none hidden md:block absolute bottom-0 sm:bottom-10 lg:top-32 right-0 sm:right-0 lg:right-44 w-[320px] h-[320px] sm:w-[420px] sm:h-[420px] lg:w-[320px] lg:h-[320px] rounded-full border-[10px] sm:border-[12px] lg:border-[36px] border-circle/50"
+        className="pointer-events-none hidden xl:block absolute bottom-0 sm:bottom-10 lg:top-32 right-0 sm:right-0 lg:right-44 w-[320px] h-[320px] sm:w-[420px] sm:h-[420px] lg:w-[320px] lg:h-[320px] rounded-full border-[10px] sm:border-[12px] lg:border-[36px] border-circle/50"
       />
       <div className="flex justify-center mb-6 z-10 relative">
         <div className="inline-flex items-center space-x-2 bg-primary/10 border border-blue-100 backdrop-blur-sm rounded-full px-4 py-2 text-sm font-medium text-primary">

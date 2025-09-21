@@ -1,16 +1,16 @@
 import React, { useState } from "react";
 import { Clock, ChevronLeft, ChevronRight } from "lucide-react";
-import { Navigate, useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import QuizResultPage from "./QuizResultPage";
 
 const QuizInterface = () => {
   const location = useLocation();
-  console.log(location.pathname.includes("overview"));
+  console.log(location.pathname)
+  const navigate = useNavigate();
   const [component, setComponent] = useState(false);
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [selectedAnswers, setSelectedAnswers] = useState({});
   const [timeRemaining, setTimeRemaining] = useState(15 * 60); // 15 minutes in seconds
-  const navigate = useNavigate();
   // Sample questions data
   const questions = [
     {
@@ -93,14 +93,12 @@ const QuizInterface = () => {
 
   const handleSubmit = () => {
     setComponent(true);
+    navigate("/quiz-result");
   };
 
-  if (component) {
-    return <QuizResultPage />;
-  }
   return (
-    <div className=" bg-gray-50 py-8 px-4">
-      <div className="max-w-4xl mx-auto">
+    <div className="bg-gray-50 py-8 px-4 w-full">
+      <div className="max-w-4xl w-full mx-auto">
         {/* Progress Bar */}
         <div className="mb-8">
           <div className="flex items-center justify-between mb-2">

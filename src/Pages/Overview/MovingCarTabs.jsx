@@ -16,7 +16,8 @@ import QuizInterface from "../QuizInterface/QuizInterface";
 import CourseCompletionCertificate from "./CourseCompletionCertificate";
 import { RiMenuSearchLine } from "react-icons/ri";
 import Documentation from "./Documentation";
-export default function MovingCarTabs () {
+import { ScrollRestoration } from "react-router-dom";
+export default function MovingCarTabs() {
   const [selectedSkillLevel, setSelectedSkillLevel] = useState("");
   const [selectedMode, setSelectedMode] = useState("");
 
@@ -430,10 +431,11 @@ export default function MovingCarTabs () {
 
   return (
     <div className="bg-[#F4F8FD]">
+      <ScrollRestoration />
       <div className="text-center pt-8 max-w-7xl mx-auto">
         <button className="bg-[#E8F5FF] border border-gray/20 px-6 py-2 rounded-full shadow-sm text-sm font-medium text-gray-700 hover:bg-gray-100 transition">
           Start Your Journey
-        </button>{" "}
+        </button>
         <h1 className="text-3xl font-bold text-gray-900 mt-2">
           Topic Overview
         </h1>
@@ -485,7 +487,10 @@ export default function MovingCarTabs () {
               {tabs.map((tab, index) => (
                 <button
                   key={tab.id}
-                  onClick={() => setActiveTab(index)}
+                  onClick={() => {
+                    setActiveTab(index);
+                    setStartQuiz(false);
+                  }}
                   className={`flex flex-col items-center space-y-2 transition-all duration-300`}
                 >
                   {/* Icon Circle */}
@@ -549,6 +554,4 @@ export default function MovingCarTabs () {
       </div>
     </div>
   );
-};
-
-
+}

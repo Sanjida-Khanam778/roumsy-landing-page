@@ -32,7 +32,7 @@ const AboutSection = () => {
   const { title, text } = getContent();
 
   return (
-    <div className="flex flex-col md:flex-row items-center justify-around md:p-6 bg-gray-100 lg:w-10/12 mx-auto mt-10">
+    <div className="flex flex-col lg:flex-row items-center justify-around md:p-6 bg-gray-100 lg:w-10/12 mx-auto mt-10">
       {/* Image Placeholder 1 */}
         <div className=" bg-gray-300 rounded-lg overflow-hidden">
           <img
