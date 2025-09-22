@@ -331,7 +331,7 @@ export default function MovingCarTabs() {
                 Ask questions about the course material. 3 free messages
                 remaining.
               </p>
-              <Dashboard tab={true} />
+              <Dashboard tab={true} embedded={true} />
             </div>
           ) : (
             <div className="max-w-4xl w-full">
