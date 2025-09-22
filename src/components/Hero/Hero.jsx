@@ -200,7 +200,7 @@ export default function Hero() {
             <div className="flex flex-col sm:flex-row gap-4">
               <Link
                 to={currentSlideData.primaryButton.go}
-                className={`${currentSlideData.primaryButton.color} text-white px-8 py-3 rounded-lg font-semibold flex items-center justify-center space-x-2 transition-all duration-300 transform hover:scale-105 shadow-lg`}
+                className={`${currentSlideData.primaryButton.color} text-white px-8 xl:px-4 py-3 rounded-lg font-semibold flex items-center justify-center space-x-2 transition-all duration-300 transform hover:scale-105 shadow-lg`}
               >
                 {renderImage(currentSlideData.primaryButton.icon)}
                 {/* Always render the banner */}
@@ -210,7 +210,7 @@ export default function Hero() {
               {currentSlideData.secondaryButton && (
                 <Link
                   to={currentSlideData.secondaryButton.go}
-                  className={`${currentSlideData.secondaryButton.color} text-white px-8 py-3 rounded-lg font-semibold flex items-center justify-center space-x-2 transition-all duration-300 transform hover:scale-105 shadow-lg`}
+                  className={`${currentSlideData.secondaryButton.color} text-white px-8 xl:px-4 py-3 rounded-lg font-semibold flex items-center justify-center space-x-2 transition-all duration-300 transform hover:scale-105 shadow-lg`}
                 >
                   {renderImage(currentSlideData.secondaryButton.icon)}
                   {/* Always render the banner */}
