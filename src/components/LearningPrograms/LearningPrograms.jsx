@@ -146,8 +146,8 @@ const LearningPrograms = () => {
     },
   ];
   const infinitePrograms = [...programs, ...programs, ...programs, ...programs];
-  const totalSlides = Math.ceil(programs.length / 3);
   const [screenSize, setScreenSize] = useState("desktop");
+  const totalSlides = Math.ceil(programs.length / 3);
   useEffect(() => {
     const handleResize = () => {
       if (window.innerWidth <= 640) {
@@ -183,7 +183,7 @@ const LearningPrograms = () => {
     clearInterval(intervalRef.current);
     intervalRef.current = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % (totalSlides * 3));
-    }, 3000);
+    }, 3000); // Always 3 seconds
   };
 
   // --- Manual navigation handlers ---
@@ -206,19 +206,6 @@ const LearningPrograms = () => {
       restartInterval();
     }, 500);
   };
-  // const programsToDisplay = ;
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentSlide((prev) => {
-        if (prev >= totalSlides * 2) {
-          return 0;
-        }
-        return prev + 1;
-      });
-    }, 3000);
-
-    return () => clearInterval(interval);
-  }, [totalSlides]);
 
   const nextSlide = () => {
     setCurrentSlide((prev) => {
