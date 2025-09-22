@@ -4,8 +4,6 @@ import { useLocation, useNavigate } from "react-router-dom";
 import QuizResultPage from "./QuizResultPage";
 
 const QuizInterface = () => {
-  const location = useLocation();
-  console.log(location.pathname)
   const navigate = useNavigate();
   const [component, setComponent] = useState(false);
   const [currentQuestion, setCurrentQuestion] = useState(0);
@@ -97,7 +95,7 @@ const QuizInterface = () => {
   };
 
   return (
-    <div className="bg-gray-50 py-8 px-4 w-full">
+    <div className="bg-gray-50 py-4 md:py-8 px-4 w-full">
       <div className="max-w-4xl w-full mx-auto">
         {/* Progress Bar */}
         <div className="mb-8">
@@ -137,7 +135,7 @@ const QuizInterface = () => {
           </div>
 
           {/* Question Content */}
-          <div className="p-8">
+          <div className="p-4 md:p-8">
             <h3 className="text-lg font-medium text-gray-800 mb-6 leading-relaxed">
               {questions[currentQuestion].question}
             </h3>

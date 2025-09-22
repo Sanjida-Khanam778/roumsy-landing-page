@@ -51,7 +51,7 @@ const Navbar = () => {
   ];
 
   return (
-    <div className="text-white font-Poppins">
+    <div className="font-Poppins">
       <div className="mx-auto w-full px-4 sm:px-6 lg:px-0 lg:w-10/12 xl:w-10/12">
         <div className="flex justify-between items-center py-4">
           {/* Logo */}

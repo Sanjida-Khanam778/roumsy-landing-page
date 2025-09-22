@@ -15,7 +15,7 @@ const QuizResultPage = () => {
     setShowReviewModal(true);
     setReviewText(tag); // Optionally prefill with tag text
   };
-  
+
   const [showReviewModal, setShowReviewModal] = useState(false); // To manage the review popup
   const [reviewText, setReviewText] = useState(""); // To hold the review text
   const [rating, setRating] = useState(5); // Default rating is 5
@@ -96,25 +96,27 @@ const QuizResultPage = () => {
   };
 
   return (
-    <div className="min-h-screen w-full bg-[#575555]/5 py-8 px-4">
+    <div className="min-h-screen w-full bg-[#575555]/5 py-4 md:py-8 px-4">
       <div className="max-w-4xl mx-auto">
         {/* Result Card */}
         <div className="overflow-hidden">
           {/* Header */}
           <div className="flex items-center flex-col justify-center text-center relative">
-            <img src={cross} alt="" />
-            <h1 className="text-3xl lg:text-4xl font-bold mb-2">
+            <img src={cross} className="w-16 md:w-auto" alt="" />
+            <h1 className="text-xl md:text-3xl lg:text-4xl font-bold mb-2">
               Quiz Complete!
             </h1>
             <p className="text-gray">Here are your results</p>
           </div>
 
           {/* Score Section */}
-          <div className="my-4 text-center">
-            <div className={`text-6xl font-bold mb-2 text-primary`}>
+          <div className="my-2 md:my-4 text-center">
+            <div
+              className={`text-4xl md:text-6xl font-bold md:mb-2 text-primary`}
+            >
               {quizResults.score}%
             </div>
-            <p className="text-gray-600 my-4">
+            <p className="text-gray-600 my-2 md:my-4">
               You got {quizResults.correctAnswers} out of{" "}
               {quizResults.totalQuestions} questions correct
             </p>
@@ -124,7 +126,7 @@ const QuizResultPage = () => {
           </div>
 
           {/* Questions Review */}
-          <div className="p-8">
+          <div className="p-4 md:p-8">
             <h3 className="text-lg font-semibold text-gray-800 mb-6">
               Question Review
             </h3>
@@ -191,19 +193,19 @@ const QuizResultPage = () => {
           </div>
 
           {/* Action Buttons */}
-          <div className="p-8 bg-gray-50">
+          <div className="p-4 md:p-8 bg-gray-50">
             <div className="text-center mb-6">
               <p className="text-primary font-medium mb-4">
                 "Let's review the sections you struggled with."
               </p>
             </div>
 
-            <div className="flex flex-col sm:flex-row gap-4 justify-center pt-8">
+            <div className="flex flex-col items-center sm:flex-row gap-8 sm:gap-4 justify-center pt-4 md:pt-8">
               <div onClick={handleGetAIHelp} className="relative">
-                <img src={aiHelp} className="absolute bottom-0 left-2" alt="" />
+                <img src={aiHelp} className="absolute bottom-0 left-2 w-16 md:w-auto" alt="" />
                 <Button
                   rounded="lg"
-                  padding="pl-24 pr-4 py-3"
+                  padding="pl-20 md:pl-24 pr-4 py-2 md:py-3"
                   onClick={() => setShowReviewModal(true)}
                 >
                   Get AI Help
@@ -213,10 +215,10 @@ const QuizResultPage = () => {
                 <div className="relative">
                   <img
                     src={retake}
-                    className="absolute bottom-0 left-2"
+                    className="absolute bottom-0 left-2 w-12 md:w-auto"
                     alt=""
                   />
-                  <button className="flex items-center justify-center gap-3 pl-20 border border-gray/50 text-black px-6 py-3 rounded-lg font-medium transition-colors">
+                  <button className="flex items-center justify-center gap-3 pl-20 border border-gray/50 text-black px-6 py-2 md:py-3 rounded-lg font-medium transition-colors">
                     Retake Quiz
                   </button>
                 </div>
