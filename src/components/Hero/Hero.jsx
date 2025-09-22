@@ -188,19 +188,19 @@ export default function Hero() {
 
             {/* Title */}
             <div className="space-y-4">
-              <h1 className="text-4xl lg:text-5xl xl:text-6xl font-bold text-gray-900 leading-tight">
+              <h1 className="text-2xl lg:text-4xl xl:text-6xl font-bold text-gray-900 leading-tight">
                 {currentSlideData.title}
               </h1>
-              <p className="text-lg lg:text-xl text-gray-600 leading-relaxed max-w-lg">
+              <p className="text-base lg:text-xl text-gray-600 leading-relaxed max-w-lg md:text-base">
                 {currentSlideData.description}
               </p>
             </div>
 
             {/* Buttons */}
-            <div className="flex flex-col sm:flex-row gap-4">
+            <div className="flex flex-col md:flex-row gap-4">
               <Link
                 to={currentSlideData.primaryButton.go}
-                className={`${currentSlideData.primaryButton.color} text-white px-8 xl:px-4 py-3 rounded-lg font-semibold flex items-center justify-center space-x-2 transition-all duration-300 transform hover:scale-105 shadow-lg`}
+                className={`${currentSlideData.primaryButton.color} text-white px-2 xl:px-3 2xl:px-4 py-3 rounded-lg font-semibold flex items-center justify-center space-x-2 transition-all duration-300 transform hover:scale-105 shadow-lg`}
               >
                 {renderImage(currentSlideData.primaryButton.icon)}
                 {/* Always render the banner */}
@@ -210,7 +210,7 @@ export default function Hero() {
               {currentSlideData.secondaryButton && (
                 <Link
                   to={currentSlideData.secondaryButton.go}
-                  className={`${currentSlideData.secondaryButton.color} text-white px-8 xl:px-4 py-3 rounded-lg font-semibold flex items-center justify-center space-x-2 transition-all duration-300 transform hover:scale-105 shadow-lg`}
+                  className={`${currentSlideData.secondaryButton.color} text-white px-2 xl:px-3 2xl:px-4 py-3 rounded-lg font-semibold flex items-center justify-center space-x-2 transition-all duration-300 transform hover:scale-105 shadow-lg`}
                 >
                   {renderImage(currentSlideData.secondaryButton.icon)}
                   {/* Always render the banner */}

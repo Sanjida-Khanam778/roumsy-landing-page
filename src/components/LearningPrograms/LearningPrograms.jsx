@@ -4,21 +4,25 @@ import { BookOpen, Users } from "lucide-react";
 import learning1 from "../../assets/images/learning1.png";
 import learning2 from "../../assets/images/learning2.png";
 import learning3 from "../../assets/images/learning3.png";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { Link } from "react-router-dom";
 import traind from "../../assets/images/icon/traind.png";
 import startd from "../../assets/images/icon/startd.png";
 import trainw from "../../assets/images/icon/trainw.png";
 import startw from "../../assets/images/icon/startw.png";
+import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
+
 const LearningPrograms = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
-
+  const [isAnimating, setIsAnimating] = useState(false);
+  const intervalRef = useRef(null);
+  
   const programs = [
     {
       bg: learning1,
       title: "Immigration & Language Preparation",
       subtitle:
-        "Master language skills, ace your exams, and get expert guidance for a smooth immigration journey.",
+      "Master language skills, ace your exams, and get expert guidance for a smooth immigration journey.",
       image: "/api/placeholder/300/200",
       rating: 4.8,
       students: "2.5k students",
@@ -32,7 +36,7 @@ const LearningPrograms = () => {
       bg: learning2,
       title: "Project Management",
       subtitle:
-        "Our courses help you handle real-world projects using proven frameworks like Scrum and PMP.",
+      "Our courses help you handle real-world projects using proven frameworks like Scrum and PMP.",
       image: "/api/placeholder/300/200",
       rating: 4.9,
       students: "3.2k students",
@@ -46,7 +50,7 @@ const LearningPrograms = () => {
       bg: learning3,
       title: "Tech & Development",
       subtitle:
-        "Master language skills, ace your exams, and get expert guidance for a smooth immigration journey.",
+      "Master language skills, ace your exams, and get expert guidance for a smooth immigration journey.",
       image: "/api/placeholder/300/200",
       rating: 4.7,
       students: "1.8k students",
@@ -60,7 +64,7 @@ const LearningPrograms = () => {
       bg: learning1,
       title: "Immigration & Language Preparation",
       subtitle:
-        "Master language skills, ace your exams, and get expert guidance for a smooth immigration journey.",
+      "Master language skills, ace your exams, and get expert guidance for a smooth immigration journey.",
       image: "/api/placeholder/300/200",
       rating: 4.8,
       students: "2.5k students",
@@ -74,7 +78,7 @@ const LearningPrograms = () => {
       bg: learning2,
       title: "Project Management",
       subtitle:
-        "Our courses help you handle real-world projects using proven frameworks like Scrum and PMP.",
+      "Our courses help you handle real-world projects using proven frameworks like Scrum and PMP.",
       image: "/api/placeholder/300/200",
       rating: 4.9,
       students: "3.2k students",
@@ -88,7 +92,7 @@ const LearningPrograms = () => {
       bg: learning3,
       title: "Tech & Development",
       subtitle:
-        "Master language skills, ace your exams, and get expert guidance for a smooth immigration journey.",
+      "Master language skills, ace your exams, and get expert guidance for a smooth immigration journey.",
       image: "/api/placeholder/300/200",
       rating: 4.7,
       students: "1.8k students",
@@ -102,7 +106,7 @@ const LearningPrograms = () => {
       bg: learning1,
       title: "Immigration & Language Preparation",
       subtitle:
-        "Master language skills, ace your exams, and get expert guidance for a smooth immigration journey.",
+      "Master language skills, ace your exams, and get expert guidance for a smooth immigration journey.",
       image: "/api/placeholder/300/200",
       rating: 4.8,
       students: "2.5k students",
@@ -116,7 +120,7 @@ const LearningPrograms = () => {
       bg: learning2,
       title: "Project Management",
       subtitle:
-        "Our courses help you handle real-world projects using proven frameworks like Scrum and PMP.",
+      "Our courses help you handle real-world projects using proven frameworks like Scrum and PMP.",
       image: "/api/placeholder/300/200",
       rating: 4.9,
       students: "3.2k students",
@@ -130,7 +134,7 @@ const LearningPrograms = () => {
       bg: learning3,
       title: "Tech & Development",
       subtitle:
-        "Master language skills, ace your exams, and get expert guidance for a smooth immigration journey.",
+      "Master language skills, ace your exams, and get expert guidance for a smooth immigration journey.",
       image: "/api/placeholder/300/200",
       rating: 4.7,
       students: "1.8k students",
@@ -142,6 +146,7 @@ const LearningPrograms = () => {
     },
   ];
   const infinitePrograms = [...programs, ...programs, ...programs, ...programs];
+  const totalSlides = Math.ceil(programs.length / 3);
   const [screenSize, setScreenSize] = useState("desktop");
   useEffect(() => {
     const handleResize = () => {
@@ -163,9 +168,45 @@ const LearningPrograms = () => {
     // Cleanup the event listener
     return () => window.removeEventListener("resize", handleResize);
   }, []);
+  // --- Update auto-slide logic to use intervalRef ---
+  useEffect(() => {
+    intervalRef.current = setInterval(() => {
+      if (!isAnimating) {
+        setCurrentSlide((prev) => (prev + 1) % (totalSlides * 3));
+      }
+    }, 3000);
+    return () => clearInterval(intervalRef.current);
+  }, [totalSlides, isAnimating]);
 
+  // --- Helper to restart interval ---
+  const restartInterval = () => {
+    clearInterval(intervalRef.current);
+    intervalRef.current = setInterval(() => {
+      setCurrentSlide((prev) => (prev + 1) % (totalSlides * 3));
+    }, 3000);
+  };
+
+  // --- Manual navigation handlers ---
+  const handleNextSlide = () => {
+    clearInterval(intervalRef.current);
+    setIsAnimating(true);
+    setCurrentSlide((prev) => (prev + 1) % (totalSlides * 3));
+    setTimeout(() => {
+      setIsAnimating(false);
+      restartInterval();
+    }, 500);
+  };
+
+  const handlePrevSlide = () => {
+    clearInterval(intervalRef.current);
+    setIsAnimating(true);
+    setCurrentSlide((prev) => (prev - 1 + (totalSlides * 3)) % (totalSlides * 3));
+    setTimeout(() => {
+      setIsAnimating(false);
+      restartInterval();
+    }, 500);
+  };
   // const programsToDisplay = ;
-  const totalSlides = Math.ceil(programs.length / 3);
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentSlide((prev) => {
@@ -190,7 +231,7 @@ const LearningPrograms = () => {
 
   return (
     <section className="py-8 md:py-16 bg-white">
-      <div className="container mx-auto px-6">
+      <div className="container mx-auto px-6 relative">
         <div className="flex justify-center mb-3 md:mb-6">
           <div className="inline-flex items-center space-x-2 bg-primary/10 border border-blue-100 backdrop-blur-sm rounded-full px-4 py-2 text-sm font-medium text-primary">
             <div>
@@ -221,13 +262,15 @@ const LearningPrograms = () => {
                           slideIndex * 1,
                           slideIndex * 1 + 1
                         )
-                      :( screenSize === "tablet"? infinitePrograms.slice(
+                      : screenSize === "tablet"
+                      ? infinitePrograms.slice(
                           slideIndex * 2,
                           slideIndex * 2 + 2
-                        ):infinitePrograms.slice(
+                        )
+                      : infinitePrograms.slice(
                           slideIndex * 3,
                           slideIndex * 3 + 3
-                        ))
+                        )
                     ).map((program, index) => (
                       <div
                         key={`${slideIndex}-${index}`}
@@ -313,6 +356,27 @@ const LearningPrograms = () => {
                 </div>
               ))}
             </div>
+            {/* Slide navigation buttons vertically centered */}
+            <div className="absolute inset-y-0 -left-8 flex items-center z-50">
+              <button
+                onClick={handlePrevSlide}
+                className="text-white p-2 rounded-full bg-primary/50 hover:bg-primary/70 transition-all duration-200 cursor-pointer"
+                type="button"
+                aria-label="Previous Slide"
+              >
+                <FaArrowLeft />
+              </button>
+            </div>
+            <div className="absolute inset-y-0 -right-8 flex items-center z-50">
+              <button
+                onClick={handleNextSlide}
+                className="text-white p-2 rounded-full bg-primary/50 hover:bg-primary/70 transition-all duration-200 cursor-pointer"
+                type="button"
+                aria-label="Next Slide"
+              >
+                <FaArrowRight />
+              </button>
+            </div>
           </div>
         </div>
         <div className="flex justify-center mt-8 mb-4 space-x-2">
@@ -327,6 +391,7 @@ const LearningPrograms = () => {
             />
           ))}
         </div>
+        {/* Slide Controls */}
         <Link to={"/topics"}>
           <div className="text-center mt-8">
             <Button rounded="lg" padding="px-6 py-3">

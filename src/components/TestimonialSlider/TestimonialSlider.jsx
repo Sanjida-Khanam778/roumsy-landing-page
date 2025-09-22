@@ -96,7 +96,7 @@ const TestimonialSlider = () => {
       {/* Circular background - z-0 so it's behind testimonial content */}
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute hidden xl:block top-0 sm:top-10 lg:-top-40 right-0 sm:right-0 lg:-right-16 w-[320px] h-[320px] sm:w-[420px] sm:h-[420px] lg:w-[320px] lg:h-[320px] rounded-full border-[10px] sm:border-[12px] lg:border-[36px] border-circle/50 z-0"
+        className="pointer-events-none absolute hidden 3xl:block top-0 sm:top-10 lg:-top-40 right-0 sm:right-0 lg:-right-16 w-[320px] h-[320px] sm:w-[420px] sm:h-[420px] lg:w-[320px] lg:h-[320px] rounded-full border-[10px] sm:border-[12px] lg:border-[36px] border-circle/50 z-0"
         style={{ clipPath: "inset(50% 0 0 0)" }}
       />
       <div

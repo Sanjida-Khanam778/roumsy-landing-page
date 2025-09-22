@@ -61,7 +61,7 @@ const AboutSection = () => {
         </p>
         <div className="flex space-x-4 mb-4">
           <button
-            className={`bg-blue-500 text-white px-4 py-2 rounded-full ${
+            className={`bg-blue-500 text-white px-2 3xl:px-4 py-2 rounded-full ${
               activeTab === "mission" ? "opacity-100" : "opacity-50"
             }`}
             onClick={() => setActiveTab("mission")}
@@ -69,7 +69,7 @@ const AboutSection = () => {
             Our Mission
           </button>
           <button
-            className={`bg-blue-500 text-white px-4 py-2 rounded-full ${
+            className={`bg-blue-500 text-white px-2 3xl:px-4 py-2 rounded-full ${
               activeTab === "vision" ? "opacity-100" : "opacity-50"
             }`}
             onClick={() => setActiveTab("vision")}
@@ -77,7 +77,7 @@ const AboutSection = () => {
             Our Vision
           </button>
           <button
-            className={`bg-blue-500 text-white px-4 py-2 rounded-full ${
+            className={`bg-blue-500 text-white px-2 3xl:px-4 py-2 rounded-full ${
               activeTab === "goal" ? "opacity-100" : "opacity-50"
             }`}
             onClick={() => setActiveTab("goal")}
