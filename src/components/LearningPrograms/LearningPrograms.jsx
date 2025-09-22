@@ -344,7 +344,7 @@ const LearningPrograms = () => {
               ))}
             </div>
             {/* Slide navigation buttons vertically centered */}
-            <div className="absolute inset-y-0 -left-8 flex items-center z-50">
+            <div className="absolute inset-y-0 -left-4 md:-left-8 flex items-center z-50">
               <button
                 onClick={handlePrevSlide}
                 className="text-white p-2 rounded-full bg-primary/50 hover:bg-primary/70 transition-all duration-200 cursor-pointer"
@@ -354,7 +354,7 @@ const LearningPrograms = () => {
                 <FaArrowLeft />
               </button>
             </div>
-            <div className="absolute inset-y-0 -right-8 flex items-center z-50">
+            <div className="absolute inset-y-0 -right-4 md:-right-8 flex items-center z-50">
               <button
                 onClick={handleNextSlide}
                 className="text-white p-2 rounded-full bg-primary/50 hover:bg-primary/70 transition-all duration-200 cursor-pointer"

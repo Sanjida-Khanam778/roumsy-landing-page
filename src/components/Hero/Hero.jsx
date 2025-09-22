@@ -1,5 +1,3 @@
-"use client";
-
 import { useState, useEffect, useRef } from "react";
 import hero1 from "../../assets/images/herobg.png"; // First background image
 import hero2 from "../../assets/images/hero2.png"; // Second background image
@@ -174,30 +172,33 @@ export default function Hero() {
       {/* Overlay for better readability */}
       <div className="absolute inset-0 bg-primary/10"></div>
 
-      <div className="relative w-10/12 flex mx-auto h-full">
+      <div className="relative w-11/12 3xl:w-10/12 flex mx-auto h-full">
         <div className="grid grid-cols-1 w-1/2 gap-12 items-center min-h-[600px] h-full ">
           {/* Left Content */}
-          <div className="space-y-8 z-10 relative w-5/6">
+          <div className="space-y-8 z-10 relative w-4/6 3xl:w-5/6">
             {/* Badge */}
             <div className="inline-flex items-center space-x-2 bg-white/80 backdrop-blur-sm rounded-full px-4 py-2 text-sm font-medium text-primary border-blue-100">
               <div className="">
-                <img src={currentSlideData.badge.icon || "/placeholder.svg"} alt="" />
+                <img
+                  src={currentSlideData.badge.icon || "/placeholder.svg"}
+                  alt=""
+                />
               </div>
               <span>{currentSlideData.badge.text}</span>
             </div>
 
             {/* Title */}
             <div className="space-y-4">
-              <h1 className="text-2xl lg:text-4xl xl:text-6xl font-bold text-gray-900 leading-tight">
+              <h1 className="text-2xl lg:text-3xl xl:text-6xl font-bold text-gray-900 leading-tight">
                 {currentSlideData.title}
               </h1>
-              <p className="text-base lg:text-xl text-gray-600 leading-relaxed max-w-lg md:text-base">
+              <p className="text-base xl:text-xl text-gray-600 leading-relaxed max-w-lg md:text-base">
                 {currentSlideData.description}
               </p>
             </div>
 
             {/* Buttons */}
-            <div className="flex flex-col md:flex-row gap-4">
+            <div className="flex flex-col xl:flex-row gap-4">
               <Link
                 to={currentSlideData.primaryButton.go}
                 className={`${currentSlideData.primaryButton.color} text-white px-2 xl:px-3 2xl:px-4 py-3 rounded-lg font-semibold flex items-center justify-center space-x-2 transition-all duration-300 transform hover:scale-105 shadow-lg`}
@@ -220,7 +221,7 @@ export default function Hero() {
             </div>
 
             {/* User Avatars and Stats */}
-            <div className="flex items-center space-x-4 pt-8">
+            <div className="flex items-center space-x-4 pt-2 2xl:pt-6 3xl:pt-8">
               <div className="flex -space-x-4">
                 {avatar.map((icon, idx) => (
                   <img
