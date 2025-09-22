@@ -29,6 +29,7 @@ import { UserAcc } from "../Pages/Home/UserAcc";
 import Plan from "../Pages/Home/Plan";
 import Form from "../components/BecomeInstructor/Form";
 import QuizStart from "../Pages/QuizInterface/QuizStart";
+import GuidedDashboard from "../Pages/Dashboard/GuidedDashboard";
 
 export const router = createBrowserRouter([
   {
@@ -122,7 +123,7 @@ export const router = createBrowserRouter([
   },
   {
     path: "/guided",
-    element: <Dashboard />,
+    element: <GuidedDashboard />,
   },
   {
     path: "/admin",
