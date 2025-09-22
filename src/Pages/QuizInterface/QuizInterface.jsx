@@ -95,7 +95,7 @@ const QuizInterface = () => {
   };
 
   return (
-    <div className="bg-gray-50 py-4 md:py-8 px-4 w-full">
+    <div className="bg-gray-50 py-4 md:py-8 px-2 w-full">
       <div className="max-w-4xl w-full mx-auto">
         {/* Progress Bar */}
         <div className="mb-8">
@@ -135,17 +135,17 @@ const QuizInterface = () => {
           </div>
 
           {/* Question Content */}
-          <div className="p-4 md:p-8">
-            <h3 className="text-lg font-medium text-gray-800 mb-6 leading-relaxed">
+          <div className="p-2 md:p-8">
+            <h3 className="md:text-lg font-medium text-gray-800 mb-6 leading-relaxed">
               {questions[currentQuestion].question}
             </h3>
 
             {/* Answer Options */}
-            <div className="space-y-4">
+            <div className="space-y-2 md:space-y-4">
               {questions[currentQuestion].options.map((option, index) => (
                 <label
                   key={index}
-                  className={`flex items-center p-4 rounded-lg border-2 cursor-pointer transition-all duration-200 ${
+                  className={`flex items-center text-sm md:text-base p-2 md:p-4 rounded-lg border-2 cursor-pointer transition-all duration-200 ${
                     selectedAnswers[currentQuestion] === index
                       ? "border-blue-500 bg-blue-50"
                       : "border-gray-200 hover:border-gray-300 hover:bg-gray-50"

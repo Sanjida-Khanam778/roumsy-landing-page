@@ -16,13 +16,13 @@ export default function QuizStart() {
         <QuizInterface />
       ) : (
         <div className="bg-gray-50 flex flex-col gap-20 items-center justify-center p-6">
-          <p className="text-[#011E46] font-bold text-xl">
+          <p className="text-[#011E46] font-bold md:text-xl text-center">
             Start your exam now and test your knowledge in real time.
           </p>
           <div onClick={handleStartQuiz}>
             <Button padding="py-2 px-4" rounded="md">
-              <span className="flex items-center text-xl gap-2">
-                <img className="h-8" src={material} />
+              <span className="flex items-center md:text-xl gap-2">
+                <img className="md:h-8 h-6" src={material} />
                 Start Exam
               </span>
             </Button>

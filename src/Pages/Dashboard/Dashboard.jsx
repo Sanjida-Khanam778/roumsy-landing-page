@@ -4,7 +4,7 @@ import pricing1 from "../../assets/images/pricing1.png";
 import pricing2 from "../../assets/images/pricing2.png";
 import pricing3 from "../../assets/images/pricing3.png";
 import logo from "../../assets/images/logo.png";
-import { Plus, Search, Send, Sparkles } from "lucide-react";
+import { Plus, Search, Send, Sparkles, MoreVertical } from "lucide-react";
 import Button from "../../components/Shared/Button";
 import botProfile from "../../assets/images/botProfile.jpg";
 import userProfile from "../../assets/images/userProfile.jpg";
@@ -20,6 +20,8 @@ const Dashboard = ({ tab }) => {
   const [showPricingModal, setShowPricingModal] = useState(true);
   const [chatCount, setChatCount] = useState(0); // Track the number of chats
   const [isSubscribed, setIsSubscribed] = useState(false);
+  const [dropdownIndex, setDropdownIndex] = useState(null);
+  const [editTitle, setEditTitle] = useState("");
   const suggestionCards = [
     "Ask your LearnGPT about PMP certification",
     "Ask your LearnGPT about immigration to Canada",
@@ -204,7 +206,7 @@ const Dashboard = ({ tab }) => {
         {/* Logo and Header */}
         <div className="p-6 border-b border-blue-500">
           {/* Logo */}
-          <Link to={'/'}>
+          <Link to={"/"}>
             <div className="flex items-center space-x-2 mb-6">
               <img src={logo} className="w-12" alt="" />
               <p className="text-[#011F47] font-bold text-2xl">
@@ -251,11 +253,52 @@ const Dashboard = ({ tab }) => {
               {conversations
                 .filter((c) => c.sender === "user")
                 .map((conv, index) => (
-                  <div
-                    key={index}
-                    className="text-blue-100 text-sm py-2 px-3 rounded-lg hover:bg-blue-500 cursor-pointer transition-colors text-right"
-                  >
-                    {conv.text}
+                  <div key={index} className="relative">
+                    <div className="flex items-center justify-end">
+                      <div
+                        className="text-blue-100 text-sm py-2 px-3 rounded-lg hover:bg-blue-500 cursor-pointer transition-colors text-right truncate"
+                        title={conv.text}
+                      >
+                        {conv.text.length > 60
+                          ? conv.text.slice(0, 57) + "..."
+                          : conv.text}
+                      </div>
+                      <button
+                        className="ml-2 p-1 text-blue-200 hover:text-white"
+                        onClick={() => setDropdownIndex(index)}
+                      >
+                        <MoreVertical className="w-4 h-4" />
+                      </button>
+                    </div>
+                    {/* Dropdown */}
+                    {dropdownIndex === index && (
+                      <div className="absolute right-0 mt-2 bg-white border rounded shadow-lg z-10 w-32">
+                        <button
+                          className="block w-full text-left px-4 py-2 text-sm text-black hover:bg-blue-100"
+                          onClick={() => {
+                            setEditTitle(conv.text);
+                            // Implement rename logic here
+                            setDropdownIndex(null);
+                          }}
+                        >
+                          Rename
+                        </button>
+                        <button
+                          className="block w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-blue-100"
+                          onClick={() => {
+                            // Implement delete logic here
+                            setConversations((prev) =>
+                              prev.filter(
+                                (c, i) => !(c.sender === "user" && i === index)
+                              )
+                            );
+                            setDropdownIndex(null);
+                          }}
+                        >
+                          Delete
+                        </button>
+                      </div>
+                    )}
                   </div>
                 ))}
             </div>
@@ -273,7 +316,7 @@ const Dashboard = ({ tab }) => {
         </div>
 
         {/* Chat Area */}
-        <div className="flex-1 flex flex-col items-center justify-between">
+        <div className="flex-1 flex flex-col items-center justify-between h-[90vh]">
           {/* Main Prompt */}
           <div className="w-full flex flex-col items-center mt-6 overflow-y-auto h-[68vh]">
             <div className="text-center mb-6">
