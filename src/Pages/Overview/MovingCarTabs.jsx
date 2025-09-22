@@ -17,6 +17,7 @@ import CourseCompletionCertificate from "./CourseCompletionCertificate";
 import { RiMenuSearchLine } from "react-icons/ri";
 import Documentation from "./Documentation";
 import { ScrollRestoration } from "react-router-dom";
+import GuidedDashboard from "../Dashboard/GuidedDashboard";
 export default function MovingCarTabs() {
   const [selectedSkillLevel, setSelectedSkillLevel] = useState("");
   const [selectedMode, setSelectedMode] = useState("");
@@ -25,6 +26,7 @@ export default function MovingCarTabs() {
     setSelectedSkillLevel(level);
     setSelectedMode("");
   };
+  console.log(selectedMode);
 
   const handleModeSelect = (mode) => {
     setSelectedMode(mode);
@@ -331,7 +333,13 @@ export default function MovingCarTabs() {
                 Ask questions about the course material. 3 free messages
                 remaining.
               </p>
-              <Dashboard tab={true} embedded={true} />
+              {
+                selectedMode === "Guided Learning Path" ? (
+                  <GuidedDashboard tab={true} embedded={true} />
+                ) : (
+                  <Dashboard tab={true} embedded={true} />
+                )
+              }
             </div>
           ) : (
             <div className="max-w-4xl w-full">
