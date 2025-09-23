@@ -265,7 +265,7 @@ export default function MovingCarTabs() {
       icon: tab2,
       active: false,
       content: (
-        <div className=" bg-gray-50 flex items-center justify-center md:p-6">
+        <div className="bg-gray-50 flex items-center justify-center md:p-6">
           {selectedSkillLevel && !selectedMode ? (
             <div className="bg-gray-50 flex items-center justify-center md:p-6 p-3">
               <div className="max-w-4xl w-full">
@@ -327,7 +327,7 @@ export default function MovingCarTabs() {
               </div>
             </div>
           ) : selectedMode ? (
-            <div className="">
+            <div className="w-full">
               <h2 className="text-2xl font-bold mb-4">LearninGPT Assistant</h2>
               <p className="text-gray mb-8">
                 Ask questions about the course material. 3 free messages

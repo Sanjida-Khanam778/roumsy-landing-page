@@ -57,7 +57,9 @@ const PricingSection = () => {
         </div>
 
         <div className="text-center mb-3 md:mb-12">
-          <h2 className="text-xl md:text-3xl font-bold mb-2 md:mb-4 text-gray-800">Pricing</h2>
+          <h2 className="text-xl md:text-3xl font-bold mb-2 md:mb-4 text-gray-800">
+            Pricing
+          </h2>
           <p className="text-gray text-sm md:text-base">
             Flexible AI learning plans for individuals and enterprises.
           </p>
@@ -65,9 +67,9 @@ const PricingSection = () => {
 
         {/* Pricing Cards */}
         <div className="grid md:grid-cols-3 gap-4 md:gap-6 lg:gap-12 mx-auto max-w-6xl relative">
-        <div
-          aria-hidden="true"
-          className="
+          <div
+            aria-hidden="true"
+            className="
             pointer-events-none absolute
             bottom-0 sm:bottom-10 lg:-bottom-36
             left-0 sm:left-0 lg:-left-36
@@ -76,7 +78,7 @@ const PricingSection = () => {
             border-circle/50 z-0
           
           "
-        />
+          />
           {plans.map((plan, index) => (
             <div
               key={index}

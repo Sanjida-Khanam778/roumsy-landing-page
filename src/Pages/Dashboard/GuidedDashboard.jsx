@@ -164,6 +164,7 @@ const GuidedDashboard = ({ tab, embedded }) => {
   };
 
   // Sidebar width for open/closed states
+  // Embedded: always left on desktop, collapsible on mobile/tablet
   const sidebarWidth = isMobileOrTablet
     ? sidebarOpen
       ? "w-72"
@@ -171,18 +172,11 @@ const GuidedDashboard = ({ tab, embedded }) => {
     : "w-72";
 
   // Sidebar position logic
-  const sidebarPosition = embedded
-    ? "relative"
-    : isMobileOrTablet
-    ? "fixed"
-    : "static";
+  // Embedded: always left (never top), fixed on mobile/tablet, static on desktop
+  const sidebarPosition = isMobileOrTablet ? "fixed" : "static";
 
   return (
-    <div
-      className={`font-Poppins ${
-        embedded ? "" : "flex h-screen bg-[#575555]/10"
-      }`}
-    >
+    <div className={`font-Poppins flex h-screen w-full bg-[#575555]/10 relative`}>
       {/* Pricing Modal */}
       {showPricingModal && !isSubscribed && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center px-8 lg:px-0 z-50">
@@ -279,9 +273,14 @@ const GuidedDashboard = ({ tab, embedded }) => {
       )}
       {/* Left Sidebar */}
       <div
-        className={`${sidebarWidth} bg-[#0062A7] text-white ${sidebarPosition} left-0 top-0 flex flex-col h-full z-40 transition-all duration-300 ${
-          embedded ? "w-full" : ""
+        className={`${sidebarWidth} bg-[#0062A7] text-white flex flex-col h-full z-40 transition-all duration-300 ${
+          isMobileOrTablet ? "absolute top-0 left-0 h-full" : ""
         }`}
+        style={
+          isMobileOrTablet
+            ? { position: "absolute", top: 0, left: 0, height: "100%" }
+            : {}
+        }
       >
         {/* Sidebar icon*/}
         <div className="flex items-center justify-between p-4">
@@ -375,16 +374,19 @@ const GuidedDashboard = ({ tab, embedded }) => {
         )}
       </div>
       {/* Overlay for sidebar on mobile/tablet when open */}
-      {!embedded && isMobileOrTablet && sidebarOpen && (
+      {isMobileOrTablet && sidebarOpen && (
         <div
-          className="fixed inset-0 bg-black bg-opacity-30 z-30"
+          className="absolute inset-0 bg-black bg-opacity-30 z-30"
+          style={{ pointerEvents: "auto" }}
           onClick={() => setSidebarOpen(false)}
         ></div>
       )}
       {/* Main Content Area */}
       {embedded ? (
         <div
-          className={`w-full flex flex-col `}
+          className={`flex-1 flex flex-col ml-0 ${
+            isMobileOrTablet ? (sidebarOpen ? "ml-72" : "ml-16") : "ml-72"
+          }`}
         >
           {/* Header */}
           <div className="border-b border-gray/50 px-6 py-4 flex justify-between items-center">
