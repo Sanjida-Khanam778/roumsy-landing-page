@@ -34,11 +34,6 @@ const GuidedDashboard = ({ tab, embedded }) => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [isMobileOrTablet, setIsMobileOrTablet] = useState(false);
 
-  const suggestionCards = [
-    "Ask your LearnGPT about PMP certification",
-    "Ask your LearnGPT about immigration to Canada",
-    "What projects should I be concerned about right now?",
-  ];
   const plans = [
     {
       title: "Exam Simulator Only",
@@ -253,7 +248,10 @@ const GuidedDashboard = ({ tab, embedded }) => {
                           <React.Fragment key={qIdx}>
                             <div
                               className="px-3 py-2 hover:bg-blue-100 cursor-pointer text-sm"
-                              onClick={() => setInputValue(q)}
+                              onClick={() => {
+                                setInputValue(q);
+                                setSidebarOpen((prev) => !prev);
+                              }}
                             >
                               {q}
                             </div>
