@@ -19,6 +19,9 @@ import userProfile from "../../assets/images/userProfile.jpg";
 import { Link } from "react-router-dom";
 import { GoSidebarExpand } from "react-icons/go";
 const GuidedDashboard = ({ tab, embedded }) => {
+  // Pricing modal logic
+  const [showPricingModal, setShowPricingModal] = useState(true);
+  const [isSubscribed, setIsSubscribed] = useState(false);
   const [inputValue, setInputValue] = useState("");
   // Each conversation is { sender: 'user' | 'ai', text: string }
   const [conversations, setConversations] = useState([
@@ -26,9 +29,7 @@ const GuidedDashboard = ({ tab, embedded }) => {
   ]);
   const [showSearch, setShowSearch] = useState(false);
   const [searchValue, setSearchValue] = useState("");
-  const [showPricingModal, setShowPricingModal] = useState(true);
   const [chatCount, setChatCount] = useState(0); // Track the number of chats
-  const [isSubscribed, setIsSubscribed] = useState(false);
   const [dropdownIndex, setDropdownIndex] = useState(null);
   const [editTitle, setEditTitle] = useState("");
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -116,11 +117,10 @@ const GuidedDashboard = ({ tab, embedded }) => {
   const handleSendMessage = () => {
     if (inputValue.trim()) {
       if (chatCount >= 3) {
-        // Block chat if the user has hit the chat limit
         setShowPricingModal(true);
+        setChatCount((prev) => prev + 1); // Still increment so modal shows every time
         return;
       }
-
       setConversations((prev) => [
         ...prev,
         { sender: "user", text: inputValue },
@@ -130,11 +130,21 @@ const GuidedDashboard = ({ tab, embedded }) => {
         },
       ]);
       setInputValue("");
-      setChatCount((prev) => prev + 1); // Increment chat count
+      setChatCount((prev) => prev + 1);
     }
   };
 
   const handleChoosePlan = (planTitle) => {
+    setIsSubscribed(true);
+    setShowPricingModal(false);
+    setChatCount(0);
+    setConversations((prev) => [
+      ...prev,
+      {
+        sender: "ai",
+        text: `Great choice! You've selected the ${planTitle} plan. Let's get started with your learning journey!`,
+      },
+    ]);
     setIsSubscribed(true); // Mark the user as subscribed
     setShowPricingModal(false);
     setChatCount(0); // Reset chat count on subscription
@@ -148,6 +158,7 @@ const GuidedDashboard = ({ tab, embedded }) => {
   };
 
   const handleMaybeLater = () => {
+    setShowPricingModal(false);
     // Allow chat but track the chats
     setShowPricingModal(false);
   };
@@ -172,6 +183,100 @@ const GuidedDashboard = ({ tab, embedded }) => {
         embedded ? "" : "flex h-screen bg-[#575555]/10"
       }`}
     >
+      {/* Pricing Modal */}
+      {showPricingModal && !isSubscribed && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center px-8 lg:px-0 z-50">
+          <div className="bg-white rounded-2xl shadow-2xl max-w-5xl w-full max-h-[90vh] overflow-y-auto">
+            {/* Modal Header */}
+            <div className="text-left px-4 sm:px-20 py-3 lg:py-6">
+              <h2 className="text-xl lg:text-3xl font-bold mb-2 text-primary">
+                Unlock AI Coach Access
+              </h2>
+              <p className="text-gray">
+                Get unlimited access to our AI Coach for 30 days!
+              </p>
+            </div>
+            {/* Pricing Cards */}
+            <div className="px-4 lg:px-20 py-3 lg:py-6">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mx-auto">
+                {plans.map((plan, index) => (
+                  <div
+                    key={index}
+                    className={`bg-white rounded-lg overflow-hidden shadow-lg flex flex-col h-full ${
+                      plan.scale ? "transform scale-100" : ""
+                    }`}
+                  >
+                    {/* Popular Badge */}
+                    {plan.popular && (
+                      <div className="absolute top-4 right-4 bg-[#FFB563] text-white px-3 py-1 rounded-full text-xs font-medium z-10">
+                        Best Deal
+                      </div>
+                    )}
+                    {/* Header with Icon */}
+                    <div
+                      className={`${plan.color} p-4 md:p-8 text-white text-center relative flex flex-col items-center`}
+                    >
+                      <img src={plan.image} alt="" />
+                      <h3 className="text-xl font-semibold my-2">
+                        {plan.title}
+                      </h3>
+                    </div>
+                    {/* Content */}
+                    <div className="p-3 md:p-6 flex flex-col flex-grow ">
+                      {/* Features */}
+                      <div className="flex-1">
+                        {plan.features.map((feature, featureIndex) => (
+                          <div
+                            key={featureIndex}
+                            className="flex items-center mb-2"
+                          >
+                            <img src={tic} alt="" />
+                            <span className="ml-2 text-gray-700 text-sm">
+                              {feature}
+                            </span>
+                          </div>
+                        ))}
+                      </div>
+                      {/* Pricing */}
+                      <div className="mb-4 flex-1">
+                        {plan.originalPrice && (
+                          <div className="text-gray line-through text-sm mb-1">
+                            {plan.originalPrice}
+                          </div>
+                        )}
+                        <div className="text-2xl font-bold text-primary mb-1">
+                          {plan.price}
+                        </div>
+                        <div className="text-gray-600 text-sm">
+                          {plan.period}
+                        </div>
+                      </div>
+                      {/* Button - Pushed to bottom */}
+                      <div className="mt-auto">
+                        <Button
+                          rounded="lg"
+                          onClick={() => handleChoosePlan(plan.title)}
+                        >
+                          Choose Plan
+                        </Button>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+              {/* Maybe Later Button */}
+              <div
+                onClick={handleMaybeLater}
+                className="text-center my-6 border border-gray/50 rounded-md py-3 cursor-pointer w-9/12 mx-auto"
+              >
+                <button className="text-gray-500 hover:text-gray-700 font-medium transition-colors">
+                  Maybe Later
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
       {/* Left Sidebar */}
       <div
         className={`${sidebarWidth} bg-[#0062A7] text-white ${sidebarPosition} left-0 top-0 flex flex-col h-full z-40 transition-all duration-300 ${
@@ -278,7 +383,11 @@ const GuidedDashboard = ({ tab, embedded }) => {
       )}
       {/* Main Content Area */}
       {embedded ? (
-        <div className="w-full flex flex-col">
+        <div
+          className={`w-full flex flex-col ${
+            isMobileOrTablet ? "" : "md:flex-row"
+          }`}
+        >
           {/* Header */}
           <div className="border-b border-gray/50 px-6 py-4 flex justify-between items-center">
             <div className="text-sm text-gray font-semibold text-end w-full">

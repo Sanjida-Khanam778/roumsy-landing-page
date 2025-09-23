@@ -138,11 +138,11 @@ const Dashboard = ({ tab, embedded }) => {
     >
       {/* Pricing Modal */}
       {showPricingModal && !isSubscribed && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center px-8 lg:px-0 z-50">
           <div className="bg-white rounded-2xl shadow-2xl max-w-5xl w-full max-h-[90vh] overflow-y-auto">
             {/* Modal Header */}
-            <div className="text-left px-8 sm:px-20 py-6">
-              <h2 className="text-3xl font-bold mb-2 text-primary">
+            <div className="text-left px-4 sm:px-20 py-3 lg:py-6">
+              <h2 className="text-xl lg:text-3xl font-bold mb-2 text-primary">
                 Unlock AI Coach Access
               </h2>
               <p className="text-gray">
@@ -151,8 +151,8 @@ const Dashboard = ({ tab, embedded }) => {
             </div>
 
             {/* Pricing Cards */}
-            <div className="px-8 sm:px-20 py-6">
-              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 mx-auto">
+            <div className="px-4 lg:px-20 py-3 lg:py-6">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mx-auto">
                 {plans.map((plan, index) => (
                   <div
                     key={index}
@@ -169,7 +169,7 @@ const Dashboard = ({ tab, embedded }) => {
 
                     {/* Header with Icon */}
                     <div
-                      className={`${plan.color} p-8 text-white text-center relative flex flex-col items-center`}
+                      className={`${plan.color} p-4 md:p-8 text-white text-center relative flex flex-col items-center`}
                     >
                       <img src={plan.image} alt="" />
                       <h3 className="text-xl font-semibold my-2">
@@ -178,7 +178,7 @@ const Dashboard = ({ tab, embedded }) => {
                     </div>
 
                     {/* Content */}
-                    <div className="p-6 flex flex-col flex-grow ">
+                    <div className="p-3 md:p-6 flex flex-col flex-grow ">
                       {/* Features */}
                       <div className="flex-1">
                         {plan.features.map((feature, featureIndex) => (
