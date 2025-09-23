@@ -10,8 +10,9 @@ import profile1 from "../../assets/images/logo/profile1.png";
 import profile2 from "../../assets/images/logo/profile2.png";
 import profile3 from "../../assets/images/logo/profile3.png";
 import learning from "../../assets/images/logo/learning.png";
-import global from "../../assets/images/icon/global.png"
-import star from "../../assets/images/icon/star.png"
+import global from "../../assets/images/icon/global.png";
+import star from "../../assets/images/icon/star.png";
+import { Link } from "react-router-dom";
 export default function Profile() {
   return (
     <div className="h-[91vh] overflow-auto bg-[#F4F8FD] p-6">
@@ -26,10 +27,12 @@ export default function Profile() {
               Continue your learning journey with AI-powered assistance
             </p>
           </div>
-          <button className="bg-gradient-to-r from-teal-600 to-primary hover:bg-teal-700 text-white px-4 py-2 rounded-lg flex items-center gap-2 transition-colors">
-            <MessageCircle size={20} />
-            Ask AI Assistant
-          </button>
+          <Link to={"/dashboard"}>
+            <button className="bg-gradient-to-r from-teal-600 to-primary hover:bg-teal-700 text-white px-4 py-2 rounded-lg flex items-center gap-2 transition-colors">
+              <MessageCircle size={20} />
+              Ask AI Assistant
+            </button>
+          </Link>
         </div>
 
         {/* Stats Cards */}
@@ -241,7 +244,7 @@ export default function Profile() {
                     </span>
                     <span className="text-sm text-gray-600">10/15 hours</span>
                   </div>
-                 <div className="w-full bg-[#ECECEC] rounded-full h-3 mb-3">
+                  <div className="w-full bg-[#ECECEC] rounded-full h-3 mb-3">
                     <div
                       className="bg-gradient-to-r from-teal-600 to-primary h-3 rounded-full"
                       style={{ width: "90%" }}
@@ -258,7 +261,7 @@ export default function Profile() {
                       8/10 completed
                     </span>
                   </div>
-               <div className="w-full bg-[#ECECEC] rounded-full h-3 mb-3">
+                  <div className="w-full bg-[#ECECEC] rounded-full h-3 mb-3">
                     <div
                       className="bg-gradient-to-r from-teal-600 to-primary h-3 rounded-full"
                       style={{ width: "80%" }}
@@ -271,7 +274,7 @@ export default function Profile() {
             {/* Recent Achievements */}
             <div className="bg-gradient-to-r from-[#FFF4FF] to-[#FFF6EC] rounded-xl p-6 shadow-lg">
               <h2 className="text-lg font-semibold text-gray-900 mb-4 flex items-center gap-2">
-              <img src={star} alt="" />
+                <img src={star} alt="" />
                 Recent Achievements
               </h2>
 

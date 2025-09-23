@@ -3,6 +3,10 @@ import { BookOpen, Users } from "lucide-react";
 import learning1 from "../../assets/images/learning1.png";
 import learning2 from "../../assets/images/learning2.png";
 import learning3 from "../../assets/images/learning3.png";
+import traind from "../../assets/images/icon/traind.png";
+import startd from "../../assets/images/icon/startd.png";
+import trainw from "../../assets/images/icon/trainw.png";
+import startw from "../../assets/images/icon/startw.png";
 import { Link } from "react-router-dom";
 export default function AllPrograms({ limit }) {
   const programs = [
@@ -144,16 +148,34 @@ export default function AllPrograms({ limit }) {
             <hr className="text-gray/50" />
             <div className="mt-4 flex justify-between items-center flex-col gap-3">
               <Link to={`/overview/${program.id}`}>
-                <div className="p-2 bg-primary/10 rounded-lg">
-                  {/* <img src="" alt="" /> */}
-                  <span>Train with LearninGPT</span>
-                </div>
+                <div className="p-2 bg-blue-50 hover:text-white hover:bg-gradient-to-r hover:from-[#189EFE] hover:to-[#0E5F98] rounded-lg flex items-center gap-2 group">
+                                                <img
+                                                  src={traind}
+                                                  alt="Train"
+                                                  className="w-6 h-6 group-hover:hidden"
+                                                />
+                                                <img
+                                                  src={trainw}
+                                                  alt="Train Hover"
+                                                  className="w-6 h-6 hidden group-hover:block"
+                                                />
+                                                <span>Train with LearninGPT</span>
+                                              </div>
               </Link>
               <Link to={"/quiz"}>
-                <div className="p-2 bg-primary/10 rounded-lg">
-                  {/* <img src="" alt="" /> */}
-                  <span> Start Exam Simulator</span>
-                </div>
+               <div className="p-2 bg-blue-50 hover:text-white hover:bg-gradient-to-r hover:from-[#189EFE] hover:to-[#0E5F98] rounded-lg flex items-center gap-2 group">
+                                               <img
+                                                 src={startd}
+                                                 alt="Start"
+                                                 className="w-6 h-6 group-hover:hidden"
+                                               />
+                                               <img
+                                                 src={startw}
+                                                 alt="Start Hover"
+                                                 className="w-6 h-6 hidden group-hover:block"
+                                               />
+                                               <span>Start Exam Simulator</span>
+                                             </div>
               </Link>
             </div>
           </div>
