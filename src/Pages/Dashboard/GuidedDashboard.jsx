@@ -384,9 +384,7 @@ const GuidedDashboard = ({ tab, embedded }) => {
       {/* Main Content Area */}
       {embedded ? (
         <div
-          className={`w-full flex flex-col ${
-            isMobileOrTablet ? "" : "md:flex-row"
-          }`}
+          className={`w-full flex flex-col `}
         >
           {/* Header */}
           <div className="border-b border-gray/50 px-6 py-4 flex justify-between items-center">
