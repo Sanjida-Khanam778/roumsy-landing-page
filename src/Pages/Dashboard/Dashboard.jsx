@@ -4,6 +4,7 @@ import pricing1 from "../../assets/images/pricing1.png";
 import pricing2 from "../../assets/images/pricing2.png";
 import pricing3 from "../../assets/images/pricing3.png";
 import logo from "../../assets/images/logo.png";
+import sales from "../../assets/images/sales.png";
 import { Plus, Search, Send, Sparkles, MoreVertical, Menu } from "lucide-react";
 import Button from "../../components/Shared/Button";
 import botProfile from "../../assets/images/botProfile.jpg";
@@ -81,11 +82,10 @@ const Dashboard = ({ tab, embedded }) => {
   const handleSendMessage = () => {
     if (inputValue.trim()) {
       if (chatCount >= 3) {
-        // Block chat if the user has hit the chat limit
         setShowPricingModal(true);
+        setChatCount((prev) => prev + 1); // Still increment so modal shows every time
         return;
       }
-
       setConversations((prev) => [
         ...prev,
         { sender: "user", text: inputValue },
@@ -95,7 +95,7 @@ const Dashboard = ({ tab, embedded }) => {
         },
       ]);
       setInputValue("");
-      setChatCount((prev) => prev + 1); // Increment chat count
+      setChatCount((prev) => prev + 1);
     }
   };
 
@@ -113,7 +113,6 @@ const Dashboard = ({ tab, embedded }) => {
   };
 
   const handleMaybeLater = () => {
-    // Allow chat but track the chats
     setShowPricingModal(false);
   };
 
@@ -125,13 +124,118 @@ const Dashboard = ({ tab, embedded }) => {
     : "w-72";
 
   // Sidebar position logic
-  const sidebarPosition = embedded ? "relative" : isMobileOrTablet ? "fixed" : "static";
+  const sidebarPosition = embedded
+    ? "relative"
+    : isMobileOrTablet
+    ? "fixed"
+    : "static";
 
   return (
-    <div className={`font-Poppins ${embedded ? '' : 'flex h-screen bg-[#575555]/10'}`}> 
-      {/* Left Sidebar */}
+    <div
+      className={`font-Poppins ${
+        embedded ? "" : "flex h-screen bg-[#575555]/10"
+      }`}
+    >
+      {/* Pricing Modal */}
+      {showPricingModal && !isSubscribed && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+          <div className="bg-white rounded-2xl shadow-2xl max-w-5xl w-full max-h-[90vh] overflow-y-auto">
+            {/* Modal Header */}
+            <div className="text-left px-8 sm:px-20 py-6">
+              <h2 className="text-3xl font-bold mb-2 text-primary">
+                Unlock AI Coach Access
+              </h2>
+              <p className="text-gray">
+                Get unlimited access to our AI Coach for 30 days!
+              </p>
+            </div>
+
+            {/* Pricing Cards */}
+            <div className="px-8 sm:px-20 py-6">
+              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 mx-auto">
+                {plans.map((plan, index) => (
+                  <div
+                    key={index}
+                    className={`bg-white rounded-lg overflow-hidden shadow-lg flex flex-col h-full ${
+                      plan.scale ? "transform scale-100" : ""
+                    }`}
+                  >
+                    {/* Popular Badge */}
+                    {plan.popular && (
+                      <div className="absolute top-4 right-4 bg-[#FFB563] text-white px-3 py-1 rounded-full text-xs font-medium z-10">
+                        Best Deal
+                      </div>
+                    )}
+
+                    {/* Header with Icon */}
+                    <div
+                      className={`${plan.color} p-8 text-white text-center relative flex flex-col items-center`}
+                    >
+                      <img src={plan.image} alt="" />
+                      <h3 className="text-xl font-semibold my-2">
+                        {plan.title}
+                      </h3>
+                    </div>
+
+                    {/* Content */}
+                    <div className="p-6 flex flex-col flex-grow ">
+                      {/* Features */}
+                      <div className="flex-1">
+                        {plan.features.map((feature, featureIndex) => (
+                          <div
+                            key={featureIndex}
+                            className="flex items-center mb-2"
+                          >
+                            <img src={tic} alt="" />
+                            <span className="ml-2 text-gray-700 text-sm">
+                              {feature}
+                            </span>
+                          </div>
+                        ))}
+                      </div>
+
+                      {/* Pricing */}
+                      <div className="mb-4 flex-1">
+                        {plan.originalPrice && (
+                          <div className="text-gray line-through text-sm mb-1">
+                            {plan.originalPrice}
+                          </div>
+                        )}
+                        <div className="text-2xl font-bold text-primary mb-1">
+                          {plan.price}
+                        </div>
+                        <div className="text-gray-600 text-sm">
+                          {plan.period}
+                        </div>
+                      </div>
+
+                      {/* Button - Pushed to bottom */}
+                      <div className="mt-auto">
+                        <Button rounded="lg">Choose Plan</Button>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              {/* Maybe Later Button */}
+              <div
+                onClick={handleMaybeLater}
+                className="text-center my-6 border border-gray/50 rounded-md py-3 cursor-pointer w-9/12 mx-auto"
+              >
+                <button className="text-gray-500 hover:text-gray-700 font-medium transition-colors">
+                  Maybe Later
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
       <div
-        className={`${sidebarWidth} bg-[#0062A7] text-white ${sidebarPosition} left-0 top-0 flex flex-col h-full z-40 transition-all duration-300 ${embedded ? 'w-full' : ''}`}
+        className={`${sidebarWidth} bg-[#0062A7] text-white ${sidebarPosition} left-0 top-0 flex flex-col h-full z-40 transition-all duration-300 ${
+          embedded ? "w-full" : ""
+        }`}
       >
         {/* Sidebar icon*/}
         <div className="flex items-center justify-between p-4">
@@ -287,7 +391,11 @@ const Dashboard = ({ tab, embedded }) => {
                         <div
                           className={` rounded-full mr-2 h-12 w-12  flex items-center justify-center `}
                         >
-                          <img className="rounded-full w-8 md:w-auto" src={botProfile} alt="" />
+                          <img
+                            className="rounded-full w-8 md:w-auto"
+                            src={botProfile}
+                            alt=""
+                          />
                         </div>
                       )}
                       <div
@@ -352,7 +460,9 @@ const Dashboard = ({ tab, embedded }) => {
                       type="text"
                       placeholder="Ask me anything about projects"
                       value={inputValue}
-                      onKeyPress={(e) => e.key === "Enter" && handleSendMessage()}
+                      onKeyPress={(e) =>
+                        e.key === "Enter" && handleSendMessage()
+                      }
                       onChange={(e) => setInputValue(e.target.value)}
                       className="flex-1 outline-none text-gray-700 placeholder-gray-400 placeholder:text-sm sm:placeholder:text-base "
                     />
@@ -386,7 +496,11 @@ const Dashboard = ({ tab, embedded }) => {
       ) : (
         <div
           className={`flex-1 flex flex-col ml-0 ${
-            isMobileOrTablet && !embedded ? (sidebarOpen ? "ml-72" : "ml-16") : "ml-72"
+            isMobileOrTablet && !embedded
+              ? sidebarOpen
+                ? "ml-72"
+                : "ml-16"
+              : "ml-72"
           }`}
         >
           {/* Header */}
@@ -422,7 +536,11 @@ const Dashboard = ({ tab, embedded }) => {
                         <div
                           className={` rounded-full mr-2 h-12 w-12  flex items-center justify-center `}
                         >
-                          <img className="rounded-full w-8 md:w-auto" src={botProfile} alt="" />
+                          <img
+                            className="rounded-full w-8 md:w-auto"
+                            src={botProfile}
+                            alt=""
+                          />
                         </div>
                       )}
                       <div
@@ -487,7 +605,9 @@ const Dashboard = ({ tab, embedded }) => {
                       type="text"
                       placeholder="Ask me anything about projects"
                       value={inputValue}
-                      onKeyPress={(e) => e.key === "Enter" && handleSendMessage()}
+                      onKeyPress={(e) =>
+                        e.key === "Enter" && handleSendMessage()
+                      }
                       onChange={(e) => setInputValue(e.target.value)}
                       className="flex-1 outline-none text-gray-700 placeholder-gray-400 placeholder:text-sm sm:placeholder:text-base "
                     />
