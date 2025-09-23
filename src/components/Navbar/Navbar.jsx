@@ -76,7 +76,7 @@ const Navbar = () => {
                   <button
                     type="button"
                     className={`relative font-bold transition-all duration-300 group ${
-                      item.active ? "text-primary" : "text-dark"
+                      item.active ? "text-primary bg-none" : "text-dark"
                     }`}
                     onClick={() => setShowLanguagePopup((prev) => !prev)} // Toggle the popup
                   >

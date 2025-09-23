@@ -6,7 +6,6 @@ import { IoSettingsOutline, IoTrophyOutline } from "react-icons/io5";
 import logo from "../../assets/images/logo.png";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../../Stores/authSlice";
-import './ProfileSidebar.css'
 export const ProfileSidebar = ({ currentComponent, onMenuClick }) => {
   const [open, setOpen] = useState(false);
   const navigate = useNavigate();
@@ -19,7 +18,7 @@ export const ProfileSidebar = ({ currentComponent, onMenuClick }) => {
   const dispatch = useDispatch();
   const { isAuthenticated, user } = useSelector((state) => state.auth);
   const handleLogout = () => {
-    navigate('/')
+    navigate("/");
     dispatch(logout());
   };
   const menuLinks = [
@@ -40,8 +39,6 @@ export const ProfileSidebar = ({ currentComponent, onMenuClick }) => {
     },
   ];
 
-
-
   return (
     <div
       className="h-screen bg-[#97D0FA] flex flex-col items-center pt-10 relative"
@@ -59,25 +56,22 @@ export const ProfileSidebar = ({ currentComponent, onMenuClick }) => {
       {/* Navigation Links */}
       <nav className="w-full flex flex-col items-center">
         <ul className="flex flex-col gap-2 items-center">
-          {menuLinks.map((item, idx) => {
-            const isActive = currentComponent === item.label;
-            return (
-              <li key={idx} className="w-full">
-                <NavLink
-                  to={item.go}
-                  className={`flex items-center w-48 h-12 pl-4 text-start rounded-lg transition-colors gap-3 font-semibold text-lg hover:bg-gradient-to-r hover:from-[#1E90FF] hover:to-[#0E5F98] hover:text-white
-                    ${
-                      isActive
-                        ? "bg-gradient-to-r from-[#1E90FF] to-[#0E5F98] text-white"
-                        : "bg-transparent text-black hover:bg-[#e8f5ff]"
-                    }`}
-                >
-                  {item.icon}
-                  <span>{item.label}</span>
-                </NavLink>
-              </li>
-            );
-          })}
+          {menuLinks.map((item, idx) => (
+            <li key={idx} className="w-full">
+              <NavLink
+                to={item.go}
+                className={({ isActive }) =>
+                  `flex items-center w-48 h-12 pl-4 text-start rounded-lg transition-colors gap-3 font-semibold text-lg hover:bg-gradient-to-r hover:from-[#1E90FF] hover:to-[#0E5F98] hover:text-white ` +
+                  (isActive
+                    ? "bg-gradient-to-r from-[#1E90FF] to-[#0E5F98] text-white"
+                    : "bg-transparent text-black hover:bg-[#e8f5ff]")
+                }
+              >
+                {item.icon}
+                <span>{item.label}</span>
+              </NavLink>
+            </li>
+          ))}
         </ul>
 
         {/* Settings Dropdown */}
@@ -97,8 +91,12 @@ export const ProfileSidebar = ({ currentComponent, onMenuClick }) => {
                   <NavLink
                     key={idx}
                     to={item.go}
-                    className={`px-4 py-2 text-sm text-left hover:text-white ${(idx =
-                      3 && "border-b border-white")}`}
+                    className={({ isActive }) =>
+                      `px-4 py-2 text-sm text-left rounded-lg transition-colors ` +
+                      (isActive
+                        ? "bg-gradient-to-r from-[#1E90FF] to-[#0E5F98] text-white"
+                        : "text-black hover:text-white hover:bg-[#1E90FF]/20")
+                    }
                   >
                     {item.name}
                   </NavLink>
