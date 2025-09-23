@@ -4,8 +4,6 @@ import { useLocation, useNavigate } from "react-router-dom";
 import QuizResultPage from "./QuizResultPage";
 
 const QuizInterface = () => {
-  const location = useLocation();
-  console.log(location.pathname);
   const navigate = useNavigate();
   const [component, setComponent] = useState(false);
   const [currentQuestion, setCurrentQuestion] = useState(0);
@@ -23,7 +21,6 @@ const QuizInterface = () => {
         "It allows students to hire tutors directly",
         "It is a video streaming platform for online classes",
       ],
-      isMulti: false,
     },
     {
       id: 2,
@@ -35,7 +32,6 @@ const QuizInterface = () => {
         "Makes learning completely automated",
         "Eliminates the need for textbooks",
       ],
-      isMulti: true, // Example multi-choice
     },
     {
       id: 3,
@@ -46,9 +42,9 @@ const QuizInterface = () => {
         "It only works with video content",
         "It requires manual input from teachers",
       ],
-      isMulti: false,
     },
   ];
+
   const totalQuestions = questions.length;
   const completedQuestions = Object.keys(selectedAnswers).length;
   const progressPercentage = Math.round(
@@ -70,31 +66,11 @@ const QuizInterface = () => {
     return `${minutes}:${remainingSeconds.toString().padStart(2, "0")}`;
   };
 
-  // Multi/single choice answer select
   const handleAnswerSelect = (optionIndex) => {
-    const isMulti = questions[currentQuestion].isMulti;
-    setSelectedAnswers((prev) => {
-      if (isMulti) {
-        // Multi-choice: toggle option
-        const prevSelected = prev[currentQuestion] || [];
-        let newSelected;
-        if (prevSelected.includes(optionIndex)) {
-          newSelected = prevSelected.filter((i) => i !== optionIndex);
-        } else {
-          newSelected = [...prevSelected, optionIndex];
-        }
-        return {
-          ...prev,
-          [currentQuestion]: newSelected,
-        };
-      } else {
-        // Single choice
-        return {
-          ...prev,
-          [currentQuestion]: optionIndex,
-        };
-      }
-    });
+    setSelectedAnswers((prev) => ({
+      ...prev,
+      [currentQuestion]: optionIndex,
+    }));
   };
 
   const handleNext = () => {
@@ -119,7 +95,7 @@ const QuizInterface = () => {
   };
 
   return (
-    <div className="bg-gray-50 py-8 px-4 w-full">
+    <div className="bg-gray-50 py-4 md:py-8 px-2 w-full">
       <div className="max-w-4xl w-full mx-auto">
         {/* Progress Bar */}
         <div className="mb-8">
@@ -159,73 +135,64 @@ const QuizInterface = () => {
           </div>
 
           {/* Question Content */}
-          <div className="p-8">
-            <h3 className="text-lg font-medium text-gray-800 mb-6 leading-relaxed">
+          <div className="p-2 md:p-8">
+            <h3 className="md:text-lg font-medium text-gray-800 mb-6 leading-relaxed">
               {questions[currentQuestion].question}
             </h3>
 
             {/* Answer Options */}
-            <div className="space-y-4">
-              {questions[currentQuestion].options.map((option, index) => {
-                const isMulti = questions[currentQuestion].isMulti;
-                const selected = isMulti
-                  ? (selectedAnswers[currentQuestion] || []).includes(index)
-                  : selectedAnswers[currentQuestion] === index;
-                return (
-                  <label
-                    key={index}
-                    className={`flex items-center p-4 rounded-lg border-2 cursor-pointer transition-all duration-200 ${
-                      selected
-                        ? "border-blue-500 bg-blue-50"
-                        : "border-gray-200 hover:border-gray-300 hover:bg-gray-50"
+            <div className="space-y-2 md:space-y-4">
+              {questions[currentQuestion].options.map((option, index) => (
+                <label
+                  key={index}
+                  className={`flex items-center text-sm md:text-base p-2 md:p-4 rounded-lg border-2 cursor-pointer transition-all duration-200 ${
+                    selectedAnswers[currentQuestion] === index
+                      ? "border-blue-500 bg-blue-50"
+                      : "border-gray-200 hover:border-gray-300 hover:bg-gray-50"
+                  }`}
+                >
+                  <input
+                    type="radio"
+                    name={`question-${currentQuestion}`}
+                    value={index}
+                    checked={selectedAnswers[currentQuestion] === index}
+                    onChange={() => handleAnswerSelect(index)}
+                    className="sr-only"
+                  />
+                  <div
+                    className={`w-5 h-5 rounded-full border-2 mr-4 flex items-center justify-center ${
+                      selectedAnswers[currentQuestion] === index
+                        ? "border-blue-500 bg-blue-500"
+                        : "border-gray-300"
                     }`}
                   >
-                    <input
-                      type={isMulti ? "checkbox" : "radio"}
-                      name={`question-${currentQuestion}`}
-                      value={index}
-                      checked={selected}
-                      onChange={() => handleAnswerSelect(index)}
-                      className="sr-only"
-                    />
-                    <div
-                      className={`w-5 h-5 rounded-full border-2 mr-4 flex items-center justify-center ${
-                        selected
-                          ? "border-blue-500 bg-blue-500"
-                          : "border-gray-300"
-                      }`}
-                    >
-                      {selected && (
-                        <div className="w-2 h-2 bg-white rounded-full"></div>
-                      )}
-                    </div>
-                    <span className="text-gray-700 leading-relaxed">
-                      {option}
-                    </span>
-                  </label>
-                );
-              })}
+                    {selectedAnswers[currentQuestion] === index && (
+                      <div className="w-2 h-2 bg-white rounded-full"></div>
+                    )}
+                  </div>
+                  <span className="text-gray-700 leading-relaxed">
+                    {option}
+                  </span>
+                </label>
+              ))}
             </div>
           </div>
 
           {/* Navigation Buttons */}
           <div className="px-8 py-6 bg-gray-50 border-t border-gray-200">
             <div className="flex items-center justify-between">
-              {currentQuestion === 0 ? (
-                <button></button>
-              ) : (
-                <button
-                  onClick={handlePrevious}
-                  className={`flex items-center gap-2 px-6 py-3 rounded-lg font-medium transition-colors ${
-                    currentQuestion === 0
-                      ? "bg-black text-white cursor-not-allowed"
-                      : "bg-black text-white hover:bg-gray-700"
-                  }`}
-                >
-                  <ChevronLeft className="w-4 h-4" />
-                  Previous
-                </button>
-              )}
+              <button
+                onClick={handlePrevious}
+                disabled={currentQuestion === 0}
+                className={`flex items-center gap-2 px-6 py-3 rounded-lg font-medium transition-colors ${
+                  currentQuestion === 0
+                    ? "bg-black text-white cursor-not-allowed"
+                    : "bg-black text-white hover:bg-gray-700"
+                }`}
+              >
+                <ChevronLeft className="w-4 h-4" />
+                Previous
+              </button>
               {currentQuestion === totalQuestions - 1 ? (
                 <button
                   type="submit"

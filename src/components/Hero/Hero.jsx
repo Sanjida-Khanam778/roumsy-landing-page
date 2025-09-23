@@ -1,5 +1,3 @@
-"use client";
-
 import { useState, useEffect, useRef } from "react";
 import hero1 from "../../assets/images/herobg.png"; // First background image
 import hero2 from "../../assets/images/hero2.png"; // Second background image
@@ -21,7 +19,9 @@ import youtube from "../../assets/images/icon/youtube.png";
 import head from "../../assets/images/icon/head.png";
 import track from "../../assets/images/icon/track.png";
 import unlimited from "../../assets/images/icon/unlimited.png";
-
+import slide1 from "../../assets/images/slide1.png";
+import slide2 from "../../assets/images/slide2.png";
+import slide3 from "../../assets/images/slide3.png";
 export default function Hero() {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isAnimating, setIsAnimating] = useState(false); // To manage animation state
@@ -161,66 +161,175 @@ export default function Hero() {
     return <img src={src} alt="Banner Icon" />;
   };
 
+  // Responsive state for mobile
+  const [isMobile, setIsMobile] = useState(false);
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 640);
+    };
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  // Mobile slide images
+  const mobileImages = [slide1, slide2, slide3];
+
   return (
     <div
-      className="relative overflow-hidden h-[90vh] w-full"
-      style={{
-        backgroundImage: `url(${currentBackgroundImage})`, // Dynamically change background image
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-        backgroundRepeat: "no-repeat",
-      }}
+      className={`relative overflow-hidden sm:h-[90vh] w-full`}
+      style={
+        isMobile
+          ? { background: "none" }
+          : {
+              backgroundImage: `url(${currentBackgroundImage})`,
+              backgroundSize: "cover",
+              backgroundPosition: "center",
+              backgroundRepeat: "no-repeat",
+            }
+      }
     >
       {/* Overlay for better readability */}
-      <div className="absolute inset-0 bg-primary/10"></div>
+      {!isMobile && <div className="absolute inset-0 bg-primary/10"></div>}
 
-      <div className="relative w-10/12 flex mx-auto h-full">
-        <div className="grid grid-cols-1 w-1/2 gap-12 items-center min-h-[600px] h-full ">
+      <div
+        className={`relative w-11/12 2xl:w-10/12 flex mx-auto ${
+          isMobile ? "flex-col" : ""
+        }`}
+      >
+        {/* Mobile: Show slide image above content */}
+        {isMobile && (
+          <div className="w-full flex flex-col  gap-4 justify-center items-center pt-4">
+            <div className="relative">
+              <img
+                src={mobileImages[currentSlide]}
+                alt="Slide"
+                className="rounded-xl shadow-lg"
+              />
+              {isMobile && (
+                <div
+                  className={`absolute flex items-center justify-between z-30 ${
+                    isMobile ? "w-full justify-center" : ""
+                  }`}
+                >
+                  <button
+                    onClick={handlePrevSlide}
+                    className="text-white left-0 p-2 rounded-full bg-primary/70 hover:bg-primary/70 transition-all duration-200 cursor-pointer"
+                    type="button"
+                  >
+                    <FaArrowLeft />
+                  </button>
+                  <button
+                    onClick={handleNextSlide}
+                    className="text-white left-0 p-2 rounded-full bg-primary/70 hover:bg-primary/70 transition-all duration-200 cursor-pointer"
+                    type="button"
+                  >
+                    <FaArrowRight />
+                  </button>
+                </div>
+              )}
+              {isMobile && (
+                <div>
+                  <div className="flex flex-col gap-2 left-0 absolute bottom-2">
+                    {/* Static Badge 1 - Top Right */}
+                    <div className="left-0 bg-white/65 backdrop-blur-sm rounded-3xl px-2 shadow-lg z-20">
+                      <div className="flex items-center space-x-2">
+                        <img src={youtube} alt="" />
+                        <span className="text-sm font-medium py-1 text-gray-700 whitespace-nowrap overflow-hidden text-ellipsis">
+                          {currentSlideData.features[0]?.text}
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="flex flex-col gap-2 right-0  absolute bottom-2">
+                    {/* Static Badge 2 - Vertically Centered */}
+                    <div className="right-0 bg-white/65 backdrop-blur-sm rounded-3xl px-2 py-1 shadow-lg z-20">
+                      <div className="space-y-4">
+                        <div className="flex items-center space-x-2">
+                          {renderImage(currentSlideData.features[1]?.icon)}
+                          <span className="text-sm font-medium text-gray-700">
+                            {currentSlideData.features[1]?.text}
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              )}
+            </div>
+            {/* Navigation Dots */}
+            {isMobile && (
+              <div className="flex space-x-3">
+                {slides.map((_, index) => (
+                  <button
+                    key={index}
+                    onClick={() => handleManualSlideChange(index)}
+                    className={`w-2 h-2 rounded-full transition-all duration-300 ${
+                      index === currentSlide
+                        ? "bg-blue-500 scale-125"
+                        : "bg-blue-200 hover:bg-blue-300"
+                    }`}
+                  />
+                ))}
+              </div>
+            )}
+          </div>
+        )}
+        <div
+          className={`grid grid-cols-1 mt-10 sm:mt-0 ${
+            isMobile ? "w-full" : "w-1/2"
+          } gap-12 items-center sm:min-h-[600px] sm:h-full`}
+        >
           {/* Left Content */}
-          <div className="space-y-8 z-10 relative w-5/6">
+          <div
+            className={`space-y-4 lg:space-y-8 z-10 relative ${
+              isMobile ? "w-full" : "w-4/6 2xl:w-5/6"
+            }`}
+          >
             {/* Badge */}
-            <div className="inline-flex items-center space-x-2 bg-white/80 backdrop-blur-sm rounded-full px-4 py-2 text-sm font-medium text-primary border-blue-100">
+            <div className="inline-flex items-center space-x-2 bg-white/80 backdrop-blur-sm rounded-full sm:px-4 sm:py-2 text-sm font-medium text-primary border-blue-100">
               <div className="">
-                <img src={currentSlideData.badge.icon || "/placeholder.svg"} alt="" />
+                <img
+                  src={currentSlideData.badge.icon || "/placeholder.svg"}
+                  alt=""
+                />
               </div>
               <span>{currentSlideData.badge.text}</span>
             </div>
-
             {/* Title */}
-            <div className="space-y-4">
-              <h1 className="text-4xl lg:text-5xl xl:text-6xl font-bold text-gray-900 leading-tight">
+            <div className="space-y-2 lg:space-y-4">
+              <h1 className="text-2xl lg:text-3xl xl:text-5xl font-bold text-gray-900 leading-tight">
                 {currentSlideData.title}
               </h1>
-              <p className="text-lg lg:text-xl text-gray-600 leading-relaxed max-w-lg">
+              <p className="text-base xl:text-xl text-gray-600 leading-relaxed max-w-lg md:text-base">
                 {currentSlideData.description}
               </p>
             </div>
-
             {/* Buttons */}
-            <div className="flex flex-col sm:flex-row gap-4">
+            <div
+              className={`flex ${
+                isMobile ? "flex-col" : "flex-col xl:flex-row"
+              } gap-4`}
+            >
               <Link
                 to={currentSlideData.primaryButton.go}
-                className={`${currentSlideData.primaryButton.color} text-white px-8 py-3 rounded-lg font-semibold flex items-center justify-center space-x-2 transition-all duration-300 transform hover:scale-105 shadow-lg`}
+                className={`${currentSlideData.primaryButton.color} text-white px-2 xl:px-3 2xl:px-4 py-3 rounded-lg font-semibold flex items-center justify-center space-x-2 transition-all duration-300 transform hover:scale-105 shadow-lg`}
               >
                 {renderImage(currentSlideData.primaryButton.icon)}
-                {/* Always render the banner */}
                 <span>{currentSlideData.primaryButton.text}</span>
               </Link>
-
               {currentSlideData.secondaryButton && (
                 <Link
                   to={currentSlideData.secondaryButton.go}
-                  className={`${currentSlideData.secondaryButton.color} text-white px-8 py-3 rounded-lg font-semibold flex items-center justify-center space-x-2 transition-all duration-300 transform hover:scale-105 shadow-lg`}
+                  className={`${currentSlideData.secondaryButton.color} text-white px-2 xl:px-3 2xl:px-4 py-3 rounded-lg font-semibold flex items-center justify-center space-x-2 transition-all duration-300 transform hover:scale-105 shadow-lg`}
                 >
                   {renderImage(currentSlideData.secondaryButton.icon)}
-                  {/* Always render the banner */}
                   <span>{currentSlideData.secondaryButton.text}</span>
                 </Link>
               )}
             </div>
-
             {/* User Avatars and Stats */}
-            <div className="flex items-center space-x-4 pt-8">
+            <div className="flex lg:flex-row items-center space-x-4 pt-2 2xl:pt-6 3xl:pt-8">
               <div className="flex -space-x-4">
                 {avatar.map((icon, idx) => (
                   <img
@@ -230,71 +339,79 @@ export default function Hero() {
                   />
                 ))}
               </div>
-              <div className="">
+              <div className="md:hidden lg:block">
                 <div className="font-semibold text-gray">
                   <span className="text-primary">10k</span> Enrollment
                 </div>
               </div>
             </div>
             {/* Navigation Dots */}
-            <div className="flex space-x-3">
-              {slides.map((_, index) => (
-                <button
-                  key={index}
-                  onClick={() => handleManualSlideChange(index)} // Change slide manually
-                  className={`w-2 h-2 rounded-full transition-all duration-300 ${
-                    index === currentSlide
-                      ? "bg-blue-500 scale-125"
-                      : "bg-blue-200 hover:bg-blue-300"
-                  }`}
-                />
-              ))}
-            </div>
+            {!isMobile && (
+              <div className="flex space-x-3">
+                {slides.map((_, index) => (
+                  <button
+                    key={index}
+                    onClick={() => handleManualSlideChange(index)}
+                    className={`w-2 h-2 rounded-full transition-all duration-300 ${
+                      index === currentSlide
+                        ? "bg-blue-500 scale-125"
+                        : "bg-blue-200 hover:bg-blue-300"
+                    }`}
+                  />
+                ))}
+              </div>
+            )}
           </div>
 
           {/* Slide Controls */}
-          <div className="absolute bottom-12 left-1/2 transform -translate-x-1/2 flex items-center space-x-6 z-30">
-            <button
-              onClick={handlePrevSlide}
-              className="text-white p-2 rounded-full bg-primary/50 hover:bg-primary/70 transition-all duration-200 cursor-pointer"
-              type="button"
+          {!isMobile && (
+            <div
+              className={`absolute bottom-10 lg:bottom-4 left-1/2 transform -translate-x-1/2 flex items-center space-x-6 z-30 ${
+                isMobile ? "w-full justify-center" : ""
+              }`}
             >
-              <FaArrowLeft />
-              {/* Left Arrow */}
-            </button>
-            <button
-              onClick={handleNextSlide}
-              className="text-white p-2 rounded-full bg-primary/50 hover:bg-primary/70 transition-all duration-200 cursor-pointer"
-              type="button"
-            >
-              <FaArrowRight /> {/* Right Arrow */}
-            </button>
-          </div>
-        </div>
-        <div className=" w-1/2 relative">
-          {/* Static Badge 1 - Top Right */}
-          <div className="absolute top-[45%]  transform -translate-y-1/2 -left-24 bg-white/95 backdrop-blur-sm rounded-3xl px-4 py-2 shadow-lg z-20">
-            <div className="flex items-center space-x-2">
-              <img src={youtube} alt="" />
-              <span className="text-sm font-medium text-gray-700 whitespace-nowrap overflow-hidden text-ellipsis max-w-[120px] lg:max-w-[150px]">
-                {currentSlideData.features[0]?.text}
-              </span>
+              <button
+                onClick={handlePrevSlide}
+                className="text-white p-2 rounded-full bg-primary/50 hover:bg-primary/70 transition-all duration-200 cursor-pointer"
+                type="button"
+              >
+                <FaArrowLeft />
+              </button>
+              <button
+                onClick={handleNextSlide}
+                className="text-white p-2 rounded-full bg-primary/50 hover:bg-primary/70 transition-all duration-200 cursor-pointer"
+                type="button"
+              >
+                <FaArrowRight />
+              </button>
             </div>
-          </div>
-
-          {/* Static Badge 2 - Vertically Centered */}
-          <div className="absolute top-[55%] transform -translate-y-1/2 -left-16  bg-white/95 backdrop-blur-sm rounded-3xl px-4 py-2 shadow-lg z-20">
-            <div className="space-y-4">
+          )}
+        </div>
+        {/* Right side badges only for non-mobile */}
+        {!isMobile && (
+          <div className="w-1/2 relative">
+            {/* Static Badge 1 - Top Right */}
+            <div className="absolute top-[45%]  transform -translate-y-1/2 -left-24 bg-white/95 backdrop-blur-sm rounded-3xl px-4 py-2 shadow-lg z-20">
               <div className="flex items-center space-x-2">
-                {renderImage(currentSlideData.features[1]?.icon)}
-                {/* Always render the image for icons */}
-                <span className="text-sm font-medium text-gray-700">
-                  {currentSlideData.features[1]?.text}
+                <img src={youtube} alt="" />
+                <span className="text-sm font-medium text-gray-700 whitespace-nowrap overflow-hidden text-ellipsis max-w-[120px] lg:max-w-[150px]">
+                  {currentSlideData.features[0]?.text}
                 </span>
               </div>
             </div>
+            {/* Static Badge 2 - Vertically Centered */}
+            <div className="absolute top-[55%] transform -translate-y-1/2 -left-16  bg-white/95 backdrop-blur-sm rounded-3xl px-4 py-2 shadow-lg z-20">
+              <div className="space-y-4">
+                <div className="flex items-center space-x-2">
+                  {renderImage(currentSlideData.features[1]?.icon)}
+                  <span className="text-sm font-medium text-gray-700">
+                    {currentSlideData.features[1]?.text}
+                  </span>
+                </div>
+              </div>
+            </div>
           </div>
-        </div>
+        )}
       </div>
     </div>
   );

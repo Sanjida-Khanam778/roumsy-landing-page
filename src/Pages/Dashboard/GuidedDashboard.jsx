@@ -4,13 +4,21 @@ import pricing1 from "../../assets/images/pricing1.png";
 import pricing2 from "../../assets/images/pricing2.png";
 import pricing3 from "../../assets/images/pricing3.png";
 import logo from "../../assets/images/logo.png";
-import { Plus, Search, Send, Sparkles, MoreVertical, Menu } from "lucide-react";
+import {
+  Plus,
+  Search,
+  Send,
+  Sparkles,
+  MoreVertical,
+  Menu,
+  ChevronDown,
+} from "lucide-react";
 import Button from "../../components/Shared/Button";
 import botProfile from "../../assets/images/botProfile.jpg";
 import userProfile from "../../assets/images/userProfile.jpg";
 import { Link } from "react-router-dom";
 import { GoSidebarExpand } from "react-icons/go";
-const Dashboard = ({ tab, embedded }) => {
+const GuidedDashboard = ({ tab, embedded }) => {
   const [inputValue, setInputValue] = useState("");
   // Each conversation is { sender: 'user' | 'ai', text: string }
   const [conversations, setConversations] = useState([
@@ -26,11 +34,6 @@ const Dashboard = ({ tab, embedded }) => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [isMobileOrTablet, setIsMobileOrTablet] = useState(false);
 
-  const suggestionCards = [
-    "Ask your LearnGPT about PMP certification",
-    "Ask your LearnGPT about immigration to Canada",
-    "What projects should I be concerned about right now?",
-  ];
   const plans = [
     {
       title: "Exam Simulator Only",
@@ -67,6 +70,38 @@ const Dashboard = ({ tab, embedded }) => {
       image: pricing1,
       scale: false,
     },
+  ];
+  const guided = [
+    {
+      id: 1,
+      name: "Immigration & Language Preparation",
+    },
+    {
+      id: 2,
+      name: "Project Management",
+    },
+    {
+      id: 3,
+      name: "Tech & Development",
+    },
+  ];
+
+  const guidedQuestions = [
+    [
+      "What are the main steps for immigration?",
+      "How to prepare for IELTS/TOEFL?",
+      "What documents are needed for visa application?",
+    ],
+    [
+      "How to get PMP certified?",
+      "Best practices for project planning?",
+      "How to manage project risks?",
+    ],
+    [
+      "What are trending tech stacks?",
+      "How to start learning web development?",
+      "Tips for career growth in tech?",
+    ],
   ];
 
   useEffect(() => {
@@ -125,13 +160,23 @@ const Dashboard = ({ tab, embedded }) => {
     : "w-72";
 
   // Sidebar position logic
-  const sidebarPosition = embedded ? "relative" : isMobileOrTablet ? "fixed" : "static";
+  const sidebarPosition = embedded
+    ? "relative"
+    : isMobileOrTablet
+    ? "fixed"
+    : "static";
 
   return (
-    <div className={`font-Poppins ${embedded ? '' : 'flex h-screen bg-[#575555]/10'}`}> 
+    <div
+      className={`font-Poppins ${
+        embedded ? "" : "flex h-screen bg-[#575555]/10"
+      }`}
+    >
       {/* Left Sidebar */}
       <div
-        className={`${sidebarWidth} bg-[#0062A7] text-white ${sidebarPosition} left-0 top-0 flex flex-col h-full z-40 transition-all duration-300 ${embedded ? 'w-full' : ''}`}
+        className={`${sidebarWidth} bg-[#0062A7] text-white ${sidebarPosition} left-0 top-0 flex flex-col h-full z-40 transition-all duration-300 ${
+          embedded ? "w-full" : ""
+        }`}
       >
         {/* Sidebar icon*/}
         <div className="flex items-center justify-between p-4">
@@ -154,13 +199,8 @@ const Dashboard = ({ tab, embedded }) => {
         {/* Sidebar content only if open or desktop */}
         {(sidebarOpen || !isMobileOrTablet) && (
           <>
-            {/* New Chat Button */}
-            <button className="w-full flex items-center gap-3 bg-blue-500 hover:bg-blue-400 rounded-lg px-4 py-3 transition-colors">
-              <Plus className="w-5 h-5" />
-              <span className="font-medium">New Chat</span>
-            </button>
             {/* Search Chat */}
-            <div className="p-6 border-b border-blue-500">
+            {/* <div className="p-6 border-b border-blue-500">
               <button
                 className="w-full flex items-center gap-3 text-blue-200 hover:text-white transition-colors"
                 onClick={() => setShowSearch((prev) => !prev)}
@@ -178,68 +218,53 @@ const Dashboard = ({ tab, embedded }) => {
                   autoFocus
                 />
               )}
-            </div>
+            </div> */}
             {/* My Conversations */}
             <div className="flex-1 p-6">
               <h3 className="text-blue-200 font-medium mb-4">
-                My Conversations
+                Guided Questions
               </h3>
-              {conversations.filter((c) => c.sender === "user").length === 0 ? (
-                <p className="text-blue-300 text-sm">No conversations yet</p>
-              ) : (
-                <div className="space-y-2">
-                  {conversations
-                    .filter((c) => c.sender === "user")
-                    .map((conv, index) => (
-                      <div key={index} className="relative">
-                        <div className="flex items-center justify-end">
-                          <div
-                            className="text-blue-100 text-sm py-2 px-3 rounded-lg hover:bg-blue-500 cursor-pointer transition-colors text-right truncate"
-                            title={conv.text}
-                          >
-                            {conv.text.length > 60
-                              ? conv.text.slice(0, 57) + "..."
-                              : conv.text}
-                          </div>
-                          <button
-                            className="ml-2 p-1 text-blue-200 hover:text-white"
-                            onClick={() => setDropdownIndex(index)}
-                          >
-                            <MoreVertical className="w-4 h-4" />
-                          </button>
-                        </div>
-                        {/* Dropdown */}
-                        {dropdownIndex === index && (
-                          <div className="absolute right-0 mt-2 bg-white border rounded shadow-lg z-10 w-32">
-                            <button
-                              className="block w-full text-left px-4 py-2 text-sm text-black hover:bg-blue-100"
+              <div className="space-y-2">
+                {guided.map((item, idx) => (
+                  <div key={item.id} className="p-2 rounded-lg bg-[#00518F]/80">
+                    <div
+                      className="flex items-center justify-between cursor-pointer"
+                      onClick={() =>
+                        setDropdownIndex(dropdownIndex === idx ? null : idx)
+                      }
+                    >
+                      <span>
+                        {item.id}. {item.name}
+                      </span>
+                      <ChevronDown
+                        className={`w-5 h-5 transition-transform ${
+                          dropdownIndex === idx ? "rotate-180" : ""
+                        }`}
+                      />
+                    </div>
+                    {dropdownIndex === idx && (
+                      <div className="mt-2 bg-white rounded-lg shadow-lg text-black ">
+                        {guidedQuestions[idx].map((q, qIdx) => (
+                          <React.Fragment key={qIdx}>
+                            <div
+                              className="px-3 py-2 hover:bg-blue-100 cursor-pointer text-sm"
                               onClick={() => {
-                                setEditTitle(conv.text);
-                                setDropdownIndex(null);
+                                setInputValue(q);
+                                setSidebarOpen((prev) => !prev);
                               }}
                             >
-                              Rename
-                            </button>
-                            <button
-                              className="block w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-blue-100"
-                              onClick={() => {
-                                setConversations((prev) =>
-                                  prev.filter(
-                                    (c, i) =>
-                                      !(c.sender === "user" && i === index)
-                                  )
-                                );
-                                setDropdownIndex(null);
-                              }}
-                            >
-                              Delete
-                            </button>
-                          </div>
-                        )}
+                              {q}
+                            </div>
+                            {qIdx < guidedQuestions[idx].length - 1 && (
+                              <div className="border-t border-gray-200 mx-2"></div>
+                            )}
+                          </React.Fragment>
+                        ))}
                       </div>
-                    ))}
-                </div>
-              )}
+                    )}
+                  </div>
+                ))}
+              </div>
             </div>
           </>
         )}
@@ -287,7 +312,11 @@ const Dashboard = ({ tab, embedded }) => {
                         <div
                           className={` rounded-full mr-2 h-12 w-12  flex items-center justify-center `}
                         >
-                          <img className="rounded-full w-8 md:w-auto" src={botProfile} alt="" />
+                          <img
+                            className="rounded-full w-8 md:w-auto"
+                            src={botProfile}
+                            alt=""
+                          />
                         </div>
                       )}
                       <div
@@ -316,27 +345,7 @@ const Dashboard = ({ tab, embedded }) => {
               )}
             </div>
 
-            <div className="px-2 md:px-0 md:w-10/12 md:mb-6">
-              {/* Suggestions */}
-              <div className="w-full mb-2 md:mb-8">
-                <h4 className="text-gray font-medium hidden md:block mb-4">
-                  Suggestions on what to ask Our AI
-                </h4>
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-2 md:gap-4">
-                  {suggestionCards.map((suggestion, index) => (
-                    <div
-                      key={index}
-                      onClick={() => setInputValue(suggestion)}
-                      className="bg-white rounded-xl p-1 md:p-4 cursor-pointer hover:border-blue-300 hover:shadow-md transition-all duration-200"
-                    >
-                      <p className="text-gray-700 text-sm leading-relaxed">
-                        {suggestion}
-                      </p>
-                    </div>
-                  ))}
-                </div>
-              </div>
-
+            <div className="px-2 md:px-0 py-2 md:py-0 md:w-10/12 md:mb-6">
               {/* Input Area */}
               {!tab && (
                 <>
@@ -352,7 +361,9 @@ const Dashboard = ({ tab, embedded }) => {
                       type="text"
                       placeholder="Ask me anything about projects"
                       value={inputValue}
-                      onKeyPress={(e) => e.key === "Enter" && handleSendMessage()}
+                      onKeyPress={(e) =>
+                        e.key === "Enter" && handleSendMessage()
+                      }
                       onChange={(e) => setInputValue(e.target.value)}
                       className="flex-1 outline-none text-gray-700 placeholder-gray-400 placeholder:text-sm sm:placeholder:text-base "
                     />
@@ -386,7 +397,11 @@ const Dashboard = ({ tab, embedded }) => {
       ) : (
         <div
           className={`flex-1 flex flex-col ml-0 ${
-            isMobileOrTablet && !embedded ? (sidebarOpen ? "ml-72" : "ml-16") : "ml-72"
+            isMobileOrTablet && !embedded
+              ? sidebarOpen
+                ? "ml-72"
+                : "ml-16"
+              : "ml-72"
           }`}
         >
           {/* Header */}
@@ -399,7 +414,7 @@ const Dashboard = ({ tab, embedded }) => {
           {/* Chat Area */}
           <div className="flex-1 flex flex-col items-center justify-between h-[90vh]">
             {/* Main Prompt */}
-            <div className="w-full flex flex-col items-center mt-6 overflow-y-auto h-[68vh]">
+            <div className="w-full flex flex-col items-center mt-6 overflow-y-auto h-full">
               <div className="text-center mb-6">
                 <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
                   <Sparkles className="w-6 h-6 text-blue-500" />
@@ -422,7 +437,11 @@ const Dashboard = ({ tab, embedded }) => {
                         <div
                           className={` rounded-full mr-2 h-12 w-12  flex items-center justify-center `}
                         >
-                          <img className="rounded-full w-8 md:w-auto" src={botProfile} alt="" />
+                          <img
+                            className="rounded-full w-8 md:w-auto"
+                            src={botProfile}
+                            alt=""
+                          />
                         </div>
                       )}
                       <div
@@ -451,27 +470,7 @@ const Dashboard = ({ tab, embedded }) => {
               )}
             </div>
 
-            <div className="px-2 md:px-0 md:w-10/12 md:mb-6">
-              {/* Suggestions */}
-              <div className="w-full mb-2 md:mb-8">
-                <h4 className="text-gray font-medium hidden md:block mb-4">
-                  Suggestions on what to ask Our AI
-                </h4>
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-2 md:gap-4">
-                  {suggestionCards.map((suggestion, index) => (
-                    <div
-                      key={index}
-                      onClick={() => setInputValue(suggestion)}
-                      className="bg-white rounded-xl p-1 md:p-4 cursor-pointer hover:border-blue-300 hover:shadow-md transition-all duration-200"
-                    >
-                      <p className="text-gray-700 text-sm leading-relaxed">
-                        {suggestion}
-                      </p>
-                    </div>
-                  ))}
-                </div>
-              </div>
-
+            <div className="px-2 md:px-0 py-2 md:py-0 md:w-10/12 md:mb-6">
               {/* Input Area */}
               {!tab && (
                 <>
@@ -487,7 +486,9 @@ const Dashboard = ({ tab, embedded }) => {
                       type="text"
                       placeholder="Ask me anything about projects"
                       value={inputValue}
-                      onKeyPress={(e) => e.key === "Enter" && handleSendMessage()}
+                      onKeyPress={(e) =>
+                        e.key === "Enter" && handleSendMessage()
+                      }
                       onChange={(e) => setInputValue(e.target.value)}
                       className="flex-1 outline-none text-gray-700 placeholder-gray-400 placeholder:text-sm sm:placeholder:text-base "
                     />
@@ -523,4 +524,4 @@ const Dashboard = ({ tab, embedded }) => {
   );
 };
 
-export default Dashboard;
+export default GuidedDashboard;
