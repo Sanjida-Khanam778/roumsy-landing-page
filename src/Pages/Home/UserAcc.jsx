@@ -40,7 +40,7 @@ export const UserAcc = () => {
   };
 
   return (
-    <div className="flex flex-col items-center gap-6 pt-16 h-[91vh] overflow-auto bg-[#F4F8FD]">
+    <div className="flex flex-col items-center justify-center gap-6 h-[91vh] overflow-auto bg-[#F4F8FD] px-6">
       {/* Header */}
       <div className="flex flex-col justify-center items-center gap-1 relative">
         <div className="relative w-20 h-20">

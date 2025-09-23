@@ -6,6 +6,7 @@ import { IoSettingsOutline, IoTrophyOutline } from "react-icons/io5";
 import logo from "../../assets/images/logo.png";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../../Stores/authSlice";
+import './ProfileSidebar.css'
 export const ProfileSidebar = ({ currentComponent, onMenuClick }) => {
   const [open, setOpen] = useState(false);
   const navigate = useNavigate();
