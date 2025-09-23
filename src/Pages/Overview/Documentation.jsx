@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Lock } from "lucide-react";
 import pricing1 from "../../assets/images/pricing1.png";
 import pricing2 from "../../assets/images/pricing2.png";
@@ -7,6 +7,20 @@ import tic from "../../assets/images/tic.png";
 import Button from "../../components/Shared/Button";
 
 const Documentation = () => {
+  const [sidebarOpen, setSidebarOpen] = useState(true);
+  const [isMobileOrTablet, setIsMobileOrTablet] = useState(false);
+
+  React.useEffect(() => {
+    const handleResize = () => {
+      const mobileOrTablet = window.innerWidth <= 768;
+      setIsMobileOrTablet(mobileOrTablet);
+      setSidebarOpen(!mobileOrTablet); // On desktop, always open; on mobile/tablet, sidebar hidden by default
+    };
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
   const [showAlert, setShowAlert] = useState(false);
   const [activeLesson, setActiveLesson] = useState(1);
 
@@ -73,14 +87,6 @@ const Documentation = () => {
       type: "ppt",
       url: "/sample2.pptx",
     },
-    // {
-    //   id: 4,
-    //   title: "Immigration Word Doc",
-    //   isUnlocked: true,
-    //   isActive: false,
-    //   type: "doc",
-    //   url: "/sample/doc.docx",
-    // },
     {
       id: 5,
       title: "Locked Lesson",
@@ -108,65 +114,128 @@ const Documentation = () => {
   const currentLesson = lessons.find((l) => l.id === activeLesson);
 
   return (
-    <div className="flex bg-white">
+    <div className="flex bg-white relative md:h-screen lg:h-auto">
+      {/* Hamburger icon for mobile/tablet - relative to Documentation component */}
+      {isMobileOrTablet && (
+        <button
+          className="absolute top-4 left-4 bg-blue-500 text-white rounded-full p-2 shadow-lg w-10 h-10 flex items-center justify-center z-50"
+          onClick={() => setSidebarOpen((prev) => !prev)}
+          aria-label="Toggle Sidebar"
+          style={{ position: "absolute" }}
+        >
+          <svg
+            width="24"
+            height="24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          >
+            <line x1="3" y1="12" x2="21" y2="12" />
+            <line x1="3" y1="6" x2="21" y2="6" />
+            <line x1="3" y1="18" x2="21" y2="18" />
+          </svg>
+        </button>
+      )}
       {/* Sidebar */}
-      <div className="w-80 bg-[#E5E5E5] py-6">
-        <div className="space-y-4">
-          {lessons.map((lesson) => (
-            <div
-              key={lesson.id}
-              className={`p-4 cursor-pointer transition-colors ${
-                lesson.id === activeLesson ? "bg-white" : "hover:bg-gray-100"
-              }`}
-              onClick={() =>
-                lesson.isUnlocked
-                  ? handleLessonClick(lesson)
-                  : handleLockedLessonClick()
-              }
+      <div
+        className={`bg-[#E5E5E5] py-6 flex flex-col transition-all duration-300 h-screen ${
+          isMobileOrTablet
+            ? sidebarOpen
+              ? "fixed top-0 left-0 w-72 h-full z-50 shadow-2xl" // overlays main content
+              : "hidden" // collapsed: sidebar hidden
+            : "w-72 h-full relative"
+        }`}
+      >
+        {/* Hamburger icon for mobile/tablet */}
+        {isMobileOrTablet && (
+          <button
+            className="bg-blue-500 text-white rounded-full p-2 shadow-lg md:mb-4 mb-2 ml-4 w-10 h-10 flex items-center justify-center"
+            onClick={() => setSidebarOpen((prev) => !prev)}
+            aria-label="Toggle Sidebar"
+          >
+            <svg
+              width="24"
+              height="24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
             >
-              <div className="flex items-center justify-between">
-                <div className="flex-1">
-                  <h3
-                    className={`font-medium ${
-                      lesson.id === activeLesson
-                        ? "text-[#1E90FF]"
-                        : "text-gray"
-                    }`}
-                  >
-                    {lesson.title}
-                  </h3>
+              <line x1="3" y1="12" x2="21" y2="12" />
+              <line x1="3" y1="6" x2="21" y2="6" />
+              <line x1="3" y1="18" x2="21" y2="18" />
+            </svg>
+          </button>
+        )}
+
+        {/* Sidebar content only if open or desktop */}
+        {(sidebarOpen || !isMobileOrTablet) && (
+          <div className="space-y-4">
+            {lessons.map((lesson) => (
+              <div
+                key={lesson.id}
+                className={`p-4 cursor-pointer transition-colors ${
+                  lesson.id === activeLesson ? "bg-white" : "hover:bg-gray-100"
+                }`}
+                onClick={() =>
+                  lesson.isUnlocked
+                    ? handleLessonClick(lesson)
+                    : handleLockedLessonClick()
+                }
+              >
+                <div className="flex items-center justify-between">
+                  <div className="flex-1">
+                    <h3
+                      className={`font-medium ${
+                        lesson.id === activeLesson
+                          ? "text-[#1E90FF]"
+                          : "text-gray"
+                      }`}
+                    >
+                      {lesson.title}
+                    </h3>
+                  </div>
+                  {!lesson.isUnlocked && (
+                    <Lock className="w-4 h-4 text-gray-500 ml-2 flex-shrink-0" />
+                  )}
                 </div>
-                {!lesson.isUnlocked && (
-                  <Lock className="w-4 h-4 text-gray-500 ml-2 flex-shrink-0" />
-                )}
               </div>
-            </div>
-          ))}
-        </div>
+            ))}
+          </div>
+        )}
       </div>
 
       {/* Main Content */}
-      <div className="flex-1 p-8">
-        <div className="max-w-4xl h-full">
-          <h1 className="text-3xl font-bold text-gray-900 mb-8">
+      <div
+        className={`flex-1 p-4 md:p-8 transition-all duration-300`}
+        style={
+          isMobileOrTablet && sidebarOpen
+            ? { filter: "blur(2px)", pointerEvents: "none" }
+            : {}
+        }
+      >
+        <div className="max-w-4xl h-full mt-10 lg:mt-0">
+          <h1 className="text-xl md:text-3xl font-bold text-gray-900 mb-8">
             {currentLesson?.title}
           </h1>
 
           {/* PDF */}
           {currentLesson?.type === "pdf" && (
-            <div className="w-full h-full rounded-lg overflow-hidden">
+            <div className="w-full rounded-lg overflow-hidden">
               <iframe
                 src="https://docs.google.com/gview?url=https://www.adobe.com/support/products/enterprise/knowledgecenter/media/c4611_sample_explain.pdf&embedded=true"
                 width="100%"
-                height="500px"
+                height="700px"
               ></iframe>
             </div>
           )}
 
           {/* PPT */}
-
           {currentLesson?.type === "ppt" && (
-            <div className="w-full h-full rounded-lg overflow-hidden">
+            <div className="w-full rounded-lg overflow-hidden">
               <iframe
                 src={`https://docs.google.com/presentation/d/1bNVVeNyMtZnOey1m25w1uY7AzZi1jZOn/preview`}
                 width="100%"
@@ -177,15 +246,6 @@ const Documentation = () => {
               ></iframe>
             </div>
           )}
-
-          {/* DOC */}
-          {/* {currentLesson?.type === "doc" && (
-            <iframe
-              src={`https://docs.google.com/document/d/1sVHPHYNJFEesnrHFYUyYBIQFxfqZwmSmDQctEjza2vk/edit?usp=sharing`}
-              width="100%"
-              height="500px"
-            ></iframe>
-          )} */}
 
           {/* Video */}
           {currentLesson?.type === "video" && (
@@ -241,7 +301,7 @@ const Documentation = () => {
                       </div>
                     )}
                     <div
-                      className={`${plan.color} p-8 text-white text-center relative flex flex-col items-center`}
+                      className={`${plan.color} md:p-8 text-white text-center relative flex flex-col items-center`}
                     >
                       <img src={plan.image} alt="" />
                       <h3 className="text-xl font-semibold my-2">

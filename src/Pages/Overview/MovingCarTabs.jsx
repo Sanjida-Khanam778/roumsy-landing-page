@@ -390,7 +390,7 @@ export default function MovingCarTabs() {
       icon: tab3,
       active: false,
       content: (
-        <div className="p-8">
+        <div className="p-2 md:p-8">
           <h2 className="text-2xl font-bold mb-4">Documentation</h2>
           <p className="text-gray mb-4">
             Comprehensive study materials and guides
