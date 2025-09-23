@@ -3,23 +3,24 @@ import Navbar from "../../components/Navbar/Navbar";
 import { ProfileSidebar } from "../../components/Shared/ProfileSidebar";
 import { useState } from "react";
 import { FaBars } from "react-icons/fa";
+import { GoSidebarCollapse, GoSidebarExpand } from "react-icons/go";
 
 export default function ProfileDashboard() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   console.log(sidebarOpen);
   // Responsive sidebar logic
   return (
-    <div className="border h-screen flex relative">
+    <div className="h-screen flex relative">
       {/* Hamburger icon for md and below (hidden on lg+) */}
       {/* Hamburger icon for md and below (hidden on lg+) */}
       {/* Only show on screens smaller than lg and only if sidebar is closed */}
       {!sidebarOpen && (
         <button
-          className="lg:hidden absolute top-4 left-4 z-30 bg-white rounded-full p-2 shadow-lg"
+          className="lg:hidden absolute top-4 left-4 z-30 bg-primary rounded-full p-2 shadow-lg"
           onClick={() => setSidebarOpen(true)}
           aria-label="Open sidebar"
         >
-          <FaBars size={24} />
+          <GoSidebarCollapse className="text-xl text-white" />
         </button>
       )}
 
@@ -37,11 +38,11 @@ export default function ProfileDashboard() {
         {/* Close button for md and below (hidden on lg+) */}
         {sidebarOpen && (
           <button
-            className="lg:hidden absolute top-4 right-4 z-50 bg-white rounded-full px-2 py-1 shadow-lg"
+            className="lg:hidden absolute top-4 right-4 z-50 bg-primary rounded-full p-2 shadow-lg"
             onClick={() => setSidebarOpen(false)}
             aria-label="Close sidebar"
           >
-            ✕
+            <GoSidebarExpand className="text-xl text-white" />
           </button>
         )}
       </div>
