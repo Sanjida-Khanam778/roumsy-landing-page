@@ -17,7 +17,6 @@ export const ProfileSidebar = ({ currentComponent, onMenuClick }) => {
   ];
   const dispatch = useDispatch();
   const { isAuthenticated, user } = useSelector((state) => state.auth);
-  console.log(isAuthenticated);
   const handleLogout = () => {
     navigate('/')
     dispatch(logout());
