@@ -177,7 +177,7 @@ export default function Hero() {
 
   return (
     <div
-      className={`relative overflow-hidden sm:h-[90vh] w-full`}
+      className={`relative flex items-center overflow-hidden sm:h-[90vh] w-full`}
       style={
         isMobile
           ? { background: "none" }
