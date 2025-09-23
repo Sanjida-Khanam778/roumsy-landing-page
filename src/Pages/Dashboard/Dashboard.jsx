@@ -10,6 +10,7 @@ import botProfile from "../../assets/images/botProfile.jpg";
 import userProfile from "../../assets/images/userProfile.jpg";
 import { Link } from "react-router-dom";
 const Dashboard = ({ tab }) => {
+  const [sidebarOpen, setSidebarOpen] = useState(false); // For mobile sidebar
   const [inputValue, setInputValue] = useState("");
   // Each conversation is { sender: 'user' | 'ai', text: string }
   const [conversations, setConversations] = useState([
@@ -102,8 +103,31 @@ const Dashboard = ({ tab }) => {
     setShowPricingModal(false);
   };
 
+  // Responsive: show sidebar on desktop, hamburger on mobile
   return (
-    <div className="flex h-screen bg-[#575555]/10 font-Poppins">
+    <div className="flex h-screen bg-[#575555]/10 font-Poppins relative">
+      {/* Hamburger for mobile */}
+      <div className="md:hidden absolute top-4 left-4 z-50">
+        <button
+          onClick={() => setSidebarOpen((prev) => !prev)}
+          className="bg-blue-500 text-white p-2 rounded-lg shadow-lg"
+        >
+          <svg
+            width="24"
+            height="24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            className="feather feather-menu"
+          >
+            <line x1="3" y1="12" x2="21" y2="12" />
+            <line x1="3" y1="6" x2="21" y2="6" />
+            <line x1="3" y1="18" x2="21" y2="18" />
+          </svg>
+        </button>
+      </div>
       {/* pricing modal */}
       {showPricingModal && !isSubscribed && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
@@ -200,11 +224,19 @@ const Dashboard = ({ tab }) => {
         </div>
       )}
       {/* Left Sidebar */}
-      <div className="w-72 bg-[#0062A7] text-white flex flex-col">
+      <div
+        className={`bg-[#0062A7] text-white flex flex-col fixed md:static top-0 left-0 h-full z-40 transition-transform duration-300 md:w-72 w-64
+          ${
+            sidebarOpen ? "translate-x-0" : "-translate-x-full"
+          } md:translate-x-0`}
+        style={{
+          boxShadow: sidebarOpen ? "0 0 0 100vw rgba(0,0,0,0.3)" : "none",
+        }}
+      >
         {/* Logo and Header */}
         <div className="p-6 border-b border-blue-500">
           {/* Logo */}
-          <Link to={'/'}>
+          <Link to={"/"}>
             <div className="flex items-center space-x-2 mb-6">
               <img src={logo} className="w-12" alt="" />
               <p className="text-[#011F47] font-bold text-2xl">
@@ -264,16 +296,32 @@ const Dashboard = ({ tab }) => {
       </div>
 
       {/* Main Content Area */}
-      <div className="flex-1 flex flex-col">
+      <div
+        className={`flex-1 flex flex-col transition-all duration-300 ${
+          sidebarOpen ? "md:ml-0" : ""
+        } ${!sidebarOpen ? "md:ml-0" : ""}`}
+        style={{ width: sidebarOpen ? "100vw" : "auto" }}
+      >
+        {/* Overlay for mobile sidebar */}
+        {sidebarOpen && (
+          <div
+            className="fixed inset-0 bg-black bg-opacity-40 z-30 md:hidden"
+            onClick={() => setSidebarOpen(false)}
+          ></div>
+        )}
         {/* Header */}
-        <div className=" border-b border-gray/50 px-6 py-4 flex justify-between items-center">
+        <div className="border-b border-gray/50 px-6 py-4 flex justify-between items-center">
           <div className="text-sm text-gray font-semibold text-end w-full">
             Remaining {3 - chatCount}/3
           </div>
         </div>
 
         {/* Chat Area */}
-        <div className="flex-1 flex flex-col items-center justify-between">
+        <div
+          className={`flex-1 flex flex-col items-center justify-between ${
+            sidebarOpen ? "md:ml-0" : ""
+          }`}
+        >
           {/* Main Prompt */}
           <div className="w-full flex flex-col items-center mt-6 overflow-y-auto h-[68vh]">
             <div className="text-center mb-6">

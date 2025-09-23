@@ -15,7 +15,7 @@ const QuizResultPage = () => {
     setShowReviewModal(true);
     setReviewText(tag); // Optionally prefill with tag text
   };
-  
+
   const [showReviewModal, setShowReviewModal] = useState(false); // To manage the review popup
   const [reviewText, setReviewText] = useState(""); // To hold the review text
   const [rating, setRating] = useState(5); // Default rating is 5
