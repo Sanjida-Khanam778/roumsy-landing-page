@@ -1,6 +1,10 @@
 import { Pencil, Settings, Trash2 } from "lucide-react";
+import { useEffect } from "react";
 
 const QuizPreview = ({ onEdit, quiz }) => {
+  useEffect(() => {
+    console.log("Quiz data in Preview:", quiz);
+  }, [quiz]);
   const questions = [
     {
       id: 1,
@@ -34,7 +38,16 @@ const QuizPreview = ({ onEdit, quiz }) => {
     },
   ];
 
-  const { name, duration, marks, questionsCount } = quiz;
+  // ✅ Dummy quiz data fallback
+  const dummyQuiz = {
+    name: "Sample Quiz",
+    duration: 30,
+    marks: 20,
+    questionsCount: 5,
+  };
+
+  // ✅ Use quiz if exists, otherwise fallback to dummy
+  const { name, duration, marks, questionsCount } = quiz || dummyQuiz;
 
   return (
     <div className="min-h-screen bg-white p-6 rounded-md">
