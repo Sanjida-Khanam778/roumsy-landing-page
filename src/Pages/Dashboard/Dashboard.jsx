@@ -207,7 +207,12 @@ const Dashboard = ({ tab, embedded }) => {
 
                       {/* Button - Pushed to bottom */}
                       <div className="mt-auto">
-                        <Button rounded="lg" padding="text-xs px-2 py-1 md:px-6 md:text-base">Choose Plan</Button>
+                        <Button
+                          rounded="lg"
+                          padding="text-xs px-2 py-1 md:px-6 md:text-base"
+                        >
+                          Choose Plan
+                        </Button>
                       </div>
                     </div>
                   </div>
