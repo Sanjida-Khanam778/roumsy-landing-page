@@ -3,13 +3,12 @@ import { Clock, ChevronLeft, ChevronRight } from "lucide-react";
 import { useLocation, useNavigate } from "react-router-dom";
 import QuizResultPage from "./QuizResultPage";
 
-const QuizInterface = () => {
+const QuizInterface = ({ quizResultShow }) => {
   const navigate = useNavigate();
-  const [component, setComponent] = useState(false);
   const [currentQuestion, setCurrentQuestion] = useState(0);
   // For multiple answers, store selected options as arrays per question
   const [selectedAnswers, setSelectedAnswers] = useState({});
-  const [timeRemaining, setTimeRemaining] = useState(15 * 60); // 15 minutes in seconds
+  const [timeRemaining, setTimeRemaining] = useState(1 * 60); // 15 minutes in seconds
   // Sample questions data
   const questions = [
     {
@@ -22,6 +21,7 @@ const QuizInterface = () => {
         "It allows students to hire tutors directly",
         "It is a video streaming platform for online classes",
       ],
+      type: "multiple", // multiple correct answers
     },
     {
       id: 2,
@@ -33,6 +33,7 @@ const QuizInterface = () => {
         "Makes learning completely automated",
         "Eliminates the need for textbooks",
       ],
+      type: "single", // single correct answers
     },
     {
       id: 3,
@@ -43,6 +44,7 @@ const QuizInterface = () => {
         "It only works with video content",
         "It requires manual input from teachers",
       ],
+      type: "multiple", // multiple correct answers
     },
   ];
 
@@ -53,13 +55,18 @@ const QuizInterface = () => {
   );
 
   // Timer effect
+  // Timer effect with auto-submit on timeout
   React.useEffect(() => {
+    if (timeRemaining === 0) {
+      // navigate("/quiz-result");
+      quizResultShow();
+      return;
+    }
     const timer = setInterval(() => {
       setTimeRemaining((prev) => (prev > 0 ? prev - 1 : 0));
     }, 1000);
-
     return () => clearInterval(timer);
-  }, []);
+  }, [timeRemaining, navigate]);
 
   const formatTime = (seconds) => {
     const minutes = Math.floor(seconds / 60);
@@ -67,22 +74,31 @@ const QuizInterface = () => {
     return `${minutes}:${remainingSeconds.toString().padStart(2, "0")}`;
   };
 
-  // Multiple answer selection logic
+  // Answer selection logic for single/multiple
   const handleAnswerSelect = (optionIndex) => {
+    const type = questions[currentQuestion].type;
     setSelectedAnswers((prev) => {
-      const prevSelected = prev[currentQuestion] || [];
-      // Toggle selection
-      if (prevSelected.includes(optionIndex)) {
-        // Deselect
-        return {
-          ...prev,
-          [currentQuestion]: prevSelected.filter((i) => i !== optionIndex),
-        };
+      if (type === "multiple") {
+        const prevSelected = prev[currentQuestion] || [];
+        // Toggle selection
+        if (prevSelected.includes(optionIndex)) {
+          // Deselect
+          return {
+            ...prev,
+            [currentQuestion]: prevSelected.filter((i) => i !== optionIndex),
+          };
+        } else {
+          // Select
+          return {
+            ...prev,
+            [currentQuestion]: [...prevSelected, optionIndex],
+          };
+        }
       } else {
-        // Select
+        // Single choice: only one selected
         return {
           ...prev,
-          [currentQuestion]: [...prevSelected, optionIndex],
+          [currentQuestion]: [optionIndex],
         };
       }
     });
@@ -105,8 +121,8 @@ const QuizInterface = () => {
   };
 
   const handleSubmit = () => {
-    setComponent(true);
-    navigate("/quiz-result");
+    quizResultShow();
+    // navigate("/quiz-result");
   };
 
   return (
@@ -155,9 +171,10 @@ const QuizInterface = () => {
               {questions[currentQuestion].question}
             </h3>
 
-            {/* Answer Options (multiple select) */}
+            {/* Answer Options: single or multiple */}
             <div className="space-y-2 md:space-y-4">
               {questions[currentQuestion].options.map((option, index) => {
+                const type = questions[currentQuestion].type;
                 const selectedArr = selectedAnswers[currentQuestion] || [];
                 const isSelected = selectedArr.includes(index);
                 return (
@@ -170,22 +187,36 @@ const QuizInterface = () => {
                     }`}
                   >
                     <input
-                      type="checkbox"
-                      name={`question-${currentQuestion}-option-${index}`}
+                      type={type === "multiple" ? "checkbox" : "radio"}
+                      name={`question-${currentQuestion}`}
                       value={index}
                       checked={isSelected}
                       onChange={() => handleAnswerSelect(index)}
                       className="sr-only"
                     />
                     <div
-                      className={`w-5 h-5 rounded-md border-2 mr-4 flex items-center justify-center ${
-                        isSelected
-                          ? "border-blue-500 bg-blue-500"
-                          : "border-gray-300"
+                      className={`w-5 h-5 mr-4 flex items-center justify-center border-2 ${
+                        type === "multiple"
+                          ? `rounded-md ${
+                              isSelected
+                                ? "border-blue-500 bg-blue-500"
+                                : "border-gray-300"
+                            }`
+                          : `rounded-full ${
+                              isSelected
+                                ? "border-blue-500 bg-blue-500"
+                                : "border-gray-300"
+                            }`
                       }`}
                     >
                       {isSelected && (
-                        <div className="w-3 h-3 bg-white rounded-sm"></div>
+                        <div
+                          className={
+                            type === "multiple"
+                              ? "w-3 h-3 bg-white rounded-sm"
+                              : "w-3 h-3 bg-white rounded-full"
+                          }
+                        ></div>
                       )}
                     </div>
                     <span className="text-gray-700 leading-relaxed">

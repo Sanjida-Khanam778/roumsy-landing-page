@@ -149,33 +149,33 @@ export default function AllPrograms({ limit }) {
             <div className="mt-4 flex justify-between items-center flex-col gap-3">
               <Link to={`/overview/${program.id}`}>
                 <div className="p-2 bg-blue-50 hover:text-white hover:bg-gradient-to-r hover:from-[#189EFE] hover:to-[#0E5F98] rounded-lg flex items-center gap-2 group">
-                                                <img
-                                                  src={traind}
-                                                  alt="Train"
-                                                  className="w-6 h-6 group-hover:hidden"
-                                                />
-                                                <img
-                                                  src={trainw}
-                                                  alt="Train Hover"
-                                                  className="w-6 h-6 hidden group-hover:block"
-                                                />
-                                                <span>Train with LearninGPT</span>
-                                              </div>
+                  <img
+                    src={traind}
+                    alt="Train"
+                    className="w-6 h-6 group-hover:hidden"
+                  />
+                  <img
+                    src={trainw}
+                    alt="Train Hover"
+                    className="w-6 h-6 hidden group-hover:block"
+                  />
+                  <span>Train with LearninGPT</span>
+                </div>
               </Link>
               <Link to={"/quiz"}>
-               <div className="p-2 bg-blue-50 hover:text-white hover:bg-gradient-to-r hover:from-[#189EFE] hover:to-[#0E5F98] rounded-lg flex items-center gap-2 group">
-                                               <img
-                                                 src={startd}
-                                                 alt="Start"
-                                                 className="w-6 h-6 group-hover:hidden"
-                                               />
-                                               <img
-                                                 src={startw}
-                                                 alt="Start Hover"
-                                                 className="w-6 h-6 hidden group-hover:block"
-                                               />
-                                               <span>Start Exam Simulator</span>
-                                             </div>
+                <div className="p-2 bg-blue-50 hover:text-white hover:bg-gradient-to-r hover:from-[#189EFE] hover:to-[#0E5F98] rounded-lg flex items-center gap-2 group">
+                  <img
+                    src={startd}
+                    alt="Start"
+                    className="w-6 h-6 group-hover:hidden"
+                  />
+                  <img
+                    src={startw}
+                    alt="Start Hover"
+                    className="w-6 h-6 hidden group-hover:block"
+                  />
+                  <span>Start Exam Simulator</span>
+                </div>
               </Link>
             </div>
           </div>

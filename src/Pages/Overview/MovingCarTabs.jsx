@@ -18,9 +18,11 @@ import { RiMenuSearchLine } from "react-icons/ri";
 import Documentation from "./Documentation";
 import { ScrollRestoration } from "react-router-dom";
 import GuidedDashboard from "../Dashboard/GuidedDashboard";
+import QuizResultPage from "../QuizInterface/QuizResultPage";
 export default function MovingCarTabs() {
   const [selectedSkillLevel, setSelectedSkillLevel] = useState("");
   const [selectedMode, setSelectedMode] = useState("");
+  const [result, setResult] = useState(false);
 
   const handleSkillLevelSelect = (level) => {
     setSelectedSkillLevel(level);
@@ -37,6 +39,9 @@ export default function MovingCarTabs() {
   const [startQuiz, setStartQuiz] = useState(false);
   const handleStartQuiz = () => {
     setStartQuiz(true);
+  };
+  const quizResultShow = () => {
+    setResult(true);
   };
   const tabs = [
     {
@@ -333,13 +338,11 @@ export default function MovingCarTabs() {
                 Ask questions about the course material. 3 free messages
                 remaining.
               </p>
-              {
-                selectedMode === "Guided Learning Path" ? (
-                  <GuidedDashboard tab={true} embedded={true} />
-                ) : (
-                  <Dashboard tab={true} embedded={true} />
-                )
-              }
+              {selectedMode === "Guided Learning Path" ? (
+                <GuidedDashboard tab={true} embedded={true} />
+              ) : (
+                <Dashboard tab={true} embedded={true} />
+              )}
             </div>
           ) : (
             <div className="max-w-4xl w-full">
@@ -407,8 +410,10 @@ export default function MovingCarTabs() {
       active: false,
       content: (
         <div>
-          {startQuiz ? (
-            <QuizInterface />
+          {result ? (
+            <QuizResultPage />
+          ) : startQuiz ? (
+            <QuizInterface quizResultShow={quizResultShow} />
           ) : (
             <div className="bg-gray-50 flex flex-col gap-20 items-center justify-center p-6">
               <p className="text-[#011E46] font-bold text-xl">
