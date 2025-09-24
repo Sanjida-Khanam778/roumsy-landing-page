@@ -80,7 +80,7 @@ export const Sidebar = ({ currentComponent, onMenuClick }) => {
               <li key={index}>
                 <button
                   onClick={() => onMenuClick(item.label)}
-                  className={`flex items-center w-48 h-12 pl-2 text-start rounded-lg transition-colors mx-6 mb-5 gap-2
+                  className={`flex items-center w-48 h-12 pl-2 text-start rounded-lg transition-colors mb-5 gap-2
     ${
       isActive
         ? "bg-gradient-to-r from-[#1E90FF] to-[#0E5F98] text-white"
