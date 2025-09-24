@@ -134,21 +134,21 @@ const Dashboard = ({ tab, embedded }) => {
     <div className={`font-Poppins flex h-screen bg-[#575555]/10 relative`}>
       {/* Pricing Modal */}
       {showPricingModal && !isSubscribed && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center px-8 lg:px-0 z-50">
-          <div className="bg-white rounded-2xl shadow-2xl max-w-5xl w-full max-h-[90vh] overflow-y-auto">
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 md:px-8 xl:px-0">
+          <div className="bg-white rounded-2xl shadow-2xl max-w-5xl w-2/3 md:w-full max-h-[90vh] overflow-y-auto">
             {/* Modal Header */}
-            <div className="text-left px-4 sm:px-20 py-3 lg:py-6">
-              <h2 className="text-xl lg:text-3xl font-bold mb-2 text-primary">
+            <div className="text-left px-3 sm:px-20 pt-2 md:py-2 lg:py-6">
+              <h2 className="text-xl lg:text-3xl font-bold md:mb-2 text-primary">
                 Unlock AI Coach Access
               </h2>
-              <p className="text-gray">
+              <p className="text-gray text-sm md:text-base">
                 Get unlimited access to our AI Coach for 30 days!
               </p>
             </div>
 
             {/* Pricing Cards */}
             <div className="px-4 lg:px-20 py-3 lg:py-6">
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mx-auto">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2 md:gap-6 mx-auto">
                 {plans.map((plan, index) => (
                   <div
                     key={index}
@@ -158,23 +158,23 @@ const Dashboard = ({ tab, embedded }) => {
                   >
                     {/* Popular Badge */}
                     {plan.popular && (
-                      <div className="absolute top-4 right-4 bg-[#FFB563] text-white px-3 py-1 rounded-full text-xs font-medium z-10">
+                      <div className="absolute top-2 md:top-4 right-2 md:right-4 bg-[#FFB563] text-white px-2 md:px-3 py-1 rounded-full text-xs font-medium z-10">
                         Best Deal
                       </div>
                     )}
 
                     {/* Header with Icon */}
                     <div
-                      className={`${plan.color} p-4 md:p-8 text-white text-center relative flex flex-col items-center`}
+                      className={`${plan.color} p-2 md:p-8 text-white text-center relative flex flex-col items-center`}
                     >
-                      <img src={plan.image} alt="" />
-                      <h3 className="text-xl font-semibold my-2">
+                      <img src={plan.image} className="w-10 md:w-auto" alt="" />
+                      <h3 className="md:text-xl text-sm font-semibold md:my-2">
                         {plan.title}
                       </h3>
                     </div>
 
                     {/* Content */}
-                    <div className="p-3 md:p-6 flex flex-col flex-grow ">
+                    <div className="p-2 md:p-6 flex flex-col flex-grow items-center lg:items-start">
                       {/* Features */}
                       <div className="flex-1">
                         {plan.features.map((feature, featureIndex) => (
@@ -182,8 +182,8 @@ const Dashboard = ({ tab, embedded }) => {
                             key={featureIndex}
                             className="flex items-center mb-2"
                           >
-                            <img src={tic} alt="" />
-                            <span className="ml-2 text-gray-700 text-sm">
+                            <img src={tic} className="w-4 md:w-auto" alt="" />
+                            <span className="ml-2 text-gray-700 text-xs md:text-sm">
                               {feature}
                             </span>
                           </div>
@@ -191,23 +191,23 @@ const Dashboard = ({ tab, embedded }) => {
                       </div>
 
                       {/* Pricing */}
-                      <div className="mb-4 flex-1">
+                      <div className="mb-2 md:mb-4 flex-1">
                         {plan.originalPrice && (
-                          <div className="text-gray line-through text-sm mb-1">
+                          <div className="text-gray line-through text-xs md:text-sm md:mb-1">
                             {plan.originalPrice}
                           </div>
                         )}
-                        <div className="text-2xl font-bold text-primary mb-1">
+                        <div className="text-lg md:text-2xl font-bold text-primary md:mb-1">
                           {plan.price}
                         </div>
-                        <div className="text-gray-600 text-sm">
+                        <div className="text-gray-600 text-xs md:text-sm">
                           {plan.period}
                         </div>
                       </div>
 
                       {/* Button - Pushed to bottom */}
                       <div className="mt-auto">
-                        <Button rounded="lg">Choose Plan</Button>
+                        <Button rounded="lg" padding="text-xs px-2 py-1 md:px-6 md:text-base">Choose Plan</Button>
                       </div>
                     </div>
                   </div>
@@ -217,9 +217,9 @@ const Dashboard = ({ tab, embedded }) => {
               {/* Maybe Later Button */}
               <div
                 onClick={handleMaybeLater}
-                className="text-center my-6 border border-gray/50 rounded-md py-3 cursor-pointer w-9/12 mx-auto"
+                className="text-center my-2 md:my-6 border border-gray/50 rounded-md py-1 md:py-3 cursor-pointer w-9/12 mx-auto"
               >
-                <button className="text-gray-500 hover:text-gray-700 font-medium transition-colors">
+                <button className="text-gray-500 text-sm md:text-base hover:text-gray-700 font-medium transition-colors">
                   Maybe Later
                 </button>
               </div>
