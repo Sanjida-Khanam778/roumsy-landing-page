@@ -12,6 +12,7 @@ import {
   MoreVertical,
   Menu,
   ChevronDown,
+  Lock,
 } from "lucide-react";
 import Button from "../../components/Shared/Button";
 import botProfile from "../../assets/images/botProfile.jpg";
@@ -20,7 +21,7 @@ import { Link } from "react-router-dom";
 import { GoSidebarExpand } from "react-icons/go";
 const GuidedDashboard = ({ tab, embedded }) => {
   // Pricing modal logic
-  const [showPricingModal, setShowPricingModal] = useState(true);
+  const [showPricingModal, setShowPricingModal] = useState(false);
   const [isSubscribed, setIsSubscribed] = useState(false);
   const [inputValue, setInputValue] = useState("");
   // Each conversation is { sender: 'user' | 'ai', text: string }
@@ -368,22 +369,39 @@ const GuidedDashboard = ({ tab, embedded }) => {
                     </div>
                     {dropdownIndex === idx && (
                       <div className="mt-2 bg-white rounded-lg shadow-lg text-black ">
-                        {guidedQuestions[idx].map((q, qIdx) => (
-                          <React.Fragment key={qIdx}>
-                            <div
-                              className="px-3 py-2 hover:bg-blue-100 cursor-pointer text-sm"
-                              onClick={() => {
-                                setInputValue(q);
-                                setSidebarOpen((prev) => !prev);
-                              }}
-                            >
-                              {q}
-                            </div>
-                            {qIdx < guidedQuestions[idx].length - 1 && (
-                              <div className="border-t border-gray-200 mx-2"></div>
-                            )}
-                          </React.Fragment>
-                        ))}
+                        {guidedQuestions[idx].map((q, qIdx) => {
+                          // Only first 2 questions are free, rest are locked
+                          const isLocked = qIdx > 1;
+                          return (
+                            <React.Fragment key={qIdx}>
+                              <div
+                                className={`px-3 py-2 flex items-center justify-between text-sm ${
+                                  isLocked
+                                    ? "bg-gray-100 text-gray cursor-pointer"
+                                    : "hover:bg-blue-100 cursor-pointer text-gray-900"
+                                }`}
+                                onClick={() => {
+                                  if (isLocked) {
+                                    setShowPricingModal(true);
+                                  } else {
+                                    setInputValue(q);
+                                    setSidebarOpen((prev) => !prev);
+                                  }
+                                }}
+                              >
+                                <span>{q}</span>
+                                {isLocked && (
+                                  <div>
+                                    <Lock className="w-4 h-4 text-gray" />
+                                  </div>
+                                )}
+                              </div>
+                              {qIdx < guidedQuestions[idx].length - 1 && (
+                                <div className="border-t border-gray-200 mx-2"></div>
+                              )}
+                            </React.Fragment>
+                          );
+                        })}
                       </div>
                     )}
                   </div>
@@ -411,7 +429,7 @@ const GuidedDashboard = ({ tab, embedded }) => {
           {/* Header */}
           <div className="border-b border-gray/50 px-6 py-4 flex justify-between items-center">
             <div className="text-sm text-gray font-semibold text-end w-full">
-              Remaining {3 - chatCount}/3
+               Remaining {Math.max(0, 3 - chatCount)}/3
             </div>
           </div>
 
@@ -536,7 +554,7 @@ const GuidedDashboard = ({ tab, embedded }) => {
           {/* Header */}
           <div className="border-b border-gray/50 px-6 py-4 flex justify-between items-center">
             <div className="text-sm text-gray font-semibold text-end w-full">
-              Remaining {3 - chatCount}/3
+           Remaining {Math.max(0, 3 - chatCount)}/3
             </div>
           </div>
 

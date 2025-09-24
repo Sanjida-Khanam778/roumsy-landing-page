@@ -367,7 +367,7 @@ const Dashboard = ({ tab, embedded }) => {
           {/* Header */}
           <div className="border-b border-gray/50 px-6 py-4 flex justify-between items-center">
             <div className="text-sm text-gray font-semibold text-end w-full">
-              Remaining {3 - chatCount}/3
+              Remaining {Math.max(0, 3 - chatCount)}/3
             </div>
           </div>
 
@@ -512,7 +512,7 @@ const Dashboard = ({ tab, embedded }) => {
           {/* Header */}
           <div className="border-b border-gray/50 px-6 py-4 flex justify-between items-center">
             <div className="text-sm text-gray font-semibold text-end w-full">
-              Remaining {3 - chatCount}/3
+              Remaining {Math.max(0, 3 - chatCount)}/3
             </div>
           </div>
 
