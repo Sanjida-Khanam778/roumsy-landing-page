@@ -24,6 +24,7 @@ export default function MovingCarTabs() {
   const [selectedSkillLevel, setSelectedSkillLevel] = useState("");
   const [selectedMode, setSelectedMode] = useState("");
   const [result, setResult] = useState(false);
+  const [getAIHelp, setGetAIHelp] = useState(false);
 
   const handleSkillLevelSelect = (level) => {
     setSelectedSkillLevel(level);
@@ -35,7 +36,11 @@ export default function MovingCarTabs() {
     setSelectedMode(mode);
     setSelectedSkillLevel("");
   };
-
+  const handleQuizEnd = () => {
+    setGetAIHelp(true);
+    setActiveTab(1);
+    setSelectedSkillLevel("Intermediate")
+  };
   const [activeTab, setActiveTab] = useState(0);
   const [startQuiz, setStartQuiz] = useState(false);
   const handleStartQuiz = () => {
@@ -354,7 +359,7 @@ export default function MovingCarTabs() {
       content: (
         <div>
           {result ? (
-            <QuizResultPage />
+            <QuizResultPage handleQuizEnd={handleQuizEnd} />
           ) : startQuiz ? (
             <QuizInterface quizResultShow={quizResultShow} />
           ) : (

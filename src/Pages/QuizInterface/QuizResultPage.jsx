@@ -8,7 +8,7 @@ import retake from "../../assets/images/retake.png";
 import Swal from "sweetalert2";
 import ReactStars from "react-stars";
 import { X } from "lucide-react"; // <-- import cross icon
-const QuizResultPage = () => {
+const QuizResultPage = ({handleQuizEnd}) => {
   console.log("result page");
   // Fix: clicking a tag should open the review modal
   const handleTagClick = (tag) => {
@@ -69,7 +69,7 @@ const QuizResultPage = () => {
   };
 
   const handleGetAIHelp = () => {
-    navigate("/dashboard");
+    handleQuizEnd();
   };
 
   const getScoreColor = (score) => {
