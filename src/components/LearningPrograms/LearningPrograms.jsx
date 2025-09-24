@@ -16,13 +16,13 @@ const LearningPrograms = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isAnimating, setIsAnimating] = useState(false);
   const intervalRef = useRef(null);
-  
+
   const programs = [
     {
       bg: learning1,
       title: "Immigration & Language Preparation",
       subtitle:
-      "Master language skills, ace your exams, and get expert guidance for a smooth immigration journey.",
+        "Master language skills, ace your exams, and get expert guidance for a smooth immigration journey.",
       image: "/api/placeholder/300/200",
       rating: 4.8,
       students: "2.5k students",
@@ -36,7 +36,7 @@ const LearningPrograms = () => {
       bg: learning2,
       title: "Project Management",
       subtitle:
-      "Our courses help you handle real-world projects using proven frameworks like Scrum and PMP.",
+        "Our courses help you handle real-world projects using proven frameworks like Scrum and PMP.",
       image: "/api/placeholder/300/200",
       rating: 4.9,
       students: "3.2k students",
@@ -50,7 +50,7 @@ const LearningPrograms = () => {
       bg: learning3,
       title: "Tech & Development",
       subtitle:
-      "Master language skills, ace your exams, and get expert guidance for a smooth immigration journey.",
+        "Master language skills, ace your exams, and get expert guidance for a smooth immigration journey.",
       image: "/api/placeholder/300/200",
       rating: 4.7,
       students: "1.8k students",
@@ -64,7 +64,7 @@ const LearningPrograms = () => {
       bg: learning1,
       title: "Immigration & Language Preparation",
       subtitle:
-      "Master language skills, ace your exams, and get expert guidance for a smooth immigration journey.",
+        "Master language skills, ace your exams, and get expert guidance for a smooth immigration journey.",
       image: "/api/placeholder/300/200",
       rating: 4.8,
       students: "2.5k students",
@@ -78,7 +78,7 @@ const LearningPrograms = () => {
       bg: learning2,
       title: "Project Management",
       subtitle:
-      "Our courses help you handle real-world projects using proven frameworks like Scrum and PMP.",
+        "Our courses help you handle real-world projects using proven frameworks like Scrum and PMP.",
       image: "/api/placeholder/300/200",
       rating: 4.9,
       students: "3.2k students",
@@ -92,7 +92,7 @@ const LearningPrograms = () => {
       bg: learning3,
       title: "Tech & Development",
       subtitle:
-      "Master language skills, ace your exams, and get expert guidance for a smooth immigration journey.",
+        "Master language skills, ace your exams, and get expert guidance for a smooth immigration journey.",
       image: "/api/placeholder/300/200",
       rating: 4.7,
       students: "1.8k students",
@@ -106,7 +106,7 @@ const LearningPrograms = () => {
       bg: learning1,
       title: "Immigration & Language Preparation",
       subtitle:
-      "Master language skills, ace your exams, and get expert guidance for a smooth immigration journey.",
+        "Master language skills, ace your exams, and get expert guidance for a smooth immigration journey.",
       image: "/api/placeholder/300/200",
       rating: 4.8,
       students: "2.5k students",
@@ -120,7 +120,7 @@ const LearningPrograms = () => {
       bg: learning2,
       title: "Project Management",
       subtitle:
-      "Our courses help you handle real-world projects using proven frameworks like Scrum and PMP.",
+        "Our courses help you handle real-world projects using proven frameworks like Scrum and PMP.",
       image: "/api/placeholder/300/200",
       rating: 4.9,
       students: "3.2k students",
@@ -134,7 +134,7 @@ const LearningPrograms = () => {
       bg: learning3,
       title: "Tech & Development",
       subtitle:
-      "Master language skills, ace your exams, and get expert guidance for a smooth immigration journey.",
+        "Master language skills, ace your exams, and get expert guidance for a smooth immigration journey.",
       image: "/api/placeholder/300/200",
       rating: 4.7,
       students: "1.8k students",
@@ -200,7 +200,7 @@ const LearningPrograms = () => {
   const handlePrevSlide = () => {
     clearInterval(intervalRef.current);
     setIsAnimating(true);
-    setCurrentSlide((prev) => (prev - 1 + (totalSlides * 3)) % (totalSlides * 3));
+    setCurrentSlide((prev) => (prev - 1 + totalSlides * 3) % (totalSlides * 3));
     setTimeout(() => {
       setIsAnimating(false);
       restartInterval();

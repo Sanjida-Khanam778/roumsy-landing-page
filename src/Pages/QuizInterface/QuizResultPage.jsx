@@ -202,7 +202,11 @@ const QuizResultPage = () => {
 
             <div className="flex flex-col items-center sm:flex-row gap-8 sm:gap-4 justify-center pt-4 md:pt-8">
               <div onClick={handleGetAIHelp} className="relative">
-                <img src={aiHelp} className="absolute bottom-0 left-2 w-16 md:w-auto" alt="" />
+                <img
+                  src={aiHelp}
+                  className="absolute bottom-0 left-2 w-16 md:w-auto"
+                  alt=""
+                />
                 <Button
                   rounded="lg"
                   padding="pl-20 md:pl-24 pr-4 py-2 md:py-3"
