@@ -68,7 +68,10 @@ const QuizManagement = ({ handleEditQuizz }) => {
                 </thead>
                 <tbody>
                   {quizzes.map((quiz) => (
-                    <tr key={quiz.id} className="border border-[#C4C4C4] bg-white">
+                    <tr
+                      key={quiz.id}
+                      className="border border-[#C4C4C4] bg-white"
+                    >
                       <td className="py-2 px-3">
                         <div className="flex flex-col justify-center">
                           <div className="font-medium text-[#383838] text-base">
@@ -87,7 +90,7 @@ const QuizManagement = ({ handleEditQuizz }) => {
                       </td>
                       <td className="py-2 px-3 w-20 text-center">
                         <p className="text-[#5E5E5E] font-normal text-sm ">
-                          {quiz.questions}
+                          {quiz.questionsCount}
                         </p>
                         <p className="text-[#5E5E5E] font-normal text-sm ">
                           Questions
@@ -143,7 +146,10 @@ const QuizManagement = ({ handleEditQuizz }) => {
                                   Delete
                                 </button>
                                 <button
-                                  onClick={() => setPreviewQuiz(quiz)}
+                                  onClick={(e) => {
+                                    e.stopPropagation();
+                                    setPreviewQuiz(quiz);
+                                  }}
                                   className="flex items-center w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-50"
                                 >
                                   <Eye className="w-4 h-4 mr-2" />
