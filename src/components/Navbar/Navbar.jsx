@@ -58,7 +58,7 @@ const Navbar = () => {
   return (
     <div className="font-Poppins">
       <div className="mx-auto w-full px-4 md:px-6 lg:px-0 lg:w-10/12 xl:w-10/12">
-        <div className="flex justify-between items-center py-4">
+        <div className="flex justify-between items-center py-2 md:py-4">
           {/* Logo */}
           <Link to={"/"}>
             <div
@@ -140,7 +140,7 @@ const Navbar = () => {
             {!isAuthenticated ? (
               <Link to={"/topics"}>
                 <div>
-                  <Button rounded="2xl" padding="text-sm py-1 px-3">Start Free</Button>
+                  <Button rounded="2xl" padding="text-xs lg:text-base py-1 lg:px-6 px-3">Start Free</Button>
                 </div>
               </Link>
             ) : (
@@ -214,14 +214,14 @@ const Navbar = () => {
             isMenuOpen ? "max-h-96 opacity-100" : "max-h-0 opacity-0"
           }`}
         >
-          <div className="border-t border-gray py-4">
+          <div className="border-t border-gray/30 py-2 md:py-4">
             <nav className="flex flex-col space-y-2 bg-gradient-to-br from-[#e0f2fe] via-[#f0f7ff] to-[#e0e7ff] shadow-lg rounded-xl border-2 border-gray/20 px-2 py-2 justify-center items-start w-full">
               {navItems.map((item, idx) =>
                 item.isLanguage ? (
                   <div key={item.name} className="relative w-full">
                     {showLanguagePopup && (
                       <div
-                        className="absolute left-1/2 -translate-x-1/2 -top-28 w-32 bg-white rounded-lg shadow-xl z-50 flex flex-col text-left py-2 border border-gray/50"
+                        className="absolute left-1/2 -translate-x-1/2 ml-10 -top-24 w-32 bg-white rounded-lg shadow-xl z-50 flex flex-col text-left py-2 border border-gray/50"
                         style={{ minWidth: "110px" }}
                       >
                         <button className="flex items-center px-2 py-1 text-black hover:bg-blue-50 text-sm gap-2 rounded transition">
