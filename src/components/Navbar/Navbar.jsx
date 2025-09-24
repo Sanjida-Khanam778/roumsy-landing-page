@@ -9,6 +9,11 @@ import { logout } from "../../Stores/authSlice";
 import en from "../../assets/images/logo/en.png";
 import spanish from "../../assets/images/logo/spanish.png";
 import france from "../../assets/images/logo/france.png";
+import { MdOutlineContactSupport, MdOutlineLanguage } from "react-icons/md";
+import { FiHome } from "react-icons/fi";
+import { RiPriceTag2Line } from "react-icons/ri";
+import { LuContact } from "react-icons/lu";
+import { TbCategory } from "react-icons/tb";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -52,7 +57,7 @@ const Navbar = () => {
 
   return (
     <div className="font-Poppins">
-      <div className="mx-auto w-full px-4 sm:px-6 lg:px-0 lg:w-10/12 xl:w-10/12">
+      <div className="mx-auto w-full px-4 md:px-6 lg:px-0 lg:w-10/12 xl:w-10/12">
         <div className="flex justify-between items-center py-4">
           {/* Logo */}
           <Link to={"/"}>
@@ -61,8 +66,8 @@ const Navbar = () => {
                 location.pathname.includes("profile-dashboard") && "hidden"
               }`}
             >
-              <img src={logo} alt="" className="w-6 md:w-8 lg:w-10" />
-              <p className="text-[#011F47] font-bold text-lg md:text-xl lg:text-2xl">
+              <img src={logo} alt="" className="w-7 md:w-8 lg:w-10" />
+              <p className="text-[#011F47] font-bold text-xl lg:text-2xl">
                 Learnin<span className="text-primary">GPT</span>
               </p>
             </div>
@@ -135,7 +140,7 @@ const Navbar = () => {
             {!isAuthenticated ? (
               <Link to={"/topics"}>
                 <div>
-                  <Button rounded="2xl">Start Free</Button>
+                  <Button rounded="2xl" padding="text-sm py-1 px-3">Start Free</Button>
                 </div>
               </Link>
             ) : (
@@ -243,20 +248,7 @@ const Navbar = () => {
                       onClick={() => setShowLanguagePopup((prev) => !prev)}
                     >
                       <span className="inline-block">
-                        <svg
-                          width="18"
-                          height="18"
-                          fill="none"
-                          viewBox="0 0 24 24"
-                        >
-                          <path
-                            stroke="#189EFE"
-                            strokeWidth="2"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            d="M12 3v18m9-9H3"
-                          />
-                        </svg>
+                        <MdOutlineLanguage className="text-primary text-2xl"/>
                       </span>
                       {item.name}
                     </button>
@@ -273,68 +265,17 @@ const Navbar = () => {
                     >
                       <span className="inline-block">
                         {idx === 0 && (
-                          <svg
-                            width="18"
-                            height="18"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                          >
-                            <path
-                              stroke="#189EFE"
-                              strokeWidth="2"
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                              d="M3 12l9-9 9 9M4.5 10.5v9a1.5 1.5 0 001.5 1.5h12a1.5 1.5 0 001.5-1.5v-9"
-                            />
-                          </svg>
+                          <FiHome className="text-primary text-xl" />
                         )}
                         {idx === 1 && (
-                          <svg
-                            width="18"
-                            height="18"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                          >
-                            <path
-                              stroke="#189EFE"
-                              strokeWidth="2"
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                              d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"
-                            />
-                          </svg>
+                          
+                        <TbCategory className="text-primary text-2xl" />
                         )}
                         {idx === 2 && (
-                          <svg
-                            width="18"
-                            height="18"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                          >
-                            <path
-                              stroke="#189EFE"
-                              strokeWidth="2"
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                              d="M12 8c-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4-1.79-4-4-4zm0 0V4m0 16v-4"
-                            />
-                          </svg>
+                        <RiPriceTag2Line className="text-primary text-2xl" />
                         )}
                         {idx === 3 && (
-                          <svg
-                            width="18"
-                            height="18"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                          >
-                            <path
-                              stroke="#189EFE"
-                              strokeWidth="2"
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                              d="M21 10.5a8.38 8.38 0 01-.9 3.8c-.6 1.2-1.5 2.2-2.6 3.1-2.1 1.7-4.7 2.6-7.5 2.1-2.8-.5-5.2-2.3-6.5-4.8a8.38 8.38 0 01-.9-3.8c0-4.7 3.8-8.5 8.5-8.5s8.5 3.8 8.5 8.5z"
-                            />
-                          </svg>
+                          <MdOutlineContactSupport className="text-primary text-2xl" />
                         )}
                       </span>
                       {item.name}
