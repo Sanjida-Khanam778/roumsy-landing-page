@@ -5,6 +5,7 @@ import QuizResultPage from "./QuizResultPage";
 
 const QuizInterface = ({ quizResultShow }) => {
   const navigate = useNavigate();
+  const location = useLocation();
   const [currentQuestion, setCurrentQuestion] = useState(0);
   // For multiple answers, store selected options as arrays per question
   const [selectedAnswers, setSelectedAnswers] = useState({});
@@ -121,8 +122,11 @@ const QuizInterface = ({ quizResultShow }) => {
   };
 
   const handleSubmit = () => {
-    quizResultShow();
-    // navigate("/quiz-result");
+    if (location.pathname === "/quiz") {
+      navigate("/quiz-result");
+    } else {
+      quizResultShow();
+    }
   };
 
   return (

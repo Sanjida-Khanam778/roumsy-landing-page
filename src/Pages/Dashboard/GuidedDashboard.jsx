@@ -92,13 +92,31 @@ const GuidedDashboard = ({ tab, embedded }) => {
       "What are the main steps for immigration?",
       "How to prepare for IELTS/TOEFL?",
       "What documents are needed for visa application?",
+      "What are the main steps for immigration?",
+      "How to prepare for IELTS/TOEFL?",
+      "What documents are needed for visa application?",
+      "What are the main steps for immigration?",
+      "How to prepare for IELTS/TOEFL?",
+      "What documents are needed for visa application?",
     ],
     [
       "How to get PMP certified?",
       "Best practices for project planning?",
       "How to manage project risks?",
+      "How to get PMP certified?",
+      "Best practices for project planning?",
+      "How to manage project risks?",
+      "How to get PMP certified?",
+      "Best practices for project planning?",
+      "How to manage project risks?",
     ],
     [
+      "What are trending tech stacks?",
+      "How to start learning web development?",
+      "Tips for career growth in tech?",
+      "What are trending tech stacks?",
+      "How to start learning web development?",
+      "Tips for career growth in tech?",
       "What are trending tech stacks?",
       "How to start learning web development?",
       "Tips for career growth in tech?",
@@ -176,7 +194,9 @@ const GuidedDashboard = ({ tab, embedded }) => {
   const sidebarPosition = isMobileOrTablet ? "fixed" : "static";
 
   return (
-    <div className={`font-Poppins flex h-screen w-full bg-[#575555]/10 relative`}>
+    <div
+      className={`font-Poppins flex h-screen w-full bg-[#575555]/10 relative`}
+    >
       {/* Pricing Modal */}
       {showPricingModal && !isSubscribed && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center px-8 lg:px-0 z-50">
