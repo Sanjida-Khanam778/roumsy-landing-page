@@ -1,14 +1,8 @@
 import React, { useState } from "react";
 import { ChevronDown } from "lucide-react";
 
-export const BasicInfo = () => {
-  const [selectedTopic, setSelectedTopic] = useState("");
+export const BasicInfo = ({ basicInfo, onChange }) => {
   const [showTopicDropdown, setShowTopicDropdown] = useState(false);
-  const [quizTitle, setQuizTitle] = useState("");
-  const [description, setDescription] = useState("");
-  const [totalMarks, setTotalMarks] = useState("30 Marks");
-  const [timeLimit, setTimeLimit] = useState("30");
-  const [maxAttempts, setMaxAttempts] = useState("3");
 
   const topics = [
     "Immigration & Language Preparation",
@@ -35,6 +29,15 @@ export const BasicInfo = () => {
     </svg>
   );
 
+  const {
+    quizTitle,
+    description,
+    selectedTopic,
+    totalMarks,
+    timeLimit,
+    maxAttempts,
+  } = basicInfo;
+
   return (
     <div className="w-full p-6 bg-white rounded-lg">
       <div className="flex items-center gap-1 mb-6">
@@ -57,7 +60,9 @@ export const BasicInfo = () => {
           <input
             type="text"
             value={quizTitle}
-            onChange={(e) => setQuizTitle(e.target.value)}
+            onChange={(e) =>
+              onChange({ ...basicInfo, quizTitle: e.target.value })
+            }
             className="w-full px-3 py-2 border border-[#BCBCBC] rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-colors"
             placeholder="Enter quiz title..."
           />
@@ -87,7 +92,7 @@ export const BasicInfo = () => {
                 <button
                   key={index}
                   onClick={() => {
-                    setSelectedTopic(topic);
+                    onChange({ ...basicInfo, selectedTopic: topic });
                     setShowTopicDropdown(false);
                   }}
                   className="w-full px-3 py-2 text-left hover:bg-gray-50 first:rounded-t-lg last:rounded-b-lg transition-colors text-sm"
@@ -106,7 +111,9 @@ export const BasicInfo = () => {
         </label>
         <textarea
           value={description}
-          onChange={(e) => setDescription(e.target.value)}
+          onChange={(e) =>
+            onChange({ ...basicInfo, description: e.target.value })
+          }
           rows={4}
           className="w-full px-3 py-2 border border-[#BCBCBC] rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-colors resize-none"
           placeholder="Enter quiz description..."
@@ -121,7 +128,9 @@ export const BasicInfo = () => {
           <input
             type="text"
             value={totalMarks}
-            onChange={(e) => setTotalMarks(e.target.value)}
+            onChange={(e) =>
+              onChange({ ...basicInfo, totalMarks: e.target.value })
+            }
             className="w-full px-3 py-2 border border-[#BCBCBC] rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-colors"
           />
         </div>
@@ -132,7 +141,9 @@ export const BasicInfo = () => {
           </label>
           <select
             value={timeLimit}
-            onChange={(e) => setTimeLimit(e.target.value)}
+            onChange={(e) =>
+              onChange({ ...basicInfo, timeLimit: e.target.value })
+            }
             className="w-full px-3 py-2 border border-[#BCBCBC] rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-colors bg-white"
           >
             <option value="15">15</option>
@@ -151,7 +162,9 @@ export const BasicInfo = () => {
           <input
             type="number"
             value={maxAttempts}
-            onChange={(e) => setMaxAttempts(e.target.value)}
+            onChange={(e) =>
+              onChange({ ...basicInfo, maxAttempts: e.target.value })
+            }
             min="1"
             max="10"
             className="w-full px-3 py-2 border border-[#BCBCBC] rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-colors"
