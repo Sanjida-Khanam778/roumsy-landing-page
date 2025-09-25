@@ -22,6 +22,9 @@ import unlimited from "../../assets/images/icon/unlimited.png";
 import slide1 from "../../assets/images/slide1.png";
 import slide2 from "../../assets/images/slide2.png";
 import slide3 from "../../assets/images/slide3.png";
+import Aos from "aos";
+import 'aos/dist/aos.css';  // Import AOS styles
+
 export default function Hero() {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isAnimating, setIsAnimating] = useState(false); // To manage animation state
@@ -99,7 +102,12 @@ export default function Hero() {
     { image: two },
     { image: one },
   ];
-
+ useEffect(() => {
+    // Initialize AOS after component mounts
+    Aos.init({
+      duration: 2000,  // You can adjust the duration globally here
+    });
+  }, []);
   // Auto-slide functionality with pause on interaction
   useEffect(() => {
     intervalRef.current = setInterval(() => {
@@ -228,6 +236,7 @@ export default function Hero() {
                   </button>
                 </div>
               )}
+              {/* badge for mobile */}
               {isMobile && (
                 <div>
                   <div className="flex flex-col gap-2 left-0 absolute bottom-2">
@@ -297,7 +306,11 @@ export default function Hero() {
               <span>{currentSlideData.badge.text}</span>
             </div>
             {/* Title */}
-            <div className="space-y-2 lg:space-y-4">
+            <div
+              data-aos="fade-up"
+              data-aos-duration="3000"
+              className="space-y-2 lg:space-y-4"
+            >
               <h1 className="text-2xl lg:text-3xl xl:text-5xl font-bold text-gray-900 leading-tight">
                 {currentSlideData.title}
               </h1>
