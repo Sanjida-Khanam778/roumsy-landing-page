@@ -131,7 +131,7 @@ const Dashboard = ({ tab, embedded }) => {
     : "static";
 
   return (
-    <div className={`font-Poppins flex h-screen bg-[#575555]/10 relative`}>
+    <div className={`font-Poppins flex h-screen bg-[#575555]/10 relative max-w-[1200px] md:max-w-max`}>
       {/* Pricing Modal */}
       {showPricingModal && !isSubscribed && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 md:px-8 xl:px-0">
