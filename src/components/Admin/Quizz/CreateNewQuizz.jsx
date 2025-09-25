@@ -12,10 +12,41 @@ import { QuestionsContent } from "./QuestionsContent";
 import QuizSettings from "./QuizSettings";
 import QuizPreview from "./Preview";
 import { Document } from "./Document";
+import toast from "react-hot-toast";
 
 export default function QuizCreator() {
   const [activeTab, setActiveTab] = useState("basic");
   const [editMode, setEditMode] = useState(false);
+
+  const [basicInfo, setBasicInfo] = useState({
+    quizTitle: "",
+    description: "",
+    selectedTopic: "",
+    totalMarks: "30 Marks",
+    timeLimit: "30",
+    maxAttempts: "3",
+  });
+
+const handleSaveQuiz = () => {
+  if (!basicInfo.quizTitle.trim() || !basicInfo.selectedTopic.trim()) {
+    toast.error("Please fill out all required fields");
+    return;
+  }
+
+  console.log("Quiz Saved:", basicInfo);
+  toast.success("Quiz info saved successfully!");
+
+  // Reset parent state → automatically resets BasicInfo fields
+  setBasicInfo({
+    quizTitle: "",
+    description: "",
+    selectedTopic: "",
+    totalMarks: "30 Marks",
+    timeLimit: "30",
+    maxAttempts: "3",
+  });
+};
+
 
   // Preview এর Edit button এ handle
   const handleEditClick = () => {
@@ -62,7 +93,10 @@ export default function QuizCreator() {
             </p>
           </div>
         </div>
-        <button className="flex gap-2 items-center bg-gradient-to-r from-[#189EFE] to-[#0E5F98] text-white px-6 py-3 rounded-lg text-2xl font-medium">
+        <button
+          onClick={handleSaveQuiz}
+          className="flex gap-2 items-center bg-gradient-to-r from-[#189EFE] to-[#0E5F98] text-white px-6 py-3 rounded-lg text-2xl font-medium"
+        >
           {saveIcon()}
           Save Quiz
         </button>
@@ -89,11 +123,16 @@ export default function QuizCreator() {
 
       {/* Content */}
       <div className="mt-12 drop-shadow-md">
-        {activeTab === "basic" && <BasicInfo />}
-        {activeTab === "questions" && <QuestionsContent editMode={editMode}/>}
+        {activeTab === "basic" && (
+          <BasicInfo
+            basicInfo={basicInfo} // current values
+            onChange={(newData) => setBasicInfo(newData)} // update parent state
+          />
+        )}
+        {activeTab === "questions" && <QuestionsContent editMode={editMode} />}
         {activeTab === "document" && <Document />}
         {activeTab === "settings" && <QuizSettings />}
-        {activeTab === "preview" && <QuizPreview onEdit={handleEditClick}/>}
+        {activeTab === "preview" && <QuizPreview onEdit={handleEditClick} />}
       </div>
     </div>
   );
