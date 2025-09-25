@@ -1,11 +1,19 @@
 import { ChevronDown, Info } from "lucide-react";
-import { useState } from "react";
+import { useRef, useState } from "react";
+import toast from "react-hot-toast";
 
 export const Document = () => {
   const [selectedTopic, setSelectedTopic] = useState("");
   const [showTopicDropdown, setShowTopicDropdown] = useState(false);
   const [documentTitle, setDocumentTitle] = useState("");
   const [document, setDocument] = useState("");
+
+  // ✅ New States for file upload
+  const [selectedFile, setSelectedFile] = useState(null);
+  const [uploadedFiles, setUploadedFiles] = useState([]);
+  const [confirmDeleteIndex, setConfirmDeleteIndex] = useState(null);
+
+  const fileInputRef = useRef(null);
 
   const topics = [
     "Immigration & Language Preparation",
@@ -17,6 +25,63 @@ export const Document = () => {
     "Lifestyle",
     "Photography & Video",
   ];
+
+  // Trigger file input click
+  const handleButtonClick = () => {
+    fileInputRef.current.click();
+  };
+
+  // Handle file select
+  const handleFileChange = (e) => {
+    if (e.target.files && e.target.files.length > 0) {
+      setSelectedFile(e.target.files[0]);
+    }
+  };
+
+  // Handle file upload
+  const handleUpload = () => {
+    if (selectedFile) {
+      setUploadedFiles((prev) => [...prev, selectedFile]);
+      setSelectedFile(null);
+    }
+  };
+
+  // Handle delete (with confirmation modal)
+  const deleteFile = (index) => {
+    setConfirmDeleteIndex(index);
+  };
+
+  const confirmDelete = () => {
+    setUploadedFiles((prev) =>
+      prev.filter((_, idx) => idx !== confirmDeleteIndex)
+    );
+    setConfirmDeleteIndex(null);
+  };
+
+  const cancelDelete = () => {
+    setConfirmDeleteIndex(null);
+  };
+
+  // ✅ Handle Save (reset everything)
+  const handleSave = () => {
+    // ✅ Validation: check if fields are empty
+     if (!documentTitle.trim() || !selectedTopic.trim() || !document.trim() || uploadedFiles.length === 0) {
+    toast.error("Please fill out all fields and upload at least one file before saving");
+    return;
+  }
+    console.log("Saved:", {
+      documentTitle,
+      selectedTopic,
+      document,
+      uploadedFiles,
+    });
+    toast.success("File saved successfully!");
+    // Reset all fields
+    setDocumentTitle("");
+    setSelectedTopic("");
+    setDocument("");
+    setUploadedFiles([]);
+  };
 
   return (
     <div className="bg-white p-6 rounded-md">
@@ -45,6 +110,7 @@ export const Document = () => {
           />
         </div>
 
+        {/* Topic Dropdown */}
         <div className="relative">
           <label className="block text-sm font-extralight text-black mb-2">
             Topic *
@@ -88,18 +154,60 @@ export const Document = () => {
           Upload Documents
         </h4>
         <div className="flex items-center relative">
-          <button className="bg-blue-500 hover:bg-blue-600 rounded-md text-white w-32 h-10 py-2 font-medium absolute top-2">
+          {/* Hidden input */}
+          <input
+            type="file"
+            ref={fileInputRef}
+            onChange={handleFileChange}
+            className="hidden"
+          />
+          <button
+            onClick={handleButtonClick}
+            className="bg-blue-500 hover:bg-blue-600 rounded-md text-white w-32 h-10 py-2 font-medium absolute top-2"
+          >
             Choose File
           </button>
-          <div className="text-sm text-[#CAC8C8] border border-[#BCBCBC] rounded-md w-full h-10 bg-white pl-36 mt-2 pt-2.5">
-            No file chosen
+          <div className="text-sm text-[#000] border border-[#BCBCBC] rounded-md w-full h-10 bg-white pl-36 mt-2 pt-2.5">
+            {selectedFile ? selectedFile.name : "No file chosen"}
           </div>
         </div>
-        <button className="w-full bg-gradient-to-r from-[#189EFE] to-[#0E5F98] text-white py-2 px-4 rounded-lg text-base font-medium mt-4">
+        <button
+          onClick={handleUpload}
+          disabled={!selectedFile}
+          className="w-full bg-gradient-to-r from-[#189EFE] to-[#0E5F98] text-white py-2 px-4 rounded-lg text-base font-medium mt-4 disabled:opacity-50 disabled:cursor-not-allowed"
+        >
           Upload
         </button>
       </div>
 
+      {/* Uploaded Documents List */}
+      {uploadedFiles.length > 0 && (
+        <div className="bg-white rounded-lg p-6 mt-4">
+          <div className="flex items-center mb-4">
+            <h3 className="text-lg font-semibold text-gray-900 flex items-center">
+              Uploaded Documents
+            </h3>
+          </div>
+          <div className="space-y-2">
+            {uploadedFiles.map((file, index) => (
+              <div
+                key={index}
+                className="flex items-center justify-between border border-[#DBDBDB] bg-white p-4 rounded-md"
+              >
+                <span className="text-base text-black">{file.name}</span>
+                <button
+                  onClick={() => deleteFile(index)}
+                  className="bg-red-500 text-white px-3 py-1 rounded-md text-sm font-medium"
+                >
+                  Delete
+                </button>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {/* Document Information */}
       <div className="mt-2">
         <label className="block text-sm font-extralight text-black mb-2">
           Document Information
@@ -115,10 +223,38 @@ export const Document = () => {
 
       {/* Save Button */}
       <div className="flex items-center justify-center mt-10">
-        <button className="w-80 bg-gradient-to-r from-[#189EFE] to-[#0E5F98] text-white text-base py-2 px-4 rounded-lg font-normal transition-colors flex items-center justify-center">
+        <button
+          onClick={handleSave}
+          className="w-80 bg-gradient-to-r from-[#189EFE] to-[#0E5F98] text-white text-base py-2 px-4 rounded-lg font-normal transition-colors flex items-center justify-center"
+        >
           Save
         </button>
       </div>
+
+      {/* Confirm Delete Modal */}
+      {confirmDeleteIndex !== null && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+          <div className="bg-white p-6 rounded-lg shadow-lg w-96">
+            <h3 className="text-lg font-semibold mb-4 text-center">
+              Are you sure you want to delete this file?
+            </h3>
+            <div className="flex justify-center gap-4">
+              <button
+                onClick={confirmDelete}
+                className="bg-red-500 text-white px-4 py-2 rounded-lg"
+              >
+                Yes, Delete
+              </button>
+              <button
+                onClick={cancelDelete}
+                className="bg-gray-300 px-4 py-2 rounded-lg"
+              >
+                No, Cancel
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
