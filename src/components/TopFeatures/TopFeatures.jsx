@@ -1,27 +1,24 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
+import { MdOutlineExplore } from "react-icons/md";
+import { FaRegUser } from "react-icons/fa";
 import tech from "../../assets/images/techno.png";
 import book from "../../assets/images/book.png";
 import arrow from "../../assets/images/arrow.png";
-import { useSelector } from "react-redux";
 import watch from "../../assets/images/watch.png";
 import score from "../../assets/images/score.png";
 import create from "../../assets/images/icon/create.png";
 import join from "../../assets/images/icon/join.png";
 import createw from "../../assets/images/icon/createw.png";
 import joinw from "../../assets/images/icon/joinw.png";
-import { Link } from "react-router-dom";
-import { MdOutlineExplore } from "react-icons/md";
-import { FaRegUser } from "react-icons/fa";
+import Aos from "aos";
+// import "aos/dist/aos.css"; // Import AOS styles
 
 const TopFeatures = () => {
   const { isAuthenticated } = useSelector((state) => state.auth);
   const [currentProgress, setCurrentProgress] = useState(65);
   const [allTimeScore, setAllTimeScore] = useState(0);
-
-  const handleStartQuiz = () => {
-    // Simulate starting a quiz
-    console.log("Quiz started!");
-  };
 
   const features = [
     {
@@ -50,13 +47,26 @@ const TopFeatures = () => {
     },
   ];
 
+  // Initialize AOS
+  useEffect(() => {
+    Aos.init({
+      duration: 1000, // Duration for the animation
+      once: true, // Animation happens only once
+    });
+  }, []);
+
   return (
     <section className="py-12 bg-[#F9FAFB]">
       {isAuthenticated ? (
         <div className="container mx-auto px-6">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {/* Today's Progress Card */}
-            <div className="bg-white rounded-2xl shadow-lg p-6 hover:shadow-xl transition-shadow duration-300">
+            <div
+              data-aos="fade-up"
+              data-aos-duration="1000"
+              data-aos-delay="100"
+              className="bg-white rounded-2xl shadow-lg p-6 hover:shadow-xl transition-shadow duration-300"
+            >
               <div className="flex items-center justify-between mb-4">
                 <h3 className="text-lg font-semibold text-gray-800">
                   Today's Progress
@@ -68,18 +78,12 @@ const TopFeatures = () => {
                   JavaScript Fundamentals
                 </h4>
                 {/* Progress Bar */}
-                {/* Progress Bar */}
                 <div className="w-full h-3 flex rounded-full overflow-hidden">
-                  {/* Filled Part */}
                   <div
                     className="h-3 bg-gradient-to-r from-[#189EFE] to-[#0E5F98]"
                     style={{ width: "65%" }}
                   ></div>
-                  {/* Remaining Part */}
-                  <div
-                    className="h-3 bg-gray/50"
-                    style={{ width: "35%" }}
-                  ></div>
+                  <div className="h-3 bg-gray/50" style={{ width: "35%" }}></div>
                 </div>
 
                 <p className="text-sm text-gray-600 mb-3">
@@ -93,7 +97,12 @@ const TopFeatures = () => {
             </div>
 
             {/* All-Time Score Card */}
-            <div className="bg-white rounded-2xl shadow-lg p-6 hover:shadow-xl transition-shadow duration-300 flex flex-col justify-center gap-4 items-center">
+            <div
+              data-aos="fade-up"
+              data-aos-duration="1000"
+              data-aos-delay="200"
+              className="bg-white rounded-2xl shadow-lg p-6 hover:shadow-xl transition-shadow duration-300 flex flex-col justify-center gap-4 items-center"
+            >
               <div className="flex items-center justify-center mb-4">
                 <h3 className="text-2xl font-bold text-gray-800">
                   All-Time Score
@@ -114,7 +123,12 @@ const TopFeatures = () => {
             </div>
 
             {/* Start Quiz Card */}
-            <div className="bg-white rounded-2xl shadow-lg p-6 hover:shadow-xl transition-shadow duration-300 flex flex-col items-center justify-center gap-6">
+            <div
+              data-aos="fade-up"
+              data-aos-duration="1000"
+              data-aos-delay="300"
+              className="bg-white rounded-2xl shadow-lg p-6 hover:shadow-xl transition-shadow duration-300 flex flex-col items-center justify-center gap-6"
+            >
               <img src={watch} alt="" />
               <p className="bg-[#E2F3FF] px-4 py-3 rounded-md w-9/12 text-center font-bold text-xl">
                 Start Quiz
@@ -128,9 +142,11 @@ const TopFeatures = () => {
             {features.map((feature, index) => (
               <div
                 key={index}
+                data-aos="fade-up"
+                data-aos-duration="1000"
+                data-aos-delay={index * 200} // Stagger the animations based on index
                 className="bg-white rounded-xl p-2 border border-gray/20 shadow-lg px-4 text-center flex flex-col items-center"
               >
-                {/* Icon Placeholder */}
                 <img src={feature.image} alt="" />
 
                 <h3 className="font-semibold text-lg my-3 text-gray-800">
@@ -190,4 +206,5 @@ const TopFeatures = () => {
     </section>
   );
 };
+
 export default TopFeatures;

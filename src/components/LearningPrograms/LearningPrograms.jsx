@@ -11,12 +11,19 @@ import startd from "../../assets/images/icon/startd.png";
 import trainw from "../../assets/images/icon/trainw.png";
 import startw from "../../assets/images/icon/startw.png";
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
-
+import AOS from "aos"; // Import AOS
+import "aos/dist/aos.css"; // Import AOS styles
 const LearningPrograms = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isAnimating, setIsAnimating] = useState(false);
   const intervalRef = useRef(null);
-
+ // Initialize AOS
+  useEffect(() => {
+    AOS.init({
+      duration: 1000, // Duration for the animation
+      once: true, // Animation happens only once
+    });
+  }, []);
   const programs = [
     {
       bg: learning1,
@@ -261,6 +268,8 @@ const LearningPrograms = () => {
                     ).map((program, index) => (
                       <div
                         key={`${slideIndex}-${index}`}
+                         data-aos="fade-up" // Add AOS animation
+                        data-aos-duration="1500"
                         className="bg-white rounded-xl border border-gray/50 hover:shadow-xl transition-shadow flex flex-col h-full"
                       >
                         <div className="p-4 pb-0">

@@ -1,9 +1,13 @@
+import React, { useEffect } from "react";
 import pricing1 from "../../assets/images/pricing1.png";
 import pricing2 from "../../assets/images/pricing2.png";
 import pricing3 from "../../assets/images/pricing3.png";
 import tic from "../../assets/images/tic.png";
 import Button from "../Shared/Button";
 import sales from "../../assets/images/sales.png";
+import AOS from "aos";
+import "aos/dist/aos.css"; // Import AOS styles
+
 const PricingSection = () => {
   const plans = [
     {
@@ -43,6 +47,14 @@ const PricingSection = () => {
     },
   ];
 
+  // Initialize AOS
+  useEffect(() => {
+    AOS.init({
+      duration: 1000, // Duration for the animation
+      once: false, // Animation happens only once
+    });
+  }, []);
+
   return (
     <section className="py-5 md:pt-10 lg:pt-10 pb-8 md:pb-12 lg:pb-28 bg-[#F9FAFB] ">
       <div className="container mx-auto px-6">
@@ -69,22 +81,15 @@ const PricingSection = () => {
         <div className="grid md:grid-cols-3 gap-4 md:gap-6 lg:gap-12 mx-auto max-w-6xl relative">
           <div
             aria-hidden="true"
-            className="
-            pointer-events-none absolute
-            bottom-0 sm:bottom-10 lg:-bottom-36
-            left-0 sm:left-0 lg:-left-36
-            w-[320px] h-[320px] sm:w-[420px] sm:h-[420px] lg:w-[320px] lg:h-[320px]
-            rounded-full border-[10px] sm:border-[12px] lg:border-[36px]
-            border-circle/50 z-0
-          
-          "
+            className="pointer-events-none absolute bottom-0 sm:bottom-10 lg:-bottom-36 left-0 sm:left-0 lg:-left-36 w-[320px] h-[320px] sm:w-[420px] sm:h-[420px] lg:w-[320px] lg:h-[320px] rounded-full border-[10px] sm:border-[12px] lg:border-[36px] border-circle/50 z-0"
           />
           {plans.map((plan, index) => (
             <div
               key={index}
-              className={`bg-white z-10 rounded-lg overflow-hidden shadow-lg flex flex-col h-full ${
-                plan.scale ? "md:transform md:scale-110" : ""
-              }`}
+              data-aos="fade-up"
+              data-aos-duration="1000"
+              data-aos-delay={index * 200} // Stagger the animation delay
+              className={`bg-white z-10 rounded-lg overflow-hidden shadow-lg flex flex-col h-full ${plan.scale ? "md:transform md:scale-110" : ""}`}
             >
               {/* Popular Badge */}
               {plan.popular && (
@@ -94,15 +99,13 @@ const PricingSection = () => {
               )}
 
               {/* Header with Icon */}
-              <div
-                className={`${plan.color} p-8 text-white text-center relative flex flex-col items-center`}
-              >
+              <div className={`${plan.color} p-8 text-white text-center relative flex flex-col items-center`}>
                 <img src={plan.image} alt="" />
                 <h3 className="text-xl font-semibold my-2">{plan.title}</h3>
               </div>
 
               {/* Content */}
-              <div className="p-6 flex flex-col flex-grow ">
+              <div className="p-6 flex flex-col flex-grow">
                 {/* Features */}
                 <div className="flex-1">
                   {plan.features.map((feature, featureIndex) => (
@@ -130,7 +133,7 @@ const PricingSection = () => {
 
                 {/* Button - Pushed to bottom */}
                 <div className="mt-auto">
-                  <Button rounded="lg">Choose Plan</Button>
+                  <Button rounded="lg">{plan.buttonText}</Button>
                 </div>
               </div>
             </div>
