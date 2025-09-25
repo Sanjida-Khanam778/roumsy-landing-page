@@ -1,12 +1,14 @@
 import { useRef, useState } from "react";
 import { Edit3, Plus, Trash2 } from "lucide-react";
 
-export const QuestionsContent = ({ editMode }) => {
+export const QuestionsContent = () => {
+  // { editMode }
   const [showSelectModal, setShowSelectModal] = useState(false);
   const [selectedQuestions, setSelectedQuestions] = useState([]);
   const [selectAll, setSelectAll] = useState(false);
   const [selectedFile, setSelectedFile] = useState(null);
   const [confirmDeleteIndex, setConfirmDeleteIndex] = useState(null);
+  const [deleteType, setDeleteType] = useState(null); // "file" | "question"
   const fileInputRef = useRef(null);
 
   // Sample questions for the modal
@@ -85,6 +87,28 @@ export const QuestionsContent = ({ editMode }) => {
     });
   };
 
+  const isFormValid = () => {
+    if (!newQuestion.text.trim()) return false; // Question text must not be empty
+    if (!newQuestion.marks) return false; // Marks must not be empty
+
+    if (
+      newQuestion.type === "Single Choice MCQ" ||
+      newQuestion.type === "Multi Choice MCQ"
+    ) {
+      // All options should be filled
+      if (newQuestion.options.some((opt) => !opt.trim())) return false;
+    }
+
+    if (
+      newQuestion.type === "Text Answer" &&
+      !newQuestion.correctTextAnswer.trim()
+    ) {
+      return false;
+    }
+
+    return true;
+  };
+
   const updateQuestionOption = (index, value) => {
     const newOptions = [...newQuestion.options];
     newOptions[index] = value;
@@ -115,22 +139,48 @@ export const QuestionsContent = ({ editMode }) => {
     setSelectedFile(null);
   };
 
-  // Handle file delete (with confirmation)
+  // Handle file delete
   const deleteFile = (index) => {
-    setConfirmDeleteIndex(index); // show modal
+    setDeleteType("file");
+    setConfirmDeleteIndex(index);
   };
 
+  // Handle question delete
+  const deleteQuestion = (id) => {
+    setDeleteType("question");
+    setConfirmDeleteIndex(id);
+  };
+
+  // Confirm delete
   const confirmDelete = () => {
-    setUploadedFiles(uploadedFiles.filter((_, i) => i !== confirmDeleteIndex));
+    if (deleteType === "file") {
+      setUploadedFiles(
+        uploadedFiles.filter((_, i) => i !== confirmDeleteIndex)
+      );
+    } else if (deleteType === "question") {
+      setQuestions(questions.filter((q) => q.id !== confirmDeleteIndex));
+    }
     setConfirmDeleteIndex(null);
+    setDeleteType(null);
   };
 
+  // Cancel delete
   const cancelDelete = () => {
     setConfirmDeleteIndex(null);
+    setDeleteType(null);
   };
 
-  const handleUseClick = (fileName) => {
-    alert(`"${fileName}" is now selected!`);
+  const handleUseClick = () => {
+    const defaultQuestion = {
+      id: questions.length + 1,
+      text: "What is the capital of France?",
+      type: "Single Choice MCQ",
+      marks: 3,
+      level: "Beginner",
+      options: ["Berlin", "Madrid", "Paris", "Rome"],
+      correctAnswer: 2, // Paris
+    };
+    setQuestions([...questions, defaultQuestion]);
   };
 
   const questionIcon = () => (
@@ -340,18 +390,23 @@ export const QuestionsContent = ({ editMode }) => {
 
             {/* Add Ques Button */}
             <div className="flex items-center justify-center">
-              <button
-                onClick={addNewQuestion}
-                className="w-80 bg-gradient-to-r from-[#189EFE] to-[#0E5F98] text-white text-base py-2 px-4 rounded-lg font-normal transition-colors flex items-center justify-center"
-              >
-                {editMode ? (
+              {/* {editMode ? (
                   <>Update Question</>
                 ) : (
                   <>
                     <Plus className="w-4 h-4 mr-2" />
                     Add New Question
                   </>
-                )}
+                )} */}
+              <button
+                onClick={addNewQuestion}
+                disabled={!isFormValid()}
+                className="w-80 text-white text-base py-2 px-4 rounded-lg font-normal transition-colors flex items-center justify-center
+    bg-gradient-to-r from-[#189EFE] to-[#0E5F98]
+    disabled:bg-gray-400 disabled:cursor-not-allowed"
+              >
+                <Plus className="w-4 h-4 mr-2" />
+                Add New Question
               </button>
             </div>
           </div>
@@ -383,14 +438,21 @@ export const QuestionsContent = ({ editMode }) => {
                         {question.text}
                       </p>
                       <div className="flex items-center space-x-4 text-xs text-gray-500">
-                        <span>Question Details</span>
+                        <span className="font-medium">Question Details:</span>
+                        <span>
+                          Type: {question.type}, Marks: {question.marks}, Level:{" "}
+                          {question.level}
+                        </span>
                       </div>
                     </div>
                     <div className="flex items-center space-x-2 ml-4">
                       <button className="p-1 text-blue-500 hover:bg-blue-50 rounded">
                         <Edit3 className="w-4 h-4" />
                       </button>
-                      <button className="p-1 text-red-500 hover:bg-red-50 rounded">
+                      <button
+                        onClick={() => deleteQuestion(question.id)}
+                        className="p-1 text-red-500 hover:bg-red-50 rounded"
+                      >
                         <Trash2 className="w-4 h-4" />
                       </button>
                     </div>
@@ -399,102 +461,101 @@ export const QuestionsContent = ({ editMode }) => {
               ))}
             </div>
           </div>
-          {editMode && (
-            <>
-              {/* Upload Questions Section */}
-              <div className="mt-8 bg-gray-50 rounded-lg py-6">
-                <h4 className="text-base font-medium text-black mb-4">
-                  Upload Questions
-                </h4>
-                <div className="flex items-center relative">
-                  {/* Hidden input */}
-                  <input
-                    type="file"
-                    ref={fileInputRef}
-                    onChange={handleFileChange}
-                    className="hidden"
-                  />
+          {/* If editMode is true, show the upload question section (only when needed) */}
+          <>
+            {/* Upload Questions Section */}
+            <div className="mt-8 bg-gray-50 rounded-lg py-6">
+              <h4 className="text-base font-medium text-black mb-4">
+                Upload Questions
+              </h4>
+              <div className="flex items-center relative">
+                {/* Hidden input */}
+                <input
+                  type="file"
+                  ref={fileInputRef}
+                  onChange={handleFileChange}
+                  className="hidden"
+                />
 
-                  {/* Button that triggers input click */}
-                  <button
-                    onClick={handleButtonClick}
-                    className="bg-blue-500 hover:bg-blue-600 rounded-md text-white w-32 h-10 py-2 font-medium absolute top-2"
-                  >
-                    Choose File
-                  </button>
-
-                  <div className="text-sm text-[#000] rounded-md w-full h-10 bg-white pl-36 mt-2 pt-2.5">
-                    {selectedFile ? selectedFile.name : "No file chosen"}
-                  </div>
-                </div>
+                {/* Button that triggers input click */}
                 <button
-                  onClick={handleUpload}
-                  disabled={!selectedFile}
-                  className="w-full bg-gradient-to-r from-[#189EFE] to-[#0E5F98] text-white py-2 px-4 rounded-lg text-base font-medium mt-4 disabled:opacity-50 disabled:cursor-not-allowed"
+                  onClick={handleButtonClick}
+                  className="bg-blue-500 hover:bg-blue-600 rounded-md text-white w-32 h-10 py-2 font-medium absolute top-2"
                 >
-                  Upload
+                  Choose File
                 </button>
-              </div>
 
-              {/* Uploaded Questions */}
-              <div className="bg-white rounded-lg p-6">
-                <div className="flex items-center mb-4">
-                  <h3 className="text-lg font-semibold text-gray-900 flex items-center">
-                    Uploaded Questions
-                  </h3>
-                </div>
-                <div className="space-y-2">
-                  {uploadedFiles.map((file, index) => (
-                    <div
-                      key={index}
-                      className="flex items-center justify-between border border-[#DBDBDB] bg-white p-4 rounded-md"
-                    >
-                      <span className="text-base text-black">{file.name}</span>
-                      <div className="flex items-center space-x-2">
-                        <button
-                          onClick={() => handleUseClick(file.name)}
-                          className="bg-[#1E90FF] text-white px-3 py-1 rounded-md text-sm font-medium"
-                        >
-                          Use
-                        </button>
-                        <button
-                          onClick={() => deleteFile(index)}
-                          className="bg-red-500 text-white px-3 py-1 rounded-md text-sm font-medium"
-                        >
-                          Delete
-                        </button>
-                      </div>
-                    </div>
-                  ))}
+                <div className="text-sm text-[#000] rounded-md w-full h-10 bg-white pl-36 mt-2 pt-2.5">
+                  {selectedFile ? selectedFile.name : "No file chosen"}
                 </div>
               </div>
+              <button
+                onClick={handleUpload}
+                disabled={!selectedFile}
+                className="w-full bg-gradient-to-r from-[#189EFE] to-[#0E5F98] text-white py-2 px-4 rounded-lg text-base font-medium mt-4 disabled:opacity-50 disabled:cursor-not-allowed"
+              >
+                Upload
+              </button>
+            </div>
 
-              {/* ✅ Confirm Delete Modal */}
-              {confirmDeleteIndex !== null && (
-                <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-                  <div className="bg-white p-6 rounded-lg shadow-lg w-96">
-                    <h3 className="text-lg font-semibold mb-4 text-center">
-                      Are you sure you want to delete this file?
-                    </h3>
-                    <div className="flex justify-center gap-4">
+            {/* Uploaded Questions */}
+            <div className="bg-white rounded-lg p-6">
+              <div className="flex items-center mb-4">
+                <h3 className="text-lg font-semibold text-gray-900 flex items-center">
+                  Uploaded Questions
+                </h3>
+              </div>
+              <div className="space-y-2">
+                {uploadedFiles.map((file, index) => (
+                  <div
+                    key={index}
+                    className="flex items-center justify-between border border-[#DBDBDB] bg-white p-4 rounded-md"
+                  >
+                    <span className="text-base text-black">{file.name}</span>
+                    <div className="flex items-center space-x-2">
                       <button
-                        onClick={confirmDelete}
-                        className="bg-red-500 text-white px-4 py-2 rounded-lg"
+                        onClick={handleUseClick}
+                        className="bg-[#1E90FF] text-white px-3 py-1 rounded-md text-sm font-medium"
                       >
-                        Yes, Delete
+                        Use
                       </button>
                       <button
-                        onClick={cancelDelete}
-                        className="bg-gray-300 px-4 py-2 rounded-lg"
+                        onClick={() => deleteFile(index)}
+                        className="bg-red-500 text-white px-3 py-1 rounded-md text-sm font-medium"
                       >
-                        No, Cancel
+                        Delete
                       </button>
                     </div>
                   </div>
+                ))}
+              </div>
+            </div>
+
+            {/* ✅ Confirm Delete Modal */}
+            {confirmDeleteIndex !== null && (
+              <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+                <div className="bg-white p-6 rounded-lg shadow-lg w-96">
+                  <h3 className="text-lg font-semibold mb-4 text-center">
+                    Are you sure you want to delete this file?
+                  </h3>
+                  <div className="flex justify-center gap-4">
+                    <button
+                      onClick={confirmDelete}
+                      className="bg-red-500 text-white px-4 py-2 rounded-lg"
+                    >
+                      Yes, Delete
+                    </button>
+                    <button
+                      onClick={cancelDelete}
+                      className="bg-gray-300 px-4 py-2 rounded-lg"
+                    >
+                      No, Cancel
+                    </button>
+                  </div>
                 </div>
-              )}
-            </>
-          )}
+              </div>
+            )}
+          </>
         </div>
       </div>
 

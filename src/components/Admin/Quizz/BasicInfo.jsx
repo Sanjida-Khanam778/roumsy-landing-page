@@ -1,19 +1,16 @@
-import React, { useState } from "react";
-import { ChevronDown } from "lucide-react";
-
 export const BasicInfo = ({ basicInfo, onChange }) => {
-  const [showTopicDropdown, setShowTopicDropdown] = useState(false);
+  // const [showTopicDropdown, setShowTopicDropdown] = useState(false);
 
-  const topics = [
-    "Immigration & Language Preparation",
-    "Project Management",
-    "Tech & Development",
-    "Office Tools",
-    "Office Productivity",
-    "Personal Development",
-    "Lifestyle",
-    "Photography & Video",
-  ];
+  // const topics = [
+  //   "Immigration & Language Preparation",
+  //   "Project Management",
+  //   "Tech & Development",
+  //   "Office Tools",
+  //   "Office Productivity",
+  //   "Personal Development",
+  //   "Lifestyle",
+  //   "Photography & Video",
+  // ];
 
   const infoIcon = () => (
     <svg
@@ -72,7 +69,17 @@ export const BasicInfo = ({ basicInfo, onChange }) => {
           <label className="block text-sm font-extralight text-black mb-2">
             Topic *
           </label>
-          <button
+
+          <input
+            type="text"
+            value={selectedTopic}
+            onChange={(e) =>
+              onChange({ ...basicInfo, selectedTopic: e.target.value })
+            }
+            className="w-full px-3 py-2 border border-[#BCBCBC] rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-colors"
+            placeholder="Add Topic"
+          />
+          {/* <button
             onClick={() => setShowTopicDropdown(!showTopicDropdown)}
             className="w-full px-3 py-2 border border-[#BCBCBC] rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-colors bg-white text-left flex items-center justify-between"
           >
@@ -101,7 +108,7 @@ export const BasicInfo = ({ basicInfo, onChange }) => {
                 </button>
               ))}
             </div>
-          )}
+          )} */}
         </div>
       </div>
 
