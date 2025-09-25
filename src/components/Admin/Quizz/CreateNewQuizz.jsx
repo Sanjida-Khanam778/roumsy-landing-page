@@ -16,7 +16,7 @@ import toast from "react-hot-toast";
 
 export default function QuizCreator() {
   const [activeTab, setActiveTab] = useState("basic");
-  const [editMode, setEditMode] = useState(false);
+  // const [editMode, setEditMode] = useState(false);
 
   const [basicInfo, setBasicInfo] = useState({
     quizTitle: "",
@@ -27,32 +27,31 @@ export default function QuizCreator() {
     maxAttempts: "3",
   });
 
-const handleSaveQuiz = () => {
-  if (!basicInfo.quizTitle.trim() || !basicInfo.selectedTopic.trim()) {
-    toast.error("Please fill out all required fields");
-    return;
-  }
+  const handleSaveQuiz = () => {
+    if (!basicInfo.quizTitle.trim() || !basicInfo.selectedTopic.trim()) {
+      toast.error("Please fill out all required fields");
+      return;
+    }
 
-  console.log("Quiz Saved:", basicInfo);
-  toast.success("Quiz info saved successfully!");
+    console.log("Quiz Saved:", basicInfo);
+    toast.success("Quiz info saved successfully!");
 
-  // Reset parent state → automatically resets BasicInfo fields
-  setBasicInfo({
-    quizTitle: "",
-    description: "",
-    selectedTopic: "",
-    totalMarks: "30 Marks",
-    timeLimit: "30",
-    maxAttempts: "3",
-  });
-};
-
+    // Reset parent state → automatically resets BasicInfo fields
+    setBasicInfo({
+      quizTitle: "",
+      description: "",
+      selectedTopic: "",
+      totalMarks: "30 Marks",
+      timeLimit: "30",
+      maxAttempts: "3",
+    });
+  };
 
   // Preview এর Edit button এ handle
-  const handleEditClick = () => {
-    setActiveTab("questions");
-    setEditMode(true);
-  };
+  // const handleEditClick = () => {
+  //   setActiveTab("questions");
+  //   setEditMode(true);
+  // };
 
   const tabs = [
     { id: "basic", label: "Basic Info", icon: <Info size={18} /> },
@@ -129,10 +128,12 @@ const handleSaveQuiz = () => {
             onChange={(newData) => setBasicInfo(newData)} // update parent state
           />
         )}
-        {activeTab === "questions" && <QuestionsContent editMode={editMode} />}
+        {/* {activeTab === "questions" && <QuestionsContent editMode={editMode} />} */}
+        {activeTab === "questions" && <QuestionsContent />}
         {activeTab === "document" && <Document />}
         {activeTab === "settings" && <QuizSettings />}
-        {activeTab === "preview" && <QuizPreview onEdit={handleEditClick} />}
+        {/* {activeTab === "preview" && <QuizPreview onEdit={handleEditClick} />} */}
+        {activeTab === "preview" && <QuizPreview />}
       </div>
     </div>
   );
