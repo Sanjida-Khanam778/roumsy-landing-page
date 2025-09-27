@@ -102,7 +102,7 @@ export default function AllPrograms({ limit }) {
   ];
 
   return (
-    <div className="grid md:grid-cols-3 gap-4 lg:gap-8 max-w-6xl px-6 lg:px-0 mx-auto">
+    <div className="grid md:grid-cols-3 gap-4 2xl:gap-8 max-w-6xl px-6 2xl:px-0 mx-auto">
       {programs.map((program, index) => (
         <div
           key={index}

@@ -39,7 +39,7 @@ export default function MovingCarTabs() {
   const handleQuizEnd = () => {
     setGetAIHelp(true);
     setActiveTab(1);
-    setSelectedSkillLevel("Intermediate")
+    setSelectedSkillLevel("Intermediate");
   };
   const [activeTab, setActiveTab] = useState(0);
   const [startQuiz, setStartQuiz] = useState(false);
@@ -397,24 +397,24 @@ export default function MovingCarTabs() {
         <button className="bg-[#E8F5FF] border border-gray/20 px-6 py-2 rounded-full shadow-sm text-sm font-medium text-gray-700 hover:bg-gray-100 transition">
           Start Your Journey
         </button>
-        <h1 className="text-3xl font-bold text-gray-900 mt-2">
+        <h1 className="md:text-lg lg:text-xl xl:text-2xl 2xl:text-3xl font-bold text-gray-900 mt-2">
           Topic Overview
         </h1>
       </div>
 
       {/* Main Card */}
       <div className="rounded-lg overflow-hidden  max-w-7xl mx-auto p-6">
-        <div className="flex flex-col md:flex-row gap-8 mt-5 xl:mt-10">
+        <div className="flex flex-col md:flex-row gap-8 mt-5 2xl:mt-10">
           {/* Left Side - Blue Section with Illustration */}
           <img className="h-40" src={learning1} alt="" />
 
           {/* Right Side - Content */}
           <div className="items-start justify-start">
-            <h2 className="text-2xl font-bold text-gray-900 mb-4">
+            <h2 className="md:text-lg xl:text-xl 2xl:text-2xl font-bold text-gray-900 mb-2 2xl:mb-4">
               Immigration & Language Preparation
             </h2>
 
-            <p className="text-gray-600 mb-6 leading-relaxed">
+            <p className="text-gray-600 mb-3 2xl:mb-6 leading-relaxed">
               Master language skills, ace your exams, and get expert guidance
               for a smooth immigration journey.
             </p>
@@ -484,7 +484,7 @@ export default function MovingCarTabs() {
           </div>
 
           {/* Moving Car */}
-          <div className="relative h-10 mb-4 w-full">
+          <div className="relative h-10 mb-2 2xl:mb-4 w-full">
             {/* Car should be centered on the active (blue) part of the road line */}
             <div
               className="absolute transition-all duration-700 ease-in-out transform z-50 mx-auto flex items-center justify-center"
@@ -494,12 +494,12 @@ export default function MovingCarTabs() {
               }}
             >
               <div className="text-4xl ">
-                <img src={car} className="w-10" alt="" />
+                <img src={car} className="w-10 xl:w-16" alt="" />
               </div>
             </div>
 
             {/* Road Line */}
-            <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-gray-300 rounded-full z-20 ">
+            <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-gray-300 rounded-full z-20">
               <div
                 className="h-full bg-blue-500 rounded-full transition-all duration-700 ease-in-out "
                 style={{ width: `${((activeTab + 1) * 100) / tabs.length}%` }}

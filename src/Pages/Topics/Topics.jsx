@@ -10,14 +10,14 @@ export default function Topics() {
       <ScrollRestoration />
       <FilterBar />
       {/* heading... */}
-      <div className="flex flex-col items-center justify-center px-4 bg-[#F4F8FD] py-5 lg:py-10">
+      <div className="flex flex-col items-center justify-center px-4 bg-[#F4F8FD] py-5 2xl:py-10">
         {/* Top Button */}
         <button className="bg-[#E8F5FF] border border-gray/20 px-6 py-2 rounded-full shadow-sm text-sm font-medium text-gray-700 hover:bg-gray-100 transition">
           Start Your Journey
         </button>
 
         {/* Heading */}
-        <h2 className="text-xl md:text-3xl lg:text-4xl font-bold text-center text-[#0A2149] my-3 lg:my-6">
+        <h2 className="text-xl md:text-3xl 2xl:text-4xl font-bold text-center text-[#0A2149] my-3 2xl:my-6">
           Our Learning Programs
         </h2>
 
@@ -30,7 +30,7 @@ export default function Topics() {
           <input
             type="text"
             placeholder="Search Course"
-            className="w-full pl-10 pr-4 py-2 lg:py-3 border border-gray/50 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400 text-gray-700 placeholder-gray/80"
+            className="w-full pl-10 pr-4 py-2 2xl:py-3 border border-gray/50 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400 text-gray-700 placeholder-gray/80"
           />
         </div>
       </div>
