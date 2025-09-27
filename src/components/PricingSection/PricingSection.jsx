@@ -81,7 +81,7 @@ const PricingSection = () => {
         <div className="grid md:grid-cols-3 gap-4 md:gap-6 lg:gap-12 mx-auto max-w-6xl relative">
           <div
             aria-hidden="true"
-            className="pointer-events-none absolute bottom-0 sm:bottom-10 lg:-bottom-36 left-0 sm:left-0 lg:-left-36 w-[320px] h-[320px] sm:w-[420px] sm:h-[420px] lg:w-[320px] lg:h-[320px] rounded-full border-[10px] sm:border-[12px] lg:border-[36px] border-circle/50 z-0"
+            className="pointer-events-none z-10 absolute bottom-0 sm:bottom-10 lg:-bottom-36 left-0 sm:left-0 lg:-left-36 w-[320px] h-[320px] sm:w-[420px] sm:h-[420px] lg:w-[320px] lg:h-[320px] rounded-full border-[10px] sm:border-[12px] lg:border-[36px] border-circle/50"
           />
           {plans.map((plan, index) => (
             <div

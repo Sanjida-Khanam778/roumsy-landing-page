@@ -14,7 +14,7 @@ import { Link } from "react-router-dom";
 // Footer Component
 const Footer = () => {
   return (
-    <footer className="bg-gradient-to-r from-[#BFE2FA]/60 to-[#8ECCFA]/90 py-12 text-[#726D6D] z-10 relative">
+    <footer className="bg-gradient-to-r from-[#CEE8FB] to-[#A0D4FB] py-12 text-[#726D6D] z-50 relative">
       <div className="w-10/12 mx-auto">
         <div className="grid md:grid-cols-4 gap-8">
           {/* Brand Section */}
