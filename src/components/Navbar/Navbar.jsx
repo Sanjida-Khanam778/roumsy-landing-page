@@ -57,7 +57,7 @@ const Navbar = () => {
 
   return (
     <div className="font-Poppins">
-      <div className="mx-auto w-full px-4 md:px-6 lg:px-0 lg:w-10/12 xl:w-10/12">
+      <div className="mx-auto w-full px-4 md:px-6 lg:px-0 lg:w-10/12 xl:w-11/12 2xl:w-10/12">
         <div className="flex justify-between items-center py-2 md:py-4">
           {/* Logo */}
           <Link to={"/"}>
@@ -74,7 +74,7 @@ const Navbar = () => {
           </Link>
 
           {/* Desktop Navigation */}
-          <nav className="hidden lg:flex items-center space-x-4 xl:space-x-8 relative">
+          <nav className="hidden lg:flex items-center space-x-4 xl:space-x-6 2xl:space-x-8 relative">
             {navItems.map((item) =>
               item.isLanguage ? (
                 <div key={item.name} className="relative">

@@ -1,7 +1,7 @@
-import React, { useState } from "react";
-import { CheckCircle } from "lucide-react";
+import { useState } from "react";
 import Button from "../Shared/Button";
 import Swal from "sweetalert2";
+import contactbg from "../../assets/images/contactbg.png";
 
 const ContactUs = () => {
   const [formData, setFormData] = useState({
@@ -72,7 +72,7 @@ const ContactUs = () => {
   }
 
   return (
-    <div className="px-6 md:px-0 bg-[#F9FAFB] rounded-xl py-10 md:py-16 ">
+    <div className="px-6 md:px-0 bg-[#F9FAFB] rounded-xl py-10 md:py-16">
       <div className="max-w-xl mx-auto">
         {/* Header */}
         <div className="text-center mb-6">
@@ -82,7 +82,9 @@ const ContactUs = () => {
             to help!
           </p>
         </div>
-
+        <div className="absolute left-0 hidden xl:block">
+          <img src={contactbg} alt="" />
+        </div>
         {/* Form */}
         <form onSubmit={handleSubmit} className="space-y-4">
           {/* Name and Email Row */}

@@ -23,7 +23,7 @@ import slide1 from "../../assets/images/slide1.png";
 import slide2 from "../../assets/images/slide2.png";
 import slide3 from "../../assets/images/slide3.png";
 import Aos from "aos";
-import 'aos/dist/aos.css';  // Import AOS styles
+import "aos/dist/aos.css"; // Import AOS styles
 
 export default function Hero() {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -102,10 +102,10 @@ export default function Hero() {
     { image: two },
     { image: one },
   ];
- useEffect(() => {
+  useEffect(() => {
     // Initialize AOS after component mounts
     Aos.init({
-      duration: 2000,  // You can adjust the duration globally here
+      duration: 2000, // You can adjust the duration globally here
     });
   }, []);
   // Auto-slide functionality with pause on interaction
@@ -198,7 +198,9 @@ export default function Hero() {
       }
     >
       {/* Overlay for better readability */}
-      {!isMobile && <div className="absolute inset-0 bg-primary/10"></div>}
+      {!isMobile && (
+        <div className="absolute inset-0 bg-gradient-to-r from-[#199DFE]/50 via-[#179DFF]/10 to-[#179DFF]/6"></div>
+      )}
 
       <div
         className={`relative w-11/12 2xl:w-10/12 flex mx-auto ${
@@ -311,10 +313,10 @@ export default function Hero() {
               data-aos-duration="3000"
               className="space-y-2 lg:space-y-4"
             >
-              <h1 className="text-2xl lg:text-3xl xl:text-5xl font-bold text-gray-900 leading-tight">
+              <h1 className="text-2xl lg:text-3xl xl:text-4xl 2xl:text-5xl font-bold text-gray-900 leading-tight">
                 {currentSlideData.title}
               </h1>
-              <p className="text-base xl:text-xl text-gray-600 leading-relaxed max-w-lg md:text-base">
+              <p className="text-base xl:text-lg 2xl:text-xl text-gray-600 leading-relaxed max-w-lg md:text-base">
                 {currentSlideData.description}
               </p>
             </div>
@@ -322,11 +324,11 @@ export default function Hero() {
             <div
               className={`flex ${
                 isMobile ? "flex-col" : "flex-col xl:flex-row"
-              } gap-4`}
+              } gap-2 2xl:gap-4`}
             >
               <Link
                 to={currentSlideData.primaryButton.go}
-                className={`${currentSlideData.primaryButton.color} text-white px-2 xl:px-3 2xl:px-4 py-3 rounded-lg font-semibold flex items-center justify-center space-x-2 transition-all duration-300 transform hover:scale-105 shadow-lg`}
+                className={`${currentSlideData.primaryButton.color} whitespace-nowrap text-white px-2 xl:px-3 2xl:px-4 py-3 rounded-lg font-semibold flex items-center justify-center space-x-2 transition-all duration-300 transform hover:scale-105 shadow-lg`}
               >
                 {renderImage(currentSlideData.primaryButton.icon)}
                 <span>{currentSlideData.primaryButton.text}</span>
@@ -334,7 +336,7 @@ export default function Hero() {
               {currentSlideData.secondaryButton && (
                 <Link
                   to={currentSlideData.secondaryButton.go}
-                  className={`${currentSlideData.secondaryButton.color} text-white px-2 xl:px-3 2xl:px-4 py-3 rounded-lg font-semibold flex items-center justify-center space-x-2 transition-all duration-300 transform hover:scale-105 shadow-lg`}
+                  className={`${currentSlideData.secondaryButton.color} whitespace-nowrap text-white px-2 xl:px-3 2xl:px-4 py-3 rounded-lg font-semibold flex items-center justify-center space-x-2 transition-all duration-300 transform hover:scale-105 shadow-lg`}
                 >
                   {renderImage(currentSlideData.secondaryButton.icon)}
                   <span>{currentSlideData.secondaryButton.text}</span>
@@ -342,7 +344,7 @@ export default function Hero() {
               )}
             </div>
             {/* User Avatars and Stats */}
-            <div className="flex lg:flex-row items-center space-x-4 pt-2 2xl:pt-6 3xl:pt-8">
+            <div className="flex lg:flex-row items-center space-x-4 pt-2 xl:pt-4 2xl:pt-8">
               <div className="flex -space-x-4">
                 {avatar.map((icon, idx) => (
                   <img

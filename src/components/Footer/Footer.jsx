@@ -14,7 +14,7 @@ import { Link } from "react-router-dom";
 // Footer Component
 const Footer = () => {
   return (
-    <footer className="bg-[#afdaf9] py-12 text-[#726D6D] z-10 relative">
+    <footer className="bg-gradient-to-r from-[#BFE2FA]/60 to-[#8ECCFA]/90 py-12 text-[#726D6D] z-10 relative">
       <div className="w-10/12 mx-auto">
         <div className="grid md:grid-cols-4 gap-8">
           {/* Brand Section */}
@@ -170,7 +170,7 @@ const Footer = () => {
         </div>
 
         {/* Bottom Copyright */}
-        <div className="border-t border-blue-300 mt-8 pt-6 text-center">
+        <div className="border-t border-blue-300 mt-8 pt-6 text-center" >
           <p className="text-gray-600">© All rights reserved LearninGPT 2024</p>
         </div>
       </div>

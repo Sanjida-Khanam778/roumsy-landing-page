@@ -429,7 +429,7 @@ const GuidedDashboard = ({ tab, embedded }) => {
       {embedded ? (
         <div
           className={`flex-1 flex flex-col ml-0 ${
-            isMobileOrTablet ? (sidebarOpen ? "ml-72" : "ml-16") : "ml-72"
+            isMobileOrTablet ? (sidebarOpen ? "ml-72" : "ml-16") : "ml-0"
           }`}
         >
           {/* Header */}
@@ -554,7 +554,7 @@ const GuidedDashboard = ({ tab, embedded }) => {
               ? sidebarOpen
                 ? "ml-72"
                 : "ml-16"
-              : "ml-72"
+              : "ml-0"
           }`}
         >
           {/* Header */}
