@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import tic from "../../assets/images/tic.png";
 import pricing1 from "../../assets/images/pricing1.png";
 import pricing2 from "../../assets/images/pricing2.png";
@@ -35,7 +35,20 @@ const GuidedDashboard = ({ tab, embedded }) => {
   const [editTitle, setEditTitle] = useState("");
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [isMobileOrTablet, setIsMobileOrTablet] = useState(false);
+  const textAreaRef = useRef(null);
+  const handleInputChange = (e) => {
+    setInputValue(e.target.value);
+  };
 
+  // Auto-resize textarea height based on content
+  useEffect(() => {
+    if (textAreaRef.current) {
+      // Reset the height to auto to allow for re-sizing
+      textAreaRef.current.style.height = "auto";
+      // Set the height to match the scrollHeight
+      textAreaRef.current.style.height = `${textAreaRef.current.scrollHeight}px`;
+    }
+  }, [inputValue]);
   const plans = [
     {
       title: "Exam Simulator Only",
@@ -510,31 +523,24 @@ const GuidedDashboard = ({ tab, embedded }) => {
               <div className="w-full">
                 <div className="bg-white border border-gray/50 rounded-2xl shadow-sm">
                   <div className="flex items-center px-2 py-1 md:p-4">
-                    <input
-                      type="text"
+                    {/* Textarea input field */}
+                    <textarea
+                      ref={textAreaRef}
                       placeholder="Ask me anything about projects"
                       value={inputValue}
                       onKeyPress={(e) =>
                         e.key === "Enter" && handleSendMessage()
                       }
-                      onChange={(e) => setInputValue(e.target.value)}
-                      className="flex-1 outline-none text-gray-700 placeholder-gray-400 placeholder:text-sm sm:placeholder:text-base "
+                      onChange={handleInputChange}
+                      rows="1" // Start with a single row
+                      className="flex-1 outline-none text-gray-700 placeholder-gray-400 placeholder:text-sm sm:placeholder:text-base resize-none overflow-auto"
+                      style={{
+                        minHeight: "40px", // Set the minimum height
+                        maxHeight: "200px", // Set the max height before the scrollbar appears
+                      }}
                     />
                     <div className="flex items-center gap-3 ml-4">
                       <button
-                        // onClick={() => {
-                        //   if (inputValue.trim()) {
-                        //     setConversations((prev) => [
-                        //       ...prev,
-                        //       { sender: "user", text: inputValue },
-                        //       {
-                        //         sender: "ai",
-                        //         text: "This is a static AI response.",
-                        //       },
-                        //     ]);
-                        //     setInputValue("");
-                        //   }
-                        // }}
                         onClick={handleSendMessage}
                         className="bg-blue-500 hover:bg-blue-600 text-white rounded-lg p-2 transition-colors"
                       >
@@ -635,31 +641,24 @@ const GuidedDashboard = ({ tab, embedded }) => {
               <div className="w-full">
                 <div className="bg-white border border-gray/50 rounded-2xl shadow-sm">
                   <div className="flex items-center px-2 py-1 md:p-4">
-                    <input
-                      type="text"
+                    {/* Textarea input field */}
+                    <textarea
+                      ref={textAreaRef}
                       placeholder="Ask me anything about projects"
                       value={inputValue}
                       onKeyPress={(e) =>
                         e.key === "Enter" && handleSendMessage()
                       }
-                      onChange={(e) => setInputValue(e.target.value)}
-                      className="flex-1 outline-none text-gray-700 placeholder-gray-400 placeholder:text-sm sm:placeholder:text-base "
+                      onChange={handleInputChange}
+                      rows="1" // Start with a single row
+                      className="flex-1 outline-none text-gray-700 placeholder-gray-400 placeholder:text-sm sm:placeholder:text-base resize-none overflow-auto"
+                      style={{
+                        minHeight: "40px", // Set the minimum height
+                        maxHeight: "200px", // Set the max height before the scrollbar appears
+                      }}
                     />
                     <div className="flex items-center gap-3 ml-4">
                       <button
-                        // onClick={() => {
-                        //   if (inputValue.trim()) {
-                        //     setConversations((prev) => [
-                        //       ...prev,
-                        //       { sender: "user", text: inputValue },
-                        //       {
-                        //         sender: "ai",
-                        //         text: "This is a static AI response.",
-                        //       },
-                        //     ]);
-                        //     setInputValue("");
-                        //   }
-                        // }}
                         onClick={handleSendMessage}
                         className="bg-blue-500 hover:bg-blue-600 text-white rounded-lg p-2 transition-colors"
                       >
