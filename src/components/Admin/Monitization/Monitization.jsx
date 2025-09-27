@@ -1,7 +1,7 @@
 import { useState } from "react";
-import { MoreHorizontal, Edit, Trash2 } from "lucide-react";
+import { MoreHorizontal, Edit, Trash2, Save, X } from "lucide-react";
 
-const plans = [
+const initialPlans = [
   {
     id: 1,
     name: "Quiz Only",
@@ -29,21 +29,49 @@ const plans = [
 ];
 
 export default function Monetization() {
+  const [plans, setPlans] = useState(initialPlans);
   const [openDropdown, setOpenDropdown] = useState(null);
+  const [editPlanId, setEditPlanId] = useState(null);
+  const [editValues, setEditValues] = useState({ price: "", billingType: "" });
+  const [deletePlanId, setDeletePlanId] = useState(null); // ✅ delete modal state
 
-  const handleEdit = (planId) => {
-    console.log("Edit plan:", planId);
+  const toggleDropdown = (planId) =>
+    setOpenDropdown(openDropdown === planId ? null : planId);
+
+  const handleEdit = (plan) => {
+    setEditPlanId(plan.id);
+    setEditValues({ price: plan.price, billingType: plan.billingType });
     setOpenDropdown(null);
   };
 
   const handleDelete = (planId) => {
-    console.log("Delete plan:", planId);
+    setDeletePlanId(planId); // modal show
     setOpenDropdown(null);
   };
 
-  const toggleDropdown = (planId) => {
-    setOpenDropdown(openDropdown === planId ? null : planId);
+  const confirmDelete = () => {
+    setPlans(plans.filter((p) => p.id !== deletePlanId));
+    setDeletePlanId(null);
   };
+
+  const handleCancelDelete = () => setDeletePlanId(null);
+
+  const handleSave = (planId) => {
+    setPlans((prev) =>
+      prev.map((p) =>
+        p.id === planId
+          ? {
+              ...p,
+              price: editValues.price,
+              billingType: editValues.billingType,
+            }
+          : p
+      )
+    );
+    setEditPlanId(null);
+  };
+
+  const handleCancel = () => setEditPlanId(null);
 
   return (
     <div className="min-h-screen bg-[#EEF6FF] p-8">
@@ -65,44 +93,119 @@ export default function Monetization() {
             className="bg-[#005EA2] rounded-tr-xl rounded-bl-xl px-6 py-8 grid grid-cols-6 gap-4 text-center text-white shadow-lg"
           >
             <div className="text-2xl">{plan.name}</div>
-            <div className="text-2xl">{plan.price}</div>
-            <div className="text-xl">{plan.billingType}</div>
+
+            <div className="text-2xl">
+              {editPlanId === plan.id ? (
+                <input
+                  type="text"
+                  value={editValues.price}
+                  onChange={(e) =>
+                    setEditValues({ ...editValues, price: e.target.value })
+                  }
+                  className="text-black text-center rounded px-2 py-1 w-full"
+                />
+              ) : (
+                plan.price
+              )}
+            </div>
+
+            <div className="text-xl">
+              {editPlanId === plan.id ? (
+                <input
+                  type="text"
+                  value={editValues.billingType}
+                  onChange={(e) =>
+                    setEditValues({
+                      ...editValues,
+                      billingType: e.target.value,
+                    })
+                  }
+                  className="text-black text-center rounded px-2 py-1 w-full"
+                />
+              ) : (
+                plan.billingType
+              )}
+            </div>
+
             <div className="text-xl">{plan.activeUsers}</div>
             <div>
-              <span className="text-[#00FF0A] text-xl text-center">{plan.status}</span>
+              <span className="text-[#00FF0A] text-xl text-center">
+                {plan.status}
+              </span>
             </div>
+
             {/* Actions */}
             <div className="relative">
-              <button
-                onClick={() => toggleDropdown(plan.id)}
-                className="h-8 w-8 flex items-center justify-center ml-24 rounded"
-              >
-                <MoreHorizontal className="h-4 w-4 text-white" />
-              </button>
-
-              {/* Dropdown */}
-              {openDropdown === plan.id && (
-                <div className="absolute right-0 mt-2 w-32 bg-white text-black rounded shadow-lg z-10">
+              {editPlanId === plan.id ? (
+                <div className="flex justify-center gap-2">
                   <button
-                    onClick={() => handleEdit(plan.id)}
-                    className="flex items-center w-full px-3 py-2 text-sm hover:bg-gray-100"
+                    onClick={() => handleSave(plan.id)}
+                    className="flex items-center bg-green-500 px-2 py-1 rounded hover:bg-green-600"
                   >
-                    <Edit className="mr-2 h-4 w-4 text-gray-600" />
-                    Edit
+                    <Save className="mr-1 h-4 w-4" /> Save
                   </button>
                   <button
-                    onClick={() => handleDelete(plan.id)}
-                    className="flex items-center w-full px-3 py-2 text-sm text-red-600 hover:bg-gray-100"
+                    onClick={handleCancel}
+                    className="flex items-center bg-red-500 px-2 py-1 rounded hover:bg-red-600"
                   >
-                    <Trash2 className="mr-2 h-4 w-4" />
-                    Delete
+                    <X className="mr-1 h-4 w-4" /> Cancel
                   </button>
                 </div>
+              ) : (
+                <>
+                  <button
+                    onClick={() => toggleDropdown(plan.id)}
+                    className="h-8 w-8 flex items-center justify-center ml-24 rounded"
+                  >
+                    <MoreHorizontal className="h-4 w-4 text-white" />
+                  </button>
+
+                  {openDropdown === plan.id && (
+                    <div className="absolute right-0 mt-2 w-32 bg-white text-black rounded shadow-lg z-10">
+                      <button
+                        onClick={() => handleEdit(plan)}
+                        className="flex items-center w-full px-3 py-2 text-sm hover:bg-gray-100"
+                      >
+                        <Edit className="mr-2 h-4 w-4 text-gray-600" /> Edit
+                      </button>
+                      <button
+                        onClick={() => handleDelete(plan.id)}
+                        className="flex items-center w-full px-3 py-2 text-sm text-red-600 hover:bg-gray-100"
+                      >
+                        <Trash2 className="mr-2 h-4 w-4" /> Delete
+                      </button>
+                    </div>
+                  )}
+                </>
               )}
             </div>
           </div>
         ))}
       </div>
+
+      {/* Confirm Delete Modal */}
+      {deletePlanId && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+          <div className="bg-white rounded-lg p-6 w-96 text-center">
+            <h2 className="text-xl font-semibold mb-4">Are you sure?</h2>
+            <p className="mb-6">Do you really want to delete this plan?</p>
+            <div className="flex justify-center gap-4">
+              <button
+                onClick={confirmDelete}
+                className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600"
+              >
+                Yes
+              </button>
+              <button
+                onClick={handleCancelDelete}
+                className="bg-gray-300 px-4 py-2 rounded hover:bg-gray-400"
+              >
+                Cancel
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
