@@ -131,9 +131,7 @@ const Dashboard = ({ tab, embedded }) => {
     : "static";
 
   return (
-    <div
-      className={`font-Poppins flex h-screen bg-[#575555]/10 relative max-w-[1200px] md:max-w-max`}
-    >
+    <div className={`font-Poppins flex h-screen bg-[#575555]/10 relative`}>
       {/* Pricing Modal */}
       {showPricingModal && !isSubscribed && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 md:px-8 2xl:px-0">
@@ -234,7 +232,7 @@ const Dashboard = ({ tab, embedded }) => {
           </div>
         </div>
       )}
-
+      {/* sidebar */}
       <div
         className={`${sidebarWidth} bg-[#0062A7] text-white flex flex-col h-full z-40 transition-all duration-300 ${
           isMobileOrTablet ? "absolute top-0 left-0 h-full" : ""
