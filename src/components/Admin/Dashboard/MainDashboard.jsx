@@ -166,9 +166,9 @@ const Dashboard = () => {
   }, []);
 
   return (
-    <div className="px-20 pt-20 pb-5">
+    <div className="px-0 pt-5 lg:px-20 lg:pt-20 pb-10 lg:pb-5">
       {/* Top row with charts */}
-      <div className="w-full grid grid-cols-1 lg:grid-cols-2 gap-28 pb-20">
+      <div className="w-full grid grid-cols-1 xl:grid-cols-2 gap-4 lg:gap-28 pb-10 lg:pb-20">
         {/* Total Revenue Chart */}
         <div className="bg-[#F2F7FF] drop-shadow-md rounded-lg p-6">
           <h3 className="text-xl font-medium text-[#004399] mb-24">
@@ -191,7 +191,7 @@ const Dashboard = () => {
       </div>
 
       {/* Bottom row */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 xl:grid-cols-2 gap-10 lg:gap-6">
         <div>
           <h3 className="text-xl font-medium text-black mb-3 text-center">
             Top scorer
@@ -223,7 +223,7 @@ const Dashboard = () => {
 
         {/* Pie Chart */}
         <div className="">
-          <div className="flex items-center justify-center h-full gap-7">
+          <div className="flex flex-col lg:flex-row items-center justify-center h-full gap-7">
             {/* Legend */}
             <div className="">
               {/* Web */}
