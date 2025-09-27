@@ -15,7 +15,7 @@ export default function ContactBar() {
   return (
     <div className="bg-black border-b border-gray-800 font-Inter">
       {/* container: keep center alignment; add responsive padding instead of fixed width on small screens */}
-      <div className="mx-auto w-full px-4 sm:px-6 lg:px-0 lg:w-10/12 xl:w-10/12">
+      <div className="mx-auto w-full px-4 sm:px-6 lg:px-0 lg:w-10/12 xl:w-11/12 2xl:w-10/12">
         {/* layout: stack on small screens, row on md+; keep spacing tight so visuals match */}
         <div className="flex justify-between items-center gap-2 md:gap-0 py-2 text-xs sm:text-sm text-white">
           {/* left cluster: allow wrapping on small screens without altering look */}
