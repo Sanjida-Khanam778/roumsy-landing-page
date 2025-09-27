@@ -113,17 +113,17 @@ const QuizResultPage = ({ handleQuizEnd }) => {
         <div className="overflow-hidden">
           {/* Header */}
           <div className="flex items-center flex-col justify-center text-center relative">
-            <img src={cross} className="w-16 md:w-auto" alt="" />
-            <h1 className="text-xl md:text-3xl lg:text-4xl font-bold mb-2">
+            <img src={cross} className="w-16 2xl:w-auto" alt="" />
+            <h1 className="text-xl md:text-3xl 2xl:text-4xl font-bold mb-2">
               Quiz Complete!
             </h1>
             <p className="text-gray">Here are your results</p>
           </div>
 
           {/* Score Section */}
-          <div className="my-2 md:my-4 text-center">
+          <div className="my-2 2xl:my-4 text-center">
             <div
-              className={`text-4xl md:text-6xl font-bold md:mb-2 text-primary`}
+              className={`text-3xl lg:text-5xl 2xl:text-6xl font-bold md:mb-2 text-primary`}
             >
               {quizResults.score}%
             </div>
@@ -137,8 +137,8 @@ const QuizResultPage = ({ handleQuizEnd }) => {
           </div>
 
           {/* Questions Review */}
-          <div className="p-4 md:p-8">
-            <h3 className="text-lg font-semibold text-gray-800 mb-6">
+          <div className="p-4 2xl:p-8">
+            <h3 className="text-lg font-semibold text-gray-800 mb-3 2xl:mb-6">
               Question Review
             </h3>
             <div className="space-y-4">
@@ -204,14 +204,14 @@ const QuizResultPage = ({ handleQuizEnd }) => {
           </div>
 
           {/* Action Buttons */}
-          <div className="p-4 md:p-8 bg-gray-50">
+          <div className="p-4 2xl:p-8 bg-gray-50">
             <div className="text-center mb-6">
               <p className="text-primary font-medium mb-4">
                 "Let's review the sections you struggled with."
               </p>
             </div>
 
-            <div className="flex flex-col items-center sm:flex-row gap-8 sm:gap-4 justify-center pt-4 md:pt-8">
+            <div className="flex flex-col items-center sm:flex-row gap-8 sm:gap-4 justify-center pt-4 2xl:pt-8">
               <div onClick={handleGetAIHelp} className="relative">
                 <img
                   src={aiHelp}
@@ -242,7 +242,7 @@ const QuizResultPage = ({ handleQuizEnd }) => {
           </div>
 
           {/* Bottom Tags */}
-          <div className="p-6 ">
+          <div className="p-3 2xl:p-6 ">
             <div className="flex flex-wrap justify-center gap-3">
               {tags.map((tag, index) => (
                 <span
