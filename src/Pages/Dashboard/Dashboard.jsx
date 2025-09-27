@@ -131,7 +131,9 @@ const Dashboard = ({ tab, embedded }) => {
     : "static";
 
   return (
-    <div className={`font-Poppins flex h-screen bg-[#575555]/10 relative max-w-[1200px] md:max-w-max`}>
+    <div
+      className={`font-Poppins flex h-screen bg-[#575555]/10 relative max-w-[1200px] md:max-w-max`}
+    >
       {/* Pricing Modal */}
       {showPricingModal && !isSubscribed && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 md:px-8 2xl:px-0">
@@ -366,7 +368,7 @@ const Dashboard = ({ tab, embedded }) => {
       {embedded ? (
         <div
           className={`flex-1 flex flex-col ml-0 ${
-            isMobileOrTablet ? (sidebarOpen ? "ml-72" : "ml-16") : "ml-0"
+            isMobileOrTablet ? (sidebarOpen ? "ml-0" : "ml-16") : "ml-0"
           }`}
         >
           {/* Header */}
@@ -509,7 +511,7 @@ const Dashboard = ({ tab, embedded }) => {
           className={`flex-1 flex flex-col ml-0 ${
             isMobileOrTablet && !embedded
               ? sidebarOpen
-                ? "ml-72"
+                ? "ml-0"
                 : "ml-16"
               : "ml-0"
           }`}
