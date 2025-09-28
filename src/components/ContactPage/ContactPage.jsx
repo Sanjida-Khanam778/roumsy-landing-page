@@ -49,14 +49,14 @@ export default function ContactPage() {
   };
 
   return (
-    <div className="min-h-screen bg-[#F2F4F7] py-12">
+    <div className="min-h-screen bg-[#F2F4F7] py-6 lg:py-12">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
-        <div className="text-center mb-12">
-          <h1 className="text-4xl font-bold text-gray-900 mb-4">
+        <div className="text-center lg:mb-12">
+          <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
             Get in Touch
           </h1>
-          <p className="text-gray-600 max-w-2xl mx-auto">
+          <p className="text-sm md:text-base text-gray-600 max-w-2xl mx-auto">
             Have questions about LearnerGPT? We'd love to hear from you. Send us
             a <br /> message and we'll respond as soon as possible.
           </p>
@@ -65,16 +65,16 @@ export default function ContactPage() {
         {/* Main Content */}
         <div className="grid lg:grid-cols-2 gap-2">
           {/* Contact Form */}
-          <div className=" rounded-lg p-8">
-            <h2 className="text-2xl font-semibold text-gray-900 mb-6">
+          <div className=" rounded-lg p-4 lg:p-8">
+            <h2 className="text-xl md:text-2xl font-semibold text-gray-900 mb-2 lg:mb-6">
               Send us a message
             </h2>
             <p className="text-gray-600 mb-6">
               Fill out the form below and we'll get back to you within 24 hours.
             </p>
 
-            <form onSubmit={handleSubmit} className="space-y-6">
-              <div className="grid md:grid-cols-2 gap-4">
+            <form onSubmit={handleSubmit} className="space-y-3 lg:space-y-6 ">
+              <div className="grid md:grid-cols-2 gap-3 lg:gap-4">
                 <div>
                   <input
                     type="text"
@@ -129,8 +129,8 @@ export default function ContactPage() {
           </div>
 
           {/* Contact Information */}
-          <div className="rounded-lg p-8">
-            <h2 className="text-2xl font-semibold text-gray-900 mb-6">
+          <div className="rounded-lg p-4 lg:p-8">
+            <h2 className="text-xl md:text-2xl font-semibold text-gray-900 mb-3 lg:mb-6">
               Contact Information
             </h2>
             <p className="text-gray-600 mb-4">
@@ -200,28 +200,30 @@ export default function ContactPage() {
           </div>
         </div>
       </div>
-      <div className="max-w-7xl mx-auto p-8">
+      <div className="max-w-7xl mx-auto p-4 lg:p-8">
         {/* Header */}
-        <div className="text-center mb-12">
-          <h1 className="text-3xl font-bold text-gray-900 my-4">
+        <div className="text-center mb-6 lg:mb-12">
+          <h1 className="text-xl md:text-2xl lg:text-3xl font-bold text-gray-900 my-2 md:my-4">
             Frequently Asked Questions
           </h1>
-          <p className="text-[#939393] font-medium text-lg mt-6">
+          <p className="text-[#939393] font-medium lg:text-lg mt-2 lg:mt-6">
             Quick answers to common questions about LearninGPT
           </p>
         </div>
 
         {/* FAQ Grid */}
-        <div className="grid md:grid-cols-2 gap-6">
+        <div className="grid md:grid-cols-2 gap-2 md:gap-3 lg:gap-6">
           {faqs.map((faq, index) => (
             <div
               key={index}
-              className="bg-white rounded-lg p-6 border border-gray/50 hover:shadow-md transition-shadow duration-200"
+              className="bg-white rounded-lg p-4 lg:p-6 border border-gray/50 hover:shadow-md transition-shadow duration-200"
             >
               <h3 className="text-lg font-bold text-gray-900 mb-3">
                 {faq.question}
               </h3>
-              <p className="text-[#939393] leading-relaxed">{faq.answer}</p>
+              <p className="text-[#939393] leading-relaxed text-sm lg:text-base">
+                {faq.answer}
+              </p>
             </div>
           ))}
         </div>

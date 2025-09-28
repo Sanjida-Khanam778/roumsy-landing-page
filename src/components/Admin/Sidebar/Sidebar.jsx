@@ -61,7 +61,7 @@ export const Sidebar = ({ currentComponent, onMenuClick }) => {
   const navigate = useNavigate();
 
   const handleLogout = () => {
-    navigate("/admin/login");
+    navigate("/login");
   };
   return (
     <div className="h-full bg-[#97D0FA] shadow-sm flex flex-col items-center">

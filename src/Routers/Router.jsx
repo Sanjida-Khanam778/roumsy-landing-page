@@ -6,7 +6,6 @@ import QuizCreator from "../components/Admin/Quizz/CreateNewQuizz";
 
 import Navbar from "../components/Navbar/Navbar";
 import Footer from "../components/Footer/Footer";
-import React from "react";
 import LoginForm from "../Pages/Auth/LoginForm";
 import SignUpPage from "../Pages/Auth/SignUpPage";
 import ForgotPasswordPage from "../Pages/Auth/ForgotPasswordPage";
@@ -22,6 +21,15 @@ import Terms from "../components/Terms&Policy/Terms";
 import Privacy from "../components/Terms&Policy/Privacy";
 import ContactPage from "../components/ContactPage/ContactPage";
 import About from "../components/About/About";
+import PricingSection from "../components/PricingSection/PricingSection";
+import Profile from "../Pages/Home/Profile";
+import ProfileDashboard from "../Pages/Dashboard/ProfileDashboard";
+import Certificates from "../Pages/Home/Certificates";
+import { UserAcc } from "../Pages/Home/UserAcc";
+import Plan from "../Pages/Home/Plan";
+import Form from "../components/BecomeInstructor/Form";
+import QuizStart from "../Pages/QuizInterface/QuizStart";
+import GuidedDashboard from "../Pages/Dashboard/GuidedDashboard";
 
 export const router = createBrowserRouter([
   {
@@ -39,28 +47,8 @@ export const router = createBrowserRouter([
     ),
     children: [
       {
-        path: "/login",
-        element: <LoginForm />,
-      },
-      {
-        path: "/register",
-        element: <SignUpPage />,
-      },
-      {
-        path: "/forgot-password",
-        element: <ForgotPasswordPage />,
-      },
-      {
-        path: "/otp",
-        element: <OtpPage />,
-      },
-      {
-        path: "/reset-password",
-        element: <ResetPasswordPage />,
-      },
-      {
         path: "/quiz",
-        element: <QuizInterface />,
+        element: <QuizStart  />,
       },
       {
         path: "/quiz-result",
@@ -94,15 +82,82 @@ export const router = createBrowserRouter([
         path: "/about",
         element: <About />,
       },
+
+      {
+        path: "/pricing",
+        element: <PricingSection />,
+      },
+      {
+        path: "/form",
+        element: <Form />,
+      },
+      {
+        path: "/lang",
+        element: < ></>,
+      },
     ],
+  },
+  {
+    path: "/login",
+    element: <LoginForm />,
+  },
+  {
+    path: "/register",
+    element: <SignUpPage />,
+  },
+  {
+    path: "/forgot-password",
+    element: <ForgotPasswordPage />,
+  },
+  {
+    path: "/otp",
+    element: <OtpPage />,
+  },
+  {
+    path: "/reset-password",
+    element: <ResetPasswordPage />,
   },
   {
     path: "/dashboard",
     element: <Dashboard />,
   },
   {
+    path: "/guided",
+    element: <GuidedDashboard />,
+  },
+  {
     path: "/admin",
     element: <DashboardMainPage />,
+  },
+  {
+    path: "/profile-dashboard",
+    element: <ProfileDashboard />,
+    children: [
+      {
+        path: "profile",
+        element: <Profile />,
+      },
+      {
+        path: "certificates",
+        element: <Certificates />,
+      },
+      {
+        path: "user-acc",
+        element: <UserAcc />,
+      },
+      {
+        path: "plan",
+        element: <Plan />,
+      },
+      {
+        path: "terms",
+        element: <Terms />,
+      },
+      {
+        path: "privacy",
+        element: <Privacy />,
+      },
+    ],
   },
   {
     path: "/admin/create-quizz",

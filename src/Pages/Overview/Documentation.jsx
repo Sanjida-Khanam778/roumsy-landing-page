@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Lock } from "lucide-react";
 import pricing1 from "../../assets/images/pricing1.png";
 import pricing2 from "../../assets/images/pricing2.png";
@@ -7,7 +7,23 @@ import tic from "../../assets/images/tic.png";
 import Button from "../../components/Shared/Button";
 
 const Documentation = () => {
+  const [sidebarOpen, setSidebarOpen] = useState(true);
+  const [isMobileOrTablet, setIsMobileOrTablet] = useState(false);
+
+  React.useEffect(() => {
+    const handleResize = () => {
+      const mobileOrTablet = window.innerWidth <= 768;
+      setIsMobileOrTablet(mobileOrTablet);
+      setSidebarOpen(!mobileOrTablet); // On desktop, always open; on mobile/tablet, sidebar hidden by default
+    };
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
   const [showAlert, setShowAlert] = useState(false);
+  const [activeLesson, setActiveLesson] = useState(1);
+
   const plans = [
     {
       title: "Exam Simulator Only",
@@ -45,34 +61,35 @@ const Documentation = () => {
       scale: false,
     },
   ];
+
   const lessons = [
     {
       id: 1,
-      title: "Introduction to Immigration Systems",
+      title: "Immigration Overview PDF",
       isUnlocked: true,
       isActive: true,
+      type: "pdf",
+      content: "https://example.com/uploads/lesson1.pdf",
     },
     {
       id: 2,
-      title: "Introduction to Immigration Systems",
-      isUnlocked: false,
+      title: "Immigration Intro Video",
+      isUnlocked: true,
       isActive: false,
+      type: "video",
+      content: "https://youtu.be/pLnN3ooJcqw?si=Rm0WRFYJnWkhpZ4T",
     },
     {
       id: 3,
-      title: "Introduction to Immigration Systems",
-      isUnlocked: false,
+      title: "Immigration PPT Slides",
+      isUnlocked: true,
       isActive: false,
-    },
-    {
-      id: 4,
-      title: "Introduction to Immigration Systems",
-      isUnlocked: false,
-      isActive: false,
+      type: "ppt",
+      url: "/sample2.pptx",
     },
     {
       id: 5,
-      title: "Introduction to Immigration Systems",
+      title: "Locked Lesson",
       isUnlocked: false,
       isActive: false,
     },
@@ -83,77 +100,174 @@ const Documentation = () => {
   };
 
   const handleMaybeLater = () => {
-    // Allow chat but track the chats
     setShowAlert(false);
   };
 
+  const handleLessonClick = (lesson) => {
+    if (!lesson.isUnlocked) {
+      setShowAlert(true);
+      return;
+    }
+    setActiveLesson(lesson.id);
+  };
+
+  const currentLesson = lessons.find((l) => l.id === activeLesson);
+
   return (
-    <div className="flex bg-white">
+    <div className="flex bg-white relative md:h-screen lg:h-auto">
+      {/* Hamburger icon for mobile/tablet - relative to Documentation component */}
+      {isMobileOrTablet && (
+        <button
+          className="absolute top-4 left-4 bg-blue-500 text-white rounded-full p-2 shadow-lg w-10 h-10 flex items-center justify-center z-50"
+          onClick={() => setSidebarOpen((prev) => !prev)}
+          aria-label="Toggle Sidebar"
+          style={{ position: "absolute" }}
+        >
+          <svg
+            width="24"
+            height="24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          >
+            <line x1="3" y1="12" x2="21" y2="12" />
+            <line x1="3" y1="6" x2="21" y2="6" />
+            <line x1="3" y1="18" x2="21" y2="18" />
+          </svg>
+        </button>
+      )}
       {/* Sidebar */}
-      <div className="w-80 bg-[#E5E5E5] py-6">
-        <div className="space-y-4">
-          {lessons.map((lesson) => (
-            <div
-              key={lesson.id}
-              className={`p-4 rounded cursor-pointer transition-colors ${
-                lesson.isActive ? "" : "hover:bg-gray-100"
-              }`}
-              onClick={lesson.isUnlocked ? undefined : handleLockedLessonClick}
+      <div
+        className={`bg-[#E5E5E5] py-6 flex flex-col transition-all duration-300 h-screen ${
+          isMobileOrTablet
+            ? sidebarOpen
+              ? "fixed top-0 left-0 w-72 h-full z-50 shadow-2xl" // overlays main content
+              : "hidden" // collapsed: sidebar hidden
+            : "w-72 h-full relative"
+        }`}
+      >
+        {/* Hamburger icon for mobile/tablet */}
+        {isMobileOrTablet && (
+          <button
+            className="bg-blue-500 text-white rounded-full p-2 shadow-lg md:mb-4 mb-2 ml-4 w-10 h-10 flex items-center justify-center"
+            onClick={() => setSidebarOpen((prev) => !prev)}
+            aria-label="Toggle Sidebar"
+          >
+            <svg
+              width="24"
+              height="24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
             >
-              <div className="flex items-center justify-between">
-                <div className="flex-1">
-                  <h3
-                    className={`font-medium ${
-                      lesson.isActive ? "text-[#1E90FF]" : "text-gray"
-                    }`}
-                  >
-                    {lesson.title}
-                  </h3>
+              <line x1="3" y1="12" x2="21" y2="12" />
+              <line x1="3" y1="6" x2="21" y2="6" />
+              <line x1="3" y1="18" x2="21" y2="18" />
+            </svg>
+          </button>
+        )}
+
+        {/* Sidebar content only if open or desktop */}
+        {(sidebarOpen || !isMobileOrTablet) && (
+          <div className="space-y-4">
+            {lessons.map((lesson) => (
+              <div
+                key={lesson.id}
+                className={`p-4 cursor-pointer transition-colors ${
+                  lesson.id === activeLesson ? "bg-white" : "hover:bg-gray-100"
+                }`}
+                onClick={() =>
+                  lesson.isUnlocked
+                    ? handleLessonClick(lesson)
+                    : handleLockedLessonClick()
+                }
+              >
+                <div className="flex items-center justify-between">
+                  <div className="flex-1">
+                    <h3
+                      className={`font-medium ${
+                        lesson.id === activeLesson
+                          ? "text-[#1E90FF]"
+                          : "text-gray"
+                      }`}
+                    >
+                      {lesson.title}
+                    </h3>
+                  </div>
+                  {!lesson.isUnlocked && (
+                    <Lock className="w-4 h-4 text-gray-500 ml-2 flex-shrink-0" />
+                  )}
                 </div>
-                {!lesson.isUnlocked && (
-                  <Lock className="w-4 h-4 text-gray-500 ml-2 flex-shrink-0" />
-                )}
               </div>
-            </div>
-          ))}
-        </div>
+            ))}
+          </div>
+        )}
       </div>
 
       {/* Main Content */}
-      <div className="flex-1 p-8">
-        <div className="max-w-4xl h-full">
-          <h1 className="text-3xl font-bold text-gray-900 mb-8">
-            Introduction to Immigration Systems
+      <div
+        className={`flex-1 p-4 md:p-8 transition-all duration-300`}
+        style={
+          isMobileOrTablet && sidebarOpen
+            ? { filter: "blur(2px)", pointerEvents: "none" }
+            : {}
+        }
+      >
+        <div className="max-w-4xl h-full mt-10 lg:mt-0">
+          <h1 className="text-xl md:text-3xl font-bold text-gray-900 mb-8">
+            {currentLesson?.title}
           </h1>
 
-          <div className="flex flex-col justify-between">
-            <div className="flex-grow">
-              <ul className="space-y-4 text-gray-700 list-disc list-inside">
-                <li>
-                  Overview of popular immigration destinations (e.g., Canada,
-                  Australia, UK)
-                </li>
-                <li>
-                  Understanding visa categories, eligibility, and documentation
-                  basics
-                </li>
-              </ul>
+          {/* PDF */}
+          {currentLesson?.type === "pdf" && (
+            <div className="w-full rounded-lg overflow-hidden">
+              <iframe
+                src="https://docs.google.com/gview?url=https://www.adobe.com/support/products/enterprise/knowledgecenter/media/c4611_sample_explain.pdf&embedded=true"
+                width="100%"
+                height="700px"
+              ></iframe>
             </div>
+          )}
 
-            {/* <div className="pt-8 ">
-              <div className="flex justify-between items-center">
-                <button className="bg-gray-200 text-gray-600 px-6 py-2 rounded-lg cursor-not-allowed">
-                  Previous
-                </button>
-                <button
-                  onClick={handleLockedLessonClick}
-                  className="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition-colors"
-                >
-                  Next Lesson
-                </button>
-              </div>
-            </div> */}
-          </div>
+          {/* PPT */}
+          {currentLesson?.type === "ppt" && (
+            <div className="w-full rounded-lg overflow-hidden">
+              <iframe
+                src={`https://docs.google.com/presentation/d/1bNVVeNyMtZnOey1m25w1uY7AzZi1jZOn/preview`}
+                width="100%"
+                height="500px"
+                frameBorder="0"
+                title="PPT Preview"
+                allow="fullscreen"
+              ></iframe>
+            </div>
+          )}
+
+          {/* Video */}
+          {currentLesson?.type === "video" && (
+            <div className="aspect-w-16 aspect-h-9">
+              <iframe
+                width="100%"
+                height="500px"
+                src="https://www.youtube.com/embed/pLnN3ooJcqw?si=Rm0WRFYJnWkhpZ4T"
+                frameborder="0"
+                title="YouTube video player"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                referrerpolicy="strict-origin-when-cross-origin"
+                allowFullScreen
+              ></iframe>
+            </div>
+          )}
+
+          {!currentLesson?.type && (
+            <p className="text-gray-600">
+              This lesson is locked or not available.
+            </p>
+          )}
         </div>
       </div>
 
@@ -181,26 +295,20 @@ const Documentation = () => {
                       plan.scale ? "transform scale-100" : ""
                     }`}
                   >
-                    {/* Popular Badge */}
                     {plan.popular && (
                       <div className="absolute top-4 right-4 bg-[#FFB563] text-white px-3 py-1 rounded-full text-xs font-medium z-10">
                         Best Deal
                       </div>
                     )}
-
-                    {/* Header with Icon */}
                     <div
-                      className={`${plan.color} p-8 text-white text-center relative flex flex-col items-center`}
+                      className={`${plan.color} md:p-8 text-white text-center relative flex flex-col items-center`}
                     >
                       <img src={plan.image} alt="" />
                       <h3 className="text-xl font-semibold my-2">
                         {plan.title}
                       </h3>
                     </div>
-
-                    {/* Content */}
                     <div className="p-6 flex flex-col flex-grow ">
-                      {/* Features */}
                       <div className="flex-1">
                         {plan.features.map((feature, featureIndex) => (
                           <div
@@ -214,8 +322,6 @@ const Documentation = () => {
                           </div>
                         ))}
                       </div>
-
-                      {/* Pricing */}
                       <div className="mb-4 flex-1">
                         {plan.originalPrice && (
                           <div className="text-gray line-through text-sm mb-1">
@@ -229,8 +335,6 @@ const Documentation = () => {
                           {plan.period}
                         </div>
                       </div>
-
-                      {/* Button - Pushed to bottom */}
                       <div className="mt-auto">
                         <Button rounded="lg">Choose Plan</Button>
                       </div>
@@ -238,8 +342,6 @@ const Documentation = () => {
                   </div>
                 ))}
               </div>
-
-              {/* Maybe Later Button */}
               <div className="text-center my-6 border border-gray/50 rounded-md py-3 w-9/12 mx-auto">
                 <button
                   onClick={handleMaybeLater}

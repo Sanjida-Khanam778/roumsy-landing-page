@@ -5,45 +5,59 @@ import tab2 from "../../assets/images/icon/tab2.png";
 import tab3 from "../../assets/images/icon/tab3.png";
 import tab4 from "../../assets/images/icon/tab4.png";
 import tab5 from "../../assets/images/icon/tab5.png";
-import { CheckCircle, Star } from "lucide-react";
+import { Star } from "lucide-react";
 import learning1 from "../../assets/images/learning1.png";
 import Dashboard from "../Dashboard/Dashboard";
 import guided from "../../assets/images/guided.png";
 import free from "../../assets/images/free.png";
-import Documentation from "./Documentation";
+import ModeSelection from "../../components/ModeSelection";
 import Button from "../../components/Shared/Button";
 import material from "../../assets/images/icon/material.png";
 import QuizInterface from "../QuizInterface/QuizInterface";
 import CourseCompletionCertificate from "./CourseCompletionCertificate";
-const MovingCarTabs = () => {
+import { RiMenuSearchLine } from "react-icons/ri";
+import Documentation from "./Documentation";
+import { ScrollRestoration } from "react-router-dom";
+import GuidedDashboard from "../Dashboard/GuidedDashboard";
+import QuizResultPage from "../QuizInterface/QuizResultPage";
+export default function MovingCarTabs() {
   const [selectedSkillLevel, setSelectedSkillLevel] = useState("");
   const [selectedMode, setSelectedMode] = useState("");
+  const [result, setResult] = useState(false);
+  const [getAIHelp, setGetAIHelp] = useState(false);
 
   const handleSkillLevelSelect = (level) => {
     setSelectedSkillLevel(level);
     setSelectedMode("");
   };
+  console.log(selectedMode);
 
   const handleModeSelect = (mode) => {
     setSelectedMode(mode);
     setSelectedSkillLevel("");
   };
-
+  const handleQuizEnd = () => {
+    setGetAIHelp(true);
+    setActiveTab(1);
+    setSelectedSkillLevel("Intermediate");
+  };
   const [activeTab, setActiveTab] = useState(0);
   const [startQuiz, setStartQuiz] = useState(false);
-
   const handleStartQuiz = () => {
     setStartQuiz(true);
+  };
+  const quizResultShow = () => {
+    setResult(true);
   };
   const tabs = [
     {
       id: "course-overview",
       title: "Course Overview",
       subtitle: "See your learning path",
-      icon: tab1,
+      active: true,
       content: (
         <div className="">
-          <div className=" p-6">
+          <div className="p-3 sm:p-6">
             {/* Header */}
             <div className="flex items-center mb-6">
               <h1 className="text-2xl font-bold text-secondary">
@@ -109,10 +123,10 @@ const MovingCarTabs = () => {
               <div className="space-y-6">
                 {/* Section 1 */}
                 <div>
-                  <h3 className="text-lg font-bold text-gray-900 mb-3 flex items-center">
+                  <h3 className="sm:text-lg font-semibold text-gray-900 mb-3 flex items-center">
                     1. Introduction to Immigration Systems
                   </h3>
-                  <ul className="text-light space-y-1 ml-8">
+                  <ul className="text-light space-y-1 ml-4 sm:ml-8 text-sm sm:text-base">
                     <li>
                       • Overview of immigration categories (student, skilled
                       worker, family, etc.)
@@ -127,10 +141,10 @@ const MovingCarTabs = () => {
 
                 {/* Section 2 */}
                 <div>
-                  <h3 className="text-lg font-semibold text-gray-900 mb-3 flex items-center">
+                  <h3 className="sm:text-lg font-semibold text-gray-900 mb-3 flex items-center">
                     2. English Language Fundamentals
                   </h3>
-                  <ul className="text-light space-y-1 ml-8">
+                  <ul className="text-light space-y-1 ml-4 sm:ml-8 text-sm sm:text-base">
                     <li>• Grammar and sentence structure refresher</li>
                     <li>• Pronunciation and accent improvement</li>
                     <li>
@@ -142,10 +156,10 @@ const MovingCarTabs = () => {
 
                 {/* Section 3 */}
                 <div>
-                  <h3 className="text-lg font-semibold text-gray-900 mb-3 flex items-center">
+                  <h3 className="sm:text-lg font-semibold text-gray-900 mb-3 flex items-center">
                     3. IELTS/TOEFL/CELPIP Exam Preparation{" "}
                   </h3>
-                  <ul className="text-light space-y-1 ml-8">
+                  <ul className="text-light space-y-1 ml-4 sm:ml-8 text-sm sm:text-base">
                     <li>• Test formats and scoring systems</li>
                     <li>
                       • Practice tasks for Reading, Writing, Listening &
@@ -157,10 +171,10 @@ const MovingCarTabs = () => {
 
                 {/* Section 4 */}
                 <div>
-                  <h3 className="text-lg font-semibold text-gray-900 mb-3 flex items-center">
+                  <h3 className="sm:text-lg font-semibold text-gray-900 mb-3 flex items-center">
                     4. Communication for Real-life Situations{" "}
                   </h3>
-                  <ul className="text-light space-y-1 ml-8">
+                  <ul className="text-light space-y-1 ml-4 sm:ml-8 text-sm sm:text-base">
                     <li>• Job interview roleplay and resume writing</li>
                     <li>
                       • Conversations at banks, clinics, schools, and government
@@ -172,10 +186,10 @@ const MovingCarTabs = () => {
 
                 {/* Section 5 */}
                 <div>
-                  <h3 className="text-lg font-semibold text-gray-900 mb-3 flex items-center">
+                  <h3 className="sm:text-lg font-semibold text-gray-900 mb-3 flex items-center">
                     5. Cultural Awareness & Integration{" "}
                   </h3>
-                  <ul className="text-light space-y-1 ml-8">
+                  <ul className="text-light space-y-1 ml-4 sm:ml-8 text-sm sm:text-base">
                     <li>• Local laws, norms, and etiquette</li>
                     <li>• Building confidence in social interactions</li>
                     <li>• Local laws, norms, and etiquette</li>
@@ -184,10 +198,10 @@ const MovingCarTabs = () => {
 
                 {/* Section 6 */}
                 <div>
-                  <h3 className="text-lg font-semibold text-gray-900 mb-3 flex items-center">
+                  <h3 className="sm:text-lg font-semibold text-gray-900 mb-3 flex items-center">
                     6. Mock Interviews & Practice Tests{" "}
                   </h3>
-                  <ul className="text-light space-y-1 ml-8">
+                  <ul className="text-light space-y-1 ml-4 sm:ml-8 text-sm sm:text-base">
                     <li>
                       • Personalized feedback from instructors (if applicable)
                     </li>
@@ -201,14 +215,14 @@ const MovingCarTabs = () => {
             </div>
 
             {/* Exam Format Overview */}
-            <div className="mb-8">
-              <h2 className="text-2xl font-bold text-secondary mb-6 flex items-center">
+            <div className="mb-4 *:sm:mb-8">
+              <h2 className="text-2xl font-bold text-secondary mb-3 sm:mb-6 flex items-center">
                 📝 Exam Format Overview
               </h2>
 
               <div className="grid md:grid-cols-2">
                 {/* Left Column */}
-                <div className="border border-gray-200 p-6">
+                <div className="border border-b-0 sm:border-b border-gray-200 p-3 sm:p-6">
                   <h3 className="font-bold text-gray-900 mb-4">
                     IELTS (International English Language Testing System)
                   </h3>
@@ -235,7 +249,7 @@ const MovingCarTabs = () => {
                 </div>
 
                 {/* Right Column */}
-                <div className="border-r border-gray-200 border-y p-6">
+                <div className="border-x sm:border-r sm:border-l-0 border-gray-200 border-y p-6">
                   <h3 className="font-bold text-gray-900 mb-4">
                     What is included in this Course?
                   </h3>
@@ -260,94 +274,41 @@ const MovingCarTabs = () => {
       title: "AI Coach",
       subtitle: "Get personalized guidance",
       icon: tab2,
+      active: false,
       content: (
-        <div className=" bg-gray-50 flex items-center justify-center p-6">
+        <div className="bg-gray-50 flex items-center justify-center md:p-6">
           {selectedSkillLevel && !selectedMode ? (
-            <div className="bg-gray-50 flex items-center justify-center p-6">
-              <div className="max-w-4xl w-full">
-                <div className=" border border-gray-300 p-12">
-                  <div className="text-center mb-12">
-                    <h2 className="text-2xl font-bold text-gray-900">
-                      Choose Your Mode
-                    </h2>
-                  </div>
-
-                  <div className="grid md:grid-cols-2 gap-8 max-w-3xl mx-auto">
-                    {/* Guided Learning Path */}
-                    <div className=" rounded-lg shadow-lg overflow-hidden">
-                      <div className="bg-[#B7DDFF] py-6 relative flex items-center justify-center">
-                        <img src={free} alt="" />
-                      </div>
-                      <div className="p-6 text-center">
-                        <h3 className="text-lg font-semibold text-gray-900 mb-3">
-                          Guided Learning Path
-                        </h3>
-                        <p className="text-gray-600 text-sm mb-6">
-                          Start here for a structured and faster learning
-                          experience.
-                        </p>
-                        <button
-                          onClick={() =>
-                            handleModeSelect("Guided Learning Path")
-                          }
-                          className="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition-colors w-full"
-                        >
-                          Start Guide Path
-                        </button>
-                      </div>
-                    </div>
-
-                    {/* Free Questions */}
-                    <div className=" rounded-lg shadow-lg overflow-hidden">
-                      <div className="bg-[#D1E5F8] py-6 relative flex items-center justify-center">
-                        <img src={guided} alt="" />
-                      </div>
-                      <div className="p-6 text-center">
-                        <h3 className="text-lg font-semibold text-gray-900 mb-3">
-                          Free Questions
-                        </h3>
-                        <p className="text-gray-600 text-sm mb-6">
-                          Ask anything. One credit per question. Personalized
-                          answers powered by AI.
-                        </p>
-                        <button
-                          onClick={() => handleModeSelect("Free Questions")}
-                          className="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition-colors w-full"
-                        >
-                          Start Free Questions
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+            <ModeSelection handleModeSelect={handleModeSelect} />
           ) : selectedMode ? (
-            <div className="">
+            <div className="w-full">
               <h2 className="text-2xl font-bold mb-4">LearninGPT Assistant</h2>
               <p className="text-gray mb-8">
                 Ask questions about the course material. 3 free messages
                 remaining.
               </p>
-              <Dashboard tab={true} />
+              {selectedMode === "Guided Learning Path" ? (
+                <GuidedDashboard tab={true} embedded={true} />
+              ) : (
+                <Dashboard tab={true} embedded={true} />
+              )}
             </div>
           ) : (
             <div className="max-w-4xl w-full">
-              <div className=" border-2 border-blue-400 rounded-lg p-12">
-                <div className="text-center mb-12">
+              <div className=" border-2 border-blue-400 rounded-lg p-6 md:p-12">
+                <div className="text-center md:mb-12 mb-6">
                   <p className="text-gray-800 text-lg">
                     Before we begin, choose your expertise level so the AI Coach
                     can better guide you.
                   </p>
                 </div>
 
-                <div className="text-center mb-12">
+                <div className="text-center mb-6 md:mb-12">
                   <h2 className="text-2xl font-semibold text-gray-900">
                     Skill level
                   </h2>
                 </div>
 
-                <div className="flex justify-center space-x-6">
+                <div className="flex flex-col md:flex-row gap-4 md:gap-0 justify-center md:space-x-8">
                   <button
                     onClick={() => handleSkillLevelSelect("Beginner")}
                     className="bg-blue-100 text-blue-800 px-8 py-3 rounded-lg border border-blue-200 hover:bg-blue-200 transition-colors font-medium min-w-[120px]"
@@ -378,8 +339,9 @@ const MovingCarTabs = () => {
       title: "Documentation",
       subtitle: "Study comprehensive materials",
       icon: tab3,
+      active: false,
       content: (
-        <div className="p-8">
+        <div className="p-2 md:p-8">
           <h2 className="text-2xl font-bold mb-4">Documentation</h2>
           <p className="text-gray mb-4">
             Comprehensive study materials and guides
@@ -393,10 +355,13 @@ const MovingCarTabs = () => {
       title: "Exam Simulator",
       subtitle: "Practice with mock exams",
       icon: tab4,
+      active: false,
       content: (
         <div>
-          {startQuiz ? (
-            <QuizInterface />
+          {result ? (
+            <QuizResultPage handleQuizEnd={handleQuizEnd} />
+          ) : startQuiz ? (
+            <QuizInterface quizResultShow={quizResultShow} />
           ) : (
             <div className="bg-gray-50 flex flex-col gap-20 items-center justify-center p-6">
               <p className="text-[#011E46] font-bold text-xl">
@@ -420,36 +385,36 @@ const MovingCarTabs = () => {
       title: "Certification",
       subtitle: "Earn your certificate",
       icon: tab5,
-      content: (
-      <CourseCompletionCertificate />
-      ),
+      active: false,
+      content: <CourseCompletionCertificate />,
     },
   ];
 
   return (
     <div className="bg-[#F4F8FD]">
-      <div className="text-center py-8  max-w-7xl mx-auto">
+      <ScrollRestoration />
+      <div className="text-center pt-8 max-w-7xl mx-auto">
         <button className="bg-[#E8F5FF] border border-gray/20 px-6 py-2 rounded-full shadow-sm text-sm font-medium text-gray-700 hover:bg-gray-100 transition">
           Start Your Journey
-        </button>{" "}
-        <h1 className="text-3xl font-bold text-gray-900 mt-2">
+        </button>
+        <h1 className="md:text-lg lg:text-xl xl:text-2xl 2xl:text-3xl font-bold text-gray-900 mt-2">
           Topic Overview
         </h1>
       </div>
 
       {/* Main Card */}
-      <div className=" rounded-lg overflow-hidden  max-w-7xl mx-auto">
-        <div className="flex gap-8 mt-10">
+      <div className="rounded-lg overflow-hidden  max-w-7xl mx-auto p-6">
+        <div className="flex flex-col md:flex-row gap-8 mt-5 2xl:mt-10">
           {/* Left Side - Blue Section with Illustration */}
           <img className="h-40" src={learning1} alt="" />
 
           {/* Right Side - Content */}
           <div className="items-start justify-start">
-            <h2 className="text-2xl font-bold text-gray-900 mb-4">
+            <h2 className="md:text-lg xl:text-xl 2xl:text-2xl font-bold text-gray-900 mb-2 2xl:mb-4">
               Immigration & Language Preparation
             </h2>
 
-            <p className="text-gray-600 mb-6 leading-relaxed">
+            <p className="text-gray-600 mb-3 2xl:mb-6 leading-relaxed">
               Master language skills, ace your exams, and get expert guidance
               for a smooth immigration journey.
             </p>
@@ -474,25 +439,32 @@ const MovingCarTabs = () => {
           </div>
         </div>
       </div>
-      <div className="max-w-7xl mx-auto p-6">
+      <div className="max-w-7xl mx-auto p-2 sm:p-6 ">
         {/* Tab Navigation */}
-        <div className="relative  rounded-lg p-6 mb-6">
+        <div className="relative rounded-lg p-0 mb-6">
           {/* Tab Icons and Labels */}
-          <div className="flex justify-around mb-8 w-full ">
-            <div className="flex gap-8 w-full justify-evenly">
+          <div className="flex mb-8 w-full">
+            <div className="flex sm:gap-8 w-full justify-evenly">
               {tabs.map((tab, index) => (
                 <button
                   key={tab.id}
-                  onClick={() => setActiveTab(index)}
+                  onClick={() => {
+                    setActiveTab(index);
+                    setStartQuiz(false);
+                  }}
                   className={`flex flex-col items-center space-y-2 transition-all duration-300`}
                 >
                   {/* Icon Circle */}
                   <div
-                    className={`w-16 h-16 rounded-full flex items-center justify-center text-2xl transition-all duration-300 ${
+                    className={`w-8 h-8 sm:w-16 sm:h-16 rounded-full flex items-center justify-center text-2xl transition-all duration-300 ${
                       index <= activeTab ? "bg-[#1E90FF]" : "bg-[#929292]"
                     }`}
                   >
-                    <img src={tab.icon} alt="" />
+                    {tab.active ? (
+                      <RiMenuSearchLine className="text-base sm:text-3xl text-white" />
+                    ) : (
+                      <img src={tab.icon} className="w-4 sm:w-auto" alt="" />
+                    )}
                   </div>
 
                   {/* Tab Title and Subtitle */}
@@ -502,7 +474,9 @@ const MovingCarTabs = () => {
                     }`}
                   >
                     <h3 className="font-semibold text-sm">{tab.title}</h3>
-                    <p className="text-xs text-gray-500">{tab.subtitle}</p>
+                    <p className="text-xs hidden sm:block text-gray-500">
+                      {tab.subtitle}
+                    </p>
                   </div>
                 </button>
               ))}
@@ -510,7 +484,7 @@ const MovingCarTabs = () => {
           </div>
 
           {/* Moving Car */}
-          <div className="relative h-10 mb-4">
+          <div className="relative h-10 mb-2 2xl:mb-4 w-full">
             {/* Car should be centered on the active (blue) part of the road line */}
             <div
               className="absolute transition-all duration-700 ease-in-out transform z-50 mx-auto flex items-center justify-center"
@@ -520,12 +494,12 @@ const MovingCarTabs = () => {
               }}
             >
               <div className="text-4xl ">
-                <img src={car} alt="" />
+                <img src={car} className="w-10 xl:w-16" alt="" />
               </div>
             </div>
 
             {/* Road Line */}
-            <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-gray-300 rounded-full z-20 ">
+            <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-gray-300 rounded-full z-20">
               <div
                 className="h-full bg-blue-500 rounded-full transition-all duration-700 ease-in-out "
                 style={{ width: `${((activeTab + 1) * 100) / tabs.length}%` }}
@@ -543,6 +517,4 @@ const MovingCarTabs = () => {
       </div>
     </div>
   );
-};
-
-export default MovingCarTabs;
+}

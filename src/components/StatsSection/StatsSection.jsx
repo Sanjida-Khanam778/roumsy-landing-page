@@ -15,17 +15,29 @@ const StatsSection = () => {
   ];
 
   return (
-    <section className="py-16 bg-[#0074C4]">
-      <div className="container mx-auto px-6">
-        <div className="grid md:grid-cols-3 gap-8 text-center text-white">
+    <section className="py-16 mt-10 md:mt-16 xl:mt-28 bg-[#0074C4] relative">
+      <div
+        aria-hidden="true"
+        className="
+            pointer-events-none absolute
+            top-0 sm:top-10 lg:-top-28
+            left-0 sm:left-0 lg:left-0
+            w-[320px] h-[320px] sm:w-[420px] sm:h-[420px] lg:w-[320px] lg:h-[320px]
+            rounded-full border-[10px] sm:border-[12px] lg:border-[36px]
+            border-circle -z-10
+          
+          "
+      />
+      <div className="w-10/12 mx-auto px-3 lg:px-6">
+        <div className="grid lg:grid-cols-3 gap-8 text-center text-white ">
           {stats.map((stat, index) => (
-            <div key={index} className="flex items-center gap-4">
+            <div key={index} className="flex items-center gap-4 ">
               <img
                 src={stat.number}
                 alt={stat.label}
                 className="mx-auto mb-4"
               />
-              <p className="text-white font-bold text-xl">{stat.label}</p>
+              <p className="text-white font-bold lg:text-xl">{stat.label}</p>
             </div>
           ))}
         </div>

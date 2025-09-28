@@ -14,7 +14,8 @@ export default {
         gray: "#929292",
         light: "#C5E7FF",
         login: "#F0F8FF",
-        light: "#7B7B7B"
+        light: "#7B7B7B",
+        circle: '#C9E4FB'
       },
     },
   },

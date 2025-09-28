@@ -14,7 +14,7 @@ import { Link } from "react-router-dom";
 // Footer Component
 const Footer = () => {
   return (
-    <footer className="bg-[#afdaf9] py-12 text-[#726D6D]">
+    <footer className="bg-gradient-to-r from-[#CEE8FB] to-[#A0D4FB] py-12 text-[#726D6D] z-20 relative">
       <div className="w-10/12 mx-auto">
         <div className="grid md:grid-cols-4 gap-8">
           {/* Brand Section */}
@@ -40,7 +40,7 @@ const Footer = () => {
 
               <div className="flex items-center text-gray-700 text-sm">
                 <img src={gmail} alt="" />
-                <span>Georgia.Young@example.Com</span>
+                <span>Georgia.Young@example.com</span>
               </div>
             </div>
 
@@ -65,7 +65,11 @@ const Footer = () => {
               <h2 className="text-[#011F47] font-semibold text-xl">
                 Start learning smarter today.
               </h2>
-              <Button rounded="lg">Join Now</Button>
+              <Link to={'/topics'}>
+                <div>
+                  <Button rounded="lg">Join Now</Button>
+                </div>
+              </Link>
             </div>
             <div className="flex justify-evenly">
               {/* Platform Section */}
@@ -73,36 +77,36 @@ const Footer = () => {
                 <h3 className="font-semibold text-gray-800 mb-4">Platform</h3>
                 <ul className="space-y-2">
                   <li>
-                    <a
-                      href="#"
+                    <Link
+                      to={"/topics"}
                       className="text-gray-700 text-sm hover:text-primary transition-colors"
                     >
                       Topics
-                    </a>
+                    </Link>
                   </li>
                   <li>
-                    <a
-                      href="#"
+                    <Link
+                      to={"/quiz"}
                       className="text-gray-700 text-sm hover:text-primary transition-colors"
                     >
                       Exams
-                    </a>
+                    </Link>
                   </li>
                   <li>
-                    <a
-                      href="#"
+                    <Link
+                      to={"/dashboard"}
                       className="text-gray-700 text-sm hover:text-primary transition-colors"
                     >
                       AI Assistant
-                    </a>
+                    </Link>
                   </li>
                   <li>
-                    <a
-                      href="#"
+                    <Link
+                      to={"/pricing"}
                       className="text-gray-700 text-sm hover:text-primary transition-colors"
                     >
                       Pricing
-                    </a>
+                    </Link>
                   </li>
                 </ul>
               </div>
@@ -113,19 +117,19 @@ const Footer = () => {
                 <ul className="space-y-2">
                   <li>
                     <Link
-                      to={'/about'}
+                      to={"/about"}
                       className="text-gray-700 text-sm hover:text-primary transition-colors"
                     >
                       About
                     </Link>
                   </li>
                   <li>
-                    <a
-                      href="#"
+                    <Link
+                      to={"/contact"}
                       className="text-gray-700 text-sm hover:text-primary transition-colors"
                     >
                       Contact
-                    </a>
+                    </Link>
                   </li>
                   <li>
                     <Link
@@ -158,14 +162,7 @@ const Footer = () => {
                       Terms Of Service
                     </Link>
                   </li>
-                  <li>
-                    <a
-                      href="#"
-                      className="text-gray-700 text-sm hover:text-primary transition-colors"
-                    >
-                      Cookie Policy
-                    </a>
-                  </li>
+                 
                 </ul>
               </div>
             </div>
@@ -173,8 +170,8 @@ const Footer = () => {
         </div>
 
         {/* Bottom Copyright */}
-        <div className="border-t border-blue-300 mt-8 pt-6 text-center">
-          <p className="text-gray-600">© All rights reserved LearnGPT 2024</p>
+        <div className="border-t border-blue-300 mt-8 pt-6 text-center" >
+          <p className="text-gray-600">© All rights reserved LearninGPT 2024</p>
         </div>
       </div>
     </footer>
