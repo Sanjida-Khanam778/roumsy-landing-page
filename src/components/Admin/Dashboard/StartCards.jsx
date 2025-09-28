@@ -51,9 +51,9 @@ export const  StartCards = () => {
   );
   return (
     <div>
-      <div className="grid grid-cols-3 gap-8 mb-6 mx-20">
+      <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4 md:gap-8 mb-6 sm:mx-0 md:mx-20">
         {/* Revenue */}
-        <div className="flex items-center justify-between gap-5 p-6 bg-[#EDF6ED] border border-white rounded-xl shadow-2xl">
+        <div className="flex items-center justify-between gap-5 p-4 md:p-6 bg-[#EDF6ED] border border-white rounded-xl shadow-2xl">
           <div className="flex flex-col gap-3">
             <p className="bg-gradient-to-r from-[#1E90FF] to-[#0E5F98] bg-clip-text text-transparent font-medium text-2xl">
               Total Revenue
@@ -77,7 +77,7 @@ export const  StartCards = () => {
           </div>
         </div>
         {/* Membership */}
-        <div className="flex items-center justify-between gap-5 p-6 bg-[#F1EDDF] border border-white rounded-xl shadow-2xl">
+        <div className="flex items-center justify-between gap-5 p-3 xl:p-6 bg-[#F1EDDF] border border-white rounded-xl shadow-2xl">
           <div className="flex flex-col gap-3">
             <p className="bg-gradient-to-r from-[#1E90FF] to-[#0E5F98] bg-clip-text text-transparent font-medium text-2xl">
               Total Membership
