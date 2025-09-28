@@ -43,25 +43,25 @@ const QuizManagement = ({ handleEditQuizz }) => {
 
             {/* Table */}
             <div className="overflow-x-auto px-4">
-              <table className="w-full border-separate border-spacing-y-4">
+              <table className="w-full border-collapse">
                 <thead>
                   <tr className="bg-[#BCDFE6]">
-                    <th className="text-left py-2 px-4 font-medium text-gray-700">
+                    <th className="text-left py-3 px-4 font-medium text-gray-700">
                       Quiz Details
                     </th>
-                    <th className="text-left py-2 px-4 font-medium text-gray-700">
+                    <th className="text-left py-3 px-4 font-medium text-gray-700">
                       Topic
                     </th>
-                    <th className="text-left py-2 px-4 font-medium text-gray-700">
+                    <th className="text-center py-3 px-4 font-medium text-gray-700">
                       Questions
                     </th>
-                    <th className="text-center py-2 px-4 font-medium text-gray-700">
+                    <th className="text-center py-3 px-4 font-medium text-gray-700">
                       Performance
                     </th>
-                    <th className="text-left py-2 px-4 font-medium text-gray-700">
+                    <th className="text-center py-3 px-4 font-medium text-gray-700">
                       Status
                     </th>
-                    <th className="text-left py-2 px-4 font-medium text-gray-700">
+                    <th className="text-center py-3 px-4 font-medium text-gray-700">
                       Action
                     </th>
                   </tr>
@@ -70,45 +70,50 @@ const QuizManagement = ({ handleEditQuizz }) => {
                   {quizzes.map((quiz) => (
                     <tr
                       key={quiz.id}
-                      className="border border-[#C4C4C4] bg-white"
+                      className="border-b border-gray-200 bg-white hover:bg-gray-50"
                     >
-                      <td className="py-2 px-3">
-                        <div className="flex flex-col justify-center">
-                          <div className="font-medium text-[#383838] text-base">
+                      {/* Quiz Details */}
+                      <td className="py-3 px-4">
+                        <div className="flex flex-col">
+                          <span className="font-medium text-[#383838] text-base">
                             {quiz.name}
-                          </div>
-                          <div className="flex items-center gap-3 mt-1 text-xs font-light text-[#929292]">
+                          </span>
+                          <div className="flex items-center gap-3 mt-1 text-xs text-[#929292]">
                             <span>{quiz.marks} Marks</span>
                             <span>{quiz.duration} Mins</span>
                           </div>
                         </div>
                       </td>
-                      <td className="py-2 px-3">
-                        <span className="text-[#5E5E5E] font-normal text-sm">
-                          {quiz.topic}
-                        </span>
+
+                      {/* Topic */}
+                      <td className="py-3 px-4 text-sm text-[#5E5E5E]">
+                        {quiz.topic}
                       </td>
-                      <td className="py-2 px-3 w-20 text-center">
-                        <p className="text-[#5E5E5E] font-normal text-sm ">
+
+                      {/* Questions */}
+                      <td className="py-3 px-4 text-center">
+                        <p className="text-[#5E5E5E] text-sm font-medium">
                           {quiz.questionsCount}
                         </p>
-                        <p className="text-[#5E5E5E] font-normal text-sm ">
-                          Questions
-                        </p>
+                        <p className="text-[#929292] text-xs">Questions</p>
                       </td>
-                      <td className="py-2 pl-[13rem] text-[#616161] font-normal text-sm ">
-                        <div>
-                          <div className="flex items-center text-sm text-gray-600 mb-1">
+
+                      {/* Performance */}
+                      <td className="py-3 px-4 text-center text-sm text-[#616161]">
+                        <div className="flex flex-col items-center gap-1">
+                          <div className="flex items-center">
                             <Users className="w-4 h-4 mr-1" />
                             {quiz.attempts} Attempt
                           </div>
-                          <div className="flex items-center text-sm text-gray-600">
-                            <span className="w-4 h-4 bg-gray-300 rounded-full mr-1"></span>
+                          <div className="flex items-center">
+                            <span className="w-3 h-3 bg-gray-300 rounded-full mr-1"></span>
                             {quiz.avgScore}% Avg
                           </div>
                         </div>
                       </td>
-                      <td className="py-2 px-3">
+
+                      {/* Status */}
+                      <td className="py-3 px-4 text-center">
                         <span
                           className={`px-3 py-1 rounded-full text-sm font-medium ${
                             quiz.status === "Active"
@@ -119,46 +124,46 @@ const QuizManagement = ({ handleEditQuizz }) => {
                           {quiz.status}
                         </span>
                       </td>
-                      <td className="py-2 px-3">
-                        <div className="relative">
-                          <button
-                            onClick={() => toggleDropdown(quiz.id)}
-                            className="p-2 hover:bg-gray-100 rounded-lg transition-colors"
-                          >
-                            <MoreHorizontal className="w-5 h-5 text-gray-600" />
-                          </button>
 
-                          {openDropdown === quiz.id && (
-                            <div className="absolute right-0 top-full mt-1 w-32 bg-white rounded-lg shadow-lg border border-gray-200 z-10">
-                              <div className="py-1">
-                                <button
-                                  onClick={() => handleEditQuizz(quiz)}
-                                  className="flex items-center w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-50"
-                                >
-                                  <Edit3 className="w-4 h-4 mr-2" />
-                                  Edit
-                                </button>
-                                <button
-                                  onClick={() => setQuizToDelete(quiz)}
-                                  className="flex items-center w-full px-4 py-2 text-sm text-red-600 hover:bg-red-50"
-                                >
-                                  <Trash2 className="w-4 h-4 mr-2" />
-                                  Delete
-                                </button>
-                                <button
-                                  onClick={(e) => {
-                                    e.stopPropagation();
-                                    setPreviewQuiz(quiz);
-                                  }}
-                                  className="flex items-center w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-50"
-                                >
-                                  <Eye className="w-4 h-4 mr-2" />
-                                  View
-                                </button>
-                              </div>
+                      {/* Action */}
+                      <td className="py-3 px-4 text-center relative">
+                        <button
+                          onClick={() => toggleDropdown(quiz.id)}
+                          className="p-2 hover:bg-gray-100 rounded-lg transition-colors"
+                        >
+                          <MoreHorizontal className="w-5 h-5 text-gray-600" />
+                        </button>
+
+                        {openDropdown === quiz.id && (
+                          <div className="absolute right-0 top-full mt-1 w-32 bg-white rounded-lg shadow-lg border border-gray-200 z-10">
+                            <div className="py-1">
+                              <button
+                                onClick={() => handleEditQuizz(quiz)}
+                                className="flex items-center w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-50"
+                              >
+                                <Edit3 className="w-4 h-4 mr-2" />
+                                Edit
+                              </button>
+                              <button
+                                onClick={() => setQuizToDelete(quiz)}
+                                className="flex items-center w-full px-4 py-2 text-sm text-red-600 hover:bg-red-50"
+                              >
+                                <Trash2 className="w-4 h-4 mr-2" />
+                                Delete
+                              </button>
+                              <button
+                                onClick={(e) => {
+                                  e.stopPropagation();
+                                  setPreviewQuiz(quiz);
+                                }}
+                                className="flex items-center w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-50"
+                              >
+                                <Eye className="w-4 h-4 mr-2" />
+                                View
+                              </button>
                             </div>
-                          )}
-                        </div>
+                          </div>
+                        )}
                       </td>
                     </tr>
                   ))}

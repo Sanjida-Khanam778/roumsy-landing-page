@@ -77,8 +77,8 @@ export const Quizz = () => {
     </svg>
   );
   return (
-    <div className="py-16">
-      <div className="px-7 flex justify-between items-center pb-12">
+    <div className="py-4 md:py-16">
+      <div className="px-7 flex flex-col md:flex-row justify-between items-center pb-12 gap-4 md:gap-0">
         <div>
           <h1 className="text-3xl font-medium text-[#1E90FF]">
             Quiz Management
@@ -95,7 +95,7 @@ export const Quizz = () => {
         </button>
       </div>
 
-      <div className="grid grid-cols-3 gap-8 mb-6 mx-14">
+      <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4 md:gap-8 mb-6 sm:mx-0 md:mx-14">
         {/* Quizzes */}
         <div className="flex items-center justify-between gap-5 p-6 bg-[#EDF6ED] border border-white rounded-xl shadow-2xl">
           <div className="flex flex-col gap-1">
@@ -139,8 +139,8 @@ export const Quizz = () => {
         </div>
       </div>
 
-      <div className="py-5 mx-14 bg-white">
-        <div className="mx-10 py-5 border border-[#C4C4C4] rounded-lg">
+      <div className="py-2 md:py-5 mx-0 md:mx-14 bg-white">
+        <div className="mx-2 md:mx-10 py-5 border border-[#C4C4C4] rounded-lg">
           <div className="flex items-center gap-3 px-4">
             <Search className="text-gray-500 w-5 h-5" />
             <input
@@ -152,7 +152,7 @@ export const Quizz = () => {
         </div>
       </div>
 
-      <div className="py-5 mx-14">
+      <div className="py-5 mx-0 md:mx-14">
         <QuizManagement handleEditQuizz={handleEditQuizz} />
       </div>
     </div>
