@@ -311,19 +311,19 @@ export default function MovingCarTabs() {
                 <div className="flex flex-col md:flex-row gap-4 md:gap-0 justify-center md:space-x-8">
                   <button
                     onClick={() => handleSkillLevelSelect("Beginner")}
-                    className="bg-blue-100 text-blue-800 px-8 py-3 rounded-lg border border-blue-200 hover:bg-blue-200 transition-colors font-medium min-w-[120px]"
+                    className="bg-blue-100 text-blue-800 px-8 py-2 rounded-lg border border-blue-200 hover:bg-blue-200 transition-colors font-medium min-w-[120px]"
                   >
                     Beginner
                   </button>
                   <button
                     onClick={() => handleSkillLevelSelect("Intermediate")}
-                    className="bg-blue-100 text-blue-800 px-8 py-3 rounded-lg border border-blue-200 hover:bg-blue-200 transition-colors font-medium min-w-[120px]"
+                    className="bg-blue-100 text-blue-800 px-8 py-2 rounded-lg border border-blue-200 hover:bg-blue-200 transition-colors font-medium min-w-[120px]"
                   >
                     Intermediate
                   </button>
                   <button
                     onClick={() => handleSkillLevelSelect("Advance")}
-                    className="bg-blue-100 text-blue-800 px-8 py-3 rounded-lg border border-blue-200 hover:bg-blue-200 transition-colors font-medium min-w-[120px]"
+                    className="bg-blue-100 text-blue-800 px-8 py-2 rounded-lg border border-blue-200 hover:bg-blue-200 transition-colors font-medium min-w-[120px]"
                   >
                     Advance
                   </button>

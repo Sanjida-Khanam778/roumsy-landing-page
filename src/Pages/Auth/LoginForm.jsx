@@ -184,7 +184,7 @@ const LoginForm = () => {
 
             {/* Login Button */}
             <div>
-              <Button type="submit" rounded="lg" padding="px-4 py-3 w-full">
+              <Button type="submit" rounded="lg" padding="px-4 py-2 w-full">
                 LOGIN
               </Button>
             </div>

@@ -239,7 +239,7 @@ const QuizInterface = ({ quizResultShow }) => {
               {currentQuestion > 0 ? (
                 <button
                   onClick={handlePrevious}
-                  className="flex items-center gap-2 px-6 py-3 rounded-lg font-medium transition-colors bg-black text-white hover:bg-gray-700"
+                  className="flex items-center gap-2 px-6 py-2 rounded-lg font-medium transition-colors bg-black text-white hover:bg-gray-700"
                 >
                   <ChevronLeft className="w-4 h-4" />
                   Previous
@@ -251,7 +251,7 @@ const QuizInterface = ({ quizResultShow }) => {
                 <button
                   type="submit"
                   onClick={handleSubmit}
-                  className={`flex items-center gap-2 px-6 py-3 rounded-lg font-medium transition-colors bg-blue-500 text-white hover:bg-blue-600
+                  className={`flex items-center gap-2 px-6 py-2 rounded-lg font-medium transition-colors bg-blue-500 text-white hover:bg-blue-600
                   `}
                 >
                   Submit
@@ -260,7 +260,7 @@ const QuizInterface = ({ quizResultShow }) => {
               ) : (
                 <button
                   onClick={handleNext}
-                  className={`flex items-center gap-2 px-6 py-3 rounded-lg font-medium transition-colors 
+                  className={`flex items-center gap-2 px-6 py-2 rounded-lg font-medium transition-colors 
                       bg-blue-500 text-white hover:bg-blue-600
                   `}
                 >

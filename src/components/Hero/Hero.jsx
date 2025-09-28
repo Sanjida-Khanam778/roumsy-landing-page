@@ -328,7 +328,7 @@ export default function Hero() {
             >
               <Link
                 to={currentSlideData.primaryButton.go}
-                className={`${currentSlideData.primaryButton.color} whitespace-nowrap text-white px-2 xl:px-3 2xl:px-4 py-3 rounded-lg font-semibold flex items-center justify-center space-x-2 transition-all duration-300 transform hover:scale-105 shadow-lg`}
+                className={`${currentSlideData.primaryButton.color} whitespace-nowrap text-white px-2 xl:px-3 2xl:px-4 py-2 rounded-lg font-semibold flex items-center justify-center space-x-2 transition-all duration-300 transform hover:scale-105 shadow-lg`}
               >
                 {renderImage(currentSlideData.primaryButton.icon)}
                 <span>{currentSlideData.primaryButton.text}</span>
@@ -336,7 +336,7 @@ export default function Hero() {
               {currentSlideData.secondaryButton && (
                 <Link
                   to={currentSlideData.secondaryButton.go}
-                  className={`${currentSlideData.secondaryButton.color} whitespace-nowrap text-white px-2 xl:px-3 2xl:px-4 py-3 rounded-lg font-semibold flex items-center justify-center space-x-2 transition-all duration-300 transform hover:scale-105 shadow-lg`}
+                  className={`${currentSlideData.secondaryButton.color} whitespace-nowrap text-white px-2 xl:px-3 2xl:px-4 py-2 rounded-lg font-semibold flex items-center justify-center space-x-2 transition-all duration-300 transform hover:scale-105 shadow-lg`}
                 >
                   {renderImage(currentSlideData.secondaryButton.icon)}
                   <span>{currentSlideData.secondaryButton.text}</span>

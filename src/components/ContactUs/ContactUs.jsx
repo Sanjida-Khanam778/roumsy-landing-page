@@ -141,7 +141,7 @@ const ContactUs = () => {
 
           {/* Submit Button */}
           <div className="flex justify-end pt-2">
-            <Button type="submit" rounded="lg" padding="px-6 py-3">
+            <Button type="submit" rounded="lg" padding="px-6 py-2">
               <span>Submit Request</span>
             </Button>
           </div>

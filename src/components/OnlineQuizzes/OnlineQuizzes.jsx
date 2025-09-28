@@ -67,7 +67,7 @@ const OnlineQuizzes = () => {
 
         <Link to={"/topics"}>
           <div className="text-center mt-8">
-            <Button rounded={"lg"} padding="px-6 py-3">
+            <Button rounded={"lg"} padding="px-6 py-2">
               Explore All Categories
             </Button>
           </div>

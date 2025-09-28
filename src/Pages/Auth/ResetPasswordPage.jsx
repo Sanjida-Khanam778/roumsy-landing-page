@@ -118,7 +118,7 @@ const ResetPasswordPage = () => {
             </div>
 
             <Button
-              padding="w-full py-3 px-2"
+              padding="w-full py-2 px-2"
               rounded="lg"
               onClick={() => setCurrentPage("otp")}
             >

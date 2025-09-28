@@ -1,7 +1,7 @@
 export default function Button({
   children,
   rounded = "full",
-  padding = "px-6 py-1",
+  padding = "px-6 py-2",
 }) {
   const roundedMap = {
     sm: "rounded-sm",

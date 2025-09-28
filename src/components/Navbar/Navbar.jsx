@@ -80,7 +80,7 @@ const Navbar = () => {
                 <div key={item.name} className="relative">
                   <button
                     type="button"
-                    className={`relative font-bold transition-all duration-300 group ${
+                    className={`relative font-semibold transition-all duration-300 group ${
                       item.active ? "text-primary bg-none" : "text-dark"
                     }`}
                     onClick={() => setShowLanguagePopup((prev) => !prev)} // Toggle the popup
@@ -116,7 +116,7 @@ const Navbar = () => {
               ) : (
                 <NavLink key={item.name} to={item.href}>
                   <a
-                    className={`relative font-bold transition-all duration-300 ${
+                    className={`relative font-semibold transition-all duration-300 ${
                       item.active && !showLanguagePopup
                         ? "text-primary"
                         : "text-dark"
@@ -240,7 +240,7 @@ const Navbar = () => {
                     )}
                     <button
                       type="button"
-                      className={`flex items-center gap-2 w-full px-2 py-2 rounded-lg font-semibold transition-all duration-300 group text-base ${
+                      className={`flex items-center gap-2 w-full px-2 py-2 rounded-lg font-medium transition-all duration-300 group text-base ${
                         showLanguagePopup
                           ? "text-primary bg-white shadow"
                           : "text-dark bg-transparent"
@@ -256,7 +256,7 @@ const Navbar = () => {
                 ) : (
                   <Link key={item.name} to={item.href} className="w-full">
                     <a
-                      className={`flex items-center gap-2 w-full px-2 py-2 rounded-lg font-semibold transition-all duration-200 text-base ${
+                      className={`flex items-center gap-2 w-full px-2 py-2 rounded-lg font-medium transition-all duration-200 text-base ${
                         item.active && !showLanguagePopup
                           ? "text-primary bg-white shadow"
                           : "text-dark bg-transparent hover:text-primary hover:bg-white/80 hover:shadow"
