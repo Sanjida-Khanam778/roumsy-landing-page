@@ -269,7 +269,24 @@ export default function MovingCarTabs() {
         </div>
       ),
     },
+   
     {
+      id: "documentation",
+      title: "Documentation",
+      subtitle: "Study comprehensive materials",
+      icon: tab3,
+      active: false,
+      content: (
+        <div className="p-2 md:p-8">
+          <h2 className="text-2xl font-bold mb-4">Documentation</h2>
+          <p className="text-gray mb-4">
+            Comprehensive study materials and guides
+          </p>
+          <Documentation />
+        </div>
+      ),
+    },
+     {
       id: "ai-coach",
       title: "AI Coach",
       subtitle: "Get personalized guidance",
@@ -331,22 +348,6 @@ export default function MovingCarTabs() {
               </div>
             </div>
           )}
-        </div>
-      ),
-    },
-    {
-      id: "documentation",
-      title: "Documentation",
-      subtitle: "Study comprehensive materials",
-      icon: tab3,
-      active: false,
-      content: (
-        <div className="p-2 md:p-8">
-          <h2 className="text-2xl font-bold mb-4">Documentation</h2>
-          <p className="text-gray mb-4">
-            Comprehensive study materials and guides
-          </p>
-          <Documentation />
         </div>
       ),
     },
