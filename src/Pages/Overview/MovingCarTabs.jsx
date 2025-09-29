@@ -16,25 +16,9 @@ import { RiMenuSearchLine } from "react-icons/ri";
 import { ScrollRestoration } from "react-router-dom";
 
 export default function MovingCarTabs() {
-  const [selectedSkillLevel, setSelectedSkillLevel] = useState("");
-  const [selectedMode, setSelectedMode] = useState("");
-  const [result, setResult] = useState(false);
-  const [getAIHelp, setGetAIHelp] = useState(false);
-
-  const handleSkillLevelSelect = (level) => {
-    setSelectedSkillLevel(level);
-    setSelectedMode("");
-  };
-
-  const handleModeSelect = (mode) => {
-    setSelectedMode(mode);
-    setSelectedSkillLevel("");
-  };
-
   const navigate = useNavigate();
   const { id } = useParams();
   const location = useLocation();
-  // Extract tab from route: /overview/:id/:tab
   const tabRoute = location.pathname.split("/")[3] || "course-overview";
   const tabIds = [
     "course-overview",
@@ -69,21 +53,13 @@ export default function MovingCarTabs() {
       active: false,
       content: <AiCoachTab />,
     },
-
     {
       id: "exam-simulator",
       title: "Exam Simulator",
       subtitle: "Practice with mock exams",
       icon: tab4,
       active: false,
-      content: (
-        <ExamSimulatorTab
-          setResult={setResult}
-          result={result}
-          getAIHelp={getAIHelp}
-          setGetAIHelp={setGetAIHelp}
-        />
-      ),
+      content: <ExamSimulatorTab />,
     },
     {
       id: "certification",
