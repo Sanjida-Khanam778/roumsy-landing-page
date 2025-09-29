@@ -4,26 +4,16 @@ import DocumentationTab from "./DocumentationTab";
 import AiCoachTab from "./AiCoachTab";
 import ExamSimulatorTab from "./ExamSimulatorTab";
 import car from "../../assets/images/car.png";
-import tab1 from "../../assets/images/icon/tab1.png";
 import tab2 from "../../assets/images/icon/tab2.png";
 import tab3 from "../../assets/images/icon/tab3.png";
 import tab4 from "../../assets/images/icon/tab4.png";
 import tab5 from "../../assets/images/icon/tab5.png";
 import { Star } from "lucide-react";
 import learning1 from "../../assets/images/learning1.png";
-import Dashboard from "../Dashboard/Dashboard";
-import guided from "../../assets/images/guided.png";
-import free from "../../assets/images/free.png";
-import ModeSelection from "../../components/ModeSelection";
-import Button from "../../components/Shared/Button";
-import material from "../../assets/images/icon/material.png";
-import QuizInterface from "../QuizInterface/QuizInterface";
 import CourseCompletionCertificate from "./CourseCompletionCertificate";
 import { RiMenuSearchLine } from "react-icons/ri";
-import Documentation from "./Documentation";
 import { ScrollRestoration } from "react-router-dom";
-import GuidedDashboard from "../Dashboard/GuidedDashboard";
-import QuizResultPage from "../QuizInterface/QuizResultPage";
+
 export default function MovingCarTabs() {
   const [selectedSkillLevel, setSelectedSkillLevel] = useState("");
   const [selectedMode, setSelectedMode] = useState("");
@@ -34,33 +24,20 @@ export default function MovingCarTabs() {
     setSelectedSkillLevel(level);
     setSelectedMode("");
   };
-  console.log(selectedMode);
-    const handleModeSelect = (mode) => {
+  const handleModeSelect = (mode) => {
     setSelectedMode(mode);
     setSelectedSkillLevel("");
   };
-  const handleQuizEnd = () => {
-    setGetAIHelp(true);
-    setActiveTab(1);
-    setSelectedSkillLevel("Intermediate");
-  };
+
   const [activeTab, setActiveTab] = useState(0);
-  const [startQuiz, setStartQuiz] = useState(false);
-  const handleStartQuiz = () => {
-    setStartQuiz(true);
-  };
-  const quizResultShow = () => {
-    setResult(true);
-  };
- const tabs = [
+
+  const tabs = [
     {
       id: "course-overview",
       title: "Course Overview",
       subtitle: "See your learning path",
       active: true,
-      content: (
-       <CourseOverviewTab />
-      ),
+      content: <CourseOverviewTab />,
     },
     {
       id: "ai-coach",
@@ -83,15 +60,7 @@ export default function MovingCarTabs() {
       subtitle: "Study comprehensive materials",
       icon: tab3,
       active: false,
-      content: (
-        <div className="p-2 md:p-8">
-          <h2 className="text-2xl font-bold mb-4">Documentation</h2>
-          <p className="text-gray mb-4">
-            Comprehensive study materials and guides
-          </p>
-          <Documentation />
-        </div>
-      ),
+      content: <DocumentationTab />,
     },
     {
       id: "exam-simulator",
@@ -100,7 +69,12 @@ export default function MovingCarTabs() {
       icon: tab4,
       active: false,
       content: (
-       <ExamSimulatorTab setResult={setResult} result={result} getAIHelp={getAIHelp} setGetAIHelp={setGetAIHelp} />
+        <ExamSimulatorTab
+          setResult={setResult}
+          result={result}
+          getAIHelp={getAIHelp}
+          setGetAIHelp={setGetAIHelp}
+        />
       ),
     },
     {
