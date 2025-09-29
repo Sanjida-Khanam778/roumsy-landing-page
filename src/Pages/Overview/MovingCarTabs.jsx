@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate, useParams, Outlet, useLocation } from "react-router-dom";
 import CourseOverviewTab from "./CourseOverviewTab";
 import DocumentationTab from "./DocumentationTab";
 import AiCoachTab from "./AiCoachTab";
@@ -24,12 +25,25 @@ export default function MovingCarTabs() {
     setSelectedSkillLevel(level);
     setSelectedMode("");
   };
+
   const handleModeSelect = (mode) => {
     setSelectedMode(mode);
     setSelectedSkillLevel("");
   };
 
-  const [activeTab, setActiveTab] = useState(0);
+  const navigate = useNavigate();
+  const { id } = useParams();
+  const location = useLocation();
+  // Extract tab from route: /overview/:id/:tab
+  const tabRoute = location.pathname.split("/")[3] || "course-overview";
+  const tabIds = [
+    "course-overview",
+    "documentation",
+    "ai-coach",
+    "exam-simulator",
+    "certification",
+  ];
+  const activeTab = tabIds.indexOf(tabRoute);
 
   const tabs = [
     {
@@ -53,16 +67,9 @@ export default function MovingCarTabs() {
       subtitle: "Get personalized guidance",
       icon: tab2,
       active: false,
-      content: (
-        <AiCoachTab
-          selectedSkillLevel={selectedSkillLevel}
-          selectedMode={selectedMode}
-          handleModeSelect={handleModeSelect}
-          handleSkillLevelSelect={handleSkillLevelSelect}
-        />
-      ),
+      content: <AiCoachTab />,
     },
-    
+
     {
       id: "exam-simulator",
       title: "Exam Simulator",
@@ -146,8 +153,7 @@ export default function MovingCarTabs() {
                 <button
                   key={tab.id}
                   onClick={() => {
-                    setActiveTab(index);
-                    setStartQuiz(false);
+                    navigate(`/overview/${id}/${tab.id}`);
                   }}
                   className={`flex flex-col items-center space-y-2 transition-all duration-300`}
                 >
@@ -208,7 +214,7 @@ export default function MovingCarTabs() {
         {/* Tab Content */}
         <div className=" rounded-lg min-h-80">
           <div className="transition-all duration-500 ease-in-out">
-            {tabs[activeTab].content}
+            <Outlet />
           </div>
         </div>
       </div>

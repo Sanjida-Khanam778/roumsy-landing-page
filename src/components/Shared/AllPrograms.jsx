@@ -147,7 +147,7 @@ export default function AllPrograms({ limit }) {
           <div className="flex-grow mt-auto mb-4">
             <hr className="text-gray/50" />
             <div className="mt-4 flex justify-between items-center flex-col gap-3">
-              <Link to={`/overview/${program.id}`}>
+              <Link to={`/overview/${program.id}/course-overview`}>
                 <div className="p-2 bg-blue-50 hover:text-white hover:bg-gradient-to-r hover:from-[#189EFE] hover:to-[#0E5F98] rounded-lg flex items-center gap-2 group">
                   <img
                     src={traind}
