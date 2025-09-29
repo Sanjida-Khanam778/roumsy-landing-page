@@ -1,4 +1,8 @@
 import { useState } from "react";
+import CourseOverviewTab from "./CourseOverviewTab";
+import DocumentationTab from "./DocumentationTab";
+import AiCoachTab from "./AiCoachTab";
+import ExamSimulatorTab from "./ExamSimulatorTab";
 import car from "../../assets/images/car.png";
 import tab1 from "../../assets/images/icon/tab1.png";
 import tab2 from "../../assets/images/icon/tab2.png";
@@ -31,8 +35,7 @@ export default function MovingCarTabs() {
     setSelectedMode("");
   };
   console.log(selectedMode);
-
-  const handleModeSelect = (mode) => {
+    const handleModeSelect = (mode) => {
     setSelectedMode(mode);
     setSelectedSkillLevel("");
   };
@@ -49,227 +52,31 @@ export default function MovingCarTabs() {
   const quizResultShow = () => {
     setResult(true);
   };
-  const tabs = [
+ const tabs = [
     {
       id: "course-overview",
       title: "Course Overview",
       subtitle: "See your learning path",
       active: true,
       content: (
-        <div className="">
-          <div className="p-3 sm:p-6">
-            {/* Header */}
-            <div className="flex items-center mb-6">
-              <h1 className="text-2xl font-bold text-secondary">
-                🌍 Immigration & Language Preparation
-              </h1>
-            </div>
-
-            {/* Course Description */}
-            <div className="mb-8">
-              <h2 className="font-semibold text-light">Course Description</h2>
-              <div className="space-y-4 text-light">
-                <p>
-                  This comprehensive course is specially designed for
-                  individuals planning to immigrate to a new country and seeking
-                  to strengthen their language proficiency along the way.
-                  Whether you're preparing for visa interviews, citizenship
-                  tests, or academic/professional language exams like IELTS,
-                  TOEFL, or CELPIP, this course offers the essential tools,
-                  strategies, and practice to help you succeed.
-                </p>
-                <p>
-                  The course combines immigration-specific knowledge with
-                  language development, helping you build strong communication
-                  skills while understanding the legal, cultural, and procedural
-                  aspects of relocating abroad. You will gain practical
-                  experience in speaking, listening, reading, and writing
-                  through real-life scenarios such as job interviews, embassy
-                  appointments, and settlement guidance.
-                </p>
-              </div>
-            </div>
-
-            {/* Topics Covered */}
-            <div className="mb-8 text-light">
-              <h2 className=" font-semibold mb-4">Topics include:</h2>
-              <ul className="space-y-2">
-                <li>
-                  • Understanding immigration requirements and documentation
-                </li>
-                <li>• Preparing for English proficiency exams</li>
-                <li>
-                  • Developing fluency and vocabulary for everyday situations
-                </li>
-                <li>• Learning about cultural adaptation and integration</li>
-                <li>
-                  • Practicing interview techniques and verbal communication
-                </li>
-              </ul>
-              <p className="text-gray-700 mt-4">
-                With flexible lessons, expert support, and practical exercises,
-                this course empowers you to confidently navigate the immigration
-                process and thrive in a new environment—linguistically,
-                socially, and professionally.
-              </p>
-            </div>
-
-            {/* Course Sections */}
-            <div className="mb-8">
-              <h2 className="text-2xl font-bold text-secondary mb-6 flex items-center">
-                📚 Course Sections
-              </h2>
-
-              <div className="space-y-6">
-                {/* Section 1 */}
-                <div>
-                  <h3 className="sm:text-lg font-semibold text-gray-900 mb-3 flex items-center">
-                    1. Introduction to Immigration Systems
-                  </h3>
-                  <ul className="text-light space-y-1 ml-4 sm:ml-8 text-sm sm:text-base">
-                    <li>
-                      • Overview of immigration categories (student, skilled
-                      worker, family, etc.)
-                    </li>
-                    <li>
-                      • Country-specific guidelines (Canada, UK, Australia,
-                      etc.)
-                    </li>
-                    <li>• Documentation and application preparation</li>
-                  </ul>
-                </div>
-
-                {/* Section 2 */}
-                <div>
-                  <h3 className="sm:text-lg font-semibold text-gray-900 mb-3 flex items-center">
-                    2. English Language Fundamentals
-                  </h3>
-                  <ul className="text-light space-y-1 ml-4 sm:ml-8 text-sm sm:text-base">
-                    <li>• Grammar and sentence structure refresher</li>
-                    <li>• Pronunciation and accent improvement</li>
-                    <li>
-                      • Essential vocabulary for daily life and formal
-                      situations
-                    </li>
-                  </ul>
-                </div>
-
-                {/* Section 3 */}
-                <div>
-                  <h3 className="sm:text-lg font-semibold text-gray-900 mb-3 flex items-center">
-                    3. IELTS/TOEFL/CELPIP Exam Preparation{" "}
-                  </h3>
-                  <ul className="text-light space-y-1 ml-4 sm:ml-8 text-sm sm:text-base">
-                    <li>• Test formats and scoring systems</li>
-                    <li>
-                      • Practice tasks for Reading, Writing, Listening &
-                      Speaking
-                    </li>
-                    <li>• Tips and strategies for exam day success</li>
-                  </ul>
-                </div>
-
-                {/* Section 4 */}
-                <div>
-                  <h3 className="sm:text-lg font-semibold text-gray-900 mb-3 flex items-center">
-                    4. Communication for Real-life Situations{" "}
-                  </h3>
-                  <ul className="text-light space-y-1 ml-4 sm:ml-8 text-sm sm:text-base">
-                    <li>• Job interview roleplay and resume writing</li>
-                    <li>
-                      • Conversations at banks, clinics, schools, and government
-                      offices
-                    </li>
-                    <li>• Writing emails, forms, and formal letters</li>
-                  </ul>
-                </div>
-
-                {/* Section 5 */}
-                <div>
-                  <h3 className="sm:text-lg font-semibold text-gray-900 mb-3 flex items-center">
-                    5. Cultural Awareness & Integration{" "}
-                  </h3>
-                  <ul className="text-light space-y-1 ml-4 sm:ml-8 text-sm sm:text-base">
-                    <li>• Local laws, norms, and etiquette</li>
-                    <li>• Building confidence in social interactions</li>
-                    <li>• Local laws, norms, and etiquette</li>
-                  </ul>
-                </div>
-
-                {/* Section 6 */}
-                <div>
-                  <h3 className="sm:text-lg font-semibold text-gray-900 mb-3 flex items-center">
-                    6. Mock Interviews & Practice Tests{" "}
-                  </h3>
-                  <ul className="text-light space-y-1 ml-4 sm:ml-8 text-sm sm:text-base">
-                    <li>
-                      • Personalized feedback from instructors (if applicable)
-                    </li>
-                    <li>• Full-length exam simulations</li>
-                    <li>
-                      • Personalized feedback from instructors (if applicable)
-                    </li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-
-            {/* Exam Format Overview */}
-            <div className="mb-4 *:sm:mb-8">
-              <h2 className="text-2xl font-bold text-secondary mb-3 sm:mb-6 flex items-center">
-                📝 Exam Format Overview
-              </h2>
-
-              <div className="grid md:grid-cols-2">
-                {/* Left Column */}
-                <div className="border border-b-0 sm:border-b border-gray-200 p-3 sm:p-6">
-                  <h3 className="font-bold text-gray-900 mb-4">
-                    IELTS (International English Language Testing System)
-                  </h3>
-
-                  <div className="space-y-3 text-sm text-gray-700">
-                    <p>
-                      Test Types: IELTS Academic & IELTS General Training <br />
-                      Duration: ~2 hours 45 minutes
-                    </p>
-                    <p>
-                      Sections: <br />
-                      • Listening: IELTS Listening has 40 questions testing
-                      listening skills
-                      <br />
-                      • Reading: IELTS Reading has 40 questions testing reading
-                      skills
-                      <br />
-                      • Writing: IELTS Writing has 2 sections: 1) describing
-                      graphs/charts in 150 words 2) essay writing in 250 words
-                      <br />• Speaking: IELTS Speaking has 3 parts: 1)
-                      introduction & interview 2) long turn 3) discussion
-                    </p>
-                  </div>
-                </div>
-
-                {/* Right Column */}
-                <div className="border-x sm:border-r sm:border-l-0 border-gray-200 border-y p-6">
-                  <h3 className="font-bold text-gray-900 mb-4">
-                    What is included in this Course?
-                  </h3>
-                  <div className="space-y-3 text-sm text-gray-700">
-                    <p>• Section-by-section breakdown and tutorials</p>
-                    <p>• Practice tests that mimic real exam conditions</p>
-                    <p>• Answer explanations and scoring strategies</p>
-                    <p>• Time management techniques</p>
-                    <p>
-                      • Speaking and writing practice with feedback (optional)
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+       <CourseOverviewTab />
       ),
     },
-   
+    {
+      id: "ai-coach",
+      title: "AI Coach",
+      subtitle: "Get personalized guidance",
+      icon: tab2,
+      active: false,
+      content: (
+        <AiCoachTab
+          selectedSkillLevel={selectedSkillLevel}
+          selectedMode={selectedMode}
+          handleModeSelect={handleModeSelect}
+          handleSkillLevelSelect={handleSkillLevelSelect}
+        />
+      ),
+    },
     {
       id: "documentation",
       title: "Documentation",
@@ -286,71 +93,6 @@ export default function MovingCarTabs() {
         </div>
       ),
     },
-     {
-      id: "ai-coach",
-      title: "AI Coach",
-      subtitle: "Get personalized guidance",
-      icon: tab2,
-      active: false,
-      content: (
-        <div className="bg-gray-50 flex items-center justify-center md:p-6">
-          {selectedSkillLevel && !selectedMode ? (
-            <ModeSelection handleModeSelect={handleModeSelect} />
-          ) : selectedMode ? (
-            <div className="w-full">
-              <h2 className="text-2xl font-bold mb-4">LearninGPT Assistant</h2>
-              <p className="text-gray mb-8">
-                Ask questions about the course material. 3 free messages
-                remaining.
-              </p>
-              {selectedMode === "Guided Learning Path" ? (
-                <GuidedDashboard tab={true} embedded={true} />
-              ) : (
-                <Dashboard tab={true} embedded={true} />
-              )}
-            </div>
-          ) : (
-            <div className="max-w-4xl w-full">
-              <div className=" border-2 border-blue-400 rounded-lg p-6 md:p-12">
-                <div className="text-center md:mb-12 mb-6">
-                  <p className="text-gray-800 text-lg">
-                    Before we begin, choose your expertise level so the AI Coach
-                    can better guide you.
-                  </p>
-                </div>
-
-                <div className="text-center mb-6 md:mb-12">
-                  <h2 className="text-2xl font-semibold text-gray-900">
-                    Skill level
-                  </h2>
-                </div>
-
-                <div className="flex flex-col md:flex-row gap-4 md:gap-0 justify-center md:space-x-8">
-                  <button
-                    onClick={() => handleSkillLevelSelect("Beginner")}
-                    className="bg-blue-100 text-blue-800 px-8 py-2 rounded-lg border border-blue-200 hover:bg-blue-200 transition-colors font-medium min-w-[120px]"
-                  >
-                    Beginner
-                  </button>
-                  <button
-                    onClick={() => handleSkillLevelSelect("Intermediate")}
-                    className="bg-blue-100 text-blue-800 px-8 py-2 rounded-lg border border-blue-200 hover:bg-blue-200 transition-colors font-medium min-w-[120px]"
-                  >
-                    Intermediate
-                  </button>
-                  <button
-                    onClick={() => handleSkillLevelSelect("Advance")}
-                    className="bg-blue-100 text-blue-800 px-8 py-2 rounded-lg border border-blue-200 hover:bg-blue-200 transition-colors font-medium min-w-[120px]"
-                  >
-                    Advance
-                  </button>
-                </div>
-              </div>
-            </div>
-          )}
-        </div>
-      ),
-    },
     {
       id: "exam-simulator",
       title: "Exam Simulator",
@@ -358,27 +100,7 @@ export default function MovingCarTabs() {
       icon: tab4,
       active: false,
       content: (
-        <div>
-          {result ? (
-            <QuizResultPage handleQuizEnd={handleQuizEnd} />
-          ) : startQuiz ? (
-            <QuizInterface quizResultShow={quizResultShow} />
-          ) : (
-            <div className="bg-gray-50 flex flex-col gap-20 items-center justify-center p-6">
-              <p className="text-[#011E46] font-bold text-xl">
-                Start your exam now and test your knowledge in real time.
-              </p>
-              <div onClick={handleStartQuiz}>
-                <Button padding="py-2 px-4" rounded="md">
-                  <span className="flex items-center text-xl gap-2">
-                    <img className="h-8" src={material} />
-                    Start Exam
-                  </span>
-                </Button>
-              </div>
-            </div>
-          )}
-        </div>
+       <ExamSimulatorTab setResult={setResult} result={result} getAIHelp={getAIHelp} setGetAIHelp={setGetAIHelp} />
       ),
     },
     {
@@ -390,7 +112,6 @@ export default function MovingCarTabs() {
       content: <CourseCompletionCertificate />,
     },
   ];
-
   return (
     <div className="bg-[#F4F8FD]">
       <ScrollRestoration />
