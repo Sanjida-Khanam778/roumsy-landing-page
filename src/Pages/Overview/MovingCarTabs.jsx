@@ -40,6 +40,14 @@ export default function MovingCarTabs() {
       content: <CourseOverviewTab />,
     },
     {
+      id: "documentation",
+      title: "Documentation",
+      subtitle: "Study comprehensive materials",
+      icon: tab3,
+      active: false,
+      content: <DocumentationTab />,
+    },
+    {
       id: "ai-coach",
       title: "AI Coach",
       subtitle: "Get personalized guidance",
@@ -54,14 +62,7 @@ export default function MovingCarTabs() {
         />
       ),
     },
-    {
-      id: "documentation",
-      title: "Documentation",
-      subtitle: "Study comprehensive materials",
-      icon: tab3,
-      active: false,
-      content: <DocumentationTab />,
-    },
+    
     {
       id: "exam-simulator",
       title: "Exam Simulator",

@@ -1,9 +1,7 @@
 import { createBrowserRouter, Outlet } from "react-router-dom";
 import Home from "../Pages/Home/Home";
-
 import DashboardMainPage from "../components/Admin/Dashboard/AdminDashboard";
 import QuizCreator from "../components/Admin/Quizz/CreateNewQuizz";
-
 import Navbar from "../components/Navbar/Navbar";
 import Footer from "../components/Footer/Footer";
 import LoginForm from "../Pages/Auth/LoginForm";
@@ -30,6 +28,11 @@ import Plan from "../Pages/Home/Plan";
 import Form from "../components/BecomeInstructor/Form";
 import QuizStart from "../Pages/QuizInterface/QuizStart";
 import GuidedDashboard from "../Pages/Dashboard/GuidedDashboard";
+import CourseOverviewTab from "../Pages/Overview/CourseOverviewTab";
+import AiCoachTab from "../Pages/Overview/AiCoachTab";
+import DocumentationTab from "../Pages/Overview/DocumentationTab";
+import CourseCompletionCertificate from "../Pages/Overview/CourseCompletionCertificate";
+import ExamSimulatorTab from "../Pages/Overview/ExamSimulatorTab";
 
 export const router = createBrowserRouter([
   {
@@ -48,7 +51,7 @@ export const router = createBrowserRouter([
     children: [
       {
         path: "/quiz",
-        element: <QuizStart  />,
+        element: <QuizStart />,
       },
       {
         path: "/quiz-result",
@@ -61,6 +64,29 @@ export const router = createBrowserRouter([
       {
         path: "/overview/:id",
         element: <MovingCarTabs />,
+        children: [
+          {
+            path: "course-overview",
+            element: <CourseOverviewTab />,
+          },
+          {
+            path: "documentation",
+            element: <DocumentationTab />,
+          },
+          {
+            path: "ai-coach",
+            element: <AiCoachTab />,
+          },
+
+          {
+            path: "exam-simulator",
+            element: <ExamSimulatorTab />,
+          },
+          {
+            path: "certification",
+            element: <CourseCompletionCertificate />,
+          },
+        ],
       },
       {
         path: "/features",
@@ -82,7 +108,6 @@ export const router = createBrowserRouter([
         path: "/about",
         element: <About />,
       },
-
       {
         path: "/pricing",
         element: <PricingSection />,
@@ -93,7 +118,7 @@ export const router = createBrowserRouter([
       },
       {
         path: "/lang",
-        element: < ></>,
+        element: <></>,
       },
     ],
   },
