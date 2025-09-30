@@ -90,15 +90,22 @@ export default function MovingCarTabs() {
 
           {/* Right Side - Content */}
           <div className="items-start justify-start">
-            <h2 className="md:text-lg xl:text-xl 2xl:text-2xl font-bold text-gray-900 mb-2 2xl:mb-4">
+            <h2 className="md:text-lg xl:text-xl 2xl:text-2xl font-bold text-gray-900 mb-2 ">
               Immigration & Language Preparation
             </h2>
 
-            <p className="text-gray-600 mb-3 2xl:mb-6 leading-relaxed">
+            <p className="text-gray-600 mb-3 2xl:mb-3 leading-relaxed">
               Master language skills, ace your exams, and get expert guidance
               for a smooth immigration journey.
             </p>
-
+            <div className="mb-2">
+              <h1>
+                Starting from{" "}
+                <span className="font-bold text-primary text-xl">
+                  19.99 CAD
+                </span>
+              </h1>
+            </div>
             {/* Rating */}
             <div className="flex items-center">
               <div className="flex items-center mr-2">
