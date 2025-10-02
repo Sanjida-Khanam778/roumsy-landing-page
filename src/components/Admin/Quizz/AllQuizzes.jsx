@@ -32,13 +32,18 @@ const QuizManagement = ({ handleEditQuizz }) => {
         <>
           <div className="shadow-sm">
             {/* Header */}
-            <div className="p-6">
-              <h1 className="text-2xl font-semibold text-[#1E90FF]">
-                All Quizzes ({quizzes.length})
-              </h1>
-              <p className="text-black font-light text-base mt-1">
-                Manage your quiz collection
-              </p>
+            <div className="p-6 flex items-center justify-between">
+              <div>
+                <h1 className="text-2xl font-semibold text-[#1E90FF]">
+                  All Topics ({quizzes.length})
+                </h1>
+                <p className="text-black font-light text-base mt-1">
+                  Manage your quiz collection
+                </p>
+              </div>
+              <button className="w-40 h-8 bg-gradient-to-r from-sky-500 to-sky-700 rounded-xl text-white text-base font-medium font-['Poppins']">
+                + Add Topics
+              </button>
             </div>
 
             {/* Table */}
@@ -150,16 +155,6 @@ const QuizManagement = ({ handleEditQuizz }) => {
                               >
                                 <Trash2 className="w-4 h-4 mr-2" />
                                 Delete
-                              </button>
-                              <button
-                                onClick={(e) => {
-                                  e.stopPropagation();
-                                  setPreviewQuiz(quiz);
-                                }}
-                                className="flex items-center w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-50"
-                              >
-                                <Eye className="w-4 h-4 mr-2" />
-                                View
                               </button>
                             </div>
                           </div>
