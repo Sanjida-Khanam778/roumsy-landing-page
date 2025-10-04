@@ -76,6 +76,8 @@ export const Quizz = () => {
       ></path>
     </svg>
   );
+
+  
   return (
     <div className="py-4 md:py-16">
       <div className="px-7 flex flex-col md:flex-row justify-between items-center pb-12 gap-4 md:gap-0">
