@@ -1,13 +1,13 @@
 import React, { useState } from "react";
-import { Users, MoreHorizontal, Edit3, Eye, Trash2 } from "lucide-react";
+import { Users, MoreHorizontal, Edit3, Trash2 } from "lucide-react";
 import quizzesData from "../../../../public/quizzes.json";
-import QuizPreview from "./Preview";
+import AdminTopics from "./AdminTopics";
 
 const QuizManagement = ({ handleEditQuizz }) => {
   const [quizzes, setQuizzes] = useState(quizzesData);
   const [openDropdown, setOpenDropdown] = useState(null);
   const [quizToDelete, setQuizToDelete] = useState(null);
-  const [previewQuiz, setPreviewQuiz] = useState(null); // <-- NEW STATE
+  const [showAdminTopics, setShowAdminTopics] = useState(false);
 
   const toggleDropdown = (id) => {
     setOpenDropdown(openDropdown === id ? null : id);
@@ -21,13 +21,11 @@ const QuizManagement = ({ handleEditQuizz }) => {
 
   return (
     <div className="bg-[#EAF2FF] min-h-screen drop-shadow-2xl rounded-xl">
-      {/* If previewQuiz is set → show QuizPreview */}
-      {previewQuiz ? (
-        <QuizPreview
-          quiz={previewQuiz}
-          onEdit={() => handleEditQuizz(previewQuiz)}
-          onClose={() => setPreviewQuiz(null)}
-        />
+      {/* AdminTopics modal */}
+      {showAdminTopics ? (
+        <div className="w-full max-w-4xl mx-auto relative">
+            <AdminTopics setShowAdminTopics={setShowAdminTopics}/>
+          </div>
       ) : (
         <>
           <div className="shadow-sm">
@@ -41,7 +39,7 @@ const QuizManagement = ({ handleEditQuizz }) => {
                   Manage your quiz collection
                 </p>
               </div>
-              <button className="w-40 h-8 bg-gradient-to-r from-sky-500 to-sky-700 rounded-xl text-white text-base font-medium font-['Poppins']">
+              <button onClick={() => setShowAdminTopics(true)} className="w-40 h-8 bg-gradient-to-r from-sky-500 to-sky-700 rounded-xl text-white text-base font-medium font-['Poppins']">
                 + Add Topics
               </button>
             </div>
