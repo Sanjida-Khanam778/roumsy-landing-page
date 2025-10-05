@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Sidebar } from "../Sidebar/Sidebar";
 import { StartCards } from "./StartCards";
 
-import { MessageSquareDot, Menu, X } from "lucide-react"; // Menu & Close icons যোগ হলো
+import { Menu, X } from "lucide-react"; // Menu & Close icons যোগ হলো
 
 import profile from "../../../assets/admin-dashboard-images/profile.png";
 import { Quizz } from "../Quizz/Quizz";
@@ -10,6 +10,7 @@ import Monetization from "../Monitization/Monitization";
 import { Account } from "../Settings/Account";
 import Privacy from "../Settings/Privacy";
 import Terms from "../Settings/Terms";
+import AdminProfile from "../Profile/Profile";
 
 export default function DashboardMainPage() {
   const [currentComponent, setCurrentComponent] = useState("Dashboard"); // New state to track the active component
@@ -70,6 +71,7 @@ export default function DashboardMainPage() {
           {currentComponent === "Account" && <Account />}
           {currentComponent === "Terms & Conditions" && <Terms />}
           {currentComponent === "Privacy Policies" && <Privacy />}
+          {currentComponent === "Profile" && <AdminProfile />}
         </div>
       </div>
     </div>
