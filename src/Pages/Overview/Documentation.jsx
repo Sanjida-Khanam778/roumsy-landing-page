@@ -114,7 +114,11 @@ const Documentation = () => {
   const currentLesson = lessons.find((l) => l.id === activeLesson);
 
   return (
-    <div className="flex bg-white relative md:h-screen lg:h-auto">
+    <div
+      className={`flex bg-white relative ${
+        !isMobileOrTablet ? "md:h-screen lg:h-auto" : ""
+      }`}
+    >
       {/* Hamburger icon for mobile/tablet - relative to Documentation component */}
       {isMobileOrTablet && (
         <button
@@ -140,10 +144,10 @@ const Documentation = () => {
       )}
       {/* Sidebar */}
       <div
-        className={`bg-[#E5E5E5] py-6 flex flex-col transition-all duration-300 h-screen ${
+        className={`bg-[#E5E5E5] py-6 flex flex-col transition-all duration-300 ${
           isMobileOrTablet
             ? sidebarOpen
-              ? "fixed top-0 left-0 w-72 h-full z-50 shadow-2xl" // overlays main content
+              ? "absolute top-0 left-0 w-72 h-full z-50 shadow-2xl" // overlays only documentation area
               : "hidden" // collapsed: sidebar hidden
             : "w-72 h-full relative"
         }`}

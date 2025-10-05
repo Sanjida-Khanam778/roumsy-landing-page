@@ -133,13 +133,18 @@ export default function AllPrograms({ limit }) {
                 {program.learners}
               </span>
             </div>
-            <div className="flex items-center mb-4">
-              <div className="flex text-yellow-400 text-sm">
-                {"★".repeat(Math.floor(program.rating))}
+            <div className="flex justify-between items-center mb-4 text-sm">
+              <div className="flex items-center">
+                <div className="flex text-yellow-400">
+                  {"★".repeat(Math.floor(program.rating))}
+                </div>
+                <span className="ml-2 text-gray-600">
+                  {program.rating} (Ratings)
+                </span>
               </div>
-              <span className="ml-2 text-sm text-gray-600">
-                {program.rating} (Ratings)
-              </span>
+              <div>
+                <h1>Starting from <span className="font-bold text-primary text-base">19.99 CAD</span></h1>
+              </div>
             </div>
           </div>
 
@@ -147,12 +152,12 @@ export default function AllPrograms({ limit }) {
           <div className="flex-grow mt-auto mb-4">
             <hr className="text-gray/50" />
             <div className="mt-4 flex justify-between items-center flex-col gap-3">
-              <Link to={`/overview/${program.id}`}>
+              <Link to={`/overview/${program.id}/course-overview`}>
                 <div className="p-2 bg-blue-50 hover:text-white hover:bg-gradient-to-r hover:from-[#189EFE] hover:to-[#0E5F98] rounded-lg flex items-center gap-2 group">
                   <img
                     src={traind}
                     alt="Train"
-                    className="w-6 h-6 group-hover:hidden"
+                    className="w-5 h-5 group-hover:hidden"
                   />
                   <img
                     src={trainw}
@@ -167,7 +172,7 @@ export default function AllPrograms({ limit }) {
                   <img
                     src={startd}
                     alt="Start"
-                    className="w-6 h-6 group-hover:hidden"
+                    className="w-5 h-5 group-hover:hidden"
                   />
                   <img
                     src={startw}

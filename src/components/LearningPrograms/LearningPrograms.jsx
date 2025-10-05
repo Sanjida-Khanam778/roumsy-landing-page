@@ -17,7 +17,7 @@ const LearningPrograms = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isAnimating, setIsAnimating] = useState(false);
   const intervalRef = useRef(null);
- // Initialize AOS
+  // Initialize AOS
   useEffect(() => {
     AOS.init({
       duration: 1000, // Duration for the animation
@@ -268,7 +268,7 @@ const LearningPrograms = () => {
                     ).map((program, index) => (
                       <div
                         key={`${slideIndex}-${index}`}
-                         data-aos="fade-up" // Add AOS animation
+                        data-aos="fade-up" // Add AOS animation
                         data-aos-duration="1500"
                         className="bg-white rounded-xl border border-gray/50 hover:shadow-xl transition-shadow flex flex-col h-full"
                       >
@@ -301,13 +301,23 @@ const LearningPrograms = () => {
                               {program.learners}
                             </span>
                           </div>
-                          <div className="flex items-center mb-4">
-                            <div className="flex text-yellow-400 text-sm">
-                              {"★".repeat(Math.floor(program.rating))}
+                          <div className="flex flex-grow justify-between items-center mb-4 text-sm">
+                            <div className="flex items-center">
+                              <div className="flex text-yellow-400">
+                                {"★".repeat(Math.floor(program.rating))}
+                              </div>
+                              <span className="ml-2 text-gray-600">
+                                {program.rating} (Ratings)
+                              </span>
                             </div>
-                            <span className="ml-2 text-sm text-gray-600">
-                              {program.rating} (Ratings)
-                            </span>
+                            <div>
+                              <h1>
+                                Starting from{" "}
+                                <span className="font-bold text-primary text-base">
+                                  19.99 CAD
+                                </span>
+                              </h1>
+                            </div>
                           </div>
                         </div>
 
@@ -319,7 +329,7 @@ const LearningPrograms = () => {
                                 <img
                                   src={traind}
                                   alt="Train"
-                                  className="w-6 h-6 group-hover:hidden"
+                                  className="w-5 h-5 group-hover:hidden"
                                 />
                                 <img
                                   src={trainw}
@@ -334,7 +344,7 @@ const LearningPrograms = () => {
                                 <img
                                   src={startd}
                                   alt="Start"
-                                  className="w-6 h-6 group-hover:hidden"
+                                  className="w-5 h-5 group-hover:hidden"
                                 />
                                 <img
                                   src={startw}
