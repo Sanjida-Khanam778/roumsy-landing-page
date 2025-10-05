@@ -30,8 +30,8 @@ const QuizManagement = ({ handleEditQuizz }) => {
         <>
           <div className="shadow-sm">
             {/* Header */}
-            <div className="p-6 flex items-center justify-between">
-              <div>
+            <div className="p-6 flex flex-col gap-4 sm:gap-0 sm:flex-row items-center justify-between">
+              <div className="flex flex-col items-center sm:items-start">
                 <h1 className="text-2xl font-semibold text-[#1E90FF]">
                   All Topics ({quizzes.length})
                 </h1>

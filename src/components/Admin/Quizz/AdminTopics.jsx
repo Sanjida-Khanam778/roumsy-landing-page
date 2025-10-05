@@ -140,9 +140,9 @@ const AdminTopics = ({ setShowAdminTopics }) => {
             Overview
           </h1>
           {/* Overview & Upload */}
-          <div className="w-full flex gap-6">
+          <div className="w-full flex flex-col sm:flex-row gap-6">
             {/* Overview */}
-            <div className="w-2/3">
+            <div className="w-full sm:w-2/3">
               <ReactQuill
                 theme="snow"
                 value={overview}
@@ -154,7 +154,7 @@ const AdminTopics = ({ setShowAdminTopics }) => {
             </div>
 
             {/* Upload */}
-            <div className="w-1/3 h-72 bg-white rounded-[10px] border border-neutral-300 p-4 flex flex-col items-center">
+            <div className="w-full sm:w-1/3 h-72 bg-white rounded-[10px] border border-neutral-300 p-4 flex flex-col items-center">
               <h3 className="text-lg font-medium mb-3">Upload</h3>
 
               {/* Upload Box */}
