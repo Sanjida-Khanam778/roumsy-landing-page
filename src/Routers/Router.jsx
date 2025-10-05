@@ -10,7 +10,6 @@ import ForgotPasswordPage from "../Pages/Auth/ForgotPasswordPage";
 import OtpPage from "../Pages/Auth/OtpPage";
 import ResetPasswordPage from "../Pages/Auth/ResetPasswordPage";
 import Dashboard from "../Pages/Dashboard/Dashboard";
-import QuizInterface from "../Pages/QuizInterface/QuizInterface";
 import QuizResultPage from "../Pages/QuizInterface/QuizResultPage";
 import Topics from "../Pages/Topics/Topics";
 import MovingCarTabs from "../Pages/Overview/MovingCarTabs";
@@ -28,11 +27,15 @@ import Plan from "../Pages/Home/Plan";
 import Form from "../components/BecomeInstructor/Form";
 import QuizStart from "../Pages/QuizInterface/QuizStart";
 import GuidedDashboard from "../Pages/Dashboard/GuidedDashboard";
+
+import AdminTopics  from "../components/Admin/Quizz/AdminTopics";
+
 import CourseOverviewTab from "../Pages/Overview/CourseOverviewTab";
 import AiCoachTab from "../Pages/Overview/AiCoachTab";
 import DocumentationTab from "../Pages/Overview/DocumentationTab";
 import CourseCompletionCertificate from "../Pages/Overview/CourseCompletionCertificate";
 import ExamSimulatorTab from "../Pages/Overview/ExamSimulatorTab";
+
 
 export const router = createBrowserRouter([
   {
@@ -187,5 +190,9 @@ export const router = createBrowserRouter([
   {
     path: "/admin/create-quizz",
     element: <QuizCreator />,
+  },
+  {
+    path: "/admin/topics",
+    element: <AdminTopics />,
   },
 ]);

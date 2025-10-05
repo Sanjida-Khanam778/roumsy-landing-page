@@ -1,13 +1,13 @@
 import React, { useState } from "react";
-import { Users, MoreHorizontal, Edit3, Eye, Trash2 } from "lucide-react";
+import { Users, MoreHorizontal, Edit3, Trash2 } from "lucide-react";
 import quizzesData from "../../../../public/quizzes.json";
-import QuizPreview from "./Preview";
+import AdminTopics from "./AdminTopics";
 
 const QuizManagement = ({ handleEditQuizz }) => {
   const [quizzes, setQuizzes] = useState(quizzesData);
   const [openDropdown, setOpenDropdown] = useState(null);
   const [quizToDelete, setQuizToDelete] = useState(null);
-  const [previewQuiz, setPreviewQuiz] = useState(null); // <-- NEW STATE
+  const [showAdminTopics, setShowAdminTopics] = useState(false);
 
   const toggleDropdown = (id) => {
     setOpenDropdown(openDropdown === id ? null : id);
@@ -21,24 +21,27 @@ const QuizManagement = ({ handleEditQuizz }) => {
 
   return (
     <div className="bg-[#EAF2FF] min-h-screen drop-shadow-2xl rounded-xl">
-      {/* If previewQuiz is set → show QuizPreview */}
-      {previewQuiz ? (
-        <QuizPreview
-          quiz={previewQuiz}
-          onEdit={() => handleEditQuizz(previewQuiz)}
-          onClose={() => setPreviewQuiz(null)}
-        />
+      {/* AdminTopics modal */}
+      {showAdminTopics ? (
+        <div className="w-full max-w-4xl mx-auto relative">
+            <AdminTopics setShowAdminTopics={setShowAdminTopics}/>
+          </div>
       ) : (
         <>
           <div className="shadow-sm">
             {/* Header */}
-            <div className="p-6">
-              <h1 className="text-2xl font-semibold text-[#1E90FF]">
-                All Quizzes ({quizzes.length})
-              </h1>
-              <p className="text-black font-light text-base mt-1">
-                Manage your quiz collection
-              </p>
+            <div className="p-6 flex items-center justify-between">
+              <div>
+                <h1 className="text-2xl font-semibold text-[#1E90FF]">
+                  All Topics ({quizzes.length})
+                </h1>
+                <p className="text-black font-light text-base mt-1">
+                  Manage your quiz collection
+                </p>
+              </div>
+              <button onClick={() => setShowAdminTopics(true)} className="w-40 h-8 bg-gradient-to-r from-sky-500 to-sky-700 rounded-xl text-white text-base font-medium font-['Poppins']">
+                + Add Topics
+              </button>
             </div>
 
             {/* Table */}
@@ -150,16 +153,6 @@ const QuizManagement = ({ handleEditQuizz }) => {
                               >
                                 <Trash2 className="w-4 h-4 mr-2" />
                                 Delete
-                              </button>
-                              <button
-                                onClick={(e) => {
-                                  e.stopPropagation();
-                                  setPreviewQuiz(quiz);
-                                }}
-                                className="flex items-center w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-50"
-                              >
-                                <Eye className="w-4 h-4 mr-2" />
-                                View
                               </button>
                             </div>
                           </div>
