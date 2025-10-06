@@ -74,7 +74,7 @@ export default function Monetization() {
   const handleCancel = () => setEditPlanId(null);
 
   return (
-    <div className="min-h-screen bg-[#EEF6FF] p-8">
+    <div className="h-[calc(100vh-80px)] bg-[#EEF6FF] p-8">
       {/* Table Header */}
       <div className="bg-[#187A80] rounded-tr-xl rounded-bl-xl px-6 py-4 grid grid-cols-6 gap-4 text-white text-center text-2xl">
         <div>Plan Name</div>

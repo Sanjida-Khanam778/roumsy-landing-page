@@ -47,11 +47,6 @@ export default function QuizCreator() {
     });
   };
 
-  // Preview এর Edit button এ handle
-  // const handleEditClick = () => {
-  //   setActiveTab("questions");
-  //   setEditMode(true);
-  // };
 
   const tabs = [
     { id: "basic", label: "Basic Info", icon: <Info size={18} /> },

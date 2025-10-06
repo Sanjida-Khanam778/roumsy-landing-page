@@ -43,13 +43,12 @@ export default function DashboardMainPage() {
       </div>
 
       {/* Main Content */}
-      <div className="flex-1 ml-0 lg:ml-72 min-h-screen overflow-y-auto">
+      <div className="flex-1 ml-0 lg:ml-72 min-h-screen">
         {/* Header */}
-        <div className="bg-[#EEF6FF] px-6 py-4">
+        <div className="bg-[#EEF6FF] px-6 h-20 flex items-center justify-end">
           <div className="flex items-center justify-end gap-9">
             {/* <MessageSquareDot color="#1E90FF" /> */}
             <img
-              onClick={() => handleComponentChange("Profile")}
               src={profile}
               alt="profile"
               className="w-12 h-12"
@@ -71,7 +70,6 @@ export default function DashboardMainPage() {
           {currentComponent === "Account" && <Account />}
           {currentComponent === "Terms & Conditions" && <Terms />}
           {currentComponent === "Privacy Policies" && <Privacy />}
-          {currentComponent === "Profile" && <AdminProfile />}
         </div>
       </div>
     </div>
