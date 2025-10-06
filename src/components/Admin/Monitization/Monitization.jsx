@@ -75,7 +75,7 @@ export default function Monetization() {
 
   return (
     <div className="lg:h-[calc(100vh-80px)] bg-[#EEF6FF] p-8">
-      {/* Table Header - শুধুমাত্র xl & lg এ show হবে */}
+      {/* Table Header */}
       <div className="hidden lg:grid bg-[#187A80] rounded-tr-xl rounded-bl-xl px-6 py-4 grid-cols-6 gap-4 text-white text-center text-2xl">
         <div>Plan Name</div>
         <div>Price</div>
