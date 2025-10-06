@@ -10,7 +10,6 @@ import Monetization from "../Monitization/Monitization";
 import { Account } from "../Settings/Account";
 import Privacy from "../Settings/Privacy";
 import Terms from "../Settings/Terms";
-import AdminProfile from "../Profile/Profile";
 
 export default function DashboardMainPage() {
   const [currentComponent, setCurrentComponent] = useState("Dashboard"); // New state to track the active component
