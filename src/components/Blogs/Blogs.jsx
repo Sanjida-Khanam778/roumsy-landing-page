@@ -14,24 +14,21 @@ const Blogs = () => {
       image: blog,
       title: "The Impact of Technology Modern Classrooms Education",
       date: "August 15, 2025",
-      category: "Marketing",
-      readMore: "Read More",
+      category: "Marketing"
     },
     {
       id: 2,
       image: blog,
       title: "The Impact of Technology Modern Classrooms Education",
       date: "August 15, 2025",
-      category: "Marketing",
-      readMore: "Read More",
+      category: "Marketing"
     },
     {
       id: 3,
       image: blog,
       title: "The Impact of Technology Modern Classrooms Education",
       date: "August 15, 2025",
-      category: "Marketing",
-      readMore: "Read More",
+      category: "Marketing"
     },
   ];
 
@@ -100,10 +97,10 @@ const Blogs = () => {
                 </div>
 
                 {/* Read More Button */}
-                <button className="group flex items-center gap-2 text-primary font-medium transition-colors duration-200">
-                  <span>{article.readMore}</span>
+                <a href="https://medium.com/@anonhossain1710" target="_blank" className="group flex items-center gap-2 text-primary font-medium transition-colors duration-200">
+                  <span>read more</span>
                   <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-200" />
-                </button>
+                </a>
               </div>
             </div>
           ))}
