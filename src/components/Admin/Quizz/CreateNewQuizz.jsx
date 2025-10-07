@@ -14,7 +14,7 @@ import QuizPreview from "./Preview";
 import { Document } from "./Document";
 import toast from "react-hot-toast";
 
-export default function QuizCreator() {
+export default function QuizCreator({ setShowBasicInfo }) {
   const [activeTab, setActiveTab] = useState("basic");
   // const [editMode, setEditMode] = useState(false);
 
@@ -47,12 +47,6 @@ export default function QuizCreator() {
     });
   };
 
-  // Preview এর Edit button এ handle
-  // const handleEditClick = () => {
-  //   setActiveTab("questions");
-  //   setEditMode(true);
-  // };
-
   const tabs = [
     { id: "basic", label: "Basic Info", icon: <Info size={18} /> },
     { id: "questions", label: "Questions", icon: <HelpCircle size={18} /> },
@@ -77,13 +71,18 @@ export default function QuizCreator() {
 
   return (
     <div className="py-6">
-      <div className="px-7 flex justify-between items-center pb-12">
-        <div className="flex items-center gap-14 cursor-pointer">
-          <div className="flex items-center text-black cursor-pointer">
+      <div className="px-7 flex flex-col md:flex-row gap-5 md:gap-0 justify-between items-center pb-12">
+        <div className="flex flex-col md:flex-row items-center gap-5 md:gap-14 cursor-pointer">
+          <div
+            onClick={() => {
+              setShowBasicInfo(false);
+            }}
+            className="flex items-center text-black cursor-pointer"
+          >
             <ArrowLeft className="w-4 h-4 mr-2" />
             <span className="text-sm font-medium">Back to Quizzes</span>
           </div>
-          <div>
+          <div className="text-center md:text-left">
             <h1 className="text-3xl font-medium text-[#1E90FF]">
               Create New Quiz
             </h1>

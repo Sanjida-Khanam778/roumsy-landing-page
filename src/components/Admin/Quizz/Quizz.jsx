@@ -19,7 +19,7 @@ export const Quizz = () => {
 
   // === Conditional Rendering ===
   if (showBasicInfo) {
-    return <QuizCreator />;
+    return <QuizCreator setShowBasicInfo={setShowBasicInfo} />;
   }
   if (editQuizz && selectedQuiz) {
     return (

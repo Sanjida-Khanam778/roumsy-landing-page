@@ -79,36 +79,6 @@ export const BasicInfo = ({ basicInfo, onChange }) => {
             className="w-full px-3 py-2 border border-[#BCBCBC] rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-colors"
             placeholder="Add Topic"
           />
-          {/* <button
-            onClick={() => setShowTopicDropdown(!showTopicDropdown)}
-            className="w-full px-3 py-2 border border-[#BCBCBC] rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-colors bg-white text-left flex items-center justify-between"
-          >
-            <span className={selectedTopic ? "text-gray-900" : "text-gray-400"}>
-              {selectedTopic || "Select topic..."}
-            </span>
-            <ChevronDown
-              className={`w-4 h-4 text-gray-400 transition-transform ${
-                showTopicDropdown ? "rotate-180" : ""
-              }`}
-            />
-          </button>
-
-          {showTopicDropdown && (
-            <div className="absolute top-full left-0 right-0 mt-1 bg-white border border-[#BCBCBC] rounded-lg shadow-lg z-10 max-h-60 overflow-y-auto">
-              {topics.map((topic, index) => (
-                <button
-                  key={index}
-                  onClick={() => {
-                    onChange({ ...basicInfo, selectedTopic: topic });
-                    setShowTopicDropdown(false);
-                  }}
-                  className="w-full px-3 py-2 text-left hover:bg-gray-50 first:rounded-t-lg last:rounded-b-lg transition-colors text-sm"
-                >
-                  {topic}
-                </button>
-              ))}
-            </div>
-          )} */}
         </div>
       </div>
 

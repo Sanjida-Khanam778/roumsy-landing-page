@@ -21,7 +21,7 @@ const initialPlans = [
   {
     id: 3,
     name: "Career Plan",
-    price: "$29.99",
+    price: "29.99 CAD",
     billingType: "Monthly",
     activeUsers: "00",
     status: "Active",
@@ -74,9 +74,9 @@ export default function Monetization() {
   const handleCancel = () => setEditPlanId(null);
 
   return (
-    <div className="min-h-screen bg-[#EEF6FF] p-8">
+    <div className="lg:h-[calc(100vh-80px)] bg-[#EEF6FF] p-8">
       {/* Table Header */}
-      <div className="bg-[#187A80] rounded-tr-xl rounded-bl-xl px-6 py-4 grid grid-cols-6 gap-4 text-white text-center text-2xl">
+      <div className="hidden lg:grid bg-[#187A80] rounded-tr-xl rounded-bl-xl px-6 py-4 grid-cols-6 gap-4 text-white text-center text-2xl">
         <div>Plan Name</div>
         <div>Price</div>
         <div>Billing Type</div>
@@ -90,11 +90,18 @@ export default function Monetization() {
         {plans.map((plan) => (
           <div
             key={plan.id}
-            className="bg-[#005EA2] rounded-tr-xl rounded-bl-xl px-6 py-8 grid grid-cols-6 gap-4 text-center text-white shadow-lg"
+            className="bg-[#005EA2] rounded-tr-xl rounded-bl-xl px-6 py-6 shadow-lg 
+                   grid grid-cols-1 lg:grid-cols-6 gap-4 text-white"
           >
-            <div className="text-2xl">{plan.name}</div>
+            {/* Plan Name */}
+            <div className="text-base lg:text-2xl text-center lg:text-left">
+              <span className="lg:hidden font-semibold">Plan Name: </span>
+              {plan.name}
+            </div>
 
-            <div className="text-2xl">
+            {/* Price */}
+            <div className="flex items-center justify-center gap-1 lg:flex-none text-base lg:text-2xl text-center">
+              <span className="lg:hidden font-semibold">Price:</span>
               {editPlanId === plan.id ? (
                 <input
                   type="text"
@@ -105,11 +112,13 @@ export default function Monetization() {
                   className="text-black text-center rounded px-2 py-1 w-full"
                 />
               ) : (
-                plan.price
+                <div>${plan.price}</div>
               )}
             </div>
 
-            <div className="text-xl">
+            {/* Billing Type */}
+            <div className="text-sm lg:text-xl text-center">
+              <span className="lg:hidden font-semibold">Billing: </span>
               {editPlanId === plan.id ? (
                 <input
                   type="text"
@@ -127,26 +136,32 @@ export default function Monetization() {
               )}
             </div>
 
-            <div className="text-xl">{plan.activeUsers}</div>
-            <div>
-              <span className="text-[#00FF0A] text-xl text-center">
-                {plan.status}
-              </span>
+            {/* Active Users */}
+            <div className="text-sm lg:text-xl text-center">
+              <span className="lg:hidden font-semibold">Active Users: </span>
+              {plan.activeUsers}
+            </div>
+
+            {/* Status */}
+            <div className="text-sm lg:text-xl text-center">
+              <span className="lg:hidden font-semibold">Status: </span>
+              <span className="text-[#00FF0A]">{plan.status}</span>
             </div>
 
             {/* Actions */}
-            <div className="relative">
+            <div className="relative flex justify-center">
+              <span className="lg:hidden font-semibold">Actions: </span>
               {editPlanId === plan.id ? (
-                <div className="flex justify-center gap-2">
+                <div className="flex flex-col lg:flex-row justify-center gap-2">
                   <button
                     onClick={() => handleSave(plan.id)}
-                    className="flex items-center bg-green-500 px-2 py-1 rounded hover:bg-green-600"
+                    className="flex items-center justify-center bg-green-500 px-2 py-1 rounded hover:bg-green-600"
                   >
                     <Save className="mr-1 h-4 w-4" /> Save
                   </button>
                   <button
                     onClick={handleCancel}
-                    className="flex items-center bg-red-500 px-2 py-1 rounded hover:bg-red-600"
+                    className="flex items-center justify-center bg-red-500 px-2 py-1 rounded hover:bg-red-600"
                   >
                     <X className="mr-1 h-4 w-4" /> Cancel
                   </button>
@@ -155,7 +170,7 @@ export default function Monetization() {
                 <>
                   <button
                     onClick={() => toggleDropdown(plan.id)}
-                    className="h-8 w-8 flex items-center justify-center ml-24 rounded"
+                    className="h-8 w-8 flex items-center justify-center rounded ml-0 lg:ml-24"
                   >
                     <MoreHorizontal className="h-4 w-4 text-white" />
                   </button>
