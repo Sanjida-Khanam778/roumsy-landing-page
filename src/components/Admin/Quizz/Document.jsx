@@ -4,7 +4,10 @@ import toast from "react-hot-toast";
 
 export const Document = () => {
   const [selectedTopic, setSelectedTopic] = useState("");
+  const [selectedCategory, setSelectedCategory] = useState("");
   const [showTopicDropdown, setShowTopicDropdown] = useState(false);
+  const [showCategoryDropdown, setShowCategoryDropdown] = useState(false);
+
   const [documentTitle, setDocumentTitle] = useState("");
   const [document, setDocument] = useState("");
 
@@ -24,6 +27,15 @@ export const Document = () => {
     "Personal Development",
     "Lifestyle",
     "Photography & Video",
+  ];
+
+  const categories = [
+    "Technology",
+    "Development",
+    "Marketing",
+    "Financial",
+    "Fitness Train",
+    "Art & Design",
   ];
 
   // Trigger file input click
@@ -65,15 +77,24 @@ export const Document = () => {
   // ✅ Handle Save (reset everything)
   const handleSave = () => {
     // ✅ Validation: check if fields are empty
-     if (!documentTitle.trim() || !selectedTopic.trim() || !document.trim() || uploadedFiles.length === 0) {
-    toast.error("Please fill out all fields and upload at least one file before saving");
-    return;
-  }
+    if (
+      !documentTitle.trim() ||
+      !selectedTopic.trim() ||
+      !selectedCategory.trim() ||
+      !document.trim() ||
+      uploadedFiles.length === 0
+    ) {
+      toast.error(
+        "Please fill out all fields and upload at least one file before saving"
+      );
+      return;
+    }
     console.log("Saved:", {
       documentTitle,
       selectedTopic,
       document,
       uploadedFiles,
+      selectedCategory,
     });
     toast.success("File saved successfully!");
     // Reset all fields
@@ -81,6 +102,7 @@ export const Document = () => {
     setSelectedTopic("");
     setDocument("");
     setUploadedFiles([]);
+    setSelectedCategory("");
   };
 
   return (
@@ -108,6 +130,45 @@ export const Document = () => {
             className="w-full px-3 py-2 border border-[#BCBCBC] rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-colors"
             placeholder=""
           />
+        </div>
+        
+        {/* Category Dropdown */}
+        <div className="relative">
+          <label className="block text-sm font-extralight text-black mb-2">
+            Category *
+          </label>
+          <button
+            onClick={() => setShowCategoryDropdown(!showCategoryDropdown)}
+            className="w-full px-3 py-2 border border-[#BCBCBC] rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-colors bg-white text-left flex items-center justify-between"
+          >
+            <span
+              className={selectedCategory ? "text-gray-900" : "text-gray-400"}
+            >
+              {selectedCategory || "Select category..."}
+            </span>
+            <ChevronDown
+              className={`w-4 h-4 text-gray-400 transition-transform ${
+                showCategoryDropdown ? "rotate-180" : ""
+              }`}
+            />
+          </button>
+
+          {showCategoryDropdown && (
+            <div className="absolute top-full left-0 right-0 mt-1 bg-white border border-[#BCBCBC] rounded-lg shadow-lg z-10 max-h-60 overflow-y-auto">
+              {categories.map((category, index) => (
+                <button
+                  key={index}
+                  onClick={() => {
+                    setSelectedCategory(category);
+                    setShowCategoryDropdown(false);
+                  }}
+                  className="w-full px-3 py-2 text-left hover:bg-gray-50 first:rounded-t-lg last:rounded-b-lg transition-colors text-sm"
+                >
+                  {category}
+                </button>
+              ))}
+            </div>
+          )}
         </div>
 
         {/* Topic Dropdown */}
