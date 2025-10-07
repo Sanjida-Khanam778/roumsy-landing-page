@@ -144,7 +144,7 @@ const Documentation = () => {
       )}
       {/* Sidebar */}
       <div
-        className={`bg-[#E5E5E5] py-6 flex flex-col transition-all duration-300 ${
+        className={`bg-[#E5E5E5] h-auto py-6 flex flex-col transition-all duration-300 ${
           isMobileOrTablet
             ? sidebarOpen
               ? "absolute top-0 left-0 w-72 h-full z-50 shadow-2xl" // overlays only documentation area
