@@ -1,8 +1,7 @@
 import React, { useState } from "react";
-import toast from "react-hot-toast";
 import "react-quill/dist/quill.snow.css";
 import ReactQuill from "react-quill";
-import { ChevronLeft } from "lucide-react";
+import { ChevronDown, ChevronLeft } from "lucide-react";
 
 const AdminTopics = ({ setShowAdminTopics }) => {
   const [topicTitle, setTopicTitle] = useState("");
@@ -10,8 +9,24 @@ const AdminTopics = ({ setShowAdminTopics }) => {
   const [overview, setOverview] = useState("");
   const [files, setFiles] = useState(null);
 
+  const [selectedCategories, setSelectedCategories] = useState("");
+  const [showDropdown, setShowDropdown] = useState(false);
+
+  const [categories, setCategories] = useState([
+    "Technology",
+    "Development",
+    "Marketing",
+    "Financial",
+    "Fitness Train",
+    "Art & Design",
+  ]);
+
+  const [addingCategory, setAddingCategory] = useState(false);
+  const [newCategory, setNewCategory] = useState("");
+
   const handleFileChange = (e) => {
-    setFiles(e.target.files);
+    const file = e.target.files[0]; // only take the first file
+    setFiles(file ? [file] : null); // store as array for mapping in UI
   };
 
   const handleSubmit = async (e) => {
@@ -22,6 +37,7 @@ const AdminTopics = ({ setShowAdminTopics }) => {
     formData.append("topicTitle", topicTitle);
     formData.append("description", description);
     formData.append("overview", overview);
+    formData.append("category", selectedCategories);
     if (files) {
       Array.from(files).forEach((file) => {
         formData.append("files", file);
@@ -37,15 +53,20 @@ const AdminTopics = ({ setShowAdminTopics }) => {
     //   return;
     // }
 
-    // এখন শুধু console + toast
-    console.log({ topicTitle, description, overview, files });
-    toast.success("Topic Saved!");
+    console.log({
+      topicTitle,
+      description,
+      overview,
+      files: Array.from(files).map((file) => file.name),
+      selectedCategories,
+    });
 
     // Reset fields after save
     setTopicTitle("");
     setDescription("");
     setOverview("");
     setFiles(null);
+    setSelectedCategories("");
   };
 
   const infoIcon = () => (
@@ -134,6 +155,99 @@ const AdminTopics = ({ setShowAdminTopics }) => {
               className="w-full p-2 h-10 bg-white rounded-[10px] border border-stone-300"
             />
           </div>
+          <div className="relative">
+            <label className="block text-sm font-extralight text-black mb-2">
+              Category *
+            </label>
+            <div
+              onClick={() => setShowDropdown(!showDropdown)}
+              className="w-full px-3 py-2 border border-[#BCBCBC] rounded-lg focus:ring-2 
+                   focus:ring-blue-500 focus:border-blue-500 outline-none transition-colors 
+                   bg-white text-left flex items-center justify-between"
+            >
+              <span
+                className={
+                  selectedCategories ? "text-gray-900" : "text-gray-400"
+                }
+              >
+                {selectedCategories || "Select Category..."}
+              </span>
+              <ChevronDown
+                className={`w-4 h-4 text-gray-400 transition-transform ${
+                  showDropdown ? "rotate-180" : ""
+                }`}
+              />
+            </div>
+
+            {showDropdown && (
+              <div className="absolute top-full left-0 right-0 mt-1 bg-white border border-[#BCBCBC] rounded-lg shadow-lg z-10 max-h-60 overflow-y-auto">
+                {categories.map((category, index) => (
+                  <button
+                    key={index}
+                    onClick={() => {
+                      setSelectedCategories(category);
+                      setShowDropdown(false);
+                    }}
+                    className="w-full px-3 py-2 text-left hover:bg-gray-50 
+                         first:rounded-t-lg last:rounded-b-lg transition-colors text-sm"
+                  >
+                    {category}
+                  </button>
+                ))}
+
+                {/* ✅ Add New Category Option */}
+                <div className="border-t border-gray-200 p-2">
+                  {!addingCategory ? (
+                    <button
+                      type="button"
+                      onClick={() => setAddingCategory(true)}
+                      className="w-full p-1 text-left text-blue-600 hover:bg-gray-50 rounded-md text-sm font-medium"
+                    >
+                      + Add Category
+                    </button>
+                  ) : (
+                    <div className="flex items-center gap-2">
+                      <input
+                        type="text"
+                        value={newCategory}
+                        onChange={(e) => setNewCategory(e.target.value)}
+                        className="flex-1 border border-gray-300 rounded-md px-2 py-1 text-sm"
+                        placeholder="Enter category"
+                      />
+                      <button
+                        type="button"
+                        onClick={() => {
+                          if (newCategory.trim() !== "") {
+                            setCategories((prev) => [
+                              ...prev,
+                              newCategory.trim(),
+                            ]);
+                            setSelectedCategories(newCategory.trim());
+                            setNewCategory("");
+                            setAddingCategory(false);
+                            setShowDropdown(false);
+                          }
+                        }}
+                        className="bg-gray-300 text-black px-2 py-1 rounded-md text-xs"
+                      >
+                        ✔
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => {
+                          setNewCategory("");
+                          setAddingCategory(false);
+                        }}
+                        className="bg-gray-300 text-black px-2 py-1 rounded-md text-xs"
+                      >
+                        ✖
+                      </button>
+                    </div>
+                  )}
+                </div>
+              </div>
+            )}
+          </div>
         </div>
         <div className="mt-14">
           <h1 className="justify-start text-black text-sm font-medium font-['Poppins'] mb-2">
@@ -158,34 +272,35 @@ const AdminTopics = ({ setShowAdminTopics }) => {
               <h3 className="text-lg font-medium mb-3">Upload</h3>
 
               {/* Upload Box */}
-              <div className="border-2 border-dashed border-gray-300 rounded-md p-6 w-full text-center mb-3 flex-1 flex items-center justify-center">
-                {!files ? (
+              <div
+                className={`rounded-md p-8 w-full h-full text-center mb-3 flex-1 flex items-center justify-center 
+    ${files ? "" : "border-2 border-dashed border-gray-300"}`}
+              >
+                {files ? (
+                  <div className="w-full h-full">
+                    {files.map((file, index) => (
+                      <img
+                        key={index}
+                        src={URL.createObjectURL(file)}
+                        alt={file.name}
+                        className="w-full h-full object-cover rounded-md"
+                      />
+                    ))}
+                  </div>
+                ) : (
                   <p className="text-gray-500">
-                    Drag & drop files or{" "}
+                    Drag & drop file or{" "}
                     <label className="text-blue-600 cursor-pointer">
                       Browse
                       <input
                         type="file"
-                        multiple
+                        accept="image/*" // no multiple
                         onChange={handleFileChange}
                         className="hidden"
                         id="fileInput"
                       />
                     </label>
                   </p>
-                ) : (
-                  <div className="w-full space-y-2 max-h-full overflow-y-auto">
-                    {Array.from(files).map((file, index) => (
-                      <div
-                        key={index}
-                        className="bg-gray-50 px-3 py-1 rounded-md text-base text-gray-700"
-                      >
-                        <span className="truncate w-40 text-center">
-                          {file.name}
-                        </span>
-                      </div>
-                    ))}
-                  </div>
                 )}
               </div>
             </div>
