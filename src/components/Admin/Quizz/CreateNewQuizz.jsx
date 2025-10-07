@@ -12,62 +12,59 @@ import { QuestionsContent } from "./QuestionsContent";
 import QuizSettings from "./QuizSettings";
 import QuizPreview from "./Preview";
 import { Document } from "./Document";
-import toast from "react-hot-toast";
 
 export default function QuizCreator({ setShowBasicInfo }) {
-  const [activeTab, setActiveTab] = useState("basic");
-  // const [editMode, setEditMode] = useState(false);
+  const [activeTab, setActiveTab] = useState("questions");
 
-  const [basicInfo, setBasicInfo] = useState({
-    quizTitle: "",
-    description: "",
-    selectedTopic: "",
-    totalMarks: "30 Marks",
-    timeLimit: "30",
-    maxAttempts: "3",
-  });
+  // const [basicInfo, setBasicInfo] = useState({
+  //   quizTitle: "",
+  //   description: "",
+  //   selectedTopic: "",
+  //   totalMarks: "30 Marks",
+  //   timeLimit: "30",
+  //   maxAttempts: "3",
+  // });
 
-  const handleSaveQuiz = () => {
-    if (!basicInfo.quizTitle.trim() || !basicInfo.selectedTopic.trim()) {
-      toast.error("Please fill out all required fields");
-      return;
-    }
+  // const handleSaveQuiz = () => {
+  //   if (!basicInfo.quizTitle.trim() || !basicInfo.selectedTopic.trim()) {
+  //     toast.error("Please fill out all required fields");
+  //     return;
+  //   }
 
-    console.log("Quiz Saved:", basicInfo);
-    toast.success("Quiz info saved successfully!");
+  //   console.log("Quiz Saved:", basicInfo);
+  //   toast.success("Quiz info saved successfully!");
 
-    // Reset parent state → automatically resets BasicInfo fields
-    setBasicInfo({
-      quizTitle: "",
-      description: "",
-      selectedTopic: "",
-      totalMarks: "30 Marks",
-      timeLimit: "30",
-      maxAttempts: "3",
-    });
-  };
+  //   // Reset parent state → automatically resets BasicInfo fields
+  //   setBasicInfo({
+  //     quizTitle: "",
+  //     description: "",
+  //     totalMarks: "30 Marks",
+  //     timeLimit: "30",
+  //     maxAttempts: "3",
+  //   });
+  // };
 
   const tabs = [
-    { id: "basic", label: "Basic Info", icon: <Info size={18} /> },
+    // { id: "basic", label: "Basic Info", icon: <Info size={18} /> },
     { id: "questions", label: "Questions", icon: <HelpCircle size={18} /> },
     { id: "document", label: "Document", icon: <FileText size={18} /> },
     { id: "settings", label: "Settings", icon: <Settings size={18} /> },
     { id: "preview", label: "Preview", icon: <Eye size={18} /> },
   ];
 
-  const saveIcon = () => (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      width={30}
-      height={30}
-      viewBox="0 0 16 16"
-    >
-      <path
-        fill="#ffffff"
-        d="M2 1a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H9.5a1 1 0 0 0-1 1v7.293l2.646-2.647a.5.5 0 0 1 .708.708l-3.5 3.5a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L7.5 9.293V2a2 2 0 0 1 2-2H14a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h2.5a.5.5 0 0 1 0 1z"
-      ></path>
-    </svg>
-  );
+  // const saveIcon = () => (
+  //   <svg
+  //     xmlns="http://www.w3.org/2000/svg"
+  //     width={30}
+  //     height={30}
+  //     viewBox="0 0 16 16"
+  //   >
+  //     <path
+  //       fill="#ffffff"
+  //       d="M2 1a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H9.5a1 1 0 0 0-1 1v7.293l2.646-2.647a.5.5 0 0 1 .708.708l-3.5 3.5a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L7.5 9.293V2a2 2 0 0 1 2-2H14a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h2.5a.5.5 0 0 1 0 1z"
+  //     ></path>
+  //   </svg>
+  // );
 
   return (
     <div className="py-6">
@@ -84,20 +81,13 @@ export default function QuizCreator({ setShowBasicInfo }) {
           </div>
           <div className="text-center md:text-left">
             <h1 className="text-3xl font-medium text-[#1E90FF]">
-              Create New Quiz
+              Create New Training
             </h1>
             <p className="text-sm text-[#929292]">
               Build comprehensive quizzes with multiple question types
             </p>
           </div>
         </div>
-        <button
-          onClick={handleSaveQuiz}
-          className="flex gap-2 items-center bg-gradient-to-r from-[#189EFE] to-[#0E5F98] text-white px-6 py-3 rounded-lg text-2xl font-medium"
-        >
-          {saveIcon()}
-          Save Quiz
-        </button>
       </div>
 
       {/* Navigation Tabs */}
@@ -121,12 +111,12 @@ export default function QuizCreator({ setShowBasicInfo }) {
 
       {/* Content */}
       <div className="mt-12 drop-shadow-md">
-        {activeTab === "basic" && (
+        {/* {activeTab === "basic" && (
           <BasicInfo
             basicInfo={basicInfo} // current values
             onChange={(newData) => setBasicInfo(newData)} // update parent state
           />
-        )}
+        )} */}
         {/* {activeTab === "questions" && <QuestionsContent editMode={editMode} />} */}
         {activeTab === "questions" && <QuestionsContent />}
         {activeTab === "document" && <Document />}

@@ -93,7 +93,7 @@ export const Quizz = () => {
           onClick={handleCreateClick}
           className="bg-gradient-to-r from-[#189EFE] to-[#0E5F98] text-white px-6 py-3 rounded-lg text-2xl font-medium"
         >
-          + Create Quizz
+          + Create Training
         </button>
       </div>
 
