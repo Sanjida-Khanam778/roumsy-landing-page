@@ -6,29 +6,34 @@ import { MdOutlineAccessTime } from "react-icons/md";
 import { FaRegFolder } from "react-icons/fa";
 import AOS from "aos";
 import "aos/dist/aos.css"; // Import AOS styles
-
+import medium from "../../assets/images/logo/medium.png";
+import reddit from "../../assets/images/logo/reddit.png";
+import quora from "../../assets/images/logo/quora.png";
 const Blogs = () => {
   const newsArticles = [
     {
       id: 1,
-      image: blog,
-      title: "The Impact of Technology Modern Classrooms Education",
+      image: medium,
+      title: "See the latest article from our blog in Medium",
       date: "August 15, 2025",
-      category: "Marketing"
+      category: "Marketing",
+      link: "https://medium.com/@anonhossain1710"
     },
     {
       id: 2,
-      image: blog,
-      title: "The Impact of Technology Modern Classrooms Education",
+      image: reddit,
+      title: "See the latest article from our blog in Reddit",
       date: "August 15, 2025",
-      category: "Marketing"
+      category: "Marketing",
+      link: "https://www.reddit.com/"
     },
     {
       id: 3,
-      image: blog,
-      title: "The Impact of Technology Modern Classrooms Education",
+      image: quora,
+      title: "See the latest article from our blog in Quora",
       date: "August 15, 2025",
-      category: "Marketing"
+      category: "Marketing",
+      link: "https://bn.quora.com/"
     },
   ];
 
@@ -73,7 +78,7 @@ const Blogs = () => {
                 <img
                   src={article.image}
                   alt={article.title}
-                  className="w-full object-cover transition-transform duration-300 hover:scale-105"
+                  className="w-full h-52 object-cover transition-transform duration-300 hover:scale-105"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
               </div>
@@ -85,7 +90,7 @@ const Blogs = () => {
                 </h3>
 
                 {/* Meta Information */}
-                <div className="flex items-center gap-4 mb-4 text-sm text-gray border-b border-dashed border-gray/60 pb-4">
+                {/* <div className="flex items-center gap-4 mb-4 text-sm text-gray border-b border-dashed border-gray/60 pb-4">
                   <div className="flex items-center gap-1">
                     <MdOutlineAccessTime className="text-lg text-primary" />
                     <span>{article.date}</span>
@@ -94,10 +99,10 @@ const Blogs = () => {
                     <FaRegFolder className="text-lg text-primary" />
                     <span>{article.category}</span>
                   </div>
-                </div>
+                </div> */}
 
                 {/* Read More Button */}
-                <a href="https://medium.com/@anonhossain1710" target="_blank" className="group flex items-center gap-2 text-primary font-medium transition-colors duration-200">
+                <a href={article.link} target="_blank" className="group flex items-center gap-2 text-primary font-medium transition-colors duration-200">
                   <span>read more</span>
                   <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-200" />
                 </a>
