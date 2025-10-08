@@ -1,4 +1,4 @@
-import { Pencil, Settings, Trash2 } from "lucide-react";
+import { Settings, Trash2 } from "lucide-react";
 import { useEffect } from "react";
 
 const QuizPreview = ({ quiz }) => { // onEdit is passed from parent
@@ -151,13 +151,6 @@ const QuizPreview = ({ quiz }) => { // onEdit is passed from parent
           ))}
         </div>
         <div className="flex gap-2">
-          <button
-            // onClick={onEdit}
-            className="flex items-center gap-1 border px-3 py-1 text-sm bg-gray-100 text-gray-700 rounded-md hover:bg-gray-200"
-          >
-            <Pencil size={14} color="#1E90FF" />
-            Edit
-          </button>
           <button className="flex items-center gap-1 border px-3 py-1 text-sm bg-gray-100 text-gray-700 rounded-md hover:bg-gray-200">
             <Trash2 size={14} color="#FF0000" />
             Delete

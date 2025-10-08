@@ -6,6 +6,9 @@ import { ChevronDown, ChevronLeft } from "lucide-react";
 const AdminTopics = ({ setShowAdminTopics }) => {
   const [topicTitle, setTopicTitle] = useState("");
   const [description, setDescription] = useState("");
+  const [freeQues, setFreeQues] = useState("");
+  const [chatbotPrice, setChatbotPrice] = useState("");
+  const [documentationPrice, setDocumentationPrice] = useState("");
   const [overview, setOverview] = useState("");
   const [files, setFiles] = useState(null);
 
@@ -43,15 +46,6 @@ const AdminTopics = ({ setShowAdminTopics }) => {
         formData.append("files", file);
       });
     }
-
-    // 👇 এখানে future এ API call করা যাবে
-    // try {
-    //   const response = await apiInstance.post("/topics", formData);
-    //   toast.success("Topic Saved!");
-    // } catch (error) {
-    //   toast.error("Something went wrong!");
-    //   return;
-    // }
 
     console.log({
       topicTitle,
@@ -141,7 +135,7 @@ const AdminTopics = ({ setShowAdminTopics }) => {
               type="text"
               value={topicTitle}
               onChange={(e) => setTopicTitle(e.target.value)}
-              className="w-full p-2 h-10 bg-white rounded-[10px] border border-stone-300"
+              className="w-full px-3 py-2 h-10 bg-white rounded-[10px] border border-stone-300"
             />
           </div>
           <div>
@@ -152,11 +146,11 @@ const AdminTopics = ({ setShowAdminTopics }) => {
               type="text"
               value={description}
               onChange={(e) => setDescription(e.target.value)}
-              className="w-full p-2 h-10 bg-white rounded-[10px] border border-stone-300"
+              className="w-full px-3 py-2 h-10 bg-white rounded-[10px] border border-stone-300"
             />
           </div>
           <div className="relative">
-            <label className="block text-sm font-extralight text-black mb-2">
+            <label className="block mb-2.5 justify-start text-black text-sm font-medium font-['Poppins']">
               Category *
             </label>
             <div
@@ -247,6 +241,39 @@ const AdminTopics = ({ setShowAdminTopics }) => {
                 </div>
               </div>
             )}
+          </div>
+          <div>
+            <label className="block mb-2.5 justify-start text-black text-sm font-medium font-['Poppins']">
+              Number of free questions *
+            </label>
+            <input
+              type="number"
+              value={freeQues}
+              onChange={(e) => setFreeQues(e.target.value)}
+              className="w-full px-3 py-2 h-10 bg-white rounded-[10px] border border-stone-300"
+            />
+          </div>
+          <div>
+            <label className="block mb-2.5 justify-start text-black text-sm font-medium font-['Poppins']">
+              Price for chatbot *
+            </label>
+            <input
+              type="number"
+              value={chatbotPrice}
+              onChange={(e) => setChatbotPrice(e.target.value)}
+              className="w-full px-3 py-2 h-10 bg-white rounded-[10px] border border-stone-300"
+            />
+          </div>
+          <div>
+            <label className="block mb-2.5 justify-start text-black text-sm font-medium font-['Poppins']">
+              Price for documentation *
+            </label>
+            <input
+              type="number"
+              value={documentationPrice}
+              onChange={(e) => setDocumentationPrice(e.target.value)}
+              className="w-full px-3 py-2 h-10 bg-white rounded-[10px] border border-stone-300"
+            />
           </div>
         </div>
         <div className="mt-14">
