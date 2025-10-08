@@ -1,9 +1,8 @@
 import { useRef, useState } from "react";
-import { Edit3, Plus, Trash2 } from "lucide-react";
+import { Plus, Trash2 } from "lucide-react";
 import { BasicInfo } from "./BasicInfo";
 
 export const QuestionsContent = () => {
-  // { editMode }
   const [showSelectModal, setShowSelectModal] = useState(false);
   const [selectedQuestions, setSelectedQuestions] = useState([]);
   const [selectAll, setSelectAll] = useState(false);
@@ -439,14 +438,6 @@ export const QuestionsContent = () => {
 
               {/* Add Ques Button */}
               <div className="flex items-center justify-center">
-                {/* {editMode ? (
-                  <>Update Question</>
-                ) : (
-                  <>
-                    <Plus className="w-4 h-4 mr-2" />
-                    Add New Question
-                  </>
-                )} */}
                 <button
                   onClick={addNewQuestion}
                   disabled={!isFormValid()}
@@ -495,9 +486,6 @@ export const QuestionsContent = () => {
                         </div>
                       </div>
                       <div className="flex items-center space-x-2 ml-4">
-                        <button className="p-1 text-blue-500 hover:bg-blue-50 rounded">
-                          <Edit3 className="w-4 h-4" />
-                        </button>
                         <button
                           onClick={() => deleteQuestion(question.id)}
                           className="p-1 text-red-500 hover:bg-red-50 rounded"
@@ -510,7 +498,6 @@ export const QuestionsContent = () => {
                 ))}
               </div>
             </div>
-            {/* If editMode is true, show the upload question section (only when needed) */}
             <>
               {/* Upload Questions Section */}
               <div className="mt-8 bg-gray-50 rounded-lg py-6">
