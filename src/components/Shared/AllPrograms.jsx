@@ -167,7 +167,7 @@ export default function AllPrograms({ limit }) {
                   <span>Train with LearninGPT</span>
                 </div>
               </Link>
-              <Link to={"/quiz"}>
+              <Link to={"/overview/1/exam-simulator"}>
                 <div className="p-2 bg-blue-50 hover:text-white hover:bg-gradient-to-r hover:from-[#189EFE] hover:to-[#0E5F98] rounded-lg flex items-center gap-2 group">
                   <img
                     src={startd}
