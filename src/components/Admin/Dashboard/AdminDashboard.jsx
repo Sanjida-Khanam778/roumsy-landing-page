@@ -6,7 +6,7 @@ import { Menu, X } from "lucide-react"; // Menu & Close icons যোগ হল�
 
 import profile from "../../../assets/admin-dashboard-images/profile.png";
 import { Quizz } from "../Quizz/Quizz";
-import Monetization from "../Monitization/Monitization";
+// import Monetization from "../Monitization/Monitization";
 import { Account } from "../Settings/Account";
 import Privacy from "../Settings/Privacy";
 import Terms from "../Settings/Terms";
@@ -65,7 +65,7 @@ export default function DashboardMainPage() {
             </div>
           )}
           {currentComponent === "Quizz" && <Quizz />}
-          {currentComponent === "Monetization" && <Monetization />}
+          {/* {currentComponent === "Monetization" && <Monetization />} */}
           {currentComponent === "Account" && <Account />}
           {currentComponent === "Terms & Conditions" && <Terms />}
           {currentComponent === "Privacy Policies" && <Privacy />}
