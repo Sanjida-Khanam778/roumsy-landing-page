@@ -9,6 +9,8 @@ const AdminTopics = ({ setShowAdminTopics }) => {
   const [freeQues, setFreeQues] = useState("");
   const [chatbotPrice, setChatbotPrice] = useState("");
   const [documentationPrice, setDocumentationPrice] = useState("");
+  const [examSimulatorPrice, setExamSimulatorPrice] = useState("");
+  const [bundlePrice, setBundlePrice] = useState("");
   const [overview, setOverview] = useState("");
   const [files, setFiles] = useState(null);
 
@@ -53,11 +55,21 @@ const AdminTopics = ({ setShowAdminTopics }) => {
       overview,
       files: Array.from(files).map((file) => file.name),
       selectedCategories,
+      freeQues,
+      chatbotPrice,
+      documentationPrice,
+      examSimulatorPrice,
+      bundlePrice,
     });
 
     // Reset fields after save
     setTopicTitle("");
     setDescription("");
+    setExamSimulatorPrice("");
+    setBundlePrice("");
+    setFreeQues("");
+    setChatbotPrice("");
+    setDocumentationPrice("");
     setOverview("");
     setFiles(null);
     setSelectedCategories("");
@@ -125,8 +137,8 @@ const AdminTopics = ({ setShowAdminTopics }) => {
       </div>
 
       <form onSubmit={handleSubmit} className="">
-        {/* Title & Description */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        {/* Topic Title */}
           <div>
             <label className="block mb-2.5 justify-start text-black text-sm font-medium font-['Poppins']">
               Topic Title *
@@ -138,6 +150,8 @@ const AdminTopics = ({ setShowAdminTopics }) => {
               className="w-full px-3 py-2 h-10 bg-white rounded-[10px] border border-stone-300"
             />
           </div>
+
+          {/* Description */}
           <div>
             <label className="block mb-2.5 justify-start text-black text-sm font-medium font-['Poppins']">
               Description *
@@ -149,6 +163,8 @@ const AdminTopics = ({ setShowAdminTopics }) => {
               className="w-full px-3 py-2 h-10 bg-white rounded-[10px] border border-stone-300"
             />
           </div>
+
+          {/* Category Dropdown */}
           <div className="relative">
             <label className="block mb-2.5 justify-start text-black text-sm font-medium font-['Poppins']">
               Category *
@@ -242,9 +258,11 @@ const AdminTopics = ({ setShowAdminTopics }) => {
               </div>
             )}
           </div>
+
+          {/* Number of Free Questions */}
           <div>
             <label className="block mb-2.5 justify-start text-black text-sm font-medium font-['Poppins']">
-              Number of free questions *
+              Number of Free Questions *
             </label>
             <input
               type="number"
@@ -253,9 +271,11 @@ const AdminTopics = ({ setShowAdminTopics }) => {
               className="w-full px-3 py-2 h-10 bg-white rounded-[10px] border border-stone-300"
             />
           </div>
+
+          {/* Price for Chatbot */}
           <div>
             <label className="block mb-2.5 justify-start text-black text-sm font-medium font-['Poppins']">
-              Price for chatbot *
+              Price for Chatbot *
             </label>
             <input
               type="number"
@@ -264,14 +284,42 @@ const AdminTopics = ({ setShowAdminTopics }) => {
               className="w-full px-3 py-2 h-10 bg-white rounded-[10px] border border-stone-300"
             />
           </div>
+
+          {/* Price for Documentation */}
           <div>
             <label className="block mb-2.5 justify-start text-black text-sm font-medium font-['Poppins']">
-              Price for documentation *
+              Price for Documentation *
             </label>
             <input
               type="number"
               value={documentationPrice}
               onChange={(e) => setDocumentationPrice(e.target.value)}
+              className="w-full px-3 py-2 h-10 bg-white rounded-[10px] border border-stone-300"
+            />
+          </div>
+
+          {/* Price for Exam Simulator */}
+          <div>
+            <label className="block mb-2.5 justify-start text-black text-sm font-medium font-['Poppins']">
+              Price for Exam Simulator *
+            </label>
+            <input
+              type="number"
+              value={examSimulatorPrice}
+              onChange={(e) => setExamSimulatorPrice(e.target.value)}
+              className="w-full px-3 py-2 h-10 bg-white rounded-[10px] border border-stone-300"
+            />
+          </div>
+
+          {/* Bundle Price */}
+          <div>
+            <label className="block mb-2.5 justify-start text-black text-sm font-medium font-['Poppins']">
+              Bundle Price *
+            </label>
+            <input
+              type="number"
+              value={bundlePrice}
+              onChange={(e) => setBundlePrice(e.target.value)}
               className="w-full px-3 py-2 h-10 bg-white rounded-[10px] border border-stone-300"
             />
           </div>
