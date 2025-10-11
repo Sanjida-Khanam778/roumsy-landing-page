@@ -1,11 +1,26 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import ModeSelection from "../../components/ModeSelection";
 import GuidedDashboard from "../Dashboard/GuidedDashboard";
 import Dashboard from "../Dashboard/Dashboard";
+import { useLocation } from "react-router-dom";
 function AiCoachTab() {
+  const location = useLocation();
   const [selectedSkillLevel, setSelectedSkillLevel] = useState("");
   const [selectedMode, setSelectedMode] = useState("");
-
+  useEffect(() => {
+   // If navigated with state.skill (from QuizResult), pre-select skill level
+   const skill = location?.state?.skill;
+   if (skill) {
+     setSelectedSkillLevel(skill);
+     setSelectedMode(""); // ensure mode step shows next
+     // clear transient history state so re-entering doesn't retrigger
+     try {
+       window.history.replaceState(null, "", location.pathname);
+     } catch (e) {
+       // noop
+     }
+   }
+ }, [location]);
   const handleSkillLevelSelect = (level) => {
     setSelectedSkillLevel(level);
     setSelectedMode("");

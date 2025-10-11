@@ -1,4 +1,4 @@
-import { useState } from "react";
+// ...existing code...
 import { useNavigate, useParams, Outlet, useLocation } from "react-router-dom";
 import CourseOverviewTab from "./CourseOverviewTab";
 import DocumentationTab from "./DocumentationTab";
@@ -19,7 +19,13 @@ export default function MovingCarTabs() {
   const navigate = useNavigate();
   const { id } = useParams();
   const location = useLocation();
+
+  // get the tab segment from the URL (/overview/:id/:tab)
   const tabRoute = location.pathname.split("/")[3] || "course-overview";
+  // keep the car on "exam-simulator" when viewing quiz-result
+  const resolvedTabRoute =
+    tabRoute === "quiz-result" ? "exam-simulator" : tabRoute;
+
   const tabIds = [
     "course-overview",
     "documentation",
@@ -27,7 +33,10 @@ export default function MovingCarTabs() {
     "exam-simulator",
     "certification",
   ];
-  const activeTab = tabIds.indexOf(tabRoute);
+
+  // ensure activeTab is a valid index (fallback to 0)
+  const idx = tabIds.indexOf(resolvedTabRoute);
+  const activeTab = idx === -1 ? 0 : idx;
 
   const tabs = [
     {
@@ -70,6 +79,7 @@ export default function MovingCarTabs() {
       content: <CourseCompletionCertificate />,
     },
   ];
+
   return (
     <div className="bg-[#F4F8FD]">
       <ScrollRestoration />

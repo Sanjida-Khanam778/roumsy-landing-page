@@ -15,6 +15,7 @@ import Swal from "sweetalert2";
 import ReactStars from "react-stars";
 import { X } from "lucide-react"; // <-- import cross icon
 const QuizResultPage = ({ handleQuizEnd }) => {
+  const { id } = useParams();
   const location = useLocation();
   console.log(location.pathname);
   // Fix: clicking a tag should open the review modal
@@ -72,15 +73,11 @@ const QuizResultPage = ({ handleQuizEnd }) => {
     "AI help was useful",
   ];
   const handleRetakeQuiz = () => {
-    navigate("/quiz");
+    navigate(`/overview/${id}/exam-simulator`);
   };
 
   const handleGetAIHelp = () => {
-    if (location.pathname === "/quiz-result") {
-      navigate("/dashboard");
-    } else {
-      handleQuizEnd();
-    }
+    navigate(`/overview/${id}/ai-coach`, { state: { skill: "Intermediate" } });
   };
 
   const getScoreColor = (score) => {
@@ -226,18 +223,17 @@ const QuizResultPage = ({ handleQuizEnd }) => {
                   Get AI Help
                 </Button>
               </div>
-              <NavLink to={"/quiz"}>
-                <div className="relative">
-                  <img
-                    src={retake}
-                    className="absolute bottom-0 left-2 w-12 md:w-auto"
-                    alt=""
-                  />
-                  <button className="flex items-center justify-center gap-3 pl-20 border border-gray/50 text-black px-6 py-2 md:py-3 rounded-lg font-medium transition-colors">
-                    Retake Quiz
-                  </button>
-                </div>
-              </NavLink>
+
+              <div onClick={handleRetakeQuiz} className="relative">
+                <img
+                  src={retake}
+                  className="absolute bottom-0 left-2 w-12 md:w-auto"
+                  alt=""
+                />
+                <button className="flex items-center justify-center gap-3 pl-20 border border-gray/50 text-black px-6 py-2 md:py-3 rounded-lg font-medium transition-colors">
+                  Retake Quiz
+                </button>
+              </div>
             </div>
           </div>
 

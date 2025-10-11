@@ -57,10 +57,6 @@ export const router = createBrowserRouter([
         element: <QuizStart />,
       },
       {
-        path: "/quiz-result",
-        element: <QuizResultPage />,
-      },
-      {
         path: "/topics",
         element: <Topics />,
       },
@@ -88,6 +84,10 @@ export const router = createBrowserRouter([
           {
             path: "certification",
             element: <CourseCompletionCertificate />,
+          },
+          {
+            path: "quiz-result",
+            element: <QuizResultPage />,
           },
         ],
       },

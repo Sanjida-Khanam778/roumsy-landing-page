@@ -125,7 +125,7 @@ const QuizInterface = ({ quizResultShow }) => {
     if (location.pathname === "/quiz") {
       navigate("/quiz-result");
     } else {
-      quizResultShow();
+      navigate("/overview/1/quiz-result");
     }
   };
 

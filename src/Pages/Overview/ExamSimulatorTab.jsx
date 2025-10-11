@@ -3,8 +3,11 @@ import Button from "../../components/Shared/Button";
 import QuizResultPage from "../QuizInterface/QuizResultPage";
 import QuizInterface from "../QuizInterface/QuizInterface";
 import material from "../../assets/images/icon/material.png";
+import { Navigate, useNavigate } from "react-router-dom";
 
 function ExamSimulatorTab() {
+  const navigate = useNavigate();
+
   const [result, setResult] = useState(false);
   const [getAIHelp, setGetAIHelp] = useState(false);
   const [startQuiz, setStartQuiz] = useState(false);
@@ -14,15 +17,17 @@ function ExamSimulatorTab() {
   const quizResultShow = () => {
     setResult(true);
   };
-  const handleQuizEnd = () => {
-    setGetAIHelp(true);
-    setActiveTab(1);
-    setSelectedSkillLevel("Intermediate");
+  const handleQuizEnd = (id) => {
+    // setSelectedSkillLevel("Intermediate");
+    navigate(`/overview/${id}/ai-coach`);
   };
   return (
     <div>
       {result ? (
-        <QuizResultPage handleQuizEnd={handleQuizEnd} />
+        // <QuizResultPage setStartQuiz={setStartQuiz} />
+        <Navigate to={"/overview/1/quiz-result"}>
+          <QuizResultPage handleQuizEnd={handleQuizEnd} />
+        </Navigate>
       ) : startQuiz ? (
         <QuizInterface quizResultShow={quizResultShow} />
       ) : (
