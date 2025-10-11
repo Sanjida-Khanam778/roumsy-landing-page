@@ -1,12 +1,6 @@
 import { useState } from "react";
 import { CheckCircle, XCircle } from "lucide-react";
-import {
-  Link,
-  NavLink,
-  useLocation,
-  useNavigate,
-  useParams,
-} from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import cross from "../../assets/images/cross.png";
 import Button from "../../components/Shared/Button";
 import aiHelp from "../../assets/images/aiHelp.png";
@@ -14,11 +8,10 @@ import retake from "../../assets/images/retake.png";
 import Swal from "sweetalert2";
 import ReactStars from "react-stars";
 import { X } from "lucide-react"; // <-- import cross icon
-const QuizResultPage = ({ handleQuizEnd }) => {
+const QuizResultPage = () => {
   const { id } = useParams();
   const location = useLocation();
-  console.log(location.pathname);
-  // Fix: clicking a tag should open the review modal
+
   const handleTagClick = (tag) => {
     setShowReviewModal(true);
     setReviewText(tag); // Optionally prefill with tag text
