@@ -149,7 +149,7 @@ const Documentation = () => {
             ? sidebarOpen
               ? "absolute top-0 left-0 w-72 h-full z-50 shadow-2xl" // overlays only documentation area
               : "hidden" // collapsed: sidebar hidden
-            : "w-72 h-full relative"
+            : "w-72 h-auto relative"
         }`}
       >
         {/* Hamburger icon for mobile/tablet */}
