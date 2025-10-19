@@ -44,7 +44,6 @@ export default function Profile() {
                   Quizzes Completed
                 </p>
                 <p className="text-3xl font-medium text-[#3C76B9]">12</p>
-                <p className="text-[#4CAF50]">+2 this month</p>
               </div>
               <div className=" p-3 rounded-lg">
                 <img src={profile1} alt="" />
@@ -59,7 +58,6 @@ export default function Profile() {
                   Quiz Score Avg
                 </p>
                 <p className="text-3xl font-medium text-[#ECB404]">87%</p>
-                <p className="text-[#4CAF50]">+5% improvement</p>
               </div>
               <div className=" p-3 rounded-lg">
                 <img src={profile2} alt="" />
@@ -74,7 +72,6 @@ export default function Profile() {
                   AI Interactions
                 </p>
                 <p className="text-3xl font-medium text-[#3C76B9]">156</p>
-                <p className="text-[#4CAF50]">+23 today</p>
               </div>
               <div className=" p-3 rounded-lg">
                 <img src={profile3} alt="" />
@@ -87,7 +84,7 @@ export default function Profile() {
           {/* Left Column */}
           <div className="lg:col-span-2 space-y-6">
             {/* Continue Learning */}
-            <div className="bg-white rounded-lg p-6 shadow-sm">
+            {/* <div className="bg-white rounded-lg p-6 shadow-sm">
               <h2 className="text-xl font-bold text-gray-900 mb-4 flex items-center gap-2">
                 <Play size={20} />
                 Continue Learning
@@ -144,7 +141,7 @@ export default function Profile() {
                   </button>
                 </div>
               </div>
-            </div>
+            </div> */}
 
             {/* Recent Quiz Results */}
             <div className="bg-white rounded-lg p-6 shadow-sm">
@@ -230,7 +227,7 @@ export default function Profile() {
             </div>
 
             {/* Learning Goals */}
-            <div className="bg-gradient-to-r from-[#FFF4FF] to-[#FFF6EC] rounded-xl p-6 shadow-lg">
+            {/* <div className="bg-gradient-to-r from-[#FFF4FF] to-[#FFF6EC] rounded-xl p-6 shadow-lg">
               <h2 className="text-lg font-semibold text-gray-900 mb-4 flex items-center gap-2">
                 <img src={global} alt="" />
                 Learning Goals
@@ -269,7 +266,7 @@ export default function Profile() {
                   </div>
                 </div>
               </div>
-            </div>
+            </div> */}
 
             {/* Recent Achievements */}
             <div className="bg-gradient-to-r from-[#FFF4FF] to-[#FFF6EC] rounded-xl p-6 shadow-lg">
@@ -285,7 +282,7 @@ export default function Profile() {
                   </div>
                   <div className="flex flex-col justify-between gap-6">
                     <h3 className="font-bold text-gray-900 text-sm">
-                      Quiz Master
+                     Web Development
                     </h3>
                     <p className="text-xs text-gray-600">
                       Scored 90%+ on 5 quizzes
@@ -299,7 +296,7 @@ export default function Profile() {
                   </div>
                   <div className="flex flex-col justify-between gap-6">
                     <h3 className="font-bold text-gray-900 text-sm">
-                      Quiz Master
+                      Technology
                     </h3>
                     <p className="text-xs text-gray-600">
                       Scored 90%+ on 5 quizzes

@@ -11,7 +11,7 @@ export const ProfileSidebar = ({ currentComponent, onMenuClick }) => {
   const navigate = useNavigate();
   const settingsItems = [
     { name: "Account Setting", go: "/profile-dashboard/user-acc" },
-    { name: "Upgrade Plan", go: "/profile-dashboard/plan" },
+    { name: "Current Plan", go: "/profile-dashboard/plan" },
     { name: "Terms & Conditions", go: "/profile-dashboard/terms" },
     { name: "Privacy Policies", go: "/profile-dashboard/privacy" },
   ];
